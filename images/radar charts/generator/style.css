@@ -15,6 +15,14 @@ ul {
     margin:0px; 
     padding:0px;
     padding-top: 10px;
+    list-style-type: none;
+}
+
+.stats {
+    margin-left: 30%;
+    margin-right: 30%;
+    background-color: #e4bf70;
+    color:#2e2e2e;
 }
 
 #canvas-container {
