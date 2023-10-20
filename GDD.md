@@ -39,7 +39,7 @@ Documento de diseño de videojuego
 
 2. **Descripción**  
 
-My Beloved True Interest es una novela visual y simulador de citas en el que el protagonista  establecerá distintas relaciones y eventualmente un romance entre cuatro personajes  universitarios en base a las decisiones del jugador, además de experimentar la vida escolar  con actividades diarias.  
+My Beloved True Interest es una novela visual y simulador de citas en el que el protagonista  establecerá distintas relaciones y eventualmente un romance entre cuatro personajes universitarios en base a las decisiones del jugador, además de experimentar la vida escolar con diferentes actividades diarias.  
 
 
 

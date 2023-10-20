@@ -2,7 +2,7 @@
 Este videojuego es un proyecto universitario de la asignatura de *Programación de Videojuegos en Lenguajes Interpretados* (PVLI) en la [Universidad Complutense de Madrid](https://www.ucm.es/estudios/grado-videojuegos) con la temática de personalidades *Myers–Briggs Type Indicator*.
 
 ## Descripción
-**My Beloved True Interest** (**MBTI**) es un simulador de citas y novela visual realizado en JavaScript. (...)
+**My Beloved True Interest** (**MBTI**) es un simulador de citas y novela visual realizado en JavaScript. En él, el protagonista  establecerá distintas relaciones y eventualmente un romance entre cuatro personajes universitarios en base a las decisiones del jugador, además de experimentar la vida escolar con diferentes actividades diarias.  
 
 ## Capturas
 ![](https://placekitten.com/200/200)
@@ -10,14 +10,13 @@ Este videojuego es un proyecto universitario de la asignatura de *Programación 
 ![](https://placekitten.com/200/200)
 
 ## Enlaces
-Enlace para jugar a MBTI [aquí](https://cyntrist.github.io/PVLI-ProjectM/).
-
-[GDD](https://github.com/cyntrist/PVLI-ProjectM/blob/main/GDD.md).md.
-[Arquitercure]().md.
-[Assets]().md.
+- [Enlace](https://cyntrist.github.io/PVLI-ProjectM/) a la página del juego.
+- [GDD](https://github.com/cyntrist/PVLI-ProjectM/blob/main/GDD.md).md.
+- [Arquitercure](https://github.com/cyntrist/PVLI-ProjectM/blob/main/architecture.md).md.
+- [Assets](https://github.com/cyntrist/PVLI-ProjectM/blob/main/assets.md).md.
 
 ## Redes sociales
-- [Twitter Oficial](https://twitter.com/MyBelovedTI).
+- [Twitter oficial](https://twitter.com/MyBelovedTI).
 - Twitter de los personajes:
     - [Camille Durant](https://twitter.com/camilleure).
     - [Delilah Medina](https://twitter.com/lilahaxo).
