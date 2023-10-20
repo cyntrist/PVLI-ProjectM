@@ -17,7 +17,9 @@
 }
 
 #juego {
-    align-content: center;
+    text-align: center; 
+    line-height: 100px;
+    margin-top: 200px
 }
 
 
