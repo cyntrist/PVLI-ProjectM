@@ -2,4 +2,23 @@
     text-align: center; 
     line-height: 100px;
     margin-top: 200px
-}   
+}  
+
+@font-face {
+    font-family: "corazones";
+    src: url("./assets/fonts/LOGO-JUEGO-kinkie.regular.ttf");
+
+}
+ 
+#equipo {
+    text-align: center; 
+    color:#d3337e;
+    font-family:fantasy;
+}
+
+#juego {
+    align-content: center;
+}
+
+
+  
