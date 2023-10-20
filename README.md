@@ -9,8 +9,12 @@ Este videojuego es un proyecto universitario de la asignatura de *Programación 
 ![](https://placekitten.com/200/200)
 ![](https://placekitten.com/200/200)
 
-## Enlace
+## Enlaces
 Enlace para jugar a MBTI [aquí](https://cyntrist.github.io/PVLI-ProjectM/).
+
+[GDD](https://github.com/cyntrist/PVLI-ProjectM/blob/main/GDD.md).md.
+[Arquitercure]().md.
+[Assets]().md.
 
 ## Redes sociales
 - [Twitter Oficial](https://twitter.com/MyBelovedTI).
@@ -19,3 +23,4 @@ Enlace para jugar a MBTI [aquí](https://cyntrist.github.io/PVLI-ProjectM/).
     - [Delilah Medina](https://twitter.com/lilahaxo).
     - [Matthew Roberts](https://twitter.com/mmatthewwttv).
     - [Richard Dickinson](https://twitter.com/RDWhovian).
+
