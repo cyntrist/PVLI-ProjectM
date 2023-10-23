@@ -1,7 +1,7 @@
 #logo {
     text-align: center; 
-    line-height: 100px;
-    margin-top: 200px
+    line-height: 5%;
+    margin-top: 25px;
 }  
 
 @font-face {
@@ -16,10 +16,10 @@
     font-family:fantasy;
 }
 
-#juego {
+canvas {
     text-align: center; 
-    line-height: 100px;
-    margin-top: 200px
+    line-height: 5%;
+    margin-left: 15%;
 }
 
 
