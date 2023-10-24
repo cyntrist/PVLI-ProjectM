@@ -32,7 +32,7 @@ ul li li::before {
 
 #equipo { 
     text-align: center; 
-    color: #ff799f;;
+    color: #73c29b;
     font-family: fantasy;
     margin-top: 25px;
     margin-bottom: 25px;
@@ -82,7 +82,7 @@ canvas {
     text-decoration: none;
   } 
   a:hover {
-    color: #74c0af;
+    color: #73c29b;
   }
 
   .tabs * {
@@ -136,5 +136,13 @@ canvas {
     z-index: 0; 
   }
 
+/* Footer */
+.footer-divider {
+  margin: 5rem 0 2rem 0; /* Space out the Bootstrap <hr> more */
+  background-color: floralwhite
+}
 
-  
+footer p {
+  font-size: 0.8rem;
+  margin-bottom: 0.5rem;
+}
