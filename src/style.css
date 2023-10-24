@@ -1,16 +1,36 @@
-#logo {
+#logo { /* logotipo */
     text-align: center; 
     line-height: 5%;
     margin-top: 25px;
 }  
 
-@font-face {
+@font-face { /* fuente de texto */
     font-family: "corazones";
     src: url("./assets/fonts/LOGO-JUEGO-kinkie.regular.ttf");
 
 }
- 
-#equipo {
+
+ul { /* corazoncitos en la lista */
+  list-style: none;
+}
+
+ul li::before {
+  content: "\2665";
+  color: whitesmoke;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+ul li li::before {
+  content: "\2661";
+  color: whitesmoke;
+  display: inline-block;
+  width: 1em;
+  margin-left: -1em;
+}
+
+#equipo { 
     text-align: center; 
     color:#d3337e;
     font-family: fantasy;
@@ -21,7 +41,7 @@
 canvas {
     text-align: center; 
     line-height: 5%;
-    margin-left: 25%;
+    /*margin-left: 25%;*/
 }
 
 /* funcionamiento básico del sistema de pestañas */
@@ -57,9 +77,14 @@ canvas {
     margin: 0;
   } 
   a {
-    color: inherit;
+    /* color: inherit; */
+    color: pink;
     text-decoration: none;
   } 
+  a:hover {
+    color: #74c0af;
+  }
+
   .tabs * {
     box-sizing: border-box;
   }
