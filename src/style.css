@@ -1,13 +1,20 @@
 #logo { /* logotipo */
     text-align: center; 
     line-height: 5%;
-    margin-top: 25px;
+    margin-top: 2rem;
 }  
 
 @font-face { /* fuente de texto */
     font-family: "corazones";
     src: url("./assets/fonts/LOGO-JUEGO-kinkie.regular.ttf");
 
+}
+
+html { /* imagen de fondo */
+  background-image: url('../assets/images/fondo/fondo1.png');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 ul { /* corazoncitos en la lista */
@@ -34,8 +41,14 @@ ul li li::before {
     text-align: center; 
     color: #73c29b;
     font-family: fantasy;
-    margin-top: 25px;
-    margin-bottom: 25px;
+    margin: 20px auto 20px auto;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 25%;
+    max-width: 400px;
+    min-width: 300px;
+    background-color: #000000c9;
+    border-radius: 15px;
 }
 
 canvas {
@@ -138,11 +151,19 @@ canvas {
 
 /* Footer */
 .footer-divider {
-  margin: 5rem 0 2rem 0; /* Space out the Bootstrap <hr> more */
-  background-color: floralwhite
+  /*margin: 5rem 0 2rem 0; /* Space out the Bootstrap <hr> more */
+  /*background-color: floralwhite*/
 }
 
 footer p {
   font-size: 0.8rem;
-  margin-bottom: 0.5rem;
+  padding: 0.5rem;
+}
+
+footer {
+  margin: 5rem 2rem 2rem 2rem;
+  padding: 10px;
+  background-color: #000000c9;
+  color: whitesmoke;
+  border-radius: 15px;
 }
