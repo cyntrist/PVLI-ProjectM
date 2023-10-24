@@ -3,4 +3,4 @@ Inés y Paula se encargan de abocetar y finalizar respectivamente los sprites de
 
 Por otro lado, la UI está por ver aunque es muy probable que sea exclusívamente por código.
 
-Los fondos se realizarán a través de fotografías (ya sea de stock o propias) con un filtro encima.
+Los fondos se realizarán a través de fotografías (ya sea de stock o propias) con un filtro encima para que sea congruente con la estética.
