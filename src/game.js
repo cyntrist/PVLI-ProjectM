@@ -1,7 +1,14 @@
-new Phaser.Game({
-    type: Phaser.CANVAS,
-    parent: document.getElementById('juego'),
-    width: 1280,
-    height: 720,
-    scene: []
-  })  
+const config = {
+  width: 1280,              
+  height: 720,            
+  type: Phaser.AUTO,      
+  parent: document.getElementById('juego'),
+  scale: {
+    parent: 'juego',
+    mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT ,
+    autoCenter: Phaser.Scale.CENTER_BOTH, 
+  }
+}
+
+var game = new Phaser.Game(config);
+ 

@@ -32,7 +32,7 @@ ul li li::before {
 
 #equipo { 
     text-align: center; 
-    color:#d3337e;
+    color: #ff799f;;
     font-family: fantasy;
     margin-top: 25px;
     margin-bottom: 25px;
@@ -40,7 +40,7 @@ ul li li::before {
 
 canvas {
     text-align: center; 
-    line-height: 5%;
+    /*line-height: 5%;*/
     /*margin-left: 25%;*/
 }
 
