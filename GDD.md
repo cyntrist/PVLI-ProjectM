@@ -176,7 +176,7 @@ Joven francesa, reciente presidente del consejo estudiantil además de  miembro 
 
 2. [Delilah Medina ](https://docs.google.com/document/u/0/d/1V3rdjy61Q6TpM6r797blQUZxC5nKlTyx-DPhaKCxgM4/edit)(INFJ):  
 
-` `Joven filipina, va más por su cuenta y es bastante tímida pero nunca  dudará en ayudar a alguien que lo necesita. Le cuesta ser dura  cuando es ella la que sufre pero no permite que dañen a la gente que  quiere. Su mayor defecto es que no sabe decir que no para contentar  a otros.  
+Joven filipina, va más por su cuenta y es bastante tímida pero nunca  dudará en ayudar a alguien que lo necesita. Le cuesta ser dura  cuando es ella la que sufre pero no permite que dañen a la gente que  quiere. Su mayor defecto es que no sabe decir que no para contentar  a otros.  
 
 3. [Matthew Roberts ](https://docs.google.com/document/u/0/d/1p0xoau-nbyLUvzDVfUtpeke1cKZtxNLzAB4rIMw4C8w/edit)(ESFP):  
 
