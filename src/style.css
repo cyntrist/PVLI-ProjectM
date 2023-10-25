@@ -6,15 +6,21 @@
 
 @font-face { /* fuente de texto */
     font-family: "corazones";
-    src: url("./assets/fonts/LOGO-JUEGO-kinkie.regular.ttf");
+    src: url("../assets/fonts/LOGO-JUEGO-kinkie.regular.ttf");
 
 }
 
+@font-face {
+  font-family: "lato";
+  src: url('../assets/fonts/Lato-Regular.ttf');
+}
+
 html { /* imagen de fondo */
-  background-image: url('../assets/images/fondo/fondo1.png');
+  background-image: url('../assets/images/fondo/fondo3.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  font-family: 'lato';
 }
 
 ul { /* corazoncitos en la lista */
@@ -40,14 +46,13 @@ ul li li::before {
 #equipo { 
     text-align: center; 
     color: #73c29b;
-    font-family: fantasy;
     margin: 20px auto 20px auto;
     padding-top: 10px;
     padding-bottom: 10px;
     width: 25%;
     max-width: 400px;
-    min-width: 300px;
-    background-color: #000000c9;
+    min-width: 320px;
+    background-color: #0000009c;
     border-radius: 15px;
 }
 
@@ -60,6 +65,9 @@ canvas {
 /* funcionamiento básico del sistema de pestañas */
 .tab-content {
     display: none;
+  /* efectito*/
+    background-image: radial-gradient(#c3ebd7 1px, #F6F6F6 1.5px);
+    background-size: 20px 20px;
   }
   
   .tab:target .tab-content, .tab:last-of-type .tab-content {
@@ -72,9 +80,9 @@ canvas {
 
   /* parámetros para configurar las pestañas */
 :root {
-    --tabs-border-color: #6d3864;
-    --tabs-border-size: 3px;
-    --tabs-text-color: white;
+    --tabs-border-color: #6d386400;
+    --tabs-border-size: 0px;
+    --tabs-text-color: rgb(17, 17, 17);
     --tabs-dark-color: #5a1938;
     --tabs-lite-color: #934569;
     --tabs-width: 120px;
@@ -83,7 +91,7 @@ canvas {
   
   /* aspecto básico */
   body {
-    font-family: sans-serif;
+    /*font-family: sans-serif;*/
     line-height: 1.2;
   }
   h2, p {
@@ -100,6 +108,7 @@ canvas {
 
   .tabs * {
     box-sizing: border-box;
+    font-size: 20px;
   }
 
   /* esto es para posicionar las pestañas correctamente */
@@ -122,7 +131,7 @@ canvas {
 
   /* más aspecto */
 .tabs { 
-    padding: 10px;
+    margin: 4rem 2rem 2rem 2rem;
     color: var(--tabs-text-color);
   }
   .tab-content {
@@ -132,17 +141,32 @@ canvas {
     border-radius: 0 0 10px 10px;
     position: relative;
     z-index: 100;
+    /*sombra*/
+    box-shadow: 0 10px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.4) !important;
   }
   .tab>a {
-    background-color: var(--tabs-dark-color); 
     padding: 10px;
     border: var(--tabs-border-size) solid var(--tabs-border-color);
     border-radius: 10px 10px 0 0;
     border-bottom: 0;
+    /* efectito*/
+    background-color: #F6F6F6;
+    background-image:  linear-gradient(135deg, #afdfc7 25%, transparent 25%), linear-gradient(225deg, #afdfc7 25%, transparent 25%), linear-gradient(45deg, #afdfc7 25%, transparent 25%), linear-gradient(315deg, #afdfc7 25%, #F6F6F6 25%);
+    background-position:  10px 0, 10px 0, 0 0, 0 0;
+    background-size: 20px 20px;
+    background-repeat: repeat;
+    background-color: var(--tabs-dark-color); 
   }
   .tab:target>a, .tab:last-of-type>a {
     background-color: var(--tabs-lite-color); 
     z-index: 200;
+    /* efectito*/
+    background-color: #F6F6F6;
+    background-image:  linear-gradient(135deg, #ebbb95 25%, transparent 25%), linear-gradient(225deg, #ebbb95 25%, transparent 25%), linear-gradient(45deg, #ebbb95 25%, transparent 25%), linear-gradient(315deg, #ebbb95 25%, #F6F6F6 25%);
+    background-position:  10px 0, 10px 0, 0 0, 0 0;
+    background-size: 20px 20px;
+    background-repeat: repeat;
+    background-color: var(--tabs-dark-color); 
   }
   .tab:target ~ .tab:last-of-type>a {
     background-color: var(--tabs-dark-color); 
