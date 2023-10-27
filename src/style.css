@@ -16,7 +16,7 @@
 }
 
 html { /* imagen de fondo */
-  background-image: url('../assets/images/fondo/fondo3.png');
+  background-image: url('../assets/images/fondoweb/fondo3.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
