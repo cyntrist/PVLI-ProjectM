@@ -13,12 +13,11 @@ export default class TypewriterDemo extends Phaser.Scene
 	create()
     {
         this.label = this.add.text(100, 100, '')
-        this.typewriteText('Hello, World!')
+        this.typewriteText('Wat JSFuck')
 
         /*
         this.label = this.add.text(100, 100, '')
 		.setWordWrapWidth(100)
-
         this.typewriteTextWrapped('Hello, World!')
         */
     }
