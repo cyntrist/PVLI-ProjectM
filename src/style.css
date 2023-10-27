@@ -56,6 +56,15 @@ ul li li::before {
     border-radius: 15px;
 }
 
+.titulo1 {
+  margin-bottom: 0.5em;
+}
+
+.titulo2 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+
 canvas {
     text-align: center; 
     /*line-height: 5%;*/
