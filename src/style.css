@@ -16,7 +16,7 @@
 }
 
 html { /* imagen de fondo */
-  background-image: url('../assets/images/fondo/fondo3.png');
+  background-image: url('../assets/images/fondoweb/fondo3.png');
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -54,6 +54,15 @@ ul li li::before {
     min-width: 320px;
     background-color: #0000009c;
     border-radius: 15px;
+}
+
+.titulo1 {
+  margin-bottom: 0.5em;
+}
+
+.titulo2 {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }
 
 canvas {
