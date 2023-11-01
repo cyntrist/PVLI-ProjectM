@@ -130,7 +130,7 @@ canvas {
 #tab4>a { --tabs-position: 6; }
 .tab>a {
   font-weight: bold;
-  font-size: 1.1em;
+  font-size: 1em;
   text-shadow: -1px 0 #F6F6F6, 0 1px #F6F6F6, 1px 0 #F6F6F6, 0 -1px #F6F6F6;
   text-align: center;
   position: absolute;
