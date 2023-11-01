@@ -21,7 +21,7 @@ export default class Demo extends Phaser.Scene
         let scene = this // referencia a esta misma escena
         let script = [
             "Camille:\nBuenas noches, muy buenas tetas por cierto.",
-            "Camille:\nJODER ESTOY HASTA LA PUTA POLLA LLEVO TODO EL DIA PARA ESTO ODIO JAVASCRIPT"
+            "Matthew:\nEeeee o no eeeeeee amonooooo"
         ]
 
         scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
@@ -49,10 +49,5 @@ export default class Demo extends Phaser.Scene
             for (i = i; i < script.length; i++)
                 scene.dialog.setText(script[i], true);
         });
-    }
-
-    update() 
-    {
-        //this.dialog.setText("Camille:\nEstoy hasta la polla.", true)
     }
 }
