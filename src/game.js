@@ -1,4 +1,4 @@
-import TypeWriterDemo from './typewritter.js';
+import TypeWritter from './typewritter.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
@@ -12,20 +12,19 @@ let config = {
   type: Phaser.CANVAS,      
   parent: document.getElementById('juego'),
   scale: {
-    /* cyn: las siguientes tres lineas son la única combinación que he encontrado para que escale bien*/
     parent: 'juego',
-    mode: Phaser.Scale.WIDTH_CONTROLS_HEIGHT,
-    autoCenter: Phaser.Scale.CENTER_BOTH, 
-    min: { // cyn: esto no funciona para absolutamente nada (probablemente por lo anterior) pero me gusta soñar
-          width: 640,
-          height: 480
+    mode: Phaser.Scale.NONE, // cyn: que alguien le pregunte a alguien por que si pongo fit pasan cosas malas
+    autoCenter: Phaser.Scale.CENTER_HORIZONTALLY, 
+    min: { // cyn: como le deje escalar se pone a hacer unas cosas rarísimas 
+          width: 1280,
+          height: 720
       },
     max: {
-          width: 1920,
-          height: 1080
+          width: 1280,
+          height: 720
       }
   },
-  scene: [TypeWriterDemo],
+  scene: [TypeWritter],
   title: "MBTI",
   version: "1.0.0"
 }
