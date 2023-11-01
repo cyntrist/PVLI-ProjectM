@@ -28,18 +28,17 @@ Documento de diseño de videojuego
 1. **Ficha técnica**  
 
 ***Título*:** My Beloved True Interest  
-
-***Género*:** Novela Visual, Romance, Simulador de citas  ***Target*:** Jóvenes adultos (sin dependencia de género)  ***Rating*:** Todos los públicos  
-
+***Género*:** Novela Visual, Romance, Simulador de citas  
+***Target*:** Jóvenes adultos (sin dependencia de género)  
+***Rating*:** Todos los públicos  
 ***Plataforma*:** Windows  
-
 ***Modos de juego*:** 1 jugador  
 
 
 
 2. **Descripción**  
 
-My Beloved True Interest es una novela visual y simulador de citas en el que el protagonista  establecerá distintas relaciones y eventualmente un romance entre cuatro personajes universitarios en base a las decisiones del jugador, además de experimentar la vida escolar con diferentes actividades diarias.  
+My Beloved True Interest es una novela visual y simulador de citas en el que el protagonista establecerá distintas relaciones y eventualmente un romance entre cuatro personajes universitarios en base a las decisiones del jugador, además de experimentar la vida escolar con diferentes actividades diarias.  
 
 
 
