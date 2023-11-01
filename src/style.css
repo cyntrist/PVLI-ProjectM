@@ -185,11 +185,6 @@ canvas {
 }
 
 /* Footer */
-.footer-divider {
-  /*margin: 5rem 0 2rem 0; /* Space out the Bootstrap <hr> more */
-  /*background-color: floralwhite*/
-}
-
 footer p {
   font-size: 0.8rem;
   padding: 0.5rem;
