@@ -13,13 +13,8 @@ export default class TypewriterDemo extends Phaser.Scene
 	create()
     {
         this.label = this.add.text(100, 100, '')
-        this.typewriteText('Wat JSFuck')
-
-        /*
-        this.label = this.add.text(100, 100, '')
-		.setWordWrapWidth(100)
-        this.typewriteTextWrapped('Hello, World!')
-        */
+        .setWordWrapWidth(100)
+        this.typewriteText('PapopepoPapopepo Papopepo Papopepo PapopepoPapo pepoPapope poPapopepoPapopepo')
     }
 
     typewriteText(text)
@@ -32,7 +27,7 @@ export default class TypewriterDemo extends Phaser.Scene
                 ++i
             },
             repeat: length - 1,
-            delay: 200
+            delay: 50
         })
     }
 
