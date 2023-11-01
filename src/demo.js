@@ -30,6 +30,8 @@ export default class Demo extends Phaser.Scene {
 
 		//new Arrow();
 
+		this.saySomething('no me puedo creer que esto este funcionando aaaaaaa');
+
 	}
 
 	update(){
@@ -40,10 +42,34 @@ export default class Demo extends Phaser.Scene {
 
 	// metodo para decir algo (text)
 	saySomething(text){
-		this.add.image(650, 590, 'cajatxt').setScale(0.95,0.95); 
+		this.add.image(650, 590, 'cajatxt').setScale(0.95,0.95);
 
-		
+		this.label = this.add.text(100, 500, '');
+        this.typewriteText(text);
 
 	}
+
+
+	typewriteText(text)
+    {
+        const length = text.length
+        let i = 0
+        this.time.addEvent({
+            callback: () => {
+                this.label.text += text[i]
+                ++i
+            },
+            repeat: length - 1,
+            delay: 100
+        })
+    }
+
+    typewriteTextWrapped(text)
+    {
+        const lines = this.label.getWrappedText(text)
+        const wrappedText = lines.join('\n')
+
+        this.typewriteText(wrappedText)
+    }
 
 }
