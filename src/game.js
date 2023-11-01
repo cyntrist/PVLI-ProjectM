@@ -1,4 +1,4 @@
-import TypeWritter from './typewritter.js';
+import Demo from './demo.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
@@ -9,10 +9,9 @@ import TypeWritter from './typewritter.js';
 let config = {
   width: 1280,              
   height: 720,            
-  type: Phaser.CANVAS,      
-  parent: document.getElementById('juego'),
+  type: Phaser.AUTO,      
+  parent: 'juego',
   scale: {
-    parent: 'juego',
     mode: Phaser.Scale.NONE, // cyn: que alguien le pregunte a alguien por que si pongo fit pasan cosas malas
     autoCenter: Phaser.Scale.CENTER_HORIZONTALLY, 
     min: { // cyn: como le deje escalar se pone a hacer unas cosas rarísimas 
@@ -24,7 +23,7 @@ let config = {
           height: 720
       }
   },
-  scene: [TypeWritter],
+  scene: [Demo],
   title: "MBTI",
   version: "1.0.0"
 }
