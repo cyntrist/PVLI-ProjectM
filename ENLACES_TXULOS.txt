@@ -1,5 +1,8 @@
+https://phaser.io/examples/v3
+
 Typewritter effect
 https://blog.ourcade.co/posts/2020/phaser-3-typewriter-text-effect-bitmap/
 
 9-Slicing
 https://blog.ourcade.co/posts/2020/fix-stretched-image-distortion-9-slice-scale-phaser-3/
+

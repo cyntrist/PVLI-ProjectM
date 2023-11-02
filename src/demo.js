@@ -1,75 +1,53 @@
-//import Arrow from "./arrow";
-
-
-export default class Demo extends Phaser.Scene {
-	/**
-	 * Constructor, con key  --->
-	 */
-	constructor() {
-		super('demo');
+import DialogText from "./dialog_plugin.js";
+/**
+ * Escena demo.
+ * @extends Scene
+ */
+export default class Demo extends Phaser.Scene
+{ 
+    constructor()
+	{
+		super({ key: 'Demo'})
 	}
 
-	
-	preload() {
-		// carga la flecha
-		this.load.image('arrow', 'assets/images/escenarios/flecha.png');
-
-		// carga la caja de texto
-		this.load.image('cajatxt', './assets/images/escenarios/cajaDeTexto.png');
-
-		// carga los fondos
+    // Carga de assets
+	preload() 
+	{
 		this.load.image('clase', './assets/images/escenarios/clase2.jpg');
-		this.load.image('pasillo', 'assets/images/escenarios/pasillo.jpg');
-	}
-
-	create() {
-		// fondo
-		this.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0); // el fondo
-
-		//this.add.image(650, 590, 'cajatxt').setScale(0.95,0.95); // 625
-
-		//new Arrow();
-
-		this.saySomething('no me puedo creer que esto este funcionando aaaaaaa');
-
-	}
-
-	update(){
-
-
-	}
-
-
-	// metodo para decir algo (text)
-	saySomething(text){
-		this.add.image(650, 590, 'cajatxt').setScale(0.95,0.95);
-
-		this.label = this.add.text(100, 500, '');
-        this.typewriteText(text);
-
-	}
-
-
-	typewriteText(text)
-    {
-        const length = text.length
-        let i = 0
-        this.time.addEvent({
-            callback: () => {
-                this.label.text += text[i]
-                ++i
-            },
-            repeat: length - 1,
-            delay: 100
-        })
     }
 
-    typewriteTextWrapped(text)
+	create()
     {
-        const lines = this.label.getWrappedText(text)
-        const wrappedText = lines.join('\n')
+        let scene = this // referencia a esta misma escena
+        let script = [
+            "Camille:\nBuenas noches, muy buenas tetas por cierto.",
+            "Matthew:\nEeeee o no eeeeeee amonooooo"
+        ]
 
-        this.typewriteText(wrappedText)
+        scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
+	    scene.dialog = new DialogText(this, {
+			borderThickness: 6,
+			borderColor: 0xF6F6F6,
+			borderAlpha: 1,
+            windowBorderRadius: 4,
+			windowAlpha: 1,
+			windowColor: 0xFF799A,
+			windowHeight: 150,
+			padding: 18,
+            hasCloseBtn: false,
+            closeBtnColor: 'white',
+			dialogSpeed: 4.5,
+			fontSize: 24,
+			fontFamily: "lato"
+		});
+
+		//this.dialog.toggleWindow();
+        let i = 0;
+		scene.dialog.setText(script[i], true);
+
+        scene.input.on('pointerdown', function () {
+            for (i = i; i < script.length; i++)
+                scene.dialog.setText(script[i], true);
+        });
     }
-
 }
