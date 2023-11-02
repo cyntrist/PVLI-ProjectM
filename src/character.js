@@ -18,29 +18,30 @@ export default class Character extends Phaser.GameObjects.Container {
     constructor(scene, x, y, sprite, nombre) {
         super (scene, x, y);
         this.add(sprite);
-        scene.add.existing(this);
+        this.sprite = sprite;
         this.nombre = nombre;
-        this.focus = false;
+        this.sprite.setBlendMode(Phaser.BlendModes.DARKEN);
+        this.onUnfocus();
+        scene.add.existing(this);
     }
 
-    update() {
-        if (!focus) {
-            this.sprite.setTint(0x000000);
+    say(escena, mensaje, personajes) {
+        this.onFocus(); // focus en este personaje
+        for (let i = 0; i < personajes.length; i++) { // al resto los oscurece (no pueden hablar dos personajes a la vez :P)
+            if (personajes[i] !== this) {
+                personajes[i].onUnfocus();
+            }
         }
-        else {
-            this.clearTint();
-        }
+        escena.dialog.setText(this.nombre + ":\n" + mensaje, true); // blabla
     }
 
-    say() {
-
-    }
-
-    focus() {
+    onFocus() {
         this.focus = true;
+        this.sprite.clearTint(); // sin filtro
     }
 
-    unfocus() {
+    onUnfocus() {
         this.focus = false;
+        this.sprite.setTint(0x858585); // filtro oscuro
     }
 }
