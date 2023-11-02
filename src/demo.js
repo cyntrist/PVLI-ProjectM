@@ -21,7 +21,9 @@ export default class Demo extends Phaser.Scene
         let scene = this // referencia a esta misma escena
         let script = [
             "Camille:\nBuenas noches, muy buenas tetas por cierto.",
-            "Matthew:\nEeeee o no eeeeeee amonooooo"
+            "Matthew:\nEeeee o no eeeeeee amonooooo",
+			"Richard:\nAkshually!",
+			"Delilah:\nLos ajolotes hacen glugluglu"
         ]
 
         scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
@@ -46,8 +48,11 @@ export default class Demo extends Phaser.Scene
 		scene.dialog.setText(script[i], true);
 
         scene.input.on('pointerdown', function () {
-            for (i = i; i < script.length; i++)
+            if (i < script.length) 
+			{
+				i++;
                 scene.dialog.setText(script[i], true);
+			}
         });
     }
 }
