@@ -1,4 +1,6 @@
 import DialogText from "./dialog_plugin.js";
+import Character from "./character.js"
+
 /**
  * Escena demo.
  * @extends Scene
@@ -22,7 +24,7 @@ export default class Demo extends Phaser.Scene
         let script = [
             "Camille:\nBuenas noches, muy buenas tetas por cierto.",
             "Matthew:\nEeeee o no eeeeeee amonooooo",
-			"Richard:\nAkshually... it's \"¿Eh, o no eh? ¡Vámonos!\"",
+			"Richard:\nAkshually... it's \"¿Es o no es? ¡Vámonos!\"",
 			"Delilah:\nPues los ajolotes hacen glugluglu. :-)",
 			" "
         ]
@@ -49,7 +51,7 @@ export default class Demo extends Phaser.Scene
 		scene.dialog.setText(script[i], true);
 
         scene.input.on('pointerdown', function () {
-            if (i < script.length) 
+            if (i < script.length - 1) 
 			{
 				i++;
                 scene.dialog.setText(script[i], true);

@@ -9,11 +9,12 @@ export default class Character extends Phaser.GameObjects.Container {
      * @param {number} x - posición X
 	 * @param {number} y - posicion Y
 	 * @param {String} nombre - nombre del personaje
-     * @param {sprite} sprite - su imagen
+     * @param {Sprite} sprite - identificador del sprite que se usará
+     * @param {bool} focus - si estan hablando en el instante actual
 	 */
 
     constructor(scene, x, y, nombre, sprite) {
-        super (scene, x, y);
+        super (scene, x, y, sprite);
         //...
     }
 
