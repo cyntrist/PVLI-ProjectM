@@ -38,7 +38,7 @@ export default class Demo extends Phaser.Scene
 			"Richard:\nCiertamente, no es algo que pueda negarse, no.",
 			"Delilah:\nSi nos ponemos así no podemos decir que no, pero...",
 			"Matthew:\n¡Veis! Lo que yo decía, es un pezado de cumplido.",
-			">> Fin de la demo <<",
+			"\n  >> Fin de la demo <<",
 			" "
         ]
 		const Elenco = {

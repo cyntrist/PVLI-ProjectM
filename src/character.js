@@ -1,3 +1,5 @@
+import DialogText from "./dialog_plugin.js";
+
 /**
  * Clase que representa a un personaje en pantalla.
  * @extends Container
@@ -13,11 +15,32 @@ export default class Character extends Phaser.GameObjects.Container {
      * @param {bool} focus - si estan hablando en el instante actual
 	 */
 
-    constructor(scene, x, y, sprite) {
+    constructor(scene, x, y, sprite, nombre) {
         super (scene, x, y);
         this.add(sprite);
         scene.add.existing(this);
-        //...
+        this.nombre = nombre;
+        this.focus = false;
     }
 
+    update() {
+        if (!focus) {
+            this.sprite.setTint(0x000000);
+        }
+        else {
+            this.clearTint();
+        }
+    }
+
+    say() {
+
+    }
+
+    focus() {
+        this.focus = true;
+    }
+
+    unfocus() {
+        this.focus = false;
+    }
 }
