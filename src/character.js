@@ -13,8 +13,10 @@ export default class Character extends Phaser.GameObjects.Container {
      * @param {bool} focus - si estan hablando en el instante actual
 	 */
 
-    constructor(scene, x, y, nombre, sprite) {
-        super (scene, x, y, sprite);
+    constructor(scene, x, y, sprite) {
+        super (scene, x, y);
+        this.add(sprite);
+        scene.add.existing(this);
         //...
     }
 
