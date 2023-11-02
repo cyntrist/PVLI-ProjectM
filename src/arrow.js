@@ -1,44 +1,54 @@
 /**
- * Clase que representa el sombrero de los pájaros
+ * Clase que representa el sombrero de los pï¿½jaros
  * @extends Spite
  */
 export default class Arrow extends Phaser.GameObjects.Sprite {
 	/**
 	 * Contructor del sombrero
-	 * @param {Scene} scene, escena en la que se añade el sombrero
-	 * @param {number} arrowID, identificador para la apariencia de la flecha, corresponde al frame del Spritesheet
+	 * @param {Scene} scene, escena en la que esta la flecha
+	 * @param {number} x // posicion x
+	 * @param {number} y // posicion y
+	 * @param {String} current // escenario en el que esta
+	 * @param {String} target // escena a la que va
+	 * @param {number} spriteID
 	 */
-	constructor(scene, hatId) {
+	constructor(scene, x, y, current, target, spriteID) {
 		// Llamamos al constructor del padre {Sprite}
-		super(scene, 0, 0, 'arrow', arrowId);
+		super(scene, x, y, 'arrow', spriteID);
 
-		// Añadimos el sombrero a la escena y lo hacemos interactivo (podremos comprobar si se ha pulsado sobre el sombrero)
+		// aÃ±adir flecha y hacerla interactiva
 		this.scene.add.existing(this);
 		this.setInteractive();
 
-		// Escuchamos el evento 'pointerdown'. El sombrero será interactivo, por lo que podremos saber si se pulsa en él y hacer lo que sea necesario
-		// El segundo parámetro de la función "on()" tenemos que pasar la función que queramos ejecutar si pasa el evento (es un callback). En este caso definimos una función anónima arrow que ejecutará la función "explode()"
-		// Para estas cosas mirad la documentación, por ejemplo del evento "pointerdown" https://newdocs.phaser.io/docs/3.54.0/Phaser.Input.Events.POINTER_DOWN  (se ve que lleva asociado ese objeto pointer con las coordenadas de la pulsación)
+		
+
+		// Escuchamos el evento 'pointerdown'. El sombrero serï¿½ interactivo, por lo que podremos saber si se pulsa en ï¿½l y hacer lo que sea necesario
+		// El segundo parï¿½metro de la funciï¿½n "on()" tenemos que pasar la funciï¿½n que queramos ejecutar si pasa el evento (es un callback). En este caso definimos una funciï¿½n anï¿½nima arrow que ejecutarï¿½ la funciï¿½n "explode()"
+		// Para estas cosas mirad la documentaciï¿½n, por ejemplo del evento "pointerdown" https://newdocs.phaser.io/docs/3.54.0/Phaser.Input.Events.POINTER_DOWN  (se ve que lleva asociado ese objeto pointer con las coordenadas de la pulsaciï¿½n)
+		
+
 		this.on('pointerdown', (pointer) => {
 			this.move(pointer);
 		});
 
+		console.log(x + " " + y);
+	
+
 	}
 
 	/**
-	 * preUpdate del sombrero
+	 * preUpdate de la flecha
 	 * @param {number} t 
 	 * @param {number} dt 
 	 */
-	preUpdate(t, dt) {
-		
+	preUpdate(t, dt){
+		super.preUpdate(t, dt) // IMPORTANTE llamar al super.preUpdate del padre cuando somos sprites. Si no se llama, no habrÃ¡ animaciÃ³n!!!!!!!!!!!!!
 
-	
 	}
 
 
 	/**
-	 * Acción para moverse de escenario
+	 * Acciï¿½n para moverse de escenario
 	 */
 	move() {
 		console.log("me voy chau chauuuuu");

@@ -1,4 +1,5 @@
 import DialogText from "./dialog_plugin.js";
+import Arrow from "./arrow.js";
 /**
  * Escena demo.
  * @extends Scene
@@ -14,10 +15,14 @@ export default class Demo extends Phaser.Scene
 	preload() 
 	{
 		this.load.image('clase', './assets/images/escenarios/clase2.jpg');
+		this.load.image('pasillo', './assets/images/escenarios/pasillo.jpg');
+
+		this.load.image('flecha', './assets/images/escenarios/flecha.jpg');
     }
 
 	create()
     {
+
         let scene = this // referencia a esta misma escena
         let script = [
             "Camille:\nBuenas noches, muy buenas tetas por cierto.",
@@ -49,5 +54,15 @@ export default class Demo extends Phaser.Scene
             for (i = i; i < script.length; i++)
                 scene.dialog.setText(script[i], true);
         });
+
+		// crea una flecha
+		new Arrow(this, 400, 400, 'clase', 'pasillo', 0);
+		
     }
+
+
+	update (){
+
+
+	}
 }
