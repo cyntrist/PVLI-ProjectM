@@ -17,7 +17,7 @@ export default class Demo extends Phaser.Scene
 		this.load.image('clase', './assets/images/escenarios/clase2.jpg');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo.jpg');
 
-		this.load.image('flecha', './assets/images/escenarios/flecha.jpg');
+		this.load.spritesheet('flecha', './assets/images/escenarios/flecha.jpg', {frameWidth: 76, frameHeight: 76})
     }
 
 	create()
@@ -56,7 +56,7 @@ export default class Demo extends Phaser.Scene
         });
 
 		// crea una flecha
-		new Arrow(this, 400, 400, 'clase', 'pasillo', 0);
+		new Arrow(this, 400, 400, 'clase', 'pasillo', 'flecha');
 		
     }
 

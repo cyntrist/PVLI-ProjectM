@@ -2,7 +2,7 @@
  * Clase que representa el sombrero de los p�jaros
  * @extends Spite
  */
-export default class Arrow extends Phaser.GameObjects.Sprite {
+export default class Arrow extends Phaser.GameObjects.Container {
 	/**
 	 * Contructor del sombrero
 	 * @param {Scene} scene, escena en la que esta la flecha
@@ -10,15 +10,20 @@ export default class Arrow extends Phaser.GameObjects.Sprite {
 	 * @param {number} y // posicion y
 	 * @param {String} current // escenario en el que esta
 	 * @param {String} target // escena a la que va
-	 * @param {number} spriteID
+	 * @param {String} key // sprite que se usara
 	 */
-	constructor(scene, x, y, current, target, spriteID) {
+	constructor(scene, x, y, current, target, key) {
 		// Llamamos al constructor del padre {Sprite}
-		super(scene, x, y, 'arrow', spriteID);
+		super(scene, x, y);
+
+		this.flecha = new Phaser.GameObjects.Sprite(scene, 0, 0, key, 0); 
+		this.flecha.setScale(0.5,0.5);
+		this.add(this.flecha);
 
 		// añadir flecha y hacerla interactiva
 		this.scene.add.existing(this);
-		this.setInteractive();
+		this.setInteractive(new Phaser.
+			Geom.Rectangle(0, 0, this.flecha.width, this.flecha.height), Phaser.Geom.Rectangle.Contains)
 
 		
 
@@ -41,10 +46,6 @@ export default class Arrow extends Phaser.GameObjects.Sprite {
 	 * @param {number} t 
 	 * @param {number} dt 
 	 */
-	preUpdate(t, dt){
-		super.preUpdate(t, dt) // IMPORTANTE llamar al super.preUpdate del padre cuando somos sprites. Si no se llama, no habrá animación!!!!!!!!!!!!!
-
-	}
 
 
 	/**
