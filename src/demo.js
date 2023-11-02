@@ -22,8 +22,9 @@ export default class Demo extends Phaser.Scene
         let script = [
             "Camille:\nBuenas noches, muy buenas tetas por cierto.",
             "Matthew:\nEeeee o no eeeeeee amonooooo",
-			"Richard:\nAkshually!",
-			"Delilah:\nLos ajolotes hacen glugluglu"
+			"Richard:\nAkshually... it's \"¿Eh, o no eh? ¡Vámonos!\"",
+			"Delilah:\nPues los ajolotes hacen glugluglu. :-)",
+			" "
         ]
 
         scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
