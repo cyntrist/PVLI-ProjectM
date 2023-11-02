@@ -20,8 +20,8 @@ export default class Demo extends Phaser.Scene
 
 	create()
     {
-        let scene = this // referencia a esta misma escena
-        let script = [
+        const scene = this // referencia a esta misma escena
+        const script = [
             "Camille:\nBuenas noches, muy buenas tetas por cierto.",
             "Matthew:\nEeeee o no eeeeeee amonooooo",
 			"Richard:\nAkshually... it's \"¿Es o no es? ¡Vámonos!\"",
@@ -33,9 +33,9 @@ export default class Demo extends Phaser.Scene
 	    scene.dialog = new DialogText(this, {
 			borderThickness: 6,
 			borderColor: 0xF6F6F6,
-			borderAlpha: 1,
+			borderAlpha: 0.8,
             windowBorderRadius: 4,
-			windowAlpha: 1,
+			windowAlpha: 0.8,
 			windowColor: 0xFF799A,
 			windowHeight: 150,
 			padding: 18,
@@ -49,7 +49,6 @@ export default class Demo extends Phaser.Scene
 		//this.dialog.toggleWindow();
         let i = 0;
 		scene.dialog.setText(script[i], true);
-
         scene.input.on('pointerdown', function () {
             if (i < script.length - 1) 
 			{
