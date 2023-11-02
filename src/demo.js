@@ -26,6 +26,7 @@ export default class Demo extends Phaser.Scene
 	create()
     {
 		// parámetros
+		const { width, height } = this.canvas;
         const scene = this // referencia a esta misma escena
         const script = [ // array de frases (en un futuro me gustaría que le pudieras pasar a cada pj su frase y fuera algo rollo camille.say(blabla) pero bueno de momento asi)
             "Matthew:\nBuenas tardes y muy buenas tetas por cierto.",
@@ -35,32 +36,34 @@ export default class Demo extends Phaser.Scene
 			"Matthew:\n¡Pero si no he dicho nada malo! A ver, francesa, ¿a ti te ha molestado?",
 			"Camille:\n...Pues mentira no es, no nos vamos a engañar. Obviamente tengo un cuerpazo, ¿o no?",
 			"Richard:\nCiertamente, no es algo que pueda negarse, no.",
-			"Delilah:\nSi nos ponemos así no podemos decir que no pero...",
+			"Delilah:\nSi nos ponemos así no podemos decir que no, pero...",
 			"Matthew:\n¡Veis! Lo que yo decía, es un pezado de cumplido.",
 			">> Fin de la demo <<",
 			" "
         ]
-		const { width, height } = this.canvas;
+		const Elenco = {
+			Camille: 0,
+			Delilah: 1,
+			Matthew: 2,
+			Richard: 3
+		}
 
 		//fondo
         scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
 
 		// sprites
-		const spr_camille = scene.add.sprite(0, 0, 'camilleph');
-		const spr_delilah = scene.add.sprite(0, 0, 'delilahph');
-		const spr_matthew = scene.add.sprite(0, 0, 'matthewph');
-		const spr_richard = scene.add.sprite(0, 0, 'richardph');
+		const sprites = [
+			scene.add.sprite(0, 0, 'camilleph'),
+			scene.add.sprite(0, 0, 'delilahph'),
+			scene.add.sprite(0, 0, 'matthewph'),
+			scene.add.sprite(0, 0, 'richardph')
+		]
 
 		// personajes
-		const camille = new Character(scene, width/5, height - spr_camille.displayHeight/2, spr_camille);
-		const delilah = new Character(scene, width*2/5, height - spr_delilah.displayHeight/2, spr_delilah);
-		const matthew = new Character(scene, width*3/5, height - spr_matthew.displayHeight/2, spr_matthew);
-		const richard = new Character(scene, width*4/5, height - spr_richard.displayHeight/2, spr_richard);
-
-		//camille2.add(spr_camille);
-		//delilah.add('delilah');
-		//matthew.add('matthew');
-		//richard.add('richard');
+		const camille = new Character(scene, width*1/5, height - sprites[Elenco.Camille].displayHeight/2, sprites[Elenco.Camille]);
+		const delilah = new Character(scene, width*2/5, height - sprites[Elenco.Delilah].displayHeight/2, sprites[Elenco.Delilah]);
+		const matthew = new Character(scene, width*3/5, height - sprites[Elenco.Matthew].displayHeight/2, sprites[Elenco.Matthew]);
+		const richard = new Character(scene, width*4/5, height - sprites[Elenco.Richard].displayHeight/2, sprites[Elenco.Richard]);
 
 		// ventana de diálogo
 	    scene.dialog = new DialogText(this, {
