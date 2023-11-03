@@ -1,5 +1,5 @@
 
-export class Button extends Phaser.GameObjects.Container {
+export default class Button extends Phaser.GameObjects.Container {
 	
 	/**
 	 * Contructor del boton 
