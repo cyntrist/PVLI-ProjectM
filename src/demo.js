@@ -1,8 +1,6 @@
 import DialogText from "./dialog_plugin.js";
-
 import Character from "./character.js"
-
-import { Button } from "./button.js";
+import Button from "./button.js";
 
 
 // int o numero para marcar el escenario
@@ -58,9 +56,6 @@ export default class Demo extends Phaser.Scene
 		}
 		const padding = 40; // espacio respecto al origen, pensado para los sprites placeholder
 
-		// añade el fondo
-        //scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
-
 		// array de sprites
 		const sprites = [
 			scene.add.sprite(0, padding, 'camilleph').setScale(0.5,0.5),
@@ -86,13 +81,13 @@ export default class Demo extends Phaser.Scene
 		// colorea a todos los personajes antes de empezar
 		camille.focusEveryone(characters); // camille siendo conejillo de indias
 
-		// crea la ventana de diálogo
-
+		// pone el fondo
 		this.nextBG = 1;
 		this.currentBG = 1;
         let bg = scene.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
 		bg.depth = -2;
 
+		// crea la ventana de diálogo
 	    scene.dialog = new DialogText(this, {
 			borderThickness: 6,
 			borderColor: 0xF6F6F6,
@@ -108,6 +103,7 @@ export default class Demo extends Phaser.Scene
 			fontSize: 24,
 			fontFamily: "lato"
 		});
+
 		// capa 2
 		let dialoguetxt = scene.dialog;
 		dialoguetxt.depth = 2;
@@ -132,7 +128,6 @@ export default class Demo extends Phaser.Scene
 		// crea un boton a la clase
 		let but2 = new Button(this, 550, 100, 'clase', 'box', 1);
 		but2.depth = 2;
-
 
 		// el input
 		let i = 0; // calienta que sales
@@ -166,19 +161,10 @@ export default class Demo extends Phaser.Scene
 				//  Cynthia status update: Frenzy +500.
                 scene.dialog.setText(script[i], true); // háblame como tú bien sabes
 			}
-		})
-
-
-        scene.input.on('pointerdown', function () {
-            for (i = i; i < script.length; i++)
-                scene.dialog.setText(script[i], true);
-        });
-
-		
+		})		
     }
 
 	update(){
-
 		if(this.nextBG == 1) Scenary = 'clase';
 		else if(this.nextBG == 2) Scenary = 'pasillo';
 		 
@@ -192,10 +178,5 @@ export default class Demo extends Phaser.Scene
 
 			this.currentBG = this.nextBG;
 		}
-	}
-
-
-	readScript(){
-		
 	}
 }
