@@ -1,5 +1,6 @@
 import DialogText from "./dialog_plugin.js";
-import Arrow from "./arrow.js";
+import { Button } from "./button.js";
+
 /**
  * Escena demo.
  * @extends Scene
@@ -17,12 +18,11 @@ export default class Demo extends Phaser.Scene
 		this.load.image('clase', './assets/images/escenarios/clase2.jpg');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo.jpg');
 
-		this.load.spritesheet('flecha', './assets/images/escenarios/flecha.jpg', {frameWidth: 76, frameHeight: 76})
+		this.load.spritesheet('box', './assets/images/escenarios/opciones.png', {frameWidth: 111, frameHeight: 30})
     }
 
 	create()
     {
-
         let scene = this // referencia a esta misma escena
         let script = [
             "Camille:\nBuenas noches, muy buenas tetas por cierto.",
@@ -45,6 +45,7 @@ export default class Demo extends Phaser.Scene
 			fontSize: 24,
 			fontFamily: "lato"
 		});
+		
 
 		//this.dialog.toggleWindow();
         let i = 0;
@@ -55,8 +56,11 @@ export default class Demo extends Phaser.Scene
                 scene.dialog.setText(script[i], true);
         });
 
+		// crea un boton
+		new Button(this, 500, 200, 'TETAAAAAAAAAAAAAAAAAAAS', 'box');
+
 		// crea una flecha
-		new Arrow(this, 400, 400, 'clase', 'pasillo', 'flecha');
+		//new Arrow(this, 400, 400, 'clase', 'pasillo', 'flecha');
 		
     }
 
