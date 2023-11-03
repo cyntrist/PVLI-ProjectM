@@ -15,8 +15,8 @@ let config = {
     mode: Phaser.Scale.NONE, // cyn: que alguien le pregunte a alguien por que si pongo fit pasan cosas malas
     autoCenter: Phaser.Scale.CENTER_HORIZONTALLY, 
     min: { // cyn: como le deje escalar se pone a hacer unas cosas rarísimas 
-          width: 1280,
-          height: 720
+          width: 720,
+          height: 480
       },
     max: {
           width: 1280,
