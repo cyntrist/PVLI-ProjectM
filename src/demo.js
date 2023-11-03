@@ -6,11 +6,11 @@ import Button from "./button.js";
 	// 0 -> clase
 	// 1 -> pasillo
 	const scenaries = ["clase", "pasillo"];//['clase', 'pasillo'];
-	var Scenary = 'clase';
+	let Scenary = 'clase';
 
 	// backgrounds
-	var currentBG;
-	var nextBG;
+	let currentBG;
+	let nextBG;
 
 /**
  * Escena demo.
