@@ -94,22 +94,13 @@ export default class Demo extends Phaser.Scene
 		 
 		// ---------------------------
 		if(this.nextBG != this.currentBG){
-
+			// current scenary
 			console.log(Scenary);
-			// scenaries[currentBG]
+
 			let bg = this.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
 			bg.depth = -2;
 
 			this.currentBG = this.nextBG;
 		}
-		
-		
-
-	}
-
-	changeBG(bg1){
-		//new Background(scene, 0, 0, bg1);
-
-		this.add.image(0, 0, bg1).setScale(0.35, 0.35).setOrigin(0, 0);
 	}
 }
