@@ -8,10 +8,6 @@ import Button from "./button.js";
 	const scenaries = ["clase", "pasillo"];//['clase', 'pasillo'];
 	let Scenary = 'clase';
 
-	// backgrounds
-	let currentBG;
-	let nextBG;
-
 /**
  * Escena demo.
  * @extends Scene
