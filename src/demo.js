@@ -72,7 +72,7 @@ export default class Demo extends Phaser.Scene
 			borderColor: 0xF6F6F6,
 			borderAlpha: 0.8,
             windowBorderRadius: 4,
-			windowAlpha: 0.9,
+			windowAlpha: 0.95,
 			windowColor: 0xFF799A,
 			windowHeight: 150,
 			padding: 18,
