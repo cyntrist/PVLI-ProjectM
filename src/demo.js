@@ -59,7 +59,7 @@ export default class Demo extends Phaser.Scene
 		const padding = 40; // espacio respecto al origen, pensado para los sprites placeholder
 
 		// añade el fondo
-        scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
+        //scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
 
 		// array de sprites
 		const sprites = [
@@ -125,6 +125,15 @@ export default class Demo extends Phaser.Scene
 		script.push("\n\n>> FIN DE LA DEMO <<");
 		//...
 
+		// crea un boton al pasillo
+		let but1 = new Button(this, 550, 200, 'pasillo', 'box', 2);
+		but1.depth = 2;
+
+		// crea un boton a la clase
+		let but2 = new Button(this, 550, 100, 'clase', 'box', 1);
+		but2.depth = 2;
+
+
 		// el input
 		let i = 0; // calienta que sales
 		scene.dialog.setText(script[i], true); // imprime la línea de título
@@ -165,14 +174,7 @@ export default class Demo extends Phaser.Scene
                 scene.dialog.setText(script[i], true);
         });
 
-		// crea un boton al pasillo
-		let but1 = new Button(this, 550, 200, 'pasillo', 'box', 2);
-		but1.depth = 2;
-
-		// crea un boton a la clase
-		let but2 = new Button(this, 550, 100, 'clase', 'box', 1);
-		but2.depth = 2;
-
+		
     }
 
 	update(){
@@ -190,5 +192,10 @@ export default class Demo extends Phaser.Scene
 
 			this.currentBG = this.nextBG;
 		}
+	}
+
+
+	readScript(){
+		
 	}
 }
