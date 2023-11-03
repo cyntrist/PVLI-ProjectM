@@ -28,23 +28,8 @@ export default class Demo extends Phaser.Scene
 		// parámetros
 		const { width, height } = this.canvas; // la anchura y altura del canvas
         const scene = this // referencia a esta misma escena
-		/*
-        const script = [ // array de frases (en un futuro me gustaría que le pudieras pasar a cada pj su frase y fuera algo rollo camille.say(blabla) pero bueno de momento asi)
-            "Matthew:\nBuenas tardes y muy buenas tetas por cierto.",
-            "Delilah:\n¡Matthew, no puedes ir diciéndole eso a la gente por la cara!",
-			"Matthew:\n¿Qué tiene de malo? Es un cumplido.",
-			"Richard:\nDe hecho, Delilah tiene razón. Es algo que puede resultar descortés y como un auténtico pervertido... Algo no muy alejado de la realidad.",
-			"Matthew:\n¡Pero si no he dicho nada malo! A ver, francesa, ¿a ti te ha molestado?",
-			"Camille:\n...Pues mentira no es, no nos vamos a engañar. Obviamente tengo un cuerpazo, ¿o no?",
-			"Richard:\nCiertamente, no es algo que pueda negarse, no.",
-			"Delilah:\nSi nos ponemos así no podemos decir que no, pero...",
-			"Matthew:\n¡Veis! Lo que yo decía, es un pezado de cumplido.",
-			"\n  >> Fin de la demo <<",
-			" "
-        ]
-		*/
-		let script = ["\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"];
-		this.script = script;
+		let script = ["\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"]; // línea de título
+		this.script = script; // para que sea alcanzable desde character y en el say() puedan añadir líneas
 		const Elenco = {
 			Camille: 0,
 			Delilah: 1,
@@ -77,8 +62,8 @@ export default class Demo extends Phaser.Scene
 			richard
 		]
 
-		for(let i = 0; i < characters.length; i++) {
-			characters[i].focus = true;
+		for(let i = 0; i < characters.length; i++) { // colorea a todos los personajes
+			characters[i].onFocus();
 		}
 
 		// ventana de diálogo
@@ -98,6 +83,7 @@ export default class Demo extends Phaser.Scene
 			fontFamily: "lato"
 		});
 
+		// La biblia, la conversación, la gracia de la experiencia, el por qué existe este juego
 		matthew.say("Buenas tardes y muy buenas tetas por cierto.");
 		delilah.say("¡Matthew, no puedes ir diciéndole eso a la gente por la cara!")
 		matthew.say("¿Qué tiene de malo? Es un cumplido.");
@@ -108,30 +94,38 @@ export default class Demo extends Phaser.Scene
 		delilah.say("Si nos ponemos así no podemos decir que no, pero...");
 		matthew.say("¡Veis! Lo que yo decía, es un pezado de cumplido.");
 		script.push("\n\n>> FIN DE LA DEMO <<");
+		//...
 
-		let i = 0;
-		scene.dialog.setText(script[i], true);
-		scene.input.on('pointerdown', function () {
-			if (i < script.length - 1) 
+		let i = 0; // calienta que sales
+		scene.dialog.setText(script[i], true); // imprime la línea de título
+		scene.input.on('pointerdown', function () { // cada click 
+			if (i < script.length - 1)  // si no se sale del array
 			{
-				i++;
+				i++; // el sigueinte mensaje
 				const name = script[i].substring(0, 7); // PORQUE TODOS SUS NOMBRES OCUPAN JUSTO 7 LETRAS XDXDDXXDDX LLEVO COMO 4 HORAS Y YA NO SE QUE MÁS PROBAR
-				switch (name) {
+				switch (name) { // colorea a quien toque (y por consiguiente descolorea a quien no toque)
 					case "Camille":
-						camille.onFocus(characters);
+						camille.onFocus();
+						camille.unfocusEveryoneElse(characters);
 						break;
 					case "Delilah":
-						delilah.onFocus(characters);
+						delilah.onFocus();
+						delilah.unfocusEveryoneElse(characters);
 						break;
 					case "Matthew":
-						matthew.onFocus(characters);
+						matthew.onFocus();
+						matthew.unfocusEveryoneElse(characters);
 						break;
 					case "Richard":
-						richard.onFocus(characters);
+						richard.onFocus();
+						richard.unfocusEveryoneElse(characters);
+						break;
+					default:
+						camille.unfocusEveryone(characters);
 						break;
 				}
 				//  Cynthia status update: Frenzy +500.
-                scene.dialog.setText(script[i], true);
+                scene.dialog.setText(script[i], true); // háblame como tú bien sabes
 			}
 		})
     }

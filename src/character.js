@@ -1,5 +1,3 @@
-import DialogText from "./dialog_plugin.js";
-
 /**
  * Clase que representa a un personaje en pantalla.
  * @extends Container
@@ -30,18 +28,27 @@ export default class Character extends Phaser.GameObjects.Container {
         this.scene.script.push(this.nombre + ":\n" + mensaje); // blabla
     }
 
-    onFocus(personajes) {
+    onFocus() {
         this.focus = true;
-        for (let i = 0; i < personajes.length; i++) { // al resto los oscurece (no pueden hablar dos personajes a la vez :P)
-            if (personajes[i] !== this) {
-                personajes[i].onUnfocus();
-            }
-        }
         this.sprite.clearTint(); // sin filtro
     }
 
     onUnfocus() {
         this.focus = false;
         this.sprite.setTint(0x858585); // filtro oscuro
+    }
+
+    unfocusEveryoneElse(personajes) {
+        for (let i = 0; i < personajes.length; i++) { // al resto los oscurece (no pueden hablar dos personajes a la vez :P)
+            if (personajes[i] !== this) {
+                personajes[i].onUnfocus();
+            }
+        }
+    }
+
+    unfocusEveryone(personajes){
+        for (let i = 0; i < personajes.length; i++) { // al resto los oscurece (no pueden hablar dos personajes a la vez :P)
+            personajes[i].onUnfocus();
+        }
     }
 }
