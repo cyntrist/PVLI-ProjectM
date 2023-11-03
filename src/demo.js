@@ -77,24 +77,24 @@ export default class Demo extends Phaser.Scene
                 scene.dialog.setText(script[i], true);
         });
 
-		// crea un boton
-		let but = new Button(this, 500, 200, 'pasillo', 'box', 2);
-		but.depth = 2;
+		// crea un boton al pasillo
+		let but1 = new Button(this, 500, 200, 'pasillo', 'box', 2);
+		but1.depth = 2;
+
+		// crea un boton a la clase
+		let but2 = new Button(this, 500, 100, 'clase', 'box', 1);
+		but2.depth = 2;
+
     }
 
 	update(){
 
-		// scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
-
-		
 		// si estamos en la clase
-		//console.log(this.nextBG + " " + this.currentBG);
+		console.log(this.nextBG + " " + this.currentBG);
 
-		if(this.nextBG == 2) {
-			Scenary = 'pasillo';
-		}
-
-
+		if(this.nextBG == 1) Scenary = 'clase';
+		else if(this.nextBG == 2) Scenary = 'pasillo';
+		 
 		// ---------------------------
 		if(this.nextBG != this.currentBG){
 
@@ -102,7 +102,6 @@ export default class Demo extends Phaser.Scene
 			// scenaries[currentBG]
 			let bg = this.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
 			bg.depth = -2;
-			console.log("a");
 
 			this.currentBG = this.nextBG;
 		}
