@@ -97,7 +97,7 @@ export default class Demo extends Phaser.Scene
 			padding: 18,
             hasCloseBtn: false,
             closeBtnColor: 'white',
-			dialogSpeed: 4.5,
+			dialogSpeed: 4.4,
 			fontSize: 24,
 			fontFamily: "lato"
 		});
