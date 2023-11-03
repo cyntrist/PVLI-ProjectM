@@ -78,19 +78,16 @@ export default class Demo extends Phaser.Scene
         });
 
 		// crea un boton al pasillo
-		let but1 = new Button(this, 500, 200, 'pasillo', 'box', 2);
+		let but1 = new Button(this, 550, 200, 'pasillo', 'box', 2);
 		but1.depth = 2;
 
 		// crea un boton a la clase
-		let but2 = new Button(this, 500, 100, 'clase', 'box', 1);
+		let but2 = new Button(this, 550, 100, 'clase', 'box', 1);
 		but2.depth = 2;
 
     }
 
 	update(){
-
-		// si estamos en la clase
-		console.log(this.nextBG + " " + this.currentBG);
 
 		if(this.nextBG == 1) Scenary = 'clase';
 		else if(this.nextBG == 2) Scenary = 'pasillo';

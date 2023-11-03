@@ -2,14 +2,12 @@
 export class Button extends Phaser.GameObjects.Container {
 	
 	/**
-	 * Contructor del sombrero
+	 * Contructor del boton 
 	 * @param {number} x // posicion x
 	 * @param {number} y // posicion y
-	 * @param {String} text// txt
-	 * 
-		
-	 }} boxSprite //
-	 * 
+	 * @param {String} text // txt
+	 * @param {String} boxSprite // sprite de la caja
+	 * @param {number} nextbg // escenario al que va
 	 */
 
 	
@@ -19,12 +17,13 @@ export class Button extends Phaser.GameObjects.Container {
 		super(scene, x, y);
 
 		// crea la caja
-		this.box = new Phaser.GameObjects.Sprite(scene, 600, 300, boxSprite, 0); 
+		this.box = new Phaser.GameObjects.Sprite(scene, x, 300, boxSprite, 0); 
 		this.box.setScale(2,2);
 		this.add(this.box);
 
-		//this.txt = new Phaser.GameObjects.text(0, 0, "TETAS");
-		//let txt = scene.add.text(100, 100, 'Phaser');
+		const tryout = scene.add.text(x, 300, text);
+		this.add(tryout); 
+
 		// añade el container
     	scene.add.existing(this);
 
@@ -39,12 +38,9 @@ export class Button extends Phaser.GameObjects.Container {
 	}
 
 	click (scene, text, nextbg) {
-		//super.changeBG('pasillo');
-		//console.log("TETORRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS");
-		//console.log("1 " + text);
+		//
 		scene.nextBG = nextbg;
 		scene.Scenary = text;
-		//console.log("2 "+ scene.Scenary);
 
 	}
   }
