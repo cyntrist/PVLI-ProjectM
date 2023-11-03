@@ -101,10 +101,7 @@ export default class Demo extends Phaser.Scene
 			fontSize: 24,
 			fontFamily: "lato"
 		});
-
-		// capa 2
-		let dialoguetxt = scene.dialog;
-		dialoguetxt.depth = 2;
+		scene.dialog.depth = 2;
 
 		// La biblia, la conversación, la gracia de la experiencia, el por qué existe este juego
 		matthew.say("Buenas tardes y muy buenas tetas por cierto.");
