@@ -1,6 +1,16 @@
 import DialogText from "./dialog_plugin.js";
 import { Button } from "./button.js";
 
+
+// int o numero para marcar el escenario
+	// 0 -> clase
+	// 1 -> pasillo
+	var scenaries = new Array("clase", "pasillo");//['clase', 'pasillo'];
+
+	// backgrounds
+	var currentBG;
+	var nextBG;
+
 /**
  * Escena demo.
  * @extends Scene
@@ -29,9 +39,13 @@ export default class Demo extends Phaser.Scene
             "Matthew:\nEeeee o no eeeeeee amonooooo"
         ]
 
+		this.nextBG = 1;
+		this.currentBG = 1;
         let bg = scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
-		bg.depth = 0;
-
+		bg.depth = -2;
+		//Scenary = 1;
+		
+		//console.log(scenaries[0]);
 
 	    scene.dialog = new DialogText(this, {
 			borderThickness: 6,
@@ -48,11 +62,9 @@ export default class Demo extends Phaser.Scene
 			fontSize: 24,
 			fontFamily: "lato"
 		});
-
+		// capa 2
 		let dialoguetxt = scene.dialog;
 		dialoguetxt.depth = 2;
-
-		console.log(scene.dialog.depth);
 
 		//this.dialog.toggleWindow();
         let i = 0;
@@ -64,9 +76,31 @@ export default class Demo extends Phaser.Scene
         });
 
 		// crea un boton
-		let but = new Button(this, 500, 200, 'TETAAAAAAAAAAAAAAAAAAAS', 'box');
+		let but = new Button(this, 500, 200, 'TETAAAAAAAAAAAAAAAAAAAS', 'box', 2);
 		but.depth = 2;
     }
+
+	update(){
+
+		// scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
+
+		// si estamos en la clase
+		console.log(this.nextBG + " " + this.currentBG);
+
+		// ---------------------------
+		if(this.nextBG != this.currentBG){
+
+			// scenaries[currentBG]
+			let bg = this.add.image(0, 0, "pasillo").setScale(0.35, 0.35).setOrigin(0, 0);
+			bg.depth = -2;
+			console.log("a");
+
+			this.currentBG = this.nextBG;
+		}
+		
+		
+
+	}
 
 	changeBG(bg1){
 		//new Background(scene, 0, 0, bg1);
