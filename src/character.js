@@ -25,18 +25,17 @@ export default class Character extends Phaser.GameObjects.Container {
         scene.add.existing(this);
     }
 
-    say(escena, mensaje, personajes) {
-        this.onFocus(); // focus en este personaje
+    say(escena, mensaje) {
+        escena.script.push(this.nombre + ":\n" + mensaje); // blabla
+    }
+
+    onFocus(personajes) {
+        this.focus = true;
         for (let i = 0; i < personajes.length; i++) { // al resto los oscurece (no pueden hablar dos personajes a la vez :P)
             if (personajes[i] !== this) {
                 personajes[i].onUnfocus();
             }
         }
-        escena.dialog.setText(this.nombre + ":\n" + mensaje, true); // blabla
-    }
-
-    onFocus() {
-        this.focus = true;
         this.sprite.clearTint(); // sin filtro
     }
 

@@ -28,6 +28,7 @@ export default class Demo extends Phaser.Scene
 		// parámetros
 		const { width, height } = this.canvas; // la anchura y altura del canvas
         const scene = this // referencia a esta misma escena
+		/*
         const script = [ // array de frases (en un futuro me gustaría que le pudieras pasar a cada pj su frase y fuera algo rollo camille.say(blabla) pero bueno de momento asi)
             "Matthew:\nBuenas tardes y muy buenas tetas por cierto.",
             "Delilah:\n¡Matthew, no puedes ir diciéndole eso a la gente por la cara!",
@@ -41,22 +42,26 @@ export default class Demo extends Phaser.Scene
 			"\n  >> Fin de la demo <<",
 			" "
         ]
+		*/
+		let script = ["\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"];
+		this.script = script;
 		const Elenco = {
 			Camille: 0,
 			Delilah: 1,
 			Matthew: 2,
 			Richard: 3
 		}
+		const padding = 40;
 
 		//fondo
         scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
 
 		// sprites
 		const sprites = [
-			scene.add.sprite(0, 30, 'camilleph').setScale(0.5,0.5),
-			scene.add.sprite(0, 30, 'delilahph').setScale(0.5,0.5),
-			scene.add.sprite(0, 30, 'matthewph').setScale(0.5,0.5),
-			scene.add.sprite(0, 30, 'richardph').setScale(0.5,0.5)
+			scene.add.sprite(0, padding, 'camilleph').setScale(0.5,0.5),
+			scene.add.sprite(0, padding, 'delilahph').setScale(0.5,0.5),
+			scene.add.sprite(0, padding, 'matthewph').setScale(0.5,0.5),
+			scene.add.sprite(0, padding, 'richardph').setScale(0.5,0.5)
 		]
 
 		// personajes
@@ -71,6 +76,10 @@ export default class Demo extends Phaser.Scene
 			matthew,
 			richard
 		]
+
+		for(let i = 0; i < characters.length; i++) {
+			characters[i].focus = true;
+		}
 
 		// ventana de diálogo
 	    scene.dialog = new DialogText(this, {
@@ -89,9 +98,34 @@ export default class Demo extends Phaser.Scene
 			fontFamily: "lato"
 		});
 
-		matthew.say(scene, "Buenas tardes y muy buenas tetas por cierto.", characters);
-		delilah.say(scene, "¡Matthew, no puedes ir diciéndole eso a la gente por la cara!", characters)
-		matthew.say(scene, "¿Qué tiene de malo? Es un cumplido.", characters);
+		matthew.say(scene, "Buenas tardes y muy buenas tetas por cierto.");
+		delilah.say(scene, "¡Matthew, no puedes ir diciéndole eso a la gente por la cara!")
+		matthew.say(scene, "¿Qué tiene de malo? Es un cumplido.");
+		richard.say(scene, "De hecho, Delilah tiene razón. Es algo que puede resultar descortés y como un auténtico pervertido... Algo no muy alejado de la realidad.");
+		matthew.say(scene, "¡Pero si no he dicho nada malo! A ver, francesa, ¿a ti te ha molestado?");
+		camille.say(scene, "...Pues mentira no es, no nos vamos a engañar. Obviamente tengo un cuerpazo, ¿o no?");
+		richard.say(scene, "Ciertamente, no es algo que pueda negarse, no.");
+		delilah.say(scene, "Si nos ponemos así no podemos decir que no, pero...");
+		matthew.say(scene, "¡Veis! Lo que yo decía, es un pezado de cumplido.");
+
+		let i = 0;
+		scene.dialog.setText(script[i], true);
+		scene.input.on('pointerdown', function () {
+			if (i < script.length - 1) 
+			{
+				i++;
+				const name = script[i].substring(0, 7); // PORQUE TODOS SUS NOMBRES OCUPAN JUSTO 7 LETRAS XDXDDXXDDX LLEVO COMO 4 HORAS Y YA NO SE QUE MÁS PROBAR
+				if (name === "Camille") 
+					camille.onFocus(characters);
+				else if (name === "Delilah")
+					delilah.onFocus(characters);
+				else if (name === "Matthew")
+					matthew.onFocus(characters);
+				else if (name === "Richard")
+					richard.onFocus(characters);
+                scene.dialog.setText(script[i], true);
+			}
+		})
 
 		/*
 		// texto en pantalla
