@@ -61,11 +61,6 @@ export default class Demo extends Phaser.Scene
 
 		// crea un boton
 		new Button(this, 500, 200, 'TETAAAAAAAAAAAAAAAAAAAS', 'box');
-		//new Background(0, 0, 'pasillo', 0.35);
-
-		
-		// crea una flecha
-		//new Arrow(this, 400, 400, 'clase', 'pasillo', 'flecha');
 		
     }
 
