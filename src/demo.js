@@ -29,10 +29,10 @@ export default class Demo extends Phaser.Scene
             "Matthew:\nEeeee o no eeeeeee amonooooo"
         ]
 
+        let bg = scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
+		bg.depth = 0;
 
-		//this.background = this.add.image(0, 0, 'clase').setOrigin(.5, .5);
 
-        scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
 	    scene.dialog = new DialogText(this, {
 			borderThickness: 6,
 			borderColor: 0xF6F6F6,
@@ -48,7 +48,11 @@ export default class Demo extends Phaser.Scene
 			fontSize: 24,
 			fontFamily: "lato"
 		});
-		
+
+		let dialoguetxt = scene.dialog;
+		dialoguetxt.depth = 2;
+
+		console.log(scene.dialog.depth);
 
 		//this.dialog.toggleWindow();
         let i = 0;
@@ -60,8 +64,8 @@ export default class Demo extends Phaser.Scene
         });
 
 		// crea un boton
-		new Button(this, 500, 200, 'TETAAAAAAAAAAAAAAAAAAAS', 'box');
-		
+		let but = new Button(this, 500, 200, 'TETAAAAAAAAAAAAAAAAAAAS', 'box');
+		but.depth = 2;
     }
 
 	changeBG(bg1){
