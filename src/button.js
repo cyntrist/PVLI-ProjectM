@@ -1,6 +1,9 @@
 
+/**
+ * Clase que representa a un boton clickable para cambiar de escena.
+ * @extends Container
+ */
 export default class Button extends Phaser.GameObjects.Container {
-	
 	/**
 	 * Contructor del boton 
 	 * @param {number} x // posicion x
@@ -9,10 +12,7 @@ export default class Button extends Phaser.GameObjects.Container {
 	 * @param {String} boxSprite // sprite de la caja
 	 * @param {number} nextbg // escenario al que va
 	 */
-
-	
 	constructor(scene, x, y, text, boxSprite, nextbg) {
-		
 		// super a la escena
 		super(scene, x, y);
 
@@ -33,7 +33,6 @@ export default class Button extends Phaser.GameObjects.Container {
 		// interaccion con la caja
 		this.box.on('pointerdown', (pointer) => {
 			this.click(scene, text, nextbg);
-			
 		});
 	}
 
@@ -41,7 +40,6 @@ export default class Button extends Phaser.GameObjects.Container {
 		//
 		scene.nextBG = nextbg;
 		scene.Scenary = text;
-
 	}
   }
 

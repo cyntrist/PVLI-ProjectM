@@ -2,12 +2,10 @@ import DialogText from "./dialog_plugin.js";
 import Character from "./character.js"
 import Button from "./button.js";
 
-
 // int o numero para marcar el escenario
 	// 0 -> clase
 	// 1 -> pasillo
-	var scenaries = new Array("clase", "pasillo");//['clase', 'pasillo'];
-
+	const scenaries = ["clase", "pasillo"];//['clase', 'pasillo'];
 	var Scenary = 'clase';
 
 	// backgrounds
