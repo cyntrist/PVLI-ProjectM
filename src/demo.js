@@ -1,5 +1,20 @@
 import DialogText from "./dialog_plugin.js";
+
 import Character from "./character.js"
+
+import { Button } from "./button.js";
+
+
+// int o numero para marcar el escenario
+	// 0 -> clase
+	// 1 -> pasillo
+	var scenaries = new Array("clase", "pasillo");//['clase', 'pasillo'];
+
+	var Scenary = 'clase';
+
+	// backgrounds
+	var currentBG;
+	var nextBG;
 
 /**
  * Escena demo.
@@ -17,10 +32,15 @@ export default class Demo extends Phaser.Scene
 	{
 		this.canvas = this.sys.game.canvas;
 		this.load.image('clase', './assets/images/escenarios/clase2.jpg');
+
 		this.load.image('camilleph', './assets/images/personajes/camille.png');
 		this.load.image('delilahph', './assets/images/personajes/delilah.png');
 		this.load.image('matthewph', './assets/images/personajes/matthew.png');
 		this.load.image('richardph', './assets/images/personajes/richard.png');
+
+		this.load.image('pasillo', './assets/images/escenarios/pasillo.jpg');
+		this.load.spritesheet('box', './assets/images/escenarios/opciones.png', {frameWidth: 111, frameHeight: 30})
+
     }
 
 	create()
@@ -39,7 +59,7 @@ export default class Demo extends Phaser.Scene
 		const padding = 40; // espacio respecto al origen, pensado para los sprites placeholder
 
 		// añade el fondo
-        scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
+        //scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
 
 		// array de sprites
 		const sprites = [
@@ -67,6 +87,12 @@ export default class Demo extends Phaser.Scene
 		camille.focusEveryone(characters); // camille siendo conejillo de indias
 
 		// crea la ventana de diálogo
+
+		this.nextBG = 1;
+		this.currentBG = 1;
+        let bg = scene.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
+		bg.depth = -2;
+
 	    scene.dialog = new DialogText(this, {
 			borderThickness: 6,
 			borderColor: 0xF6F6F6,
@@ -82,6 +108,9 @@ export default class Demo extends Phaser.Scene
 			fontSize: 24,
 			fontFamily: "lato"
 		});
+		// capa 2
+		let dialoguetxt = scene.dialog;
+		dialoguetxt.depth = 2;
 
 		// La biblia, la conversación, la gracia de la experiencia, el por qué existe este juego
 		matthew.say("Buenas tardes y muy buenas tetas por cierto.");
@@ -95,6 +124,15 @@ export default class Demo extends Phaser.Scene
 		matthew.say("¡Veis! Lo que yo decía, es un pezado de cumplido.");
 		script.push("\n\n>> FIN DE LA DEMO <<");
 		//...
+
+		// crea un boton al pasillo
+		let but1 = new Button(this, 550, 200, 'pasillo', 'box', 2);
+		but1.depth = 2;
+
+		// crea un boton a la clase
+		let but2 = new Button(this, 550, 100, 'clase', 'box', 1);
+		but2.depth = 2;
+
 
 		// el input
 		let i = 0; // calienta que sales
@@ -129,5 +167,35 @@ export default class Demo extends Phaser.Scene
                 scene.dialog.setText(script[i], true); // háblame como tú bien sabes
 			}
 		})
+
+
+        scene.input.on('pointerdown', function () {
+            for (i = i; i < script.length; i++)
+                scene.dialog.setText(script[i], true);
+        });
+
+		
     }
+
+	update(){
+
+		if(this.nextBG == 1) Scenary = 'clase';
+		else if(this.nextBG == 2) Scenary = 'pasillo';
+		 
+		// ---------------------------
+		if(this.nextBG != this.currentBG){
+			// current scenary
+			console.log(Scenary);
+
+			let bg = this.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
+			bg.depth = -2;
+
+			this.currentBG = this.nextBG;
+		}
+	}
+
+
+	readScript(){
+		
+	}
 }

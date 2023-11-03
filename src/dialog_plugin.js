@@ -156,6 +156,7 @@ export default class DialogText{
 		this._createOuterWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
 		this._createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
 		
+
 		if (this.hasCloseBtn) 
 		{
 			this._createCloseModalButton(); //se muestra el boton de cerrar en la ventana
