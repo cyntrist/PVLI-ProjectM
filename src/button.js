@@ -1,4 +1,5 @@
 
+
 export class Button extends Phaser.GameObjects.Container {
 	
 	/**
@@ -6,45 +7,38 @@ export class Button extends Phaser.GameObjects.Container {
 	 * @param {number} x // posicion x
 	 * @param {number} y // posicion y
 	 * @param {String} text// txt
-	 * @param {String} boxSprite //
+		
+	 }} boxSprite //
 	 * 
 	 */
 
 	
 	constructor(scene, x, y, text, boxSprite) {
 		
+		// super a la escena
 		super(scene, x, y);
+
+		// crea la caja
 		this.box = new Phaser.GameObjects.Sprite(scene, 600, 300, boxSprite, 0); 
 		this.box.setScale(2,2);
 		this.add(this.box);
 
-		
-		//let txt = scene.add.text(x, y, text);
+		// añade el container
     	scene.add.existing(this);
 
-		//this.setScale().setInteractive();
-
+		// lo hace interactivo
 		this.box.setInteractive();
 
-		//console.log();
-
+		// interaccion con la caja
 		this.box.on('pointerdown', (pointer) => {
-			this.click(pointer);
+			this.click();
 		});
-
-		// hitbox, Phaser.Geom.Rectangle.Contains(rect, pointer.x, pointer.y)
-	}
-	create() {
-		
-	  //const button1 = this.add.text(100, 100, text, { fill: '#0f0' });
-	  //helloButton.setInteractive();
-
 	}
 
-
-	click (pointer) {
+	click () {
+		//super.changeBG('pasillo');
 		console.log("TETORRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS");
-		console.log(pointer.x + " " + pointer.y);
+
 	}
   }
 

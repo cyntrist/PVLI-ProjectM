@@ -29,6 +29,9 @@ export default class Demo extends Phaser.Scene
             "Matthew:\nEeeee o no eeeeeee amonooooo"
         ]
 
+
+		//this.background = this.add.image(0, 0, 'clase').setOrigin(.5, .5);
+
         scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
 	    scene.dialog = new DialogText(this, {
 			borderThickness: 6,
@@ -64,9 +67,9 @@ export default class Demo extends Phaser.Scene
 		
     }
 
+	changeBG(bg1){
+		//new Background(scene, 0, 0, bg1);
 
-	update (){
-
-
+		this.add.image(0, 0, bg1).setScale(0.35, 0.35).setOrigin(0, 0);
 	}
 }
