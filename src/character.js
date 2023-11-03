@@ -18,6 +18,7 @@ export default class Character extends Phaser.GameObjects.Container {
     constructor(scene, x, y, sprite, nombre) {
         super (scene, x, y);
         this.add(sprite);
+        this.scene = scene;
         this.sprite = sprite;
         this.nombre = nombre;
         this.sprite.setBlendMode(Phaser.BlendModes.DARKEN);
@@ -25,8 +26,8 @@ export default class Character extends Phaser.GameObjects.Container {
         scene.add.existing(this);
     }
 
-    say(escena, mensaje) {
-        escena.script.push(this.nombre + ":\n" + mensaje); // blabla
+    say(mensaje) {
+        this.scene.script.push(this.nombre + ":\n" + mensaje); // blabla
     }
 
     onFocus(personajes) {

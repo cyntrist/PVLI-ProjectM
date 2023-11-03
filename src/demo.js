@@ -98,15 +98,16 @@ export default class Demo extends Phaser.Scene
 			fontFamily: "lato"
 		});
 
-		matthew.say(scene, "Buenas tardes y muy buenas tetas por cierto.");
-		delilah.say(scene, "¡Matthew, no puedes ir diciéndole eso a la gente por la cara!")
-		matthew.say(scene, "¿Qué tiene de malo? Es un cumplido.");
-		richard.say(scene, "De hecho, Delilah tiene razón. Es algo que puede resultar descortés y como un auténtico pervertido... Algo no muy alejado de la realidad.");
-		matthew.say(scene, "¡Pero si no he dicho nada malo! A ver, francesa, ¿a ti te ha molestado?");
-		camille.say(scene, "...Pues mentira no es, no nos vamos a engañar. Obviamente tengo un cuerpazo, ¿o no?");
-		richard.say(scene, "Ciertamente, no es algo que pueda negarse, no.");
-		delilah.say(scene, "Si nos ponemos así no podemos decir que no, pero...");
-		matthew.say(scene, "¡Veis! Lo que yo decía, es un pezado de cumplido.");
+		matthew.say("Buenas tardes y muy buenas tetas por cierto.");
+		delilah.say("¡Matthew, no puedes ir diciéndole eso a la gente por la cara!")
+		matthew.say("¿Qué tiene de malo? Es un cumplido.");
+		richard.say("De hecho, Delilah tiene razón. Es algo que puede resultar descortés y como un auténtico pervertido... Algo no muy alejado de la realidad.");
+		matthew.say("¡Pero si no he dicho nada malo! A ver, francesa, ¿a ti te ha molestado?");
+		camille.say("...Pues mentira no es, no nos vamos a engañar. Obviamente tengo un cuerpazo, ¿o no?");
+		richard.say("Ciertamente, no es algo que pueda negarse, no.");
+		delilah.say("Si nos ponemos así no podemos decir que no, pero...");
+		matthew.say("¡Veis! Lo que yo decía, es un pezado de cumplido.");
+		script.push("\n\n>> FIN DE LA DEMO <<");
 
 		let i = 0;
 		scene.dialog.setText(script[i], true);
@@ -115,29 +116,23 @@ export default class Demo extends Phaser.Scene
 			{
 				i++;
 				const name = script[i].substring(0, 7); // PORQUE TODOS SUS NOMBRES OCUPAN JUSTO 7 LETRAS XDXDDXXDDX LLEVO COMO 4 HORAS Y YA NO SE QUE MÁS PROBAR
-				if (name === "Camille") 
-					camille.onFocus(characters);
-				else if (name === "Delilah")
-					delilah.onFocus(characters);
-				else if (name === "Matthew")
-					matthew.onFocus(characters);
-				else if (name === "Richard")
-					richard.onFocus(characters);
+				switch (name) {
+					case "Camille":
+						camille.onFocus(characters);
+						break;
+					case "Delilah":
+						delilah.onFocus(characters);
+						break;
+					case "Matthew":
+						matthew.onFocus(characters);
+						break;
+					case "Richard":
+						richard.onFocus(characters);
+						break;
+				}
+				//  Cynthia status update: Frenzy +500.
                 scene.dialog.setText(script[i], true);
 			}
 		})
-
-		/*
-		// texto en pantalla
-        let i = 0;
-		scene.dialog.setText(script[i], true);
-        scene.input.on('pointerdown', function () {
-            if (i < script.length - 1) 
-			{
-				i++;
-                scene.dialog.setText(script[i], true);
-			}
-        });
-		*/
     }
 }
