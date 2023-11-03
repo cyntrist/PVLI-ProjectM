@@ -27,15 +27,15 @@ export default class Demo extends Phaser.Scene
 	preload() 
 	{
 		this.canvas = this.sys.game.canvas;
-		this.load.image('clase', './assets/images/escenarios/clase2.jpg');
 
 		this.load.image('camilleph', './assets/images/personajes/camille.png');
 		this.load.image('delilahph', './assets/images/personajes/delilah.png');
 		this.load.image('matthewph', './assets/images/personajes/matthew.png');
 		this.load.image('richardph', './assets/images/personajes/richard.png');
 
-		this.load.image('pasillo', './assets/images/escenarios/pasillo.jpg');
-		this.load.spritesheet('box', './assets/images/escenarios/opciones.png', {frameWidth: 111, frameHeight: 30})
+		this.load.image('clase', './assets/images/escenarios/clase2.png');
+		this.load.image('pasillo', './assets/images/escenarios/pasillo.png');
+		this.load.spritesheet('box', './assets/images/escenarios/opciones2.png', {frameWidth: 60, frameHeight: 30})
 
     }
 
@@ -120,11 +120,11 @@ export default class Demo extends Phaser.Scene
 		//...
 
 		// crea un boton al pasillo
-		let but1 = new Button(this, 550, 200, 'pasillo', 'box', 2);
+		let but1 = new Button(this, 590, 200, 'pasillo', 'box', 2);
 		but1.depth = 2;
 
 		// crea un boton a la clase
-		let but2 = new Button(this, 550, 100, 'clase', 'box', 1);
+		let but2 = new Button(this, 590, 250, 'clase', 'box', 1);
 		but2.depth = 2;
 
 		// el input

@@ -17,11 +17,21 @@ export default class Button extends Phaser.GameObjects.Container {
 		super(scene, x, y);
 
 		// crea la caja
-		this.box = new Phaser.GameObjects.Sprite(scene, x, 300, boxSprite, 0); 
+		this.box = new Phaser.GameObjects.Sprite(scene, x, y, boxSprite, 0); 
 		this.box.setScale(2,2);
 		this.add(this.box);
 
-		const tryout = scene.add.text(x, 300, text);
+		x -= 30
+		y -= 10;
+		const tryout = scene.make.text({
+			x, 
+			y, 
+			text,
+			style: {
+				fontSize: 20,
+				fontFamily: 'lato'
+			}
+			})
 		this.add(tryout); 
 
 		// añade el container

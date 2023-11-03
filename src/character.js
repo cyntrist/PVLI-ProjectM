@@ -56,6 +56,7 @@ export default class Character extends Phaser.GameObjects.Container {
             personajes[i].onFocus();
         }
     }
+    
     /**
 	 * oscurece a todos excepto a quien está hablando
 	 * @param {Character[]} personajes - array de personajes sobre el que cicla para acceder y oscurecerlos.
