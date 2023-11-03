@@ -1,4 +1,4 @@
-
+import newBG from "./newBG";
 
 export class Button extends Phaser.GameObjects.Container {
 	
@@ -38,6 +38,7 @@ export class Button extends Phaser.GameObjects.Container {
 	click () {
 		//super.changeBG('pasillo');
 		console.log("TETORRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS");
+		new newBG(this, 0, 0, 'pasillo');
 
 	}
   }

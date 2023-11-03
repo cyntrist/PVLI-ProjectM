@@ -1,10 +1,10 @@
-export class Background extends Phaser.scene.GameObjects.image {
-	
+export class Background extends Phaser.GameObjects.Container {
 	/**
 	 * Contructor del sombrero
 	 * @param {number} x // posicion x
 	 * @param {number} y // posicion y
 	 * @param {String} bg// txt
+	 * @param {number} scale
 	 * 
 	 */
 
@@ -13,7 +13,7 @@ export class Background extends Phaser.scene.GameObjects.image {
 		// super a la escena
 		super(scene, x, y);
 
-        scene.add.image(x, y, bg).setScale(0.35, 0.35).setOrigin(0, 0);
+        scene.add.image(x, y, bg).setScale(scale, scale).setOrigin(0, 0);
 
 		// añade el container
     	scene.add.existing(this);
