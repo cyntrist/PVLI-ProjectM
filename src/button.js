@@ -13,7 +13,7 @@ export class Button extends Phaser.GameObjects.Container {
 	 */
 
 	
-	constructor(scene, x, y, text, boxSprite, nextBG) {
+	constructor(scene, x, y, text, boxSprite) {
 		
 		// super a la escena
 		super(scene, x, y);
@@ -31,15 +31,18 @@ export class Button extends Phaser.GameObjects.Container {
 
 		// interaccion con la caja
 		this.box.on('pointerdown', (pointer) => {
-			this.click(scene);
+			this.click(scene, text);
+			
 		});
 	}
 
-	click (scene) {
+	click (scene, text) {
 		//super.changeBG('pasillo');
-		console.log("TETORRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS");
+		//console.log("TETORRAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS");
+		//console.log("1 " + text);
 		scene.nextBG = 2;
-		//this.createBG(scene);
+		scene.Scenary = text;
+		//console.log("2 "+ scene.Scenary);
 
 	}
 

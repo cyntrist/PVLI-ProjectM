@@ -7,6 +7,8 @@ import { Button } from "./button.js";
 	// 1 -> pasillo
 	var scenaries = new Array("clase", "pasillo");//['clase', 'pasillo'];
 
+	var Scenary = 'clase';
+
 	// backgrounds
 	var currentBG;
 	var nextBG;
@@ -41,7 +43,7 @@ export default class Demo extends Phaser.Scene
 
 		this.nextBG = 1;
 		this.currentBG = 1;
-        let bg = scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
+        let bg = scene.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
 		bg.depth = -2;
 		//Scenary = 1;
 		
@@ -76,7 +78,7 @@ export default class Demo extends Phaser.Scene
         });
 
 		// crea un boton
-		let but = new Button(this, 500, 200, 'TETAAAAAAAAAAAAAAAAAAAS', 'box', 2);
+		let but = new Button(this, 500, 200, 'pasillo', 'box', 2);
 		but.depth = 2;
     }
 
@@ -84,14 +86,21 @@ export default class Demo extends Phaser.Scene
 
 		// scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
 
+		
 		// si estamos en la clase
-		console.log(this.nextBG + " " + this.currentBG);
+		//console.log(this.nextBG + " " + this.currentBG);
+
+		if(this.nextBG == 2) {
+			Scenary = 'pasillo';
+		}
+
 
 		// ---------------------------
 		if(this.nextBG != this.currentBG){
 
+			console.log(Scenary);
 			// scenaries[currentBG]
-			let bg = this.add.image(0, 0, "pasillo").setScale(0.35, 0.35).setOrigin(0, 0);
+			let bg = this.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
 			bg.depth = -2;
 			console.log("a");
 
