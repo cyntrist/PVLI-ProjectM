@@ -28,20 +28,20 @@ export default class Demo extends Phaser.Scene
 		// parámetros
 		const { width, height } = this.canvas; // la anchura y altura del canvas
         const scene = this // referencia a esta misma escena
-		let script = ["\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"]; // línea de título
+		let script = ["\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"]; // línea de título, array que va a llevar todo el script del juego
 		this.script = script; // para que sea alcanzable desde character y en el say() puedan añadir líneas
-		const Elenco = {
+		const Elenco = { // enum para que queden más bonitas las asignaciones pero vamos es una tonteria
 			Camille: 0,
 			Delilah: 1,
 			Matthew: 2,
 			Richard: 3
 		}
-		const padding = 40;
+		const padding = 40; // espacio respecto al origen, pensado para los sprites placeholder
 
-		//fondo
+		// añade el fondo
         scene.add.image(0, 0, 'clase').setScale(0.35, 0.35).setOrigin(0, 0);
 
-		// sprites
+		// array de sprites
 		const sprites = [
 			scene.add.sprite(0, padding, 'camilleph').setScale(0.5,0.5),
 			scene.add.sprite(0, padding, 'delilahph').setScale(0.5,0.5),
@@ -49,24 +49,26 @@ export default class Demo extends Phaser.Scene
 			scene.add.sprite(0, padding, 'richardph').setScale(0.5,0.5)
 		]
 
-		// personajes
+		// creación de personajes
 		const camille = new Character(scene, width*1/5, height - sprites[Elenco.Camille].displayHeight/2, sprites[Elenco.Camille], "Camille");
 		const delilah = new Character(scene, width*2/5, height - sprites[Elenco.Delilah].displayHeight/2, sprites[Elenco.Delilah], "Delilah");
 		const matthew = new Character(scene, width*3/5, height - sprites[Elenco.Matthew].displayHeight/2, sprites[Elenco.Matthew], "Matthew");
 		const richard = new Character(scene, width*4/5, height - sprites[Elenco.Richard].displayHeight/2, sprites[Elenco.Richard], "Richard");
 
-		const characters = [
+		// array de los personajes, pensado para las iteraciones dentro de Character
+		const characters = [ 
 			camille,
 			delilah,
 			matthew,
 			richard
 		]
 
-		for(let i = 0; i < characters.length; i++) { // colorea a todos los personajes
+		// colorea a todos los personajes antes de empezar
+		for(let i = 0; i < characters.length; i++) { 
 			characters[i].onFocus();
 		}
 
-		// ventana de diálogo
+		// crea la ventana de diálogo
 	    scene.dialog = new DialogText(this, {
 			borderThickness: 6,
 			borderColor: 0xF6F6F6,
@@ -96,6 +98,7 @@ export default class Demo extends Phaser.Scene
 		script.push("\n\n>> FIN DE LA DEMO <<");
 		//...
 
+		// el input
 		let i = 0; // calienta que sales
 		scene.dialog.setText(script[i], true); // imprime la línea de título
 		scene.input.on('pointerdown', function () { // cada click 

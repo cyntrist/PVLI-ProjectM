@@ -12,7 +12,6 @@ export default class Character extends Phaser.GameObjects.Container {
      * @param {Sprite} sprite - identificador del sprite que se usará
      * @param {bool} focus - si estan hablando en el instante actual
 	 */
-
     constructor(scene, x, y, sprite, nombre) {
         super (scene, x, y);
         this.add(sprite);
@@ -20,34 +19,53 @@ export default class Character extends Phaser.GameObjects.Container {
         this.sprite = sprite;
         this.nombre = nombre;
         this.sprite.setBlendMode(Phaser.BlendModes.DARKEN);
-        this.onUnfocus();
+        this.onUnfocus(); // por defecto siempre aparecen oscuros
         scene.add.existing(this);
     }
 
-    say(mensaje) {
+    /**
+     * el personaje habla (añade al script de la escena el mensaje correspondiente al final del array)
+     * @param {String} mensaje -  pues lo que dice, no te voy a mentir.
+     */
+    say(mensaje) { 
         this.scene.script.push(this.nombre + ":\n" + mensaje); // blabla
     }
 
-    onFocus() {
+    /**
+     * ilumina al personaje
+     */
+    onFocus() { 
         this.focus = true;
         this.sprite.clearTint(); // sin filtro
     }
 
-    onUnfocus() {
+    /**
+     * oscurece al personaje
+     */
+    onUnfocus() { 
         this.focus = false;
         this.sprite.setTint(0x858585); // filtro oscuro
     }
 
+
+    /**
+	 * oscurece a todos excepto a quien está hablando
+	 * @param {Character[]} personajes - array de personajes sobre el que cicla para acceder y oscurecerlos.
+	 */
     unfocusEveryoneElse(personajes) {
-        for (let i = 0; i < personajes.length; i++) { // al resto los oscurece (no pueden hablar dos personajes a la vez :P)
-            if (personajes[i] !== this) {
+        for (let i = 0; i < personajes.length; i++) { 
+            if (personajes[i] !== this) { // si es distinto a este
                 personajes[i].onUnfocus();
             }
         }
     }
 
-    unfocusEveryone(personajes){
-        for (let i = 0; i < personajes.length; i++) { // al resto los oscurece (no pueden hablar dos personajes a la vez :P)
+    /**
+	 * oscurece a todo el mundo, hablante inclusive
+	 * @param {Character[]} personajes - array de personajes sobre el que cicla para acceder y oscurecerlos.
+	 */
+    unfocusEveryone(personajes){ 
+        for (let i = 0; i < personajes.length; i++) {
             personajes[i].onUnfocus();
         }
     }
