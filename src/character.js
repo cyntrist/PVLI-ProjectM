@@ -47,7 +47,15 @@ export default class Character extends Phaser.GameObjects.Container {
         this.sprite.setTint(0x858585); // filtro oscuro
     }
 
-
+    /**
+	 * ilumina a todo el mundo
+	 * @param {Character[]} personajes - array de personajes sobre el que cicla para acceder y oscurecerlos.
+	 */
+    focusEveryone(personajes) {
+        for (let i = 0; i < personajes.length; i++) {
+            personajes[i].onFocus();
+        }
+    }
     /**
 	 * oscurece a todos excepto a quien está hablando
 	 * @param {Character[]} personajes - array de personajes sobre el que cicla para acceder y oscurecerlos.

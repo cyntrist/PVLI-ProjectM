@@ -64,9 +64,7 @@ export default class Demo extends Phaser.Scene
 		]
 
 		// colorea a todos los personajes antes de empezar
-		for(let i = 0; i < characters.length; i++) { 
-			characters[i].onFocus();
-		}
+		camille.focusEveryone(characters); // camille siendo conejillo de indias
 
 		// crea la ventana de diálogo
 	    scene.dialog = new DialogText(this, {
@@ -124,7 +122,7 @@ export default class Demo extends Phaser.Scene
 						richard.unfocusEveryoneElse(characters);
 						break;
 					default:
-						camille.unfocusEveryone(characters);
+						camille.unfocusEveryone(characters); // camille siendo conejillo de indias otra vez
 						break;
 				}
 				//  Cynthia status update: Frenzy +500.
