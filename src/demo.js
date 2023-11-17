@@ -164,17 +164,20 @@ export default class Demo extends Phaser.Scene
 			// current scenary
 			console.log(Scenary);
 
-			let bg = this.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
-			bg.depth = -2;
-
+			
 			this.currentBG = this.nextBG;
 		}
 	}
 
 
 	// cambia el escenario (la imagen de fondo)
-	ChangeScenary (){
-		console.log("QUE ES UN CALLBACKKKKKK");
+	ChangeScenary (newImage, escena){
 
+		// crea una imagen en la escena dada 
+		let bg = escena.add.image(0, 0, newImage).setScale(0.35, 0.35).setOrigin(0, 0);
+
+		// ajusta la capa
+		bg.depth = -2;
+		
 	}
 }
