@@ -12,7 +12,7 @@ export default class Button extends Phaser.GameObjects.Container {
 	 * @param {String} boxSprite // sprite de la caja
 	 * @param {number} nextbg // escenario al que va
 	 */
-	constructor(scene, x, y, text, boxSprite, nextbg) {
+	constructor(scene, x, y, text, boxSprite, nextbg, callback) {
 		// super a la escena
 		super(scene, x, y);
 
@@ -42,7 +42,8 @@ export default class Button extends Phaser.GameObjects.Container {
 
 		// interaccion con la caja
 		this.box.on('pointerdown', (pointer) => {
-			this.click(scene, text, nextbg);
+			//this.click(scene, text, nextbg);
+			callback();
 		});
 	}
 

@@ -113,11 +113,11 @@ export default class Demo extends Phaser.Scene
 		//...
 
 		// crea un boton al pasillo
-		let but1 = new Button(this, 590, 200, 'pasillo', 'box', 2);
+		let but1 = new Button(this, 590, 200, 'pasillo', 'box', 2, this.ChangeScenary);
 		but1.depth = 2;
 
 		// crea un boton a la clase
-		let but2 = new Button(this, 590, 250, 'clase', 'box', 1);
+		let but2 = new Button(this, 590, 250, 'clase', 'box', 1, this.ChangeScenary);
 		but2.depth = 2;
 
 		// el input
@@ -169,5 +169,12 @@ export default class Demo extends Phaser.Scene
 
 			this.currentBG = this.nextBG;
 		}
+	}
+
+
+	// cambia el escenario (la imagen de fondo)
+	ChangeScenary (){
+		console.log("QUE ES UN CALLBACKKKKKK");
+
 	}
 }
