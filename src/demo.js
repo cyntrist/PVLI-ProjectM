@@ -32,6 +32,7 @@ export default class Demo extends Phaser.Scene
 		this.load.image('clase', './assets/images/escenarios/clase2.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo.png');
 		this.load.spritesheet('box', './assets/images/escenarios/opciones2.png', {frameWidth: 60, frameHeight: 30})
+		this.load.spritesheet('movil', './assets/images/movil/movil.png', {frameWidht: 60, frameHeight: 20})
 
     }
 
@@ -120,6 +121,9 @@ export default class Demo extends Phaser.Scene
 		let but2 = new Button(this, 590, 250, 'clase', 'box', 1, this.ChangeScenary);
 		but2.depth = 2;
 
+		// crea el botón del movil
+		//let movil = new Button(this, window.width - 10, window.height - 10, ' ', 'movil', this.OpenMovile);
+
 		// el input
 		let i = 0; // calienta que sales
 		scene.dialog.setText(script[i], true); // imprime la línea de título
@@ -176,5 +180,9 @@ export default class Demo extends Phaser.Scene
 	ChangeScenary (){
 		console.log("QUE ES UN CALLBACKKKKKK");
 
+	}
+
+	OpenMovile (){
+		console.log("Movil :)");
 	}
 }
