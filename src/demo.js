@@ -5,8 +5,7 @@ import Button from "./button.js";
 // int o numero para marcar el escenario
 	// 0 -> clase
 	// 1 -> pasillo
-	const scenaries = ["clase", "pasillo"];//['clase', 'pasillo'];
-	let Scenary = 'clase';
+	const scenaries = ["clase", "pasillo"];
 
 /**
  * Escena demo.
@@ -78,7 +77,7 @@ export default class Demo extends Phaser.Scene
 		// pone el fondo
 		this.nextBG = 1;
 		this.currentBG = 1;
-        let bg = scene.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
+        let bg = scene.add.image(0, 0, "clase").setScale(0.35, 0.35).setOrigin(0, 0);
 		bg.depth = -2;
 
 		// crea la ventana de diálogo
@@ -113,11 +112,11 @@ export default class Demo extends Phaser.Scene
 		//...
 
 		// crea un boton al pasillo
-		let but1 = new Button(this, 590, 200, 'pasillo', 'box', 2, this.ChangeScenary);
+		let but1 = new Button(this, 590, 200, 'pasillo', 'box', this.ChangeScenary);
 		but1.depth = 2;
 
 		// crea un boton a la clase
-		let but2 = new Button(this, 590, 250, 'clase', 'box', 1, this.ChangeScenary);
+		let but2 = new Button(this, 590, 250, 'clase', 'box', this.ChangeScenary);
 		but2.depth = 2;
 
 		// el input
@@ -156,17 +155,8 @@ export default class Demo extends Phaser.Scene
     }
 
 	update(){
-		if(this.nextBG == 1) Scenary = 'clase';
-		else if(this.nextBG == 2) Scenary = 'pasillo';
-		 
-		// ---------------------------
-		if(this.nextBG != this.currentBG){
-			// current scenary
-			console.log(Scenary);
+		//  eh??
 
-			
-			this.currentBG = this.nextBG;
-		}
 	}
 
 
@@ -178,6 +168,6 @@ export default class Demo extends Phaser.Scene
 
 		// ajusta la capa
 		bg.depth = -2;
-		
+
 	}
 }
