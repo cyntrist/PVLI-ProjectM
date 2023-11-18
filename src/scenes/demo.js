@@ -1,6 +1,6 @@
-import DialogText from "./dialog_plugin.js";
-import Character from "./character.js"
-import Button from "./button.js";
+import DialogText from "../plugins/dialog_plugin.js";
+import Character from "../objects/character.js"
+import Button from "../objects/button.js";
 
 // int o numero para marcar el escenario
 	// 0 -> clase

@@ -1,4 +1,4 @@
-import Demo from './demo.js';
+import Demo from './scenes/demo.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
