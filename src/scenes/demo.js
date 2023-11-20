@@ -2,11 +2,6 @@ import DialogText from "../plugins/dialog_plugin.js";
 import Character from "../objects/character.js"
 import Button from "../objects/button.js";
 
-// int o numero para marcar el escenario
-	// 0 -> clase
-	// 1 -> pasillo
-	const scenaries = ["clase", "pasillo"];
-
 /**
  * Escena demo.
  * @extends Scene
@@ -119,6 +114,10 @@ export default class Demo extends Phaser.Scene
 		let but2 = new Button(this, 590, 250, 'clase', 'box', this.ChangeScenary);
 		but2.depth = 2;
 
+		// boton del movil (placeholder)
+		let but3 = new Button(this, 590, 300, 'movil', 'box', this.ChangeScene);
+		but3.depth = 2;
+
 		// el input
 		let i = 0; // calienta que sales
 		scene.dialog.setText(script[i], true); // imprime la línea de título
@@ -151,14 +150,9 @@ export default class Demo extends Phaser.Scene
 				//  Cynthia status update: Frenzy +500.
                 scene.dialog.setText(script[i], true); // háblame como tú bien sabes
 			}
-		})		
+		})	
+		
     }
-
-	update(){
-		//  eh??
-
-	}
-
 
 	// cambia el escenario (la imagen de fondo)
 	ChangeScenary (newImage, escena){
@@ -168,6 +162,13 @@ export default class Demo extends Phaser.Scene
 
 		// ajusta la capa
 		bg.depth = -2;
+
+	}
+
+	ChangeScene(newScene, escena){
+
+		//
+		escena.scene.start(newScene);
 
 	}
 

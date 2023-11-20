@@ -1,4 +1,5 @@
 import Demo from './scenes/demo.js';
+import movil from './scenes/movil.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
@@ -23,7 +24,7 @@ let config = {
           height: 720
       }
   },
-  scene: [Demo],
+  scene: [Demo, movil],
   title: "MBTI",
   version: "1.0.0"
 }
