@@ -32,7 +32,7 @@ export default class Demo extends Phaser.Scene
 		this.load.image('clase', './assets/images/escenarios/clase2.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo.png');
 		this.load.spritesheet('box', './assets/images/escenarios/opciones2.png', {frameWidth: 60, frameHeight: 30})
-		this.load.image('movilph', './assets/images/movil/movil.png', {width: 60, height: 30} )
+		this.load.image('movilph', './assets/images/movil/movil.png')
 
     }
 
@@ -58,11 +58,6 @@ export default class Demo extends Phaser.Scene
 			scene.add.sprite(0, padding, 'matthewph').setScale(0.5,0.5),
 			scene.add.sprite(0, padding, 'richardph').setScale(0.5,0.5),
 		]
-
-		//Sprite del movil
-		//scene.add.sprite(100, juego.height, 'movilph').setScale(0.5,0.5);
-
-		
 
 		// creación de personajes
 		const camille = new Character(scene, width*1/5, height - sprites[Elenco.Camille].displayHeight/2, sprites[Elenco.Camille], "Camille");
@@ -128,7 +123,8 @@ export default class Demo extends Phaser.Scene
 
 		// crea el botón del movil
 		//Cuando se pueda crear una contructora sin el número del escenario al que cambia o quitarselo totalmente
-		let movil = new Button(this, 590, 150, 'movil ', 'movilph', 1, this.OpenMovile);
+		let movil = new Button(this, 850, 700, ' ', 'movilph', 1, this.OpenMovile);
+		movil.setScale(0.25,0.25);
 		movil.depth = 2;
 
 		// el input
