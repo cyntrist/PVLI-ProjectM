@@ -5,18 +5,20 @@ export default class MelonFlip extends Phaser.Scene{
 
 
     constructor() {
-		super({ key: 'MelonFlip'});
+		super({ key: 'melonFlip'});
 	}
 
 
     preload (){
 
+        this.canvas = this.sys.game.canvas;
+
         // fondo
 		this.load.image('fondo', './assets/images/escenarios/melonFlip.png');
 
         // melon flippeando
-        this.load.image('melon', './assets/images/escenarios/melon.png');
-        
+        this.load.image('melon', './assets/images/personajes/melonQueFlippea.png');
+
 
     }
 
@@ -26,7 +28,7 @@ export default class MelonFlip extends Phaser.Scene{
 		let bg = this.add.image(0, 0, 'fondo').setScale(1, 1).setOrigin(0, 0);
 		bg.depth = -2;
 
-        let character = new melon(this, 10, 10, 'melon');
+        character = new melon(this, 10, 10, 'melon');
 
     }
 
