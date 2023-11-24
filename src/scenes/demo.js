@@ -3,25 +3,22 @@ import Character from "../objects/character.js"
 import Button from "../objects/button.js";
 
 // int o numero para marcar el escenario
-	// 0 -> clase
-	// 1 -> pasillo
-	const scenaries = ["clase", "pasillo"];//['clase', 'pasillo'];
-	let Scenary = 'clase';
+// 0 -> clase
+// 1 -> pasillo
+const scenaries = ["clase", "pasillo"];//['clase', 'pasillo'];
+let Scenary = 'clase';
 
 /**
  * Escena demo.
  * @extends Scene
  */
-export default class Demo extends Phaser.Scene
-{ 
-    constructor()
-	{
-		super({ key: 'Demo'})
+export default class Demo extends Phaser.Scene {
+	constructor() {
+		super({ key: 'Demo' })
 	}
 
-    // Carga de assets
-	preload() 
-	{
+	// Carga de assets
+	preload() {
 		this.canvas = this.sys.game.canvas;
 
 		this.load.image('camilleph', './assets/images/personajes/camille.png');
@@ -32,17 +29,15 @@ export default class Demo extends Phaser.Scene
 		this.load.image('clase', './assets/images/escenarios/clase2.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo.png');
 
-		this.load.spritesheet('box', './assets/images/escenarios/opciones2.png', {frameWidth: 60, frameHeight: 30});
+		this.load.spritesheet('box', './assets/images/escenarios/opciones2.png', { frameWidth: 60, frameHeight: 30 });
 		this.load.image('movil', './assets/images/movil/movil.png');
-		this.load.image('cora', './assets/images/movil/corazon.png');
 
-    }
+	}
 
-	create()
-    {
+	create() {
 		// parámetros
 		const { width, height } = this.canvas; // la anchura y altura del canvas
-        const scene = this // referencia a esta misma escena
+		const scene = this // referencia a esta misma escena
 		let script = ["\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"]; // línea de título, array que va a llevar todo el script del juego
 		this.script = script; // para que sea alcanzable desde character y en el say() puedan añadir líneas
 		const Elenco = { // enum para que queden más bonitas las asignaciones pero vamos es una tonteria
@@ -55,20 +50,20 @@ export default class Demo extends Phaser.Scene
 
 		// array de sprites
 		const sprites = [
-			scene.add.sprite(0, padding, 'camilleph').setScale(0.5,0.5),
-			scene.add.sprite(0, padding, 'delilahph').setScale(0.5,0.5),
-			scene.add.sprite(0, padding, 'matthewph').setScale(0.5,0.5),
-			scene.add.sprite(0, padding, 'richardph').setScale(0.5,0.5),
+			scene.add.sprite(0, padding, 'camilleph').setScale(0.5, 0.5),
+			scene.add.sprite(0, padding, 'delilahph').setScale(0.5, 0.5),
+			scene.add.sprite(0, padding, 'matthewph').setScale(0.5, 0.5),
+			scene.add.sprite(0, padding, 'richardph').setScale(0.5, 0.5),
 		]
 
 		// creación de personajes
-		const camille = new Character(scene, width*1/5, height - sprites[Elenco.Camille].displayHeight/2, sprites[Elenco.Camille], "Camille");
-		const delilah = new Character(scene, width*2/5, height - sprites[Elenco.Delilah].displayHeight/2, sprites[Elenco.Delilah], "Delilah");
-		const matthew = new Character(scene, width*3/5, height - sprites[Elenco.Matthew].displayHeight/2, sprites[Elenco.Matthew], "Matthew");
-		const richard = new Character(scene, width*4/5, height - sprites[Elenco.Richard].displayHeight/2, sprites[Elenco.Richard], "Richard");
+		const camille = new Character(scene, width * 1 / 5, height - sprites[Elenco.Camille].displayHeight / 2, sprites[Elenco.Camille], "Camille");
+		const delilah = new Character(scene, width * 2 / 5, height - sprites[Elenco.Delilah].displayHeight / 2, sprites[Elenco.Delilah], "Delilah");
+		const matthew = new Character(scene, width * 3 / 5, height - sprites[Elenco.Matthew].displayHeight / 2, sprites[Elenco.Matthew], "Matthew");
+		const richard = new Character(scene, width * 4 / 5, height - sprites[Elenco.Richard].displayHeight / 2, sprites[Elenco.Richard], "Richard");
 
 		// array de los personajes, pensado para las iteraciones dentro de Character
-		const characters = [ 
+		const characters = [
 			camille,
 			delilah,
 			matthew,
@@ -81,21 +76,21 @@ export default class Demo extends Phaser.Scene
 		// pone el fondo
 		this.nextBG = 1;
 		this.currentBG = 1;
-        let bg = scene.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
+		let bg = scene.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
 		bg.depth = -2;
 
 		// crea la ventana de diálogo
-	    scene.dialog = new DialogText(this, {
+		scene.dialog = new DialogText(this, {
 			borderThickness: 6,
 			borderColor: 0xF6F6F6,
 			borderAlpha: 0.8,
-            windowBorderRadius: 4,
+			windowBorderRadius: 4,
 			windowAlpha: 0.95,
 			windowColor: 0xFF799A,
 			windowHeight: 150,
 			padding: 18,
-            hasCloseBtn: false,
-            closeBtnColor: 'white',
+			hasCloseBtn: false,
+			closeBtnColor: 'white',
 			dialogSpeed: 4.4,
 			fontSize: 24,
 			fontFamily: "lato"
@@ -116,30 +111,31 @@ export default class Demo extends Phaser.Scene
 		//...
 
 		// crea un boton al pasillo
-		let but1 = new Button(this, 590, 200, 'pasillo', 'box', 2, this.ChangeScenary);
+		let but1 = new Button(this, 590, 200, 'pasillo', 'box', 2, { "clickCallback": this.ChangeScenary });
 		but1.depth = 2;
 
 		// crea un boton a la clase
-		let but2 = new Button(this, 590, 250, 'clase', 'box', 1, this.ChangeScenary);
+		let but2 = new Button(this, 590, 250, 'clase', 'box', 1, { "clickCallback": this.ChangeScenary });
 		but2.depth = 2;
 
 		// crea el botón del movil
 		//Cuando se pueda crear una contructora sin el número del escenario al que cambia o quitarselo totalmente
-		let movil = new Button(this, 850, 700, ' ', 'movil', 1, this.OpenMovile);
-		movil.setScale(0.25,0.25);
+		let movil = new Button(this, 850, 700, ' ', 'movil', 1, { "clickCallback": () => this.OpenMovile() },);
+		movil.setScale(0.25, 0.25);
 		movil.depth = 2;
 
 
-		//Pruebas con los tween
-		let movilTween = this.tweens.add ({
+		//Tween del movil
+		this.movilTween = this.tweens.add({
 			targets: movil,
 			duration: 100,
-			y: 650,	
+			y: 650,
 			yoyo: true,
 			delay: 50,
-			loop: -1
+			persist: true
 		})
-		movilTween.pause();
+
+
 		// el input
 		let i = 0; // calienta que sales
 		scene.dialog.setText(script[i], true); // imprime la línea de título
@@ -170,17 +166,18 @@ export default class Demo extends Phaser.Scene
 						break;
 				}
 				//  Cynthia status update: Frenzy +500.
-                scene.dialog.setText(script[i], true); // háblame como tú bien sabes
+				scene.dialog.setText(script[i], true); // háblame como tú bien sabes
 			}
-		})		
-    }
+		})
+	}
 
-	update(){
-		if(this.nextBG == 1) Scenary = 'clase';
-		else if(this.nextBG == 2) Scenary = 'pasillo';
-		 
+	update() {
+
+		if (this.nextBG == 1) Scenary = 'clase';
+		else if (this.nextBG == 2) Scenary = 'pasillo';
+
 		// ---------------------------
-		if(this.nextBG != this.currentBG){
+		if (this.nextBG != this.currentBG) {
 			// current scenary
 			console.log(Scenary);
 
@@ -190,18 +187,23 @@ export default class Demo extends Phaser.Scene
 			this.currentBG = this.nextBG;
 		}
 
-		
+
 	}
 
 
 	// cambia el escenario (la imagen de fondo)
-	ChangeScenary (){
+	ChangeScenary() {
 		console.log("QUE ES UN CALLBACKKKKKK");
 
 	}
 
-	OpenMovile (){
+	OpenMovile() {
+
 		console.log("Movil :)");
-		movilTween.play();
+
+		//Dividir en dos funciones y añadirla a la constructora
+		//this.movilTween.play();
+		//console.log(this.movilTween)
+
 	}
 }
