@@ -131,7 +131,6 @@ export default class Demo extends Phaser.Scene {
 			duration: 100,
 			y: 650,
 			yoyo: true,
-			delay: 50,
 			persist: true
 		})
 
