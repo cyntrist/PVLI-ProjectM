@@ -9,11 +9,11 @@ export default class Melon extends Phaser.GameObjects.Container{
 		super(scene, x, y);
 
         this.melon = new Phaser.GameObjects.Sprite(scene, x, y, melonSprite); 
-		this.melon.setScale(5,5);
+		this.melon.setScale(0.5, 0.5);
 
-        this.add(this.bird);
+        this.add(this.melon);
 
-        this.scene.add.existing(this);
+        scene.add.existing(this);
 
     }
 

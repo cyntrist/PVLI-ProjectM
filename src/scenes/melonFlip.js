@@ -10,7 +10,7 @@ export default class MelonFlip extends Phaser.Scene{
 
 
     preload (){
-
+        // crea el canvas (importante que si no da error)
         this.canvas = this.sys.game.canvas;
 
         // fondo
@@ -28,7 +28,8 @@ export default class MelonFlip extends Phaser.Scene{
 		let bg = this.add.image(0, 0, 'fondo').setScale(1, 1).setOrigin(0, 0);
 		bg.depth = -2;
 
-        character = new melon(this, 10, 10, 'melon');
+        // cr
+        character = new melon(this, 150, 250, 'melon');
 
     }
 
