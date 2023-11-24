@@ -44,7 +44,7 @@ export default class Character extends Phaser.GameObjects.Container {
      */
     onUnfocus() { 
         this.focus = false;
-        this.sprite.setTint(0x858585); // filtro oscuro
+        this.sprite.setTint(0xbababa); // filtro oscuro
     }
 
     /**
