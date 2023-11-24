@@ -31,8 +31,10 @@ export default class Demo extends Phaser.Scene
 
 		this.load.image('clase', './assets/images/escenarios/clase2.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo.png');
-		this.load.spritesheet('box', './assets/images/escenarios/opciones2.png', {frameWidth: 60, frameHeight: 30})
-		this.load.image('movilph', './assets/images/movil/movil.png')
+
+		this.load.spritesheet('box', './assets/images/escenarios/opciones2.png', {frameWidth: 60, frameHeight: 30});
+		this.load.image('movil', './assets/images/movil/movil.png');
+		this.load.image('cora', './assets/images/movil/corazon.png');
 
     }
 
@@ -123,10 +125,21 @@ export default class Demo extends Phaser.Scene
 
 		// crea el botón del movil
 		//Cuando se pueda crear una contructora sin el número del escenario al que cambia o quitarselo totalmente
-		let movil = new Button(this, 850, 700, ' ', 'movilph', 1, this.OpenMovile);
+		let movil = new Button(this, 850, 700, ' ', 'movil', 1, this.OpenMovile);
 		movil.setScale(0.25,0.25);
 		movil.depth = 2;
 
+
+		//Pruebas con los tween
+		let movilTween = this.tweens.add ({
+			targets: movil,
+			duration: 100,
+			y: 650,	
+			yoyo: true,
+			delay: 50,
+			loop: -1
+		})
+		movilTween.pause();
 		// el input
 		let i = 0; // calienta que sales
 		scene.dialog.setText(script[i], true); // imprime la línea de título
@@ -176,6 +189,8 @@ export default class Demo extends Phaser.Scene
 
 			this.currentBG = this.nextBG;
 		}
+
+		
 	}
 
 
@@ -187,5 +202,6 @@ export default class Demo extends Phaser.Scene
 
 	OpenMovile (){
 		console.log("Movil :)");
+		movilTween.play();
 	}
 }
