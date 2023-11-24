@@ -120,7 +120,7 @@ export default class Demo extends Phaser.Scene {
 
 		// crea el botón del movil
 		//Cuando se pueda crear una contructora sin el número del escenario al que cambia o quitarselo totalmente
-		let movil = new Button(this, 850, 700, ' ', 'movil', 1, { "clickCallback": () => this.OpenMovile() },);
+		let movil = new Button(this, 850, 700, ' ', 'movil', 1, { "clickCallback": () => this.OpenMovile(), "overCallback": () => this.OverMovile() },);
 		movil.setScale(0.25, 0.25);
 		movil.depth = 2;
 
@@ -205,5 +205,9 @@ export default class Demo extends Phaser.Scene {
 		//this.movilTween.play();
 		//console.log(this.movilTween)
 
+	}
+
+	OverMovile() {
+		this.movilTween.play();
 	}
 }
