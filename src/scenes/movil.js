@@ -1,5 +1,6 @@
 import Button from "../objects/button.js";
 
+
 export default class Movil extends Phaser.Scene {
 	/**
 	 * Contructor del boton 
@@ -9,8 +10,6 @@ export default class Movil extends Phaser.Scene {
 	constructor() {
 		
 		super({ key: 'movil'});
-
-
 	}
 
 	preload (){
@@ -21,8 +20,6 @@ export default class Movil extends Phaser.Scene {
 
 		// boton de vuelta
 		this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
-
-		
 
 	}
 
@@ -35,11 +32,12 @@ export default class Movil extends Phaser.Scene {
 		let but1 = new Button(this, 100, 320, 'Demo', 'goBackBox', this.ChangeScene);
 		but1.depth = 2;
 
-
+		// boton de melon flip
+		let but2 = new Button(this, 200, 200, 'melonFlip', 'goBackBox', this.ChangeScene);
+		but2.depth = 2;
 	}
 
 	// update (que no hara falta)
-
 
 	ChangeScene(newScene, escena){
 
