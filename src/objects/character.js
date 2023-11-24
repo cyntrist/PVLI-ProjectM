@@ -62,9 +62,9 @@ export default class Character extends Phaser.GameObjects.Container {
 	 * @param {Character[]} personajes - array de personajes sobre el que cicla para acceder y oscurecerlos.
 	 */
     unfocusEveryoneElse(personajes) {
-        for (let i = 0; i < personajes.length; i++) { 
-            if (personajes[i] !== this) { // si es distinto a este
-                personajes[i].onUnfocus();
+        for (let p of personajes.values()) { 
+            if (p !== this) { // si es distinto a este
+                p.onUnfocus();
             }
         }
     }
