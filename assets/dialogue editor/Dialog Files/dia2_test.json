@@ -1,0 +1,436 @@
+{
+    "root": {
+        "next": "6831d86e-bec5-46b4-b0ca-4affb8f53ec6"
+    },
+    "6831d86e-bec5-46b4-b0ca-4affb8f53ec6": {
+        "name": "Y/N",
+        "character_uuid": "a244c2db-b0e0-4069-903d-0e9292bc3591",
+        "portrait": "",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": ">>> Día 1 <<<"
+        },
+        "parent": "root",
+        "next": "83a36e69-0f9c-4449-ad9d-e3c52996ece2"
+    },
+    "83a36e69-0f9c-4449-ad9d-e3c52996ece2": {
+        "name": "Matthew",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/matthew.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "¡Hola, T/N! ¿Qué tal?"
+        },
+        "parent": "6831d86e-bec5-46b4-b0ca-4affb8f53ec6",
+        "choices": [
+            {
+                "text": {
+                    "en": "",
+                    "fr": "",
+                    "es": "¡Muy bien!"
+                },
+                "next": "7650683b-2d80-4c91-955f-a3d6514e7662",
+                "parent": "83a36e69-0f9c-4449-ad9d-e3c52996ece2"
+            },
+            {
+                "text": {
+                    "en": "",
+                    "fr": "",
+                    "es": "Algo floje..."
+                },
+                "next": "b13ff2f6-a1f5-4b1f-a8bc-5fa001f36344",
+                "parent": "83a36e69-0f9c-4449-ad9d-e3c52996ece2"
+            },
+            {
+                "text": {
+                    "en": "",
+                    "fr": "",
+                    "es": "Sin más."
+                },
+                "next": "e4d63eb8-1daf-4d78-be42-069a4e7c9212",
+                "parent": "83a36e69-0f9c-4449-ad9d-e3c52996ece2"
+            },
+            {
+                "text": {
+                    "en": "",
+                    "fr": "",
+                    "es": "¿Tú iniciando una conversacion de forma educada? Ni de coña."
+                },
+                "next": "d1624b9d-612b-46e7-8c40-89b285bf9cbe",
+                "parent": "83a36e69-0f9c-4449-ad9d-e3c52996ece2"
+            }
+        ]
+    },
+    "d1624b9d-612b-46e7-8c40-89b285bf9cbe": {
+        "name": "Camille",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/camille.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Pfff... JAJAJAJAJAJA"
+        },
+        "parent": "a8b1fc46-2390-4168-b173-4eed8e8b1448",
+        "signals": {
+            "parent": "d1624b9d-612b-46e7-8c40-89b285bf9cbe",
+            "camilleAffinityUp": {
+                "Number": "5"
+            }
+        },
+        "next": "05d543c9-ab4f-4097-9ae5-4da73d4760d8"
+    },
+    "b13ff2f6-a1f5-4b1f-a8bc-5fa001f36344": {
+        "name": "Delilah",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/delilah.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Qué pobre... ¿Y eso? "
+        },
+        "next": "b06a10d4-df85-4e0f-9419-3025d49cd7be",
+        "signals": {
+            "parent": "b13ff2f6-a1f5-4b1f-a8bc-5fa001f36344",
+            "delilahAffinityUp": {
+                "Number": "5"
+            }
+        }
+    },
+    "05d543c9-ab4f-4097-9ae5-4da73d4760d8": {
+        "name": "Matthew",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/matthew.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Tienes razón, voy a empezar de nuevo:"
+        },
+        "parent": "d1624b9d-612b-46e7-8c40-89b285bf9cbe",
+        "next": "49d76188-bf3a-4012-89ec-5d21f5b3ca35"
+    },
+    "49d76188-bf3a-4012-89ec-5d21f5b3ca35": {
+        "name": "Matthew",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/matthew.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "¡Bue nos días, muy buenas tetas por cierto!  "
+        },
+        "parent": "05d543c9-ab4f-4097-9ae5-4da73d4760d8",
+        "next": "257652a3-e724-44ed-8262-33ebd1f13a46"
+    },
+    "257652a3-e724-44ed-8262-33ebd1f13a46": {
+        "name": "Richard",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/richard.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "*suspira* "
+        },
+        "parent": "49d76188-bf3a-4012-89ec-5d21f5b3ca35",
+        "next": "db8b5517-94ee-469e-9f53-e19195a99a8a"
+    },
+    "db8b5517-94ee-469e-9f53-e19195a99a8a": {
+        "name": "Richard",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/richard.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "*saca una aplicación de sonidos del móvil y suenan risas enlatadas*"
+        },
+        "parent": "257652a3-e724-44ed-8262-33ebd1f13a46",
+        "next": "1b145bb8-1d4a-48f8-acc8-3e8297ad2afc"
+    },
+    "1b145bb8-1d4a-48f8-acc8-3e8297ad2afc": {
+        "name": "Camille",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/camille.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Bravo, te has superado una vez más. "
+        },
+        "parent": "db8b5517-94ee-469e-9f53-e19195a99a8a",
+        "next": "c3060abd-9ae4-43ae-bb01-c1b4593b960d"
+    },
+    "c3060abd-9ae4-43ae-bb01-c1b4593b960d": {
+        "name": "Delilah",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/delilah.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Ay... ¡Vaya plantel! "
+        },
+        "parent": "1b145bb8-1d4a-48f8-acc8-3e8297ad2afc",
+        "next": "7f962b24-0522-4c4d-ac85-365b21566420"
+    },
+    "7f962b24-0522-4c4d-ac85-365b21566420": {
+        "name": "Y/N",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": ">>> FIN DEL DÍA 1 <<< "
+        },
+        "parent": "bd12c86f-2562-4e19-b0f9-e10d5f6c69b4"
+    },
+    "b06a10d4-df85-4e0f-9419-3025d49cd7be": {
+        "name": "Camille",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/camille.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "No te preocupes, T/N. Tú dime a quién tengo que coaccionar y estará todo solucionado."
+        },
+        "parent": "b13ff2f6-a1f5-4b1f-a8bc-5fa001f36344",
+        "next": "3cc07905-392b-4185-97f2-ea322053bd42"
+    },
+    "3cc07905-392b-4185-97f2-ea322053bd42": {
+        "name": "Matthew",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/matthew.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "...YIKES!!"
+        },
+        "parent": "b06a10d4-df85-4e0f-9419-3025d49cd7be",
+        "next": "e3d99db2-3efb-41a3-ad78-f146769d7138"
+    },
+    "e3d99db2-3efb-41a3-ad78-f146769d7138": {
+        "name": "Matthew",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/matthew.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Rarete, como dirían aquí..."
+        },
+        "parent": "3cc07905-392b-4185-97f2-ea322053bd42",
+        "next": "c1e1ab2c-4487-46f6-879e-62c40c4e2d4f"
+    },
+    "c1e1ab2c-4487-46f6-879e-62c40c4e2d4f": {
+        "name": "Richard",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/richard.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Tú sí que eres rarete, Matthew."
+        },
+        "parent": "e3d99db2-3efb-41a3-ad78-f146769d7138",
+        "next": "3d65a208-602a-4ad1-9519-a7cfc1eaa8a1"
+    },
+    "3d65a208-602a-4ad1-9519-a7cfc1eaa8a1": {
+        "name": "Matthew",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/matthew.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "¡No sé yo si deberías ser tú quién me lo dijera, Dick!"
+        },
+        "parent": "c1e1ab2c-4487-46f6-879e-62c40c4e2d4f",
+        "next": "471e5d8b-e6f6-424a-a3e3-ff8509ed0927"
+    },
+    "471e5d8b-e6f6-424a-a3e3-ff8509ed0927": {
+        "name": "Camille",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/camille.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "...Ew..."
+        },
+        "parent": "3d65a208-602a-4ad1-9519-a7cfc1eaa8a1",
+        "next": "324aba28-24ee-43c3-a0b9-9e4e1b64b72f"
+    },
+    "324aba28-24ee-43c3-a0b9-9e4e1b64b72f": {
+        "name": "Delilah",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/delilah.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Jejeje :-)"
+        },
+        "parent": "471e5d8b-e6f6-424a-a3e3-ff8509ed0927",
+        "next": "7f962b24-0522-4c4d-ac85-365b21566420"
+    },
+    "e4d63eb8-1daf-4d78-be42-069a4e7c9212": {
+        "name": "Richard",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/richard.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Muy bien,  una persona tranquila y serena, no como otros... "
+        },
+        "parent": "613e5c45-cd4a-408c-8bc4-b27a69ebdb6c",
+        "signals": {
+            "richardAffinityUp": {
+                "Number": "5"
+            },
+            "parent": "e4d63eb8-1daf-4d78-be42-069a4e7c9212"
+        },
+        "next": "16d11e55-1c4d-410e-91ff-e46d56665c05"
+    },
+    "7650683b-2d80-4c91-955f-a3d6514e7662": {
+        "name": "Matthew",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/matthew.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "¡OLÉ! Venga, corriendo a casa a echarse unas rankeds, venga ."
+        },
+        "parent": "4841cb37-b66a-4d77-b88f-8ed08d7f3160",
+        "signals": {
+            "matthewAffinityUp": {
+                "Number": "5"
+            },
+            "parent": "7650683b-2d80-4c91-955f-a3d6514e7662"
+        },
+        "next": "4af002b0-047d-4c75-a39d-dcf2e4dae778"
+    },
+    "16d11e55-1c4d-410e-91ff-e46d56665c05": {
+        "name": "Matthew",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/matthew.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "De tu envidia nace mi fama, Dickie."
+        },
+        "parent": "e4d63eb8-1daf-4d78-be42-069a4e7c9212",
+        "next": "cee0dccc-b499-439a-beed-3a6c8ddbaff1"
+    },
+    "cee0dccc-b499-439a-beed-3a6c8ddbaff1": {
+        "name": "Camille",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/camille.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Ugh, mon Deiu. Idos a un hotel."
+        },
+        "parent": "16d11e55-1c4d-410e-91ff-e46d56665c05",
+        "next": "e76d6b5a-7e60-4623-b872-ede908566342"
+    },
+    "e76d6b5a-7e60-4623-b872-ede908566342": {
+        "name": "Camille",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/camille.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Lleváis todo el día así, os lo pago yo si hace falta."
+        },
+        "parent": "cee0dccc-b499-439a-beed-3a6c8ddbaff1",
+        "next": "1ad88bbe-451f-44a5-9795-961f212b7ed9"
+    },
+    "1ad88bbe-451f-44a5-9795-961f212b7ed9": {
+        "name": "Matthew",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/matthew.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Lo siento Cam, estás delulu, bestie..."
+        },
+        "parent": "e76d6b5a-7e60-4623-b872-ede908566342",
+        "next": "8655c2a5-e69f-43f5-b068-dad84ca9355e"
+    },
+    "8655c2a5-e69f-43f5-b068-dad84ca9355e": {
+        "name": "Richard",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/richard.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Por una vez, tengo que concordar."
+        },
+        "parent": "1ad88bbe-451f-44a5-9795-961f212b7ed9",
+        "next": "e34105cc-35e8-4e81-99e0-fe24fc3680f5"
+    },
+    "e34105cc-35e8-4e81-99e0-fe24fc3680f5": {
+        "name": "Delilah",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/delilah.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "...no os lo creéis ni vosotros..."
+        },
+        "parent": "8655c2a5-e69f-43f5-b068-dad84ca9355e",
+        "next": "bf2f6daa-8a64-4979-9925-0ec4e5c54025"
+    },
+    "bf2f6daa-8a64-4979-9925-0ec4e5c54025": {
+        "name": "Camille",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/camille.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Dilo, reina."
+        },
+        "parent": "e34105cc-35e8-4e81-99e0-fe24fc3680f5",
+        "next": "7f962b24-0522-4c4d-ac85-365b21566420"
+    },
+    "4af002b0-047d-4c75-a39d-dcf2e4dae778": {
+        "name": "Camille",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/camille.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "No bitches?"
+        },
+        "parent": "7650683b-2d80-4c91-955f-a3d6514e7662",
+        "next": "c58e7257-dafc-4640-ab2c-6d090f47a3c6"
+    },
+    "c58e7257-dafc-4640-ab2c-6d090f47a3c6": {
+        "name": "Richard",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/richard.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "¡JÁ!"
+        },
+        "parent": "4af002b0-047d-4c75-a39d-dcf2e4dae778",
+        "next": "6ff92a5e-a1b9-42c2-93fb-a219766523d6"
+    },
+    "6ff92a5e-a1b9-42c2-93fb-a219766523d6": {
+        "name": "Delilah",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/delilah.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "*aplaude*"
+        },
+        "parent": "c58e7257-dafc-4640-ab2c-6d090f47a3c6",
+        "next": "bd12c86f-2562-4e19-b0f9-e10d5f6c69b4"
+    },
+    "bd12c86f-2562-4e19-b0f9-e10d5f6c69b4": {
+        "name": "Matthew",
+        "character_uuid": "b720698b-0f41-453c-bdf4-31ce61a4ce9e",
+        "portrait": "/Programas/OneDrive - UCM/UCM/2º/S1/pvli/ProjectM/assets/images/personajes/matthew.png",
+        "text": {
+            "en": "",
+            "fr": "",
+            "es": "Girl, are you http, 'cause ://..."
+        },
+        "parent": "6ff92a5e-a1b9-42c2-93fb-a219766523d6",
+        "next": "7f962b24-0522-4c4d-ac85-365b21566420"
+    }
+}
