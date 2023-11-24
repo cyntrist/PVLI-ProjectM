@@ -1,5 +1,6 @@
 
 import melon from "../melonFlip/melon.js";
+import Button from "../objects/button.js";
 
 export default class MelonFlip extends Phaser.Scene{
 
@@ -16,6 +17,9 @@ export default class MelonFlip extends Phaser.Scene{
         // fondo
 		this.load.image('fondo', './assets/images/escenarios/melonFlip.png');
 
+        // boton de vuelta
+		this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
+
         // melon flippeando
         this.load.image('melon', './assets/images/personajes/melonQueFlippea.png');
 
@@ -28,7 +32,11 @@ export default class MelonFlip extends Phaser.Scene{
 		let bg = this.add.image(0, 0, 'fondo').setScale(1, 1).setOrigin(0, 0);
 		bg.depth = -2;
 
-        // cr
+        // boton de vuelta
+		let but1 = new Button(this, 100, 320, 'movil', 'goBackBox', this.ChangeScene);
+		but1.depth = 2;
+
+        // character
         character = new melon(this, 150, 250, 'melon');
 
     }
@@ -37,6 +45,12 @@ export default class MelonFlip extends Phaser.Scene{
 
     }
     
+
+    ChangeScene(newScene, escena){
+
+		escena.scene.start(newScene);
+
+	}
 
 
 }
