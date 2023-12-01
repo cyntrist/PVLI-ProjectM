@@ -1,6 +1,7 @@
 import DialogText from "../plugins/dialog_plugin.js";
 import Character from "../objects/character.js"
 import Button from "../objects/button.js";
+import Movil from "./movil.js";
 
 /**
  * Escena demo.
@@ -105,16 +106,19 @@ export default class Demo extends Phaser.Scene {
 		//...
 
 		// crea un boton al pasillo
-		let but1 = new Button(this, 590, 200, 'pasillo', 'box', { "clickCallback": this.ChangeScenary });
+		console.log("creando el primer botón")
+		let but1 = new Button(this, 590, 200, 'pasillo', 'box', { "ClickCallback": () => this.ChangeScenary ("pasillo", scene), });
 		but1.depth = 2;
 
+		console.log("creando el segundo botón")
 		// crea un boton a la clase
-		let but2 = new Button(this, 590, 250, 'clase', 'box', { "clickCallback": this.ChangeScenary });
+		let but2 = new Button(this, 590, 250, 'clase', 'box', { "ClickCallback": () => this.ChangeScenary ("clase", scene) });
 		but2.depth = 2;
 
+		console.log("creando el tercer botón")
 		// crea el botón del movil
 		//Cuando se pueda crear una contructora sin el número del escenario al que cambia o quitarselo totalmente
-		let movil = new Button(this, 850, 700, ' ', 'movil', { "ClickCallback": () => this.OpenMovile(), 
+		let movil = new Button(this, 850, 700, ' ', 'movil', { "ClickCallback": () => this.ChangeScene("movil", scene), 
 																  "EnterCallback": () => this.OverMovile(),
 																  "ExitCallback": () => this.ExitMovile() },);
 		movil.setScale(0.25, 0.25);
@@ -170,26 +174,6 @@ export default class Demo extends Phaser.Scene {
 			}
 		})
 	}
-
-	update() {
-
-		if (this.nextBG == 1) Scenary = 'clase';
-		else if (this.nextBG == 2) Scenary = 'pasillo';
-
-		// ---------------------------
-		if (this.nextBG != this.currentBG) {
-			// current scenary
-			console.log(Scenary);
-
-			let bg = this.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
-			bg.depth = -2;
-
-			this.currentBG = this.nextBG;
-		}
-
-
-	}
-
 	
 	// cambia el escenario (la imagen de fondo)
 	ChangeScenary (newImage, escena){
@@ -209,16 +193,6 @@ export default class Demo extends Phaser.Scene {
 
 	}
 
-	OpenMovile() {
-
-		console.log("Movil :)");
-
-		//Dividir en dos funciones y añadirla a la constructora
-		//this.movilTween.play();
-		//console.log(this.movilTween)
-
-	}
-
 	OverMovile() {
 		this.movilEnterTween.play();
 		console.log("Encima del movil")
@@ -228,4 +202,6 @@ export default class Demo extends Phaser.Scene {
 		this.movilExitTween.play();
 		console.log("Sale del movil")
 	}
+
+	
 }
