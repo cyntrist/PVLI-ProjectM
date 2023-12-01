@@ -63,26 +63,16 @@ export default class MelonFlip extends Phaser.Scene{
 
         // ------------------------- FISICAS --------------------------
      
-        // -------------------- >>>>> con arcade solo <<<<<< ---------------------------
-        // crea un grupo para las colisiones
-        //this.objs = this.add.group();
-
-		// metemos los objetos en el objeto de colisiones
-		//this.objs.add(this.character);
-		//this.objs.addMultiple([this.duck2, this.duck3]) // con varios
-
-        // añade colisiones a los objetos character (melon flippeador) y tubo 
-        //(es un palo alargado) y si colisionan llama al callback
-        //this.physics.add.collider(this.character, this.tubo, this.CollisionCheck); 
-
-        
+        // ¿?¿¿?¿?
+        this.speed = 0.03;
+        this.force = {x: 0, y: 10 * this.speed};
 
         // ----------------- INPUT -------------------
 
         //
-		this.jumpKey = this.input.keyboard.addKey('W'); 
-
-        //spaceKey.onDown.add(this.jumpKey, this);     
+		this.AjumpKey = this.input.keyboard.addKey('A'); 
+        this.DjumpKey = this.input.keyboard.addKey('D'); 
+  
 
 
 
@@ -91,20 +81,17 @@ export default class MelonFlip extends Phaser.Scene{
     update (){
 
 
-        if(this.jumpKey.isDown){ 
+        if(this.AjumpKey.isDown){ 
 			
 			// salta
             console.log("salto saltooooo");
 
-            const speed = 0.03;
-            const force = {x: 0, y: 3 * speed};
-            //this.melones.body.applyForce(this.melones.body, this.car.getTopRight(), force);
-            
-            //this.melones.Body.applyForce(this.melones, force);  //Matter.Body.applyForce( this.melones, force);
+            Phaser.Physics.Matter.Matter.Body.applyForce(this.melones.body, this.melones.getTopRight(), this.force);
 
-            Phaser.Physics.Matter.Matter.Body.applyForce(this.melones.body, this.melones.getTopRight(), force);
+        }
+        else if(this.DjumpKey.isDown){
+            Phaser.Physics.Matter.Matter.Body.applyForce(this.melones.body, this.melones.getTopLeft(), this.force);
 
-            //Phaser.Physics.Matter.Matter.Body.applyForce(this.melones.body, );
         }
       
 
