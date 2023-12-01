@@ -53,13 +53,6 @@ export default class Button extends Phaser.GameObjects.Container {
 		if (ExitCallback)
 			this.box.on('pointerout', ExitCallback);
 
-		//this.box.on('pointerdown', (pointer) => {
-
-			// llama a la funcion y le pasa un texto 
-		//	metodo(text, scene);
-	
-		//});
-
 	}
 
 

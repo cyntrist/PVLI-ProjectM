@@ -1,11 +1,9 @@
-
 import melon from "../melonFlip/melon.js";
 import Button from "../objects/button.js";
 
 export default class MelonFlip extends Phaser.Scene{
-
-
     constructor() {
+
 		super({ key: 'melonFlip'});
 	}
 
@@ -38,8 +36,7 @@ export default class MelonFlip extends Phaser.Scene{
 		but1.depth = 2;
 
         // character
-        character = new melon(this, 150, 250, 'melon');
-
+        this.character = new melon(this, 150, 250, 'melon');
     }
 
     update (){
@@ -48,7 +45,6 @@ export default class MelonFlip extends Phaser.Scene{
     
 
     ChangeScene(newScene, escena){
-
 		escena.scene.start(newScene);
 
 	}

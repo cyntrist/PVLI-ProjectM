@@ -1,11 +1,12 @@
 import DialogText from "../plugins/dialog_plugin.js";
 import Character from "../objects/character.js"
 import Button from "../objects/button.js";
-import Movil from "./movil.js";
+
 
 /**
  * Escena demo.
  * @extends Scene
+ * @namespace Phaser.Actions
  */
 export default class Demo extends Phaser.Scene {
 	constructor() {
@@ -101,26 +102,31 @@ export default class Demo extends Phaser.Scene {
 		camille.say("...Pues mentira no es, no nos vamos a engañar. Obviamente tengo un cuerpazo, ¿o no?");
 		richard.say("Ciertamente, no es algo que pueda negarse, no.");
 		delilah.say("Si nos ponemos así no podemos decir que no, pero...");
-		matthew.say("¡Veis! Lo que yo decía, es un pezado de cumplido.");
+		matthew.say("¡Veis! Lo que yo decía, es un pedazo de cumplido.");
 		script.push("\n\n>> FIN DE LA DEMO <<");
 		//...
 
 		// crea un boton al pasillo
-		let but1 = new Button(this, 590, 200, 'pasillo', 'box', { "ClickCallback": () => this.ChangeScenary ("pasillo", scene), });
+		let but1 = new Button(this, 590, 200, 'pasillo', 'box', { "ClickCallback": () => this.ChangeScenary ("pasillo", scene),
+																	"EnterCallback": () =>this.OverButton(but1),
+																	"ExitCallback": () => this.ExitButton(but1) });
 		but1.depth = 2;
 
 		// crea un boton a la clase
-		let but2 = new Button(this, 590, 250, 'clase', 'box', { "ClickCallback": () => this.ChangeScenary ("clase", scene) });
+		let but2 = new Button(this, 590, 250, 'clase', 'box', { "ClickCallback": () => this.ChangeScenary ("clase", scene),
+																	"EnterCallback": () =>this.OverButton(but2),
+																	"ExitCallback": () => this.ExitButton(but2) });
 		but2.depth = 2;
 
 		// crea el botón del movil
 		//Cuando se pueda crear una contructora sin el número del escenario al que cambia o quitarselo totalmente
 		let movil = new Button(this, 850, 700, ' ', 'movil', { "ClickCallback": () => this.ChangeScene("movil", scene), 
 																  "EnterCallback": () => this.OverMovile(),
-																  "ExitCallback": () => this.ExitMovile() },);
+																  "ExitCallback": () => this.ExitMovile() });
 		movil.setScale(0.25, 0.25);
 		movil.depth = 2;
 
+		
 
 		//Tween del movil cuando el ratón esté encima
 		this.movilEnterTween = this.tweens.add({
@@ -130,13 +136,14 @@ export default class Demo extends Phaser.Scene {
 			persist: true
 		})
 
+		//Tween del movil cuando el ratón sale del botón
 		this.movilExitTween = this.tweens.add({
 			targets: movil,
 			duration: 100,
 			y: 700,
 			persist: true
 		})
-
+		
 		// el input
 		let i = 0; // calienta que sales
 		scene.dialog.setText(script[i], true); // imprime la línea de título
@@ -180,12 +187,10 @@ export default class Demo extends Phaser.Scene {
 
 		// ajusta la capa
 		bg.depth = -2;
-
 	}
 
 	ChangeScene(newScene, escena){
 		escena.scene.start(newScene);
-
 	}
 
 	OverMovile() {
@@ -194,6 +199,15 @@ export default class Demo extends Phaser.Scene {
 
 	ExitMovile() {
 		this.movilExitTween.play();
+	}
+
+	OverButton(but) {
+		but.box.tint = "0xc24d6d" ;
+		
+	}
+
+	ExitButton(but) {
+		but.box.tint = "0xF6F6F6" ;
 	}
 
 	

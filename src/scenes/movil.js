@@ -1,12 +1,6 @@
 import Button from "../objects/button.js";
 
-
 export default class Movil extends Phaser.Scene {
-	/**
-	 * Contructor del boton 
-	 * @param {number} x // posicion x
-	 * @param {number} y // posicion y
-	 */
 	constructor() {
 		
 		super({ key: 'movil'});
