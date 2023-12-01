@@ -40,12 +40,24 @@ export default class MelonFlip extends Phaser.Scene{
 		but1.depth = 2;
 
         // melon flippeador con matter
-        this.melones = this.matter.add.image(150, 250, 'melon');
+        //this.melones = this.matter.add.image(150, 250, 'melon');
+        //this.melones.setScale(0.5, 0.5);
 
-        this.melones.setScale(0.5, 0.5);
+        //const { width, height } = this.scene.scale;
+        /*
+        this.melones = this.scene.add.image(320, 300, 'melon');
+        this.scene.physics.add.existing(this.melones);
+        this.add(this.melones);
+        */
+
+        this.mel = new melon(this, 150, 270, 'melon');
+        this.mel.depth = 3;
+
+        // el melon NO flippeador
+
 
         // settea una masa
-        this.melones.setMass(10);
+        //this.melones.setMass(10);
         
         
         // ------------------------- FISICAS --------------------------
@@ -60,6 +72,7 @@ export default class MelonFlip extends Phaser.Scene{
         // 
 		this.AjumpKey = this.input.keyboard.addKey('A'); 
         this.DjumpKey = this.input.keyboard.addKey('D'); 
+        this.WjumpKey = this.input.keyboard.addKey('W'); 
   
 
 
@@ -69,22 +82,17 @@ export default class MelonFlip extends Phaser.Scene{
     update (){
 
 
-        if(this.AjumpKey.isDown){ 
+        if(this.WjumpKey.isDown){ 
 			
 			// salta
             console.log("salto saltooooo");
 
-            // aplica la fuerza con el body, la posicion de la fuerza y la fuerza
-            Phaser.Physics.Matter.Matter.Body.applyForce(this.melones.body, 
-                this.melones.getTopRight(), this.force);
+            this.mel.jump();
 
         }
-        else if(this.DjumpKey.isDown){
-            // aplica la fuerza con el body, la posicion de la fuerza y la fuerza
-            Phaser.Physics.Matter.Matter.Body.applyForce(this.melones.body, 
-                this.melones.getTopLeft(), this.force);
+       
 
-        }
+        this.mel.sufferGravity();
       
 
 
