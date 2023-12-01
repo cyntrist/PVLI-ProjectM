@@ -31,6 +31,7 @@ export default class Demo extends Phaser.Scene
 		this.load.image('pasillo', './assets/images/escenarios/pasillo.png');
 		this.load.spritesheet('box', './assets/images/escenarios/opciones2.png', {frameWidth: 60, frameHeight: 30})
 		this.load.json('dia1Data', './src/json/dia1_test.json')
+		this.load.image('decisionslice', './assets/images/ui/botones_decision_nineslice.png')
     }
 
 	create()
