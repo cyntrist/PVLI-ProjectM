@@ -1,7 +1,6 @@
 
 
-
-export default class Tubo extends Phaser.GameObjects.Container{
+export default class Pipe extends Phaser.GameObjects.Container{
 
     // 
     constructor(scene, x, y, tuboSprite) {
