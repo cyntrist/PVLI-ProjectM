@@ -22,7 +22,7 @@ export default class MelonFlip extends Phaser.Scene{
 		this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
 
         // melon flippeando
-        this.load.image('melon', './assets/images/personajes/melonQueFlippea.png');
+        this.load.image('melon', './assets/images/personajes/melonQueFlippeaCunty.png');
 
         // tuberia flippeando
         this.load.image('pipe', './assets/images/personajes/pipe.png');
@@ -70,6 +70,7 @@ export default class MelonFlip extends Phaser.Scene{
 
         })
         */
+        
 
 
         // ------------------------- FISICAS --------------------------
