@@ -29,7 +29,7 @@ export default class Demo extends Phaser.Scene
 		this.load.image('richardph', './assets/images/personajes/richard.png');
 		this.load.image('clase', './assets/images/escenarios/clase2.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo.png');
-		this.load.spritesheet('box', './assets/images/escenarios/opciones2.png', {frameWidth: 60, frameHeight: 30})
+		this.load.image('box', './assets/images/escenarios/opciones2.png')
 		this.load.json('dia1Data', './src/json/dia1_test.json')
 		this.load.image('decisionslice', './assets/images/ui/botones_decision_nineslice.png')
     }
@@ -100,17 +100,19 @@ export default class Demo extends Phaser.Scene
 		scene.dialog.setText(title, true); // imprime la línea de título
 		scene.input.on('pointerdown', function () { // cada click 
 			let name = dayData[node].name.toLowerCase();
-			let currentCharacter = characters[dayData[node].name]; 
+			let currentCharacter = characters[name]; 
 			currentCharacter?.onFocus(); //muy importante el interrogante 
 			currentCharacter?.unfocusEveryoneElse(characters);
 
 			if (dayData[node].hasOwnProperty("next") || dayData[node].hasOwnProperty("choices")) { // si es un nodo intermedio y/o tiene tiene elecciones
 				scene.dialog.setText(dayData[node].name + ":\n" + dayData[node].text.es, true);
 				if (dayData[node].hasOwnProperty("choices")) { // si tiene decisiones, **ahora mismo escribe la última** y continúa por ese camino, en el futuro debería invocar a una decisión
+					let option = new Decision();
 					// DISCLAIMER: vamos a hacer que por defecto se vaya a la última opción, cuando se implementen decisiones y eventos ya veremos...
-					let ultimaOpcion = Object.keys(dayData[node].choices).length - 2; // x_x
+					//let ultimaOpcion = Object.keys(dayData[node].choices).length - 2; // x_x
 					//scene.dialog.setText("T/N:\n" + dayData[node].choices[ultimaOpcion].text.es); // como que lo dice T/N pero no se (esto es  infumable e illegible </3)
-					node = dayData[node].choices[ultimaOpcion].next; // el nodo actual pasa a ser el último de las opciones
+					//node = dayData[node].choices[ultimaOpcion].next; // el nodo actual pasa a ser el último de las opciones
+					node = dayData[node].choices[option].next;
 				}
 				else node = dayData[node].next; // si no hay decisiones, continuación lineal, el nodo actual pasa a ser el siguiente
 			}

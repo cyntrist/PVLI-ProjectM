@@ -31,7 +31,7 @@ export default class Button extends Phaser.GameObjects.Container {
 				fontSize: 20,
 				fontFamily: 'lato'
 			}
-			})
+		})
 		this.add(tryout); 
 
 		// añade el container
