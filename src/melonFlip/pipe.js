@@ -16,5 +16,9 @@ export default class Pipe extends Phaser.GameObjects.Container{
 
     }
 
+    paralax (){
+        this.tubo.x -= 5;
+    }
+
 
 }

@@ -18,6 +18,8 @@ export class Background extends Phaser.GameObjects.Container {
 		// añade el container
     	scene.add.existing(this);
 	}
+
+	
   }
 
 	

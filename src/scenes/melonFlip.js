@@ -27,7 +27,13 @@ export default class MelonFlip extends Phaser.Scene{
         // tuberia flippeando
         this.load.image('pipe', './assets/images/personajes/pipe.png');
 
-
+        // pila para info entre escenas
+        /*
+        const pila = [{sceneName: "escena", data: {}} ];
+        pila.push("bicho");
+        const ant = pila.pop()
+        pila.length()
+        */
 
     }
 
@@ -95,6 +101,7 @@ export default class MelonFlip extends Phaser.Scene{
             //this.flippea.play();
         }
        
+        this.paralax();
 
         // gameover
         if(this.mel.checkEnd()){
@@ -102,9 +109,6 @@ export default class MelonFlip extends Phaser.Scene{
 
             this.mel.stopMoving();
         }
-      
-
-
     }
     
 
@@ -112,5 +116,13 @@ export default class MelonFlip extends Phaser.Scene{
     ChangeScene(newScene, escena){
 		escena.scene.start(newScene);
 	}
+
+
+    paralax(){
+        //
+        this.pipe.paralax();
+
+
+    }
 
 }
