@@ -1,4 +1,6 @@
 import Demo from './scenes/demo.js';
+import Pruebita from './scenes/pruebita.js';
+import PlayerManager from './managers/playerManger.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
@@ -23,10 +25,14 @@ let config = {
           height: 720
       }
   },
-  scene: [Demo],
+  scene: [Pruebita],
   title: "MBTI",
   version: "1.0.0"
 }
 
 new Phaser.Game(config);
+
+var PM = new PlayerManager(0, 0, 0, 0)
+console.log(PM);
+PM.increasePlayerStats("charisma");
  
