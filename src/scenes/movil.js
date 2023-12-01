@@ -16,7 +16,7 @@ export default class Movil extends Phaser.Scene {
 		this.canvas = this.sys.game.canvas;
 
 		// fondo
-		this.load.image('movil', './assets/images/escenarios/movilPH.png');
+		this.load.image('movilph', './assets/images/escenarios/movilPH.png');
 
 		// boton de vuelta
 		this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
@@ -24,25 +24,24 @@ export default class Movil extends Phaser.Scene {
 	}
 
 	create (){
+
+		const scene = this // referencia a esta misma escena
 		// pone el fondo
-		let bg = this.add.image(0, 0, 'movil').setScale(1, 1).setOrigin(0, 0);
+		let bg = this.add.image(0, 0, 'movilph').setScale(1, 1).setOrigin(0, 0);
 		bg.depth = -2;
 
 		// boton de vuelta
-		let but1 = new Button(this, 100, 320, 'Demo', 'goBackBox', this.ChangeScene);
+		let but1 = new Button(this, 100, 320, 'Demo', 'goBackBox', { "ClickCallback": () => this.ChangeScene("Demo", scene) } );
 		but1.depth = 2;
 
 		// boton de melon flip
-		let but2 = new Button(this, 200, 200, 'melonFlip', 'goBackBox', this.ChangeScene);
+		let but2 = new Button(this, 200, 200, 'melonFlip', 'goBackBox', { "ClickCallback": () => this.ChangeScene("melonFlip", scene) });
 		but2.depth = 2;
 	}
 
 	// update (que no hara falta)
 
 	ChangeScene(newScene, escena){
-
-		console.log(newScene);
-
 		escena.scene.start(newScene);
 
 	}

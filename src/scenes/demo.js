@@ -106,16 +106,13 @@ export default class Demo extends Phaser.Scene {
 		//...
 
 		// crea un boton al pasillo
-		console.log("creando el primer botón")
 		let but1 = new Button(this, 590, 200, 'pasillo', 'box', { "ClickCallback": () => this.ChangeScenary ("pasillo", scene), });
 		but1.depth = 2;
 
-		console.log("creando el segundo botón")
 		// crea un boton a la clase
 		let but2 = new Button(this, 590, 250, 'clase', 'box', { "ClickCallback": () => this.ChangeScenary ("clase", scene) });
 		but2.depth = 2;
 
-		console.log("creando el tercer botón")
 		// crea el botón del movil
 		//Cuando se pueda crear una contructora sin el número del escenario al que cambia o quitarselo totalmente
 		let movil = new Button(this, 850, 700, ' ', 'movil', { "ClickCallback": () => this.ChangeScene("movil", scene), 
@@ -187,20 +184,16 @@ export default class Demo extends Phaser.Scene {
 	}
 
 	ChangeScene(newScene, escena){
-
-		//
 		escena.scene.start(newScene);
 
 	}
 
 	OverMovile() {
 		this.movilEnterTween.play();
-		console.log("Encima del movil")
 	}
 
 	ExitMovile() {
 		this.movilExitTween.play();
-		console.log("Sale del movil")
 	}
 
 	

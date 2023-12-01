@@ -28,12 +28,13 @@ export default class MelonFlip extends Phaser.Scene{
 
     create (){
 
+        const scene = this // referencia a esta misma escena
         // pone el fondo
 		let bg = this.add.image(0, 0, 'fondo').setScale(1, 1).setOrigin(0, 0);
 		bg.depth = -2;
 
         // boton de vuelta
-		let but1 = new Button(this, 100, 320, 'movil', 'goBackBox', this.ChangeScene);
+		let but1 = new Button(this, 100, 320, 'movil', 'goBackBox', { "ClickCallback": () => this.ChangeScene("movil", scene) });
 		but1.depth = 2;
 
         // character
