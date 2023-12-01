@@ -120,17 +120,25 @@ export default class Demo extends Phaser.Scene {
 
 		// crea el botón del movil
 		//Cuando se pueda crear una contructora sin el número del escenario al que cambia o quitarselo totalmente
-		let movil = new Button(this, 850, 700, ' ', 'movil', 1, { "clickCallback": () => this.OpenMovile(), "overCallback": () => this.OverMovile() },);
+		let movil = new Button(this, 850, 700, ' ', 'movil', 1, { "ClickCallback": () => this.OpenMovile(), 
+																  "EnterCallback": () => this.OverMovile(),
+																  "ExitCallback": () => this.ExitMovile() },);
 		movil.setScale(0.25, 0.25);
 		movil.depth = 2;
 
 
-		//Tween del movil
-		this.movilTween = this.tweens.add({
+		//Tween del movil cuando el ratón esté encima
+		this.movilEnterTween = this.tweens.add({
 			targets: movil,
 			duration: 100,
 			y: 650,
-			yoyo: true,
+			persist: true
+		})
+
+		this.movilExitTween = this.tweens.add({
+			targets: movil,
+			duration: 100,
+			y: 700,
 			persist: true
 		})
 
@@ -207,6 +215,12 @@ export default class Demo extends Phaser.Scene {
 	}
 
 	OverMovile() {
-		this.movilTween.play();
+		this.movilEnterTween.play();
+		console.log("Encima del movil")
+	}
+
+	ExitMovile() {
+		this.movilExitTween.play();
+		console.log("Sale del movil")
 	}
 }

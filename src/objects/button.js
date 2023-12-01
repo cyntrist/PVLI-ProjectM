@@ -12,7 +12,7 @@ export default class Button extends Phaser.GameObjects.Container {
 	 * @param {String} boxSprite // sprite de la caja
 	 * @param {number} nextbg // escenario al que va
 	 */
-	constructor(scene, x, y, text, boxSprite, nextbg, { clickCallback, overCallback }) {
+	constructor(scene, x, y, text, boxSprite, nextbg, { ClickCallback, EnterCallback, ExitCallback }) {
 		// super a la escena
 		super(scene, x, y);
 
@@ -41,12 +41,17 @@ export default class Button extends Phaser.GameObjects.Container {
 		this.box.setInteractive();
 
 		// interaccion con la caja
-		if (clickCallback)
-			this.box.on('pointerdown', clickCallback);
+		if (ClickCallback)
+			this.box.on('pointerdown', ClickCallback);
 
 		//Reconoce que el ratón está encima de la función
-		if (overCallback)
-			this.box.on('pointerover', overCallback);
+		if (EnterCallback)
+			this.box.on('pointerover', EnterCallback);
+
+		//Reconoce que el raton sale del botón
+		if (ExitCallback)
+			this.box.on('pointerout', ExitCallback);
+
 
 
 	}
