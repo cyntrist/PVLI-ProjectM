@@ -2,12 +2,6 @@ import DialogText from "../plugins/dialog_plugin.js";
 import Character from "../objects/character.js"
 import Button from "../objects/button.js";
 
-// int o numero para marcar el escenario
-// 0 -> clase
-// 1 -> pasillo
-const scenaries = ["clase", "pasillo"];//['clase', 'pasillo'];
-let Scenary = 'clase';
-
 /**
  * Escena demo.
  * @extends Scene
@@ -76,7 +70,7 @@ export default class Demo extends Phaser.Scene {
 		// pone el fondo
 		this.nextBG = 1;
 		this.currentBG = 1;
-		let bg = scene.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
+        let bg = scene.add.image(0, 0, "clase").setScale(0.35, 0.35).setOrigin(0, 0);
 		bg.depth = -2;
 
 		// crea la ventana de diálogo
@@ -111,16 +105,16 @@ export default class Demo extends Phaser.Scene {
 		//...
 
 		// crea un boton al pasillo
-		let but1 = new Button(this, 590, 200, 'pasillo', 'box', 2, { "clickCallback": this.ChangeScenary });
+		let but1 = new Button(this, 590, 200, 'pasillo', 'box', { "clickCallback": this.ChangeScenary });
 		but1.depth = 2;
 
 		// crea un boton a la clase
-		let but2 = new Button(this, 590, 250, 'clase', 'box', 1, { "clickCallback": this.ChangeScenary });
+		let but2 = new Button(this, 590, 250, 'clase', 'box', { "clickCallback": this.ChangeScenary });
 		but2.depth = 2;
 
 		// crea el botón del movil
 		//Cuando se pueda crear una contructora sin el número del escenario al que cambia o quitarselo totalmente
-		let movil = new Button(this, 850, 700, ' ', 'movil', 1, { "ClickCallback": () => this.OpenMovile(), 
+		let movil = new Button(this, 850, 700, ' ', 'movil', { "ClickCallback": () => this.OpenMovile(), 
 																  "EnterCallback": () => this.OverMovile(),
 																  "ExitCallback": () => this.ExitMovile() },);
 		movil.setScale(0.25, 0.25);
@@ -141,7 +135,6 @@ export default class Demo extends Phaser.Scene {
 			y: 700,
 			persist: true
 		})
-
 
 		// el input
 		let i = 0; // calienta que sales
@@ -197,10 +190,22 @@ export default class Demo extends Phaser.Scene {
 
 	}
 
-
+	
 	// cambia el escenario (la imagen de fondo)
-	ChangeScenary() {
-		console.log("QUE ES UN CALLBACKKKKKK");
+	ChangeScenary (newImage, escena){
+
+		// crea una imagen en la escena dada 
+		let bg = escena.add.image(0, 0, newImage).setScale(0.35, 0.35).setOrigin(0, 0);
+
+		// ajusta la capa
+		bg.depth = -2;
+
+	}
+
+	ChangeScene(newScene, escena){
+
+		//
+		escena.scene.start(newScene);
 
 	}
 

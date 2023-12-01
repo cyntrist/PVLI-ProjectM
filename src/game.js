@@ -1,4 +1,6 @@
 import Demo from './scenes/demo.js';
+import movil from './scenes/movil.js';
+import melonFlip from './scenes/melonFlip.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
@@ -23,7 +25,14 @@ let config = {
           height: 720
       }
   },
-  scene: [Demo],
+  scene: [Demo, movil, melonFlip],
+  physics: {
+    default: 'arcade', // elegir motor
+    arcade: { // propiedades del motor
+        gravity: { y: 300 }, // gravedad
+        debug: true // true para ver info
+    }
+  },
   title: "MBTI",
   version: "1.0.0"
 }
