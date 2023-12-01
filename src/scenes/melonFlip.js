@@ -42,6 +42,8 @@ export default class MelonFlip extends Phaser.Scene{
         // melon flippeador con matter
         this.melones = this.matter.add.image(150, 250, 'melon');
 
+        this.melones.setScale(0.5, 0.5);
+
         // settea una masa
         this.melones.setMass(10);
         
