@@ -8,7 +8,10 @@ export default class Melon extends Phaser.GameObjects.Container{
 		// super a la escena
 		super(scene, x, y);
 
-        this.melon = new Phaser.GameObjects.Sprite(scene, x, y, melonSprite); 
+        //this.melon = new Phaser.GameObjects.Sprite(scene, x, y, melonSprite); 
+
+        this.melon = this.scene.add.image(200, 200, melonSprite);
+        this.scene.physics.add.existing(this.melon);
 
 		this.melon.setScale(0.5, 0.5);
 
@@ -22,19 +25,17 @@ export default class Melon extends Phaser.GameObjects.Container{
     // añade la fuerza indicada al objeto mediante un vector
     jump()
     {
-
-        this.melon.y -= 20;
-
+        this.melon.body.velocity.y = -200;
     }
 
-    sufferGravity(){
+    checkEnd(){
+        return (this.melon.y > 300)
+    }
 
-        console.log("estoy sufriendo gravedad");
+    stopMoving(){
 
-        // y = y0 + v0t + 1/2 gt2 
-
-        this.melon.y += (9.8 * 0.2);
-
+        //this.melon.body.enable(false);
+        this.melon.body.setEnable(false);
     }
 
 

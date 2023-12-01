@@ -24,8 +24,6 @@ export default class MelonFlip extends Phaser.Scene{
         // melon flippeando
         this.load.image('melon', './assets/images/personajes/melonQueFlippea.png');
 
-        // tuberia
-        //
     }
 
     create (){
@@ -92,7 +90,13 @@ export default class MelonFlip extends Phaser.Scene{
         }
        
 
-        this.mel.sufferGravity();
+        //this.mel.sufferGravity();
+
+        if(this.mel.checkEnd()){
+            console.log("GAME OVER");
+
+            this.mel.stopMoving();
+        }
       
 
 
@@ -108,7 +112,7 @@ export default class MelonFlip extends Phaser.Scene{
     CollisionCheck(){
 
         // aaaaaaaaaaaaaaaa
-        console.log("explosion BOOOOOOOOOOOOOOOOOOOOOOOOOOM");
+        console.log("explosion BOOOOOOOOOOOOOOOOOOOOOOOOOOM eres open jaime libre office");
     }
 
     // siendo side un metodo a lo 'this.car.getTopRight()'
