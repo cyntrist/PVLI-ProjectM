@@ -29,11 +29,8 @@ export default class MelonFlip extends Phaser.Scene{
     }
 
     create (){
-
-
-
         
-        // ----------------------- OBJETOS -----------------------------------
+        // ----------------------- 'OBJETOS' -----------------------------------
         // pone el fondo
 		let bg = this.add.image(0, 0, 'fondo').setScale(1, 1).setOrigin(0, 0);
 		bg.depth = -2;
@@ -42,34 +39,23 @@ export default class MelonFlip extends Phaser.Scene{
 		let but1 = new Button(this, 100, 320, 'movil', 'goBackBox', this.ChangeScene);
 		but1.depth = 2;
 
-        // crea un melon que flippea
-        //this.character = new melon(this, 150, 250, 'melon');
-
         // melon flippeador con matter
         this.melones = this.matter.add.image(150, 250, 'melon');
 
+        // settea una masa
         this.melones.setMass(10);
         
-        //melones.setFrictionAir(1);
-       
-
-        // settea el body (para colisiones y fisicas)
-        // this.character.Phaser.Physics.Matter.Components.SetRectangle(387, 319);
-        // 387 319
-
-        //this.obstacle1 = this.add.tubo(this, 150, 250, 'melon');
-
-
-
+        
         // ------------------------- FISICAS --------------------------
      
-        // ¿?¿¿?¿?
+        // settea la velocidad
         this.speed = 0.03;
+        // crea la fuerza
         this.force = {x: 0, y: 10 * this.speed};
 
         // ----------------- INPUT -------------------
 
-        //
+        // 
 		this.AjumpKey = this.input.keyboard.addKey('A'); 
         this.DjumpKey = this.input.keyboard.addKey('D'); 
   
@@ -86,11 +72,15 @@ export default class MelonFlip extends Phaser.Scene{
 			// salta
             console.log("salto saltooooo");
 
-            Phaser.Physics.Matter.Matter.Body.applyForce(this.melones.body, this.melones.getTopRight(), this.force);
+            // aplica la fuerza con el body, la posicion de la fuerza y la fuerza
+            Phaser.Physics.Matter.Matter.Body.applyForce(this.melones.body, 
+                this.melones.getTopRight(), this.force);
 
         }
         else if(this.DjumpKey.isDown){
-            Phaser.Physics.Matter.Matter.Body.applyForce(this.melones.body, this.melones.getTopLeft(), this.force);
+            // aplica la fuerza con el body, la posicion de la fuerza y la fuerza
+            Phaser.Physics.Matter.Matter.Body.applyForce(this.melones.body, 
+                this.melones.getTopLeft(), this.force);
 
         }
       
@@ -99,21 +89,25 @@ export default class MelonFlip extends Phaser.Scene{
     }
     
 
+    // cambio de escena a la marcada (depende del boton)
     ChangeScene(newScene, escena){
 		escena.scene.start(newScene);
 	}
 
+    // para cuando colisione con una tuberia ou mama
     CollisionCheck(){
 
+        // aaaaaaaaaaaaaaaa
         console.log("explosion BOOOOOOOOOOOOOOOOOOOOOOOOOOM");
     }
 
-    jump (character) {
-        // añade fuerza al melon
-        //character.addForce(); // con arcade
+    // siendo side un metodo a lo 'this.car.getTopRight()'
+    // siendo character un body a lo 'this.melones.body'
+    // siendo force la fuerza (no olvidar el this.side)
+    jump (character, side, force) {
 
-        // añade fuerza al melon  // con matter
-        Phaser.Physics.Matter.Matter.Body.applyForce(this.car.body, this.car.getTopRight(), force); 
+        Phaser.Physics.Matter.Matter.Body.applyForce(character, 
+                side, force);
 
     }
 
