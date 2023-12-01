@@ -27,11 +27,19 @@ let config = {
   },
   scene: [Demo, movil, melonFlip],
   physics: {
-    default: 'arcade', // elegir motor
-    arcade: { // propiedades del motor
-        gravity: { y: 300 }, // gravedad
-        debug: true // true para ver info
+    default: 'matter', // elegir motor
+    matter: {
+      gravity: { y: 2 },
+      setBounds: {
+        left: true,
+        right: true,
+        top: true,
+        right: true,
+      }
     }
+
+
+    
   },
   title: "MBTI",
   version: "1.0.0"
