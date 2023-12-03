@@ -1,6 +1,7 @@
 import DialogText from "../plugins/dialog_plugin.js";
 import Character from "../objects/character.js"
 import Button from "../objects/button.js";
+import Decision from "../objects/decision.js";
 
 // int o numero para marcar el escenario
 	// 0 -> clase
@@ -99,22 +100,19 @@ export default class Demo extends Phaser.Scene
 		let i = 0; // calienta que sales
 		scene.dialog.setText(title, true); // imprime la línea de título
 		scene.input.on('pointerdown', function () { // cada click 
-			let name = dayData[node].name.toLowerCase();
-			let currentCharacter = characters[name]; 
+			let currentNode = dayData[node];
+			let currentName = currentNode.name.toLowerCase();
+			let currentCharacter = characters[currentName]; 
 			currentCharacter?.onFocus(); //muy importante el interrogante 
 			currentCharacter?.unfocusEveryoneElse(characters);
-
-			if (dayData[node].hasOwnProperty("next") || dayData[node].hasOwnProperty("choices")) { // si es un nodo intermedio y/o tiene tiene elecciones
-				scene.dialog.setText(dayData[node].name + ":\n" + dayData[node].text.es, true);
-				if (dayData[node].hasOwnProperty("choices")) { // si tiene decisiones, **ahora mismo escribe la última** y continúa por ese camino, en el futuro debería invocar a una decisión
-					let option = new Decision();
-					// DISCLAIMER: vamos a hacer que por defecto se vaya a la última opción, cuando se implementen decisiones y eventos ya veremos...
-					//let ultimaOpcion = Object.keys(dayData[node].choices).length - 2; // x_x
-					//scene.dialog.setText("T/N:\n" + dayData[node].choices[ultimaOpcion].text.es); // como que lo dice T/N pero no se (esto es  infumable e illegible </3)
+			if (currentNode.hasOwnProperty("next") || currentNode.hasOwnProperty("choices")) { // si es un nodo intermedio y/o tiene tiene elecciones
+				scene.dialog.setText(currentNode.name + ":\n" + currentNode.text.es, true);
+				if (dayData[node].hasOwnProperty("choices")) { 
+					let option = new Decision(scene, currentNode.choices, 'decisionSlice');
 					//node = dayData[node].choices[ultimaOpcion].next; // el nodo actual pasa a ser el último de las opciones
-					node = dayData[node].choices[option].next;
+					//node = currentNode.choices[option].next;
 				}
-				else node = dayData[node].next; // si no hay decisiones, continuación lineal, el nodo actual pasa a ser el siguiente
+				else node = currentNode.next; // si no hay decisiones, continuación lineal, el nodo actual pasa a ser el siguiente
 			}
 			else scene.dialog.setText(dayData[node].text.es); // se escribe el último msj
 		})		
