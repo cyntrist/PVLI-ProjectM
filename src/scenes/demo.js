@@ -3,11 +3,7 @@ import Character from "../objects/character.js"
 import Button from "../objects/button.js";
 import Decision from "../objects/decision.js";
 
-// int o numero para marcar el escenario
-	// 0 -> clase
-	// 1 -> pasillo
-	const scenaries = ["clase", "pasillo"];//['clase', 'pasillo'];
-	let Scenary = 'clase';
+let Scenary = 'clase';
 
 /**
  * Escena demo.
@@ -92,6 +88,7 @@ export default class Demo extends Phaser.Scene
 
 
 		// ** DIALOGO MOMENTO: ** //
+		let i = 0;
 		let node = dayData.root.next; // primer nodo
 		scene.dialog.setText(title, true); // imprime la línea de título
 		scene.dialog.graphics.on('pointerdown', function () { // cada click 
@@ -102,17 +99,21 @@ export default class Demo extends Phaser.Scene
 			currentCharacter?.onFocus(); //muy importante el interrogante 
 			currentCharacter?.unfocusEveryoneElse(characters);
 			if (currentNode.hasOwnProperty("next") || currentNode.hasOwnProperty("choices")) { // si es un nodo intermedio y/o tiene tiene elecciones
-				scene.dialog.setText(currentNode.name + ":\n" + currentNode.text.es, true);
-				if (dayData[node].hasOwnProperty("choices")) { 
-					let option = new Decision(scene, currentNode.choices, "'9slice'");
-					//scene.add.nineslice(width/2, height/2, '9slice'); esto funciona
-					//node = dayData[node].choices[ultimaOpcion].next; // el nodo actual pasa a ser el último de las opciones
-					//option.destroy();
-					//node = currentNode.choices[option].next;
+				if ( i < 1) 
+					scene.dialog.setText(currentNode.name + ":\n" + currentNode.text.es, true);
+				if (currentNode.hasOwnProperty("choices")) { 
+					if (i >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
+						let option = new Decision(scene, currentNode.choices, '9slice');
+						i = 0;
+						scene.dialog.setInteractable(false);
+						//option.destroy();
+						//node = currentNode.choices[option].next;
+					} 
+					else i++;
 				}
 				else node = currentNode.next; // si no hay decisiones, continuación lineal, el nodo actual pasa a ser el siguiente
 			}
-			else scene.dialog.setText(dayData[node].text.es); // se escribe el último msj
+			else scene.dialog.setText(currentNode.text.es); // se escribe el último msj
 		})		
     }
 
