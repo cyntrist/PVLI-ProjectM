@@ -1,13 +1,12 @@
-import NineSlice from "../plugins/nineslice.js";
-//import { Plugin as NineSlicePlugin } from "../plugins/nineslice.js" 
+
+
+const OPTION_HEIGHT = 50; // altura de cada opcion de decision
+const CORNER_SLICE = 350; // pixeles que ocupa el width/height de cada casilla de nineslice
+
 /**
  * Clase que representa a una decision en el diálogo, compuesta por diferentes botones
  * @extends Container
  */
-
-const OPTION_HEIGHT = 50;
-const CORNER_SLICE = 350; // pixeles que ocupa el width/height de cada casilla de nineslice
-
 export default class Button extends Phaser.GameObjects.Container {
 	/**
 	 * Constructor de la decisión
