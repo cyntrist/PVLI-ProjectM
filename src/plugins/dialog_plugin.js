@@ -156,6 +156,8 @@ export default class DialogText{
 		this._createOuterWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
 		this._createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
 		
+		//this.graphics.setInteractive({ useHandCursor: true });
+		this.graphics.setInteractive(new Phaser.Geom.Rectangle(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight), Phaser.Geom.Rectangle.Contains, { useHandCursor: true });
 
 		if (this.hasCloseBtn) 
 		{

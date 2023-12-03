@@ -12,7 +12,7 @@ export default class Button extends Phaser.GameObjects.Container {
 	 * @param {String} boxSprite // sprite de la caja
 	 * @param {number} nextbg // escenario al que va
 	 */
-	constructor(scene, x, y, text, boxSprite, nextbg) {
+	constructor(scene, x, y, text, boxSprite, nextbg, depth) {
 		// super a la escena
 		super(scene, x, y);
 
@@ -20,7 +20,7 @@ export default class Button extends Phaser.GameObjects.Container {
 		this.box = new Phaser.GameObjects.Sprite(scene, x, y, boxSprite, 0); 
 		this.box.setScale(2,2);
 		this.add(this.box);
-
+		this.depth = depth;
 		x -= 30
 		y -= 10;
 		const tryout = scene.make.text({
