@@ -1,12 +1,11 @@
 const FONT_SIZE = 24;
 const FONT_FAMILY = "lato";
-const WIDTH_FACTOR = 12;
 
 /**
  * Clase que representa a una de las opciones dentro de una decisión en el diálogo
  * @extends Container
  */
-export default class Decision extends Phaser.GameObjects.Container { 
+export default class DecisionButton extends Phaser.GameObjects.Container { 
     /**
 	 * Constructor del botón
      * @param {Scene} scene - escena en la que se añade

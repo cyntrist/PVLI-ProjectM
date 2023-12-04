@@ -115,7 +115,7 @@ export default class Demo extends Phaser.Scene
 			}
 			else {
 				scene.dialog.setText(currentNode.text.es); // se escribe el último msj
-				currentCharacter?.unfocusEveryone();
+				camille.unfocusEveryone(characters);
 			}
 		})		
 
