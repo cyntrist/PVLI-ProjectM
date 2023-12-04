@@ -35,15 +35,15 @@ export default class Decision extends Phaser.GameObjects.Container {
         )
         this.nineslice.setInteractive(); 
         this.text = scene.add.text(
-            x - text.length * WIDTH_FACTOR/2 + text.length/1.5, 
-            y - FONT_SIZE/2, 
+            x, 
+            y, 
             text, 
             { 
                 fontFamily: FONT_FAMILY,
                 fontSize: FONT_SIZE
             }
         );
-
+        this.text.setOrigin(0.5, 0.5);
         this.nineslice.on('pointerdown', function(){
             scene.eventEmitter.emit('decided', value);
         })
