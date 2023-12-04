@@ -25,7 +25,6 @@ export default class Decision extends Phaser.GameObjects.Container {
 
 		for (let i = 0; i < choices.length; i++) {
 			let currentOption = choices[i].text.es;
-			
 			let db = new DecisionButton(
 				scene,
 				scene.width/2, 
@@ -35,28 +34,8 @@ export default class Decision extends Phaser.GameObjects.Container {
 				OPTION_HEIGHT, 
 				currentOption,
 				CORNER_SLICE,
+				i
 			);
-			/*
-			let button = scene.add.nineslice(
-				scene.width/2, 
-				(scene.height - scene.dialog.windowHeight) * (i + 1)/(choices.length + 1), 
-				sprite, 
-				0, 
-				option_width * WIDTH_FACTOR, 
-				OPTION_HEIGHT, 
-				CORNER_SLICE,
-				CORNER_SLICE
-			); 
-			/*
-			let text = scene.add.text(
-				scene.width/2 - currentOption.length * WIDTH_FACTOR/2 + currentOption.length/1.5, 
-				(scene.height - scene.dialog.windowHeight) * (i + 1)/(choices.length + 1) - FONT_SIZE/2, 
-				currentOption, 
-				{ 
-					fontFamily: FONT_FAMILY,
-					fontSize: FONT_SIZE
-				}
-			);*/
 			this.buttons.push(db);
 		}
 

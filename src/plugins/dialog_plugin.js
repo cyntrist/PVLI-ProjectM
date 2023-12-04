@@ -113,7 +113,6 @@ export default class DialogText{
 		}
 		else {
 			this.graphics.disableInteractive();
-			console.log("JDLKSJFALÑKSJDFÑO");
 		}
 	}
 

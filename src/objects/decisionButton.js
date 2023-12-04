@@ -17,12 +17,13 @@ export default class Decision extends Phaser.GameObjects.Container {
      * @param {int} height - altura
      * @param {string} text - texto a representar
      * @param {int} corner - tamaño del frame del 3-slice
+     * @param {int} id - numero en el array de la opcion
 	*/
-    constructor(scene, x, y, sprite, width, height, text, corner) {
+    constructor(scene, x, y, sprite, width, height, text, corner, value) {
 		// super a la escena
 		super(scene, x, y);
 
-        this.box = scene.add.nineslice(
+        this.nineslice = scene.add.nineslice(
             x, 
             y, 
             sprite, 
@@ -31,7 +32,8 @@ export default class Decision extends Phaser.GameObjects.Container {
             height, 
             corner,
             corner
-        ); 
+        )
+        this.nineslice.setInteractive(); 
         this.text = scene.add.text(
             x - text.length * WIDTH_FACTOR/2 + text.length/1.5, 
             y - FONT_SIZE/2, 
@@ -41,5 +43,15 @@ export default class Decision extends Phaser.GameObjects.Container {
                 fontSize: FONT_SIZE
             }
         );
+
+        this.nineslice.on('pointerdown', function(){
+            scene.eventEmitter.emit('decided', value);
+        })
+
+        this.on('destroy', function onDestroy() {
+			console.log("ME MUEROOOO");
+			this.nineslice.destroy();
+            this.text.destroy();
+		}); // esto funciona
 	}
 }

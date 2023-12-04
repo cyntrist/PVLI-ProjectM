@@ -14,6 +14,7 @@ export default class Demo extends Phaser.Scene
     constructor()
 	{
 		super({ key: 'Demo'})
+		this.eventEmitter = new Phaser.Events.EventEmitter();
 	}
 
     // Carga de assets
@@ -82,17 +83,18 @@ export default class Demo extends Phaser.Scene
 		});
 		scene.dialog.depth = 2;
 		// crea un boton al pasillo
-		let but1 = new Button(this, 590, 200, 'pasillo', 'box', 2, 2);
+		//let but1 = new Button(this, 590, 200, 'pasillo', 'box', 2, 2);
 		// crea un boton a la clase
-		let but2 = new Button(this, 590, 250, 'clase', 'box', 1, 2);
+		//let but2 = new Button(this, 590, 250, 'clase', 'box', 1, 2);
 
 
-		// ** DIALOGO MOMENTO: ** //
+		// ** DIALOGO MOMENTO: ESTO DEBERÁ IR EN EL DIALOGUE MANAGER EN EL FUTURO ** //
 		let i = 0;
 		let node = dayData.root.next; // primer nodo
+		let option;
 		scene.dialog.setText(title, true); // imprime la línea de título
 		scene.dialog.graphics.on('pointerdown', function () { // cada click 
-			console.log("jodfer");
+			option?.destroy();
 			let currentNode = dayData[node];
 			let currentName = currentNode.name.toLowerCase();
 			let currentCharacter = characters[currentName]; 
@@ -103,18 +105,34 @@ export default class Demo extends Phaser.Scene
 					scene.dialog.setText(currentNode.name + ":\n" + currentNode.text.es, true);
 				if (currentNode.hasOwnProperty("choices")) { 
 					if (i >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
-						let option = new Decision(scene, currentNode.choices, '9slice');
+						option = new Decision(scene, currentNode.choices, '9slice');
 						i = 0;
 						scene.dialog.setInteractable(false);
-						//option.destroy();
-						//node = currentNode.choices[option].next;
 					} 
 					else i++;
 				}
 				else node = currentNode.next; // si no hay decisiones, continuación lineal, el nodo actual pasa a ser el siguiente
 			}
-			else scene.dialog.setText(currentNode.text.es); // se escribe el último msj
+			else {
+				scene.dialog.setText(currentNode.text.es); // se escribe el último msj
+				currentCharacter?.unfocusEveryone();
+			}
 		})		
+
+		this.eventEmitter.on('decided', function (valor) {
+			console.log('OPCION DECIDIDA: ', valor);
+			scene.dialog.setText("T/N:\n" + dayData[node].choices[valor].text.es, true);
+			node = dayData[node].choices[valor].next;
+			/*
+			let currentNode = dayData[node];
+			let currentName = currentNode.name.toLowerCase();
+			let currentCharacter = characters[currentName]; 
+			currentCharacter?.onFocus(); //muy importante el interrogante 
+			currentCharacter?.unfocusEveryoneElse(characters);
+			*/
+			scene.dialog.setInteractable(true);
+			option.destroy();
+		});
     }
 
 	update(){
