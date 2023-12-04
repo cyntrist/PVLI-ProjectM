@@ -121,15 +121,9 @@ export default class Demo extends Phaser.Scene
 
 		this.eventEmitter.on('decided', function (valor) {
 			console.log('OPCION DECIDIDA: ', valor);
+			camille.focusEveryone(characters);
 			scene.dialog?.setText("T/N:\n" + dayData[node].choices[valor].text.es, true);
 			node = dayData[node].choices[valor].next;
-			/*
-			let currentNode = dayData[node];
-			let currentName = currentNode.name.toLowerCase();
-			let currentCharacter = characters[currentName]; 
-			currentCharacter?.onFocus(); //muy importante el interrogante 
-			currentCharacter?.unfocusEveryoneElse(characters);
-			*/
 			scene.dialog.setInteractable(true);
 			decision.destroy();
 		});
