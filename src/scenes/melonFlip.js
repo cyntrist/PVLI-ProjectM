@@ -64,16 +64,18 @@ export default class MelonFlip extends Phaser.Scene{
         
         // -------------------------- TWEENS -------------------------------
 
-        /*
+        
         this.flippea = this.tweens.add({
             targets: this.mel,
             duration: 100,
-            angle: 180,
-            // lo que hace
+            //No sabemos cambiar el origen para hacer que rote sobre si mismo
+            //angle: '+=360',
+            scaleY: 0.1,
+            yoyo: true,
             persist: true
-
+            
         })
-        */
+
         
 
 
@@ -100,8 +102,9 @@ export default class MelonFlip extends Phaser.Scene{
 			
             // le dice al melon que salte
             this.mel.jump();
+            this.flippea.play();
+            console.log("flip");
 
-            //this.flippea.play();
         }
        
         // gestiona la creacion de tuberias
@@ -192,7 +195,7 @@ export default class MelonFlip extends Phaser.Scene{
     createNewHeight(){
         let height = Phaser.Math.Between(-20, 80)
 
-        console.log(height);
+        //console.log(height);
         return height;
 
         // -20 - 80

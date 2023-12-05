@@ -187,6 +187,7 @@ export default class Demo extends Phaser.Scene {
 
 		// ajusta la capa
 		bg.depth = -2;
+
 	}
 
 	ChangeScene(newScene, escena){
