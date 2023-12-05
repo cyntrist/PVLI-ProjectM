@@ -34,7 +34,12 @@ export default class Decision extends Phaser.GameObjects.Container {
 				OPTION_HEIGHT, 
 				currentOption,
 				CORNER_SLICE,
-				i
+				i,
+				{
+					"EnterCallback" : () => this.OverButton(db),
+					"ExitCallback": () => this.ExitButton(db)
+				}
+				 
 			);
 			this.buttons.push(db);
 		}
@@ -67,4 +72,8 @@ export default class Decision extends Phaser.GameObjects.Container {
 		}
 		return longest; // Return the longest string found
 	}
+
+	OverButton(db) { db.nineslice.tint = "0xc24d6d"; }
+
+	ExitButton(db) { db.nineslice.tint = "0xF6F6F6" ; }
 }

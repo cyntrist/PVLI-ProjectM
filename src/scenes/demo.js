@@ -102,7 +102,6 @@ export default class Demo extends Phaser.Scene
 		but2.depth = 2;
 
 		// crea el botón del movil
-		//Cuando se pueda crear una contructora sin el número del escenario al que cambia o quitarselo totalmente
 		let movil = new Button(this, 850, 700, ' ', 'movil', { "ClickCallback": () => this.ChangeScene("movil", scene), 
 																  "EnterCallback": () => this.OverMovile(),
 																  "ExitCallback": () => this.ExitMovile() });

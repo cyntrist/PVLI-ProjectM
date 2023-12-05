@@ -30,7 +30,7 @@ export default class DecisionButton extends Phaser.GameObjects.Container {
             width, 
             height, 
             corner,
-            corner
+            corner,
         )
         this.nineslice.setInteractive(); 
         this.text = scene.add.text(
@@ -48,18 +48,18 @@ export default class DecisionButton extends Phaser.GameObjects.Container {
             scene.eventEmitter.emit('decided', value);
         })
 
-        this.nineslice.on('pointerover', function(){
+        /* this.nineslice.on('pointerover', function(){
             console.log("Encima");
            this.nineslice.sprite.tint = "0xc24d6d"
-        })
+        }) */
 
         //Reconoce que el ratón está encima de la función
 		if (EnterCallback)
-        this.box.on('pointerover', EnterCallback);
+        this.nineslice.on('pointerover', EnterCallback);
 
         //Reconoce que el raton sale del botón
         if (ExitCallback)
-        this.box.on('pointerout', ExitCallback);
+        this.nineslice.on('pointerout', ExitCallback);
 
         this.on('destroy', function onDestroy() {
 			console.log("ME MUEROOOO");
