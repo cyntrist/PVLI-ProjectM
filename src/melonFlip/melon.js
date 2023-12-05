@@ -29,8 +29,8 @@ export default class Melon extends Phaser.GameObjects.Container{
     }
 
     checkEnd(){
-        console.log("END");
-        return (this.melon.y > 400)
+        console.log("END")
+        return (this.melon.y > 300)
     }
 
     stopMoving(){

@@ -3,7 +3,7 @@
 export default class Pipe extends Phaser.GameObjects.Container{
 
     // 
-    constructor(scene, x, y, tuboSprite) {
+    constructor(scene, x, y, tuboSprite, deleteCon) {
 		// super a la escena
 		super(scene, x, y);
 
@@ -17,11 +17,15 @@ export default class Pipe extends Phaser.GameObjects.Container{
     }
 
     paralax (){
+
+        console.log("AAAAAAAAAAAAA " + this.tubo.x);
         this.tubo.x -= 5;
     }
 
     isOut(){
-        return this.tubo.x <= -300;
+
+        //console.log("LOSE CONN " + 0);
+        return this.tubo.x <= -400;
 
     }
 

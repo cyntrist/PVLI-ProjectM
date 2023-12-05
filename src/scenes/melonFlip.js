@@ -59,8 +59,10 @@ export default class MelonFlip extends Phaser.Scene{
         this.pipes = [];
 
         // variables para los pipes
-        this.pipeCooldown = 50;
+        this.pipeCooldown = 70;
         this.cdCounter = 0;
+
+        let { width, height } = this.sys.game.canvas;
 
         
         // -------------------------- TWEENS -------------------------------
@@ -134,12 +136,9 @@ export default class MelonFlip extends Phaser.Scene{
         // si hay tuberias
         for(let i = 0; i<this.pipes.length; i++){
 
-
-            console.log(!this.pipes[i].isOut());
             // si no esta fuera lo mueve
             if(!this.pipes[i].isOut()){
 
-                console.log(!this.pipes[i].isOut());
                 //
                 this.pipes[i].paralax();
             }
@@ -174,8 +173,10 @@ export default class MelonFlip extends Phaser.Scene{
 
     createNewPipe(){
 
+        //console.log(" AAAAAAAAAAAAAAAAAAA " + this.sys.game.canvas.width);
+
         // crea una tuberia
-        this.pipe = new Pipe(this, 300, 95, 'pipe');
+        this.pipe = new Pipe(this, 700, 95, 'pipe', 0);
         this.mel.depth = 2;
 
         // añade la tuberia al array de tuberias
