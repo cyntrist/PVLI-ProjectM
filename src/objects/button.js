@@ -22,7 +22,7 @@ export default class Button extends Phaser.GameObjects.Container {
 		this.box = new Phaser.GameObjects.Sprite(scene, x, y, boxSprite);
 		this.box.setScale(2, 2);
 		this.add(this.box);
-		this.depth = depth;
+		//this.depth = depth;
 		x -= 30
 		y -= 10;
 		const tryout = scene.make.text({

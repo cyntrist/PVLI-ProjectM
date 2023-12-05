@@ -3,7 +3,7 @@ import Character from "../objects/character.js"
 import Button from "../objects/button.js";
 import Decision from "../objects/decision.js";
 
-
+let Scenary = 'clase';
 /**
  * Escena demo.
  * @extends Scene
@@ -25,9 +25,13 @@ export default class Demo extends Phaser.Scene
 		this.load.image('delilahph', './assets/images/personajes/delilah.png');
 		this.load.image('matthewph', './assets/images/personajes/matthew.png');
 		this.load.image('richardph', './assets/images/personajes/richard.png');
+
 		this.load.image('clase', './assets/images/escenarios/clase2.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo.png');
+
 		this.load.image('box', './assets/images/escenarios/opciones2.png')
+		this.load.image('movil', './assets/images/movil/movil.png');
+
 		this.load.json('dia1Data', './src/json/dia1_test.json')
 		this.load.image('9slice', './assets/images/ui/botones_decision_nineslice_muy_peque.png')
     }
