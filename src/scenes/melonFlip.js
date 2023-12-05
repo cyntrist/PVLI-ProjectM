@@ -113,7 +113,7 @@ export default class MelonFlip extends Phaser.Scene{
         
         // gameover
         if(this.mel.checkEnd()){
-            console.log("GAME OVER");
+            //console.log("GAME OVER");
 
             this.mel.stopMoving();
         }
@@ -173,15 +173,32 @@ export default class MelonFlip extends Phaser.Scene{
 
     createNewPipe(){
 
-        //console.log(" AAAAAAAAAAAAAAAAAAA " + this.sys.game.canvas.width);
+        let height = this.createNewHeight();
 
         // crea una tuberia
-        this.pipe = new Pipe(this, 700, 95, 'pipe', 0);
-        this.mel.depth = 2;
+        this.TOPpipe = new Pipe(this, 700, height, 'pipe', 0);
+        this.TOPpipe.depth = 2;
 
         // añade la tuberia al array de tuberias
-        this.pipes.push(this.pipe);
+        this.pipes.push(this.TOPpipe);
 
+        // crea una tuberia
+        this.BOTpipe = new Pipe(this, 700, height + 400, 'pipe', 0);
+        this.BOTpipe.depth = 2;
+
+        // añade la tuberia al array de tuberias
+        this.pipes.push(this.BOTpipe);
+
+    }
+
+    // genera una nueva altrua para la tuberia
+    createNewHeight(){
+        let height = Phaser.Math.Between(-20, 80)
+
+        console.log(height);
+        return height;
+
+        // -20 - 80
     }
 
 }

@@ -8,7 +8,7 @@ export default class Pipe extends Phaser.GameObjects.Container{
 		super(scene, x, y);
 
         this.tubo = new Phaser.GameObjects.Sprite(scene, x, y, tuboSprite); 
-		this.tubo.setScale(0.5, 0.5);
+		this.tubo.setScale(0.5, 0.8);
 
         this.add(this.tubo);
 
@@ -17,8 +17,6 @@ export default class Pipe extends Phaser.GameObjects.Container{
     }
 
     paralax (){
-
-        console.log("AAAAAAAAAAAAA " + this.tubo.x);
         this.tubo.x -= 5;
     }
 
