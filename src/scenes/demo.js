@@ -3,12 +3,13 @@ import Character from "../objects/character.js"
 import Button from "../objects/button.js";
 import Decision from "../objects/decision.js";
 
-let Scenary = 'clase';
 
 /**
  * Escena demo.
  * @extends Scene
+ * @namespace Phaser.Actions
  */
+
 export default class Demo extends Phaser.Scene
 { 
     constructor()
@@ -17,9 +18,8 @@ export default class Demo extends Phaser.Scene
 		this.eventEmitter = new Phaser.Events.EventEmitter();
 	}
 
-    // Carga de assets
-	preload() 
-	{
+	// Carga de assets
+	preload() {
 		this.canvas = this.sys.game.canvas;
 		this.load.image('camilleph', './assets/images/personajes/camille.png');
 		this.load.image('delilahph', './assets/images/personajes/delilah.png');
@@ -48,6 +48,7 @@ export default class Demo extends Phaser.Scene
 			scene.add.sprite(0, padding, 'matthewph').setScale(0.5,0.5),
 			scene.add.sprite(0, padding, 'richardph').setScale(0.5,0.5)
 		]
+
 		// creación de personajes
 		const camille = new Character(scene, width*1/5, height - sprites[Elenco.Camille].displayHeight/2, sprites[Elenco.Camille], "Camille");
 		const delilah = new Character(scene, width*2/5, height - sprites[Elenco.Delilah].displayHeight/2, sprites[Elenco.Delilah], "Delilah");
@@ -57,36 +58,69 @@ export default class Demo extends Phaser.Scene
 		const characters = { camille, delilah, matthew, richard } // corchetes array, brackets diccionario (objeto)
 		// descolorea a todos los personajes antes de empezar
 		camille.unfocusEveryone(characters); // camille siendo conejillo de indias
+
 		// pone el fondo
 		this.nextBG = 1;
 		this.currentBG = 1;
-        let bg = scene.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
+        let bg = scene.add.image(0, 0, "clase").setScale(0.35, 0.35).setOrigin(0, 0);
 		bg.depth = -2;
 
 		
 		// ** CREACION DE INTERFAZ ** //
 		// crea la ventana de diálogo
-	    scene.dialog = new DialogText(this, {
+		scene.dialog = new DialogText(this, {
 			borderThickness: 6,
 			borderColor: 0xF6F6F6,
 			borderAlpha: 0.8,
-            windowBorderRadius: 4,
+			windowBorderRadius: 4,
 			windowAlpha: 0.95,
 			windowColor: 0xFF799A,
 			windowHeight: 150,
 			padding: 18,
-            hasCloseBtn: false,
-            closeBtnColor: 'white',
+			hasCloseBtn: false,
+			closeBtnColor: 'white',
 			dialogSpeed: 4.4,
 			fontSize: 24,
 			fontFamily: "lato"
 		});
 		scene.dialog.depth = 2;
-		// crea un boton al pasillo
-		//let but1 = new Button(this, 590, 200, 'pasillo', 'box', 2, 2);
-		// crea un boton a la clase
-		//let but2 = new Button(this, 590, 250, 'clase', 'box', 1, 2);
 
+		// crea un boton al pasillo
+		let but1 = new Button(this, 590, 200, 'pasillo', 'box', { "ClickCallback": () => this.ChangeScenary ("pasillo", scene),
+																	"EnterCallback": () =>this.OverButton(but1),
+																	"ExitCallback": () => this.ExitButton(but1) });
+		but1.depth = 2;
+
+		// crea un boton a la clase
+		let but2 = new Button(this, 590, 250, 'clase', 'box', { "ClickCallback": () => this.ChangeScenary ("clase", scene),
+																	"EnterCallback": () =>this.OverButton(but2),
+																	"ExitCallback": () => this.ExitButton(but2) });
+		but2.depth = 2;
+
+		// crea el botón del movil
+		//Cuando se pueda crear una contructora sin el número del escenario al que cambia o quitarselo totalmente
+		let movil = new Button(this, 850, 700, ' ', 'movil', { "ClickCallback": () => this.ChangeScene("movil", scene), 
+																  "EnterCallback": () => this.OverMovile(),
+																  "ExitCallback": () => this.ExitMovile() });
+		movil.setScale(0.25, 0.25);
+		movil.depth = 2;
+
+		//Tween del movil cuando el ratón esté encima
+		this.movilEnterTween = this.tweens.add({
+			targets: movil,
+			duration: 100,
+			y: 650,
+			persist: true
+		})
+
+		//Tween del movil cuando el ratón sale del botón
+		this.movilExitTween = this.tweens.add({
+			targets: movil,
+			duration: 100,
+			y: 700,
+			persist: true
+		})
+	
 
 		// ** DIALOGO MOMENTO: ESTO DEBERÁ IR EN EL DIALOGUE MANAGER EN EL FUTURO ** //
 		let i = 0;
@@ -137,5 +171,40 @@ export default class Demo extends Phaser.Scene
 			bg.depth = -2;
 			this.currentBG = this.nextBG;
 		}
+
 	}
+	
+	// cambia el escenario (la imagen de fondo)
+	ChangeScenary (newImage, escena){
+
+		// crea una imagen en la escena dada 
+		let bg = escena.add.image(0, 0, newImage).setScale(0.35, 0.35).setOrigin(0, 0);
+
+		// ajusta la capa
+		bg.depth = -2;
+
+	}
+
+	ChangeScene(newScene, escena){
+		escena.scene.start(newScene);
+	}
+
+	OverMovile() {
+		this.movilEnterTween.play();
+	}
+
+	ExitMovile() {
+		this.movilExitTween.play();
+	}
+
+	OverButton(but) {
+		but.box.tint = "0xc24d6d" ;
+		
+	}
+
+	ExitButton(but) {
+		but.box.tint = "0xF6F6F6" ;
+	}
+
+	
 }
