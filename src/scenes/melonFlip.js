@@ -53,10 +53,15 @@ export default class MelonFlip extends Phaser.Scene{
         this.mel.depth = 3;
 
 
-        // pipe placeholder
-        this.pipe = new Pipe(this, 300, 95, 'pipe');
-        this.mel.depth = 2;
         
+
+       // array de pipes
+        this.pipes = [];
+
+        // variables para los pipes
+        this.pipeCooldown = 50;
+        this.cdCounter = 0;
+
         
         // -------------------------- TWEENS -------------------------------
 
@@ -94,22 +99,25 @@ export default class MelonFlip extends Phaser.Scene{
         // input
         if(this.WjumpKey.isDown){ 
 			
-			// salta
-            console.log("salto saltooooo");
-
+            // le dice al melon que salte
             this.mel.jump();
 
             //this.flippea.play();
         }
        
-        this.paralax();
+        // gestiona la creacion de tuberias
+        this.pipesManager();
 
+        
         // gameover
         if(this.mel.checkEnd()){
             console.log("GAME OVER");
 
             this.mel.stopMoving();
         }
+
+        // movimiento paralax
+        this.paralax();
     }
     
 
@@ -120,9 +128,58 @@ export default class MelonFlip extends Phaser.Scene{
 
 
     paralax(){
-        //
-        this.pipe.paralax();
 
+        // ----------- pipes ------------
+
+        // si hay tuberias
+        for(let i = 0; i<this.pipes.length; i++){
+
+
+            console.log(!this.pipes[i].isOut());
+            // si no esta fuera lo mueve
+            if(!this.pipes[i].isOut()){
+
+                console.log(!this.pipes[i].isOut());
+                //
+                this.pipes[i].paralax();
+            }
+            else{
+                this.pipes[i].deletePipe();
+            }
+        }
+
+        
+    }
+    
+
+    // ------------------------- PIPES MANAGER ---------------------------------
+
+    // gestion de pipes
+    pipesManager(){
+
+        // si llega hace cosas
+        if(this.cdCounter >= this.pipeCooldown){
+
+            // crea un nuebo tubo
+            this.createNewPipe();
+
+            // reinicia el contador
+            this.cdCounter = 0;
+        }
+        else {
+            // añade al contador
+            this.cdCounter++;
+        }
+    }
+
+    createNewPipe(){
+
+        // crea una tuberia
+        this.pipe = new Pipe(this, 300, 95, 'pipe');
+        this.mel.depth = 2;
+
+        // añade la tuberia al array de tuberias
+        this.pipes.push(this.pipe);
 
     }
 
