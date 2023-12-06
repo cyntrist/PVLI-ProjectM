@@ -45,12 +45,12 @@ export default class MelonFlip extends Phaser.Scene{
 		bg.depth = -2;
 
         // boton de vuelta
-		let but1 = new Button(this, 100, 320, 'movil', 'goBackBox', { "ClickCallback": () => this.ChangeScene("movil", scene) });
-		but1.depth = 2;
+		let but1 = new Button(this, 100, 320, 'movil', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("movil", scene) });
+		//but1.depth = 2;
 
         // melon flippeador
         this.mel = new melon(this, 150, 270, 'melon');
-        this.mel.depth = 3;
+        //this.mel.depth = 3;
 
        // array de pipes
         this.pipes = [];
