@@ -99,6 +99,23 @@ export default class DialogText{
 		
 	}
 
+	// IMPORTANTE: para que sea clickable y tenga onpointerdown en caso de true y para esperar a una decision en caso de false
+	setInteractable(value) {
+		//Obtenemos las dimensiones del juego
+		var gameHeight = this._getGameHeight();
+		var gameWidth = this._getGameWidth();
+
+		//Se calcula la dimension de la ventana de diálogo
+		var dimensions = this._calculateWindowDimensions(gameWidth, gameHeight);
+
+		if (value) {
+			this.graphics.setInteractive(new Phaser.Geom.Rectangle(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight), Phaser.Geom.Rectangle.Contains, { useHandCursor: true });
+		}
+		else {
+			this.graphics.disableInteractive();
+		}
+	}
+
 	// Consigue el ancho del juego (en funcion del tamaño en la escena) 
 	_getGameWidth() {
 		return this.scene.sys.game.config.width;
@@ -151,12 +168,12 @@ export default class DialogText{
 		//Se calcula la dimension de la ventana de diálogo
 		var dimensions = this._calculateWindowDimensions(gameWidth, gameHeight);
 		this.graphics = this.scene.add.graphics();
-		
+		this.graphics.setInteractive(new Phaser.Geom.Rectangle(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight), Phaser.Geom.Rectangle.Contains, { useHandCursor: true });
+
 		//Se crean las ventanas interior y exterior
 		this._createOuterWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
 		this._createInnerWindow(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight);
 		
-
 		if (this.hasCloseBtn) 
 		{
 			this._createCloseModalButton(); //se muestra el boton de cerrar en la ventana

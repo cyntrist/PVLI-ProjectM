@@ -9,48 +9,55 @@ export default class Button extends Phaser.GameObjects.Container {
 	 * @param {number} x // posicion x
 	 * @param {number} y // posicion y
 	 * @param {String} text // txt
+	 * @param {int} depth - numero de capa (frente o fondo)
 	 * @param {String} boxSprite // sprite de la caja
 	 * @param {number} nextbg // escenario al que va
 	 */
-	constructor(scene, x, y, text, boxSprite, nextbg) {
+
+	constructor(scene, x, y, text, depth, boxSprite, { ClickCallback, EnterCallback, ExitCallback }) {
+
 		// super a la escena
 		super(scene, x, y);
 
 		// crea la caja
-		this.box = new Phaser.GameObjects.Sprite(scene, x, y, boxSprite, 0); 
-		this.box.setScale(2,2);
+		this.box = new Phaser.GameObjects.Sprite(scene, x, y, boxSprite);
+		this.box.setScale(2, 2);
 		this.add(this.box);
-
+		this.depth = depth;
 		x -= 30
 		y -= 10;
 		const tryout = scene.make.text({
-			x, 
-			y, 
+			x,
+			y,
 			text,
 			style: {
 				fontSize: 20,
 				fontFamily: 'lato'
 			}
-			})
-		this.add(tryout); 
+		})
+
+		this.add(tryout);
 
 		// añade el container
-    	scene.add.existing(this);
+		scene.add.existing(this);
 
 		// lo hace interactivo
 		this.box.setInteractive();
 
 		// interaccion con la caja
-		this.box.on('pointerdown', (pointer) => {
-			this.click(scene, text, nextbg);
-		});
+		if (ClickCallback)
+			this.box.on('pointerdown', ClickCallback);
+
+		//Reconoce que el ratón está encima de la función
+		if (EnterCallback)
+			this.box.on('pointerover', EnterCallback);
+
+		//Reconoce que el raton sale del botón
+		if (ExitCallback)
+			this.box.on('pointerout', ExitCallback);
+
 	}
 
-	click (scene, text, nextbg) {
-		//
-		scene.nextBG = nextbg;
-		scene.Scenary = text;
-	}
-  }
 
-	
+}
+
