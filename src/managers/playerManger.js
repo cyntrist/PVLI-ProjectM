@@ -11,7 +11,7 @@ export default class PlayerManager {
         this.affinities = [cAff, dAff, mAff, rAff]
 
         //this.playerStats = { charisma: 1, kindness: 1, humor: 1, intelligence: 1, luck: 1 }
-        this.playerStats = [1, 1, 1, 1, 1]
+        this.playerStats = [1, 1, 1, 1, 1] //orden de arriba 
 
         this.affIncrease = 100;
     }

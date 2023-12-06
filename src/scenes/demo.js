@@ -155,7 +155,7 @@ export default class Demo extends Phaser.Scene
 
 		this.eventEmitter.on('decided', function (valor) {
 			//console.log('OPCION DECIDIDA: ', valor);
-			if(valor >= 0 && valor <= 3)
+			if(valor >= 0 && valor <= 3) //0 camille, 1 delilah, 2 matthew, 3 richard, cualquier valor que no sea de esos no suma (no entra en el caso, no porque haya proteccion contra eso en el player manager)
 				PM.increaseAffinity(valor);
 			camille.focusEveryone(characters);
 			scene.dialog?.setText("T/N:\n" + dayData[node].choices[valor].text.es, true);
