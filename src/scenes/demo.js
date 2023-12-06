@@ -90,23 +90,19 @@ export default class Demo extends Phaser.Scene
 		scene.dialog.depth = 2;
 
 		// crea un boton al pasillo
-		let but1 = new Button(this, 590, 200, 'pasillo', 'box', { "ClickCallback": () => this.ChangeScenary ("pasillo", scene),
+		let but1 = new Button(this, 590, 200, 'pasillo', 2, 'box', { "ClickCallback": () => this.ChangeScenary ("pasillo", scene),
 																	"EnterCallback": () =>this.OverButton(but1),
 																	"ExitCallback": () => this.ExitButton(but1) });
 		but1.depth = 2;
-
 		// crea un boton a la clase
-		let but2 = new Button(this, 590, 250, 'clase', 'box', { "ClickCallback": () => this.ChangeScenary ("clase", scene),
+		let but2 = new Button(this, 590, 250, 'clase', 2, 'box', { "ClickCallback": () => this.ChangeScenary ("clase", scene),
 																	"EnterCallback": () =>this.OverButton(but2),
 																	"ExitCallback": () => this.ExitButton(but2) });
-		but2.depth = 2;
-
 		// crea el botón del movil
-		let movil = new Button(this, 850, 700, ' ', 'movil', { "ClickCallback": () => this.ChangeScene("movil", scene), 
+		let movil = new Button(this, 850, 700, ' ', 2, 'movil', { "ClickCallback": () => this.ChangeScene("movil", scene), 
 																  "EnterCallback": () => this.OverMovile(),
 																  "ExitCallback": () => this.ExitMovile() });
 		movil.setScale(0.25, 0.25);
-		movil.depth = 2;
 
 		//Tween del movil cuando el ratón esté encima
 		this.movilEnterTween = this.tweens.add({
