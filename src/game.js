@@ -29,7 +29,7 @@ let config = {
   physics: {
     default: 'arcade', // elegir motor
     arcade: {
-      gravity: { y : 700 }
+      gravity: { y : 500 }
 
     }
     /*

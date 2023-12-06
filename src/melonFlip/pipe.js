@@ -23,7 +23,7 @@ export default class Pipe extends Phaser.GameObjects.Container{
     isOut(){
 
         //console.log("LOSE CONN " + 0);
-        return this.tubo.x <= -400;
+        return this.tubo.x <= -700;
 
     }
 

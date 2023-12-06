@@ -25,7 +25,9 @@ export default class Melon extends Phaser.GameObjects.Container{
     // añade la fuerza indicada al objeto mediante un vector
     jump()
     {
-        this.melon.body.velocity.y = -200;
+        //this.melon.body.velocity.y = -200;
+
+        this.melon.body.setVelocityY(-200);
     }
 
     checkEnd(){
