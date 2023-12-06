@@ -13,7 +13,10 @@ export default class Melon extends Phaser.GameObjects.Container{
         this.melon = this.scene.add.image(200, 200, melonSprite);
         this.scene.physics.add.existing(this.melon);
 
-		this.melon.setScale(0.5, 0.5);
+		this.melon.setScale(1, 1);
+
+       
+
 
         this.add(this.melon);
 
@@ -22,17 +25,24 @@ export default class Melon extends Phaser.GameObjects.Container{
     }
 
 
+
+
     // añade la fuerza indicada al objeto mediante un vector
-    jump()
+    jump(callback)
     {
         //this.melon.body.velocity.y = -200;
 
         this.melon.body.setVelocityY(-200);
+
+        // deberia ser la anim del salto
+        //callback
+        
+        //console.log("flip");
     }
 
     checkEnd(){
         //console.log("END")
-        return (this.melon.y > 300)
+        return (this.melon.y > 500)
     }
 
     stopMoving(){

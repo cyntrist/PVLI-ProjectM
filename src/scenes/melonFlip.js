@@ -20,7 +20,7 @@ export default class MelonFlip extends Phaser.Scene{
 		this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
 
         // melon flippeando
-        this.load.image('melon', './assets/images/personajes/melonQueFlippeaCunty.png');
+        this.load.image('melon', './assets/images/personajes/melonQueFlippea2.png');
 
         // tuberia flippeando
         this.load.image('pipe', './assets/images/personajes/pipe.png');
@@ -76,9 +76,6 @@ export default class MelonFlip extends Phaser.Scene{
             
         })
 
-        
-
-
         // ------------------------- FISICAS --------------------------
      
         // settea la velocidad
@@ -93,6 +90,11 @@ export default class MelonFlip extends Phaser.Scene{
         this.DjumpKey = this.input.keyboard.addKey('D'); 
         this.WjumpKey = this.input.keyboard.addKey('W'); 
 
+        // -------------------- COLISIONES ----------------------
+
+      
+        this.physics.add.collider(this.mel, this.pipe);
+
     }
 
     update (){
@@ -102,9 +104,7 @@ export default class MelonFlip extends Phaser.Scene{
 			
             // le dice al melon que salte
             this.mel.jump();
-            this.flippea.play();
-            console.log("flip");
-
+    
         }
        
         // gestiona la creacion de tuberias
@@ -149,6 +149,11 @@ export default class MelonFlip extends Phaser.Scene{
 
         
     }
+
+    rotateAnim(){
+        this.flippea.play()
+
+    }
     
 
     // ------------------------- PIPES MANAGER ---------------------------------
@@ -183,7 +188,7 @@ export default class MelonFlip extends Phaser.Scene{
         this.pipes.push(this.TOPpipe);
 
         // crea una tuberia
-        this.BOTpipe = new Pipe(this, 700, height + 400, 'pipe', 0);
+        this.BOTpipe = new Pipe(this, 700, height + 410, 'pipe', 0);
         this.BOTpipe.depth = 2;
 
         // añade la tuberia al array de tuberias
