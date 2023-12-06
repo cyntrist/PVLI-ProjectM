@@ -2,6 +2,7 @@ import DialogText from "../plugins/dialog_plugin.js";
 import Character from "../objects/character.js"
 import Button from "../objects/button.js";
 import Decision from "../objects/decision.js";
+import PlayerManager from "../managers/playerManger.js";
 
 let Scenary = 'clase';
 /**
@@ -38,6 +39,7 @@ export default class Demo extends Phaser.Scene
 
 	create()
     {
+		var PM = new PlayerManager(0, 0, 0, 0);
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
 		const dayData = this.cache.json.get('dia1Data'); // XD la conversación del día
 		const { width, height } = this.canvas; // la anchura y altura del canvas
@@ -120,7 +122,6 @@ export default class Demo extends Phaser.Scene
 			persist: true
 		})
 	
-
 		// ** DIALOGO MOMENTO: ESTO DEBERÁ IR EN EL DIALOGUE MANAGER EN EL FUTURO ** //
 		let i = 0;
 		let node = dayData.root.next; // primer nodo
@@ -153,7 +154,9 @@ export default class Demo extends Phaser.Scene
 		})		
 
 		this.eventEmitter.on('decided', function (valor) {
-			console.log('OPCION DECIDIDA: ', valor);
+			//console.log('OPCION DECIDIDA: ', valor);
+			if(valor >= 0 && valor <= 3)
+				PM.increaseAffinity(valor);
 			camille.focusEveryone(characters);
 			scene.dialog?.setText("T/N:\n" + dayData[node].choices[valor].text.es, true);
 			node = dayData[node].choices[valor].next;

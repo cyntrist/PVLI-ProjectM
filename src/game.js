@@ -54,8 +54,3 @@ let config = {
 }
 
 new Phaser.Game(config);
-
-var PM = new PlayerManager(0, 0, 0, 0)
-console.log(PM);
-PM.increasePlayerStats("charisma");
- 

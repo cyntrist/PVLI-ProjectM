@@ -1,6 +1,7 @@
 import DialogText from "../plugins/dialog_plugin.js";
 import Character from "../objects/character.js"
 import Decision from "../objects/decision.js";
+import PlayerManager from "./playerManger.js";
 /**
  * Clase que maneja la lógica de diálogo
  * @extends Container
@@ -13,7 +14,8 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
      * @param {*} x - 
      * @param {*} x - 
      */
-    constructor(scene){
+    constructor(scene, playerManager){
+		var PM = playerManager;
         super(scene, 0, 0);
         // ** CREACION DE INTERFAZ ** //
 		// crea la ventana de diálogo
@@ -67,7 +69,9 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		})		
 
 		this.eventEmitter.on('decided', function (valor) {
-			console.log('OPCION DECIDIDA: ', valor);
+			//console.log('OPCION DECIDIDA: ', valor);
+			if(valor >= 0 && valor <= 3)
+				PM.increaseAffinity(valor);
 			camille.focusEveryone(characters);
 			scene.dialog?.setText("T/N:\n" + dayData[node].choices[valor].text.es, true);
 			node = dayData[node].choices[valor].next;
