@@ -8,12 +8,12 @@ import Decision from "../objects/decision.js";
 export default class DialogueManager extends Phaser.GameObjects.Container {
     /**
      * @param {*} scene - 
-     * @param {*} x - 
+     * @param {*} dayData -
      * @param {*} x - 
      * @param {*} x - 
      * @param {*} x - 
      */
-    constructor(scene){
+    constructor(scene, dayData){
         super(scene, 0, 0);
         // ** CREACION DE INTERFAZ ** //
 		// crea la ventana de diálogo
