@@ -48,6 +48,8 @@ export default class MelonFlippeador extends Phaser.Scene{
 
         })
 
+        this.END = false;
+
         // array de pipes
         this.pipes = [];
 
@@ -65,16 +67,21 @@ export default class MelonFlippeador extends Phaser.Scene{
     }
 
     update(time){
-        //console.log(time);
 
-        if(this.cursor.up.isDown){
-            this.mel.setVelocityY(-200);
+
+        if(!this.END){
+            if(this.cursor.up.isDown){
+                this.mel.setVelocityY(-200);
+            }
+    
+            this.pipeManager();
         }
-
-        this.pipeManager();
-
-        if(this.physics.collide(this.mel, this.PIPE)) {
+        else{
+            console.log("UWU");
         }
+        
+
+      
     }
 
 
@@ -96,6 +103,8 @@ export default class MelonFlippeador extends Phaser.Scene{
 
     melonDie(){
         
+
+        this.END = true;
         console.log("MUEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 
     }
@@ -131,38 +140,9 @@ export default class MelonFlippeador extends Phaser.Scene{
         // -20 - 80
     }
 
-    paralax(){
 
-        // ----------- pipes ------------
+    endGame(){
 
-        // si hay tuberias
-        for(let i = 0; i<this.pipes.length; i++){
-
-            if(this.pipes[i] != undefined){
-                console.log(this.pipes[i].x < -700);
-
-                // si no esta fuera lo mueve
-                if(!this.pipes[i].x < -700){
-
-                    console.log("holi holi");
-                    //
-                    this.pipes[i].setVelocityX(-20);
-                }
-                else{
-                    // lo saca del grupo de colisiones
-                    //this.deleteFromGroup(this.pipes[i]);
-
-                    this.pipeGroup.remove(this.pipes[i]);
-
-                    // lo elimina
-                    //this.pipes[i].destroy();
-                }
-            }
-            
-        }
-
-        
     }
-
 
 }
