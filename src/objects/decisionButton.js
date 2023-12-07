@@ -45,6 +45,7 @@ export default class DecisionButton extends Phaser.GameObjects.Container {
         this.text.setOrigin(0.5, 0.5);
 
         this.nineslice.on('pointerdown', function(){
+            console.log(scene.eventEmitter);
             scene.eventEmitter.emit('decided', value);
         })
 

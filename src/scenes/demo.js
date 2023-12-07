@@ -153,6 +153,8 @@ export default class Demo extends Phaser.Scene
 		})		
 
 		this.eventEmitter.on('decided', function (valor) {
+
+			console.log(this.eventEmitter);
 			console.log('OPCION DECIDIDA: ', valor);
 			camille.focusEveryone(characters);
 			scene.dialog?.setText("T/N:\n" + dayData[node].choices[valor].text.es, true);

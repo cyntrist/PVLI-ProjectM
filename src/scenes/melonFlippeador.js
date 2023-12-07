@@ -1,13 +1,14 @@
-
-
 import Pipe from "../melonFlip/pipe.js";
 
-
-export default class MelonFlippeador extends Phaser.Scene{
+export default class MelonFlippeador extends Phaser.Scene
+{
 
     constructor() {
 
 		super({ key: 'melonFlippeador'});
+
+       // crea un emitidor de eventos
+       this.eventEmitter = new Phaser.Events.EventEmitter();
 	}
 
 
@@ -65,9 +66,24 @@ export default class MelonFlippeador extends Phaser.Scene{
 
         this.physics.add.collider(this.mel, this.PIPE, this.melonDie);
 
-
         // En el create de Scene 
-        this.events.on('GAMEOVER', gameOver);
+        //this.events.on('GAMEOVER', gameOver)
+
+        // crea un listener
+        this.eventEmitter.on('melondied', function (valor) {
+			console.log("¿?¿?¿¿¿?¿? cyntrist carrrea");
+		});
+
+
+        this.eventEmitter.on('decided', function (valor) {
+			console.log('OPCION DECIDIDA: ', valor);
+			camille.focusEveryone(characters);
+			scene.dialog?.setText("T/N:\n" + dayData[node].choices[valor].text.es, true);
+			node = dayData[node].choices[valor].next;
+			scene.dialog.setInteractable(true);
+			decision.destroy();
+		});
+       
 
     }
 
@@ -109,8 +125,14 @@ export default class MelonFlippeador extends Phaser.Scene{
     melonDie(){
         
         // En otro punto de nuestro juego (this es la escena)
-        this.events.emit('GAMEOVER');
+       
         console.log("MUEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
+
+
+        console.log("AAAAA decap " + this.eventEmitter.emit('melondied'));
+        //console.log(this.eventEmitter);
+        //this.eventEmitter.emit('melondied');
+       // this.events.emit('melondied');
 
     }
 
@@ -149,14 +171,6 @@ export default class MelonFlippeador extends Phaser.Scene{
     endGame(){
 
     }
-
-    
-
-    
-
 }
 
-function gameOver() {
-        // Fin de la partida
-        console.log("wow... eventos....");
-    }
+
