@@ -24,7 +24,7 @@ export default class MelonFlippeador extends Phaser.Scene{
         this.load.image('melon', './assets/images/personajes/melonQueFlippea2.png');
 
         // tuberia flippeando
-        this.load.image('pipe', './assets/images/personajes/pipe.png');
+        this.load.image('pipe', './assets/images/personajes/pipe2.png');
 
     }
 
@@ -117,43 +117,19 @@ export default class MelonFlippeador extends Phaser.Scene{
         // crea una altura
         let height = this.createNewHeight();
 
-
-        // crea el pajaro ¿?¿¿?
-        //this.mel = this.physics.add.sprite(150, 270, 'melon', 0);
-        // crea una tuberia
-        //this.TOPpipe = this.physics.add.sprite(700, height, 'pipe', 0).setAllowGravity(false);
-
-
-
-       
-
-        // Total gravity is 150.
+        // crea la tuberia de arriba
         this.TOPpipe = this.PIPE.create(1200, height).body.setAllowGravity(false);
-
-
         this.TOPpipe.setVelocity(-100, 0);
-        //new Pipe(this, 700, height, 'pipe', 0);
         this.TOPpipe.depth = 2;
-
-        //this.TOPpipe.setScale(0.5, 0.8);
-
-        // añade la tuberia al array de tuberias
         this.pipes.push(this.TOPpipe);
 
-        //this.pipeGroup.add(this.TOPpipe);
 
         // crea una tuberia
 
-        this.BOTpipe = this.physics.add.sprite(700, height + 410, 'pipe', 0);
-        // new Pipe(this, 700, height + 410, 'pipe', 0);
+        this.BOTpipe = this.PIPE.create(1200, height + 600).body.setAllowGravity(false);
+        this.BOTpipe.setVelocity(-100, 0);
         this.BOTpipe.depth = 2;
-
-        // añade la tuberia al array de tuberias
         this.pipes.push(this.BOTpipe);
-
-        this.pipeGroup.add(this.BOTpipe);
-
-        //console.log(this.pipeGroup);
 
     }
 
