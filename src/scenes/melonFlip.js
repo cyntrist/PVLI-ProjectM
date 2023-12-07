@@ -49,11 +49,16 @@ export default class MelonFlip extends Phaser.Scene{
 		//but1.depth = 2;
 
         // melon flippeador
-        this.mel = new melon(this, 150, 270, 'melon');
+        //this.mel = new melon(this, 150, 270, 'melon');
+
+        this.mel = this.physics.add.sprite(150, 270, 'melon', 0);
         //this.mel.depth = 3;
 
        // array de pipes
         this.pipes = [];
+
+        // crea
+        this.pipeGroup = this.add.group();
 
         // variables para los pipes
         this.pipeCooldown = 70;
@@ -92,8 +97,8 @@ export default class MelonFlip extends Phaser.Scene{
 
         // -------------------- COLISIONES ----------------------
 
-      
-        this.physics.add.collider(this.mel, this.pipe);
+        // crea las colisiones del melon y el grupo de pipes
+        this.physics.add.collider(this.mel, this.pipeGroup);
 
     }
 
@@ -136,15 +141,25 @@ export default class MelonFlip extends Phaser.Scene{
         // si hay tuberias
         for(let i = 0; i<this.pipes.length; i++){
 
-            // si no esta fuera lo mueve
-            if(!this.pipes[i].isOut()){
+            if(this.pipes[i] != undefined){
 
-                //
-                this.pipes[i].paralax();
+                // si no esta fuera lo mueve
+                if(!this.pipes[i].isOut()){
+
+                    //
+                    this.pipes[i].paralax();
+                }
+                else{
+
+                    console.log("holi");
+                    // lo saca del grupo de colisiones
+                    this.deleteFromGroup(this.pipes[i]);
+
+                    // lo elimina
+                    this.pipes[i].deletePipe();
+                }
             }
-            else{
-                this.pipes[i].deletePipe();
-            }
+            
         }
 
         
@@ -187,12 +202,18 @@ export default class MelonFlip extends Phaser.Scene{
         // añade la tuberia al array de tuberias
         this.pipes.push(this.TOPpipe);
 
+        this.pipeGroup.add(this.TOPpipe);
+
         // crea una tuberia
         this.BOTpipe = new Pipe(this, 700, height + 410, 'pipe', 0);
         this.BOTpipe.depth = 2;
 
         // añade la tuberia al array de tuberias
         this.pipes.push(this.BOTpipe);
+
+        this.pipeGroup.add(this.BOTpipe);
+
+        //console.log(this.pipeGroup);
 
     }
 
@@ -204,6 +225,16 @@ export default class MelonFlip extends Phaser.Scene{
         return height;
 
         // -20 - 80
+    }
+
+    deleteFromGroup(obj){
+        this.pipeGroup.remove(obj);
+    }
+
+
+    // el método recibe dos parámetros, son los objetos que han colisionado
+    onCollision() {
+        console.log("que cojones");
     }
 
 }

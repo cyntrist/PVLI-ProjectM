@@ -7,17 +7,20 @@ export default class Pipe extends Phaser.GameObjects.Container{
 		// super a la escena
 		super(scene, x, y);
 
-        this.tubo = new Phaser.GameObjects.Sprite(scene, x, y, tuboSprite); 
+        this.tubo = this.physics.add.sprite(x, y, tuboSprite, 0);
+        //this.tubo = new Phaser.GameObjects.Sprite(scene, x, y, tuboSprite); 
 		this.tubo.setScale(0.5, 0.8);
 
         this.add(this.tubo);
 
         scene.add.existing(this);
 
+
+
     }
 
     paralax (){
-        this.tubo.x -= 5;
+        this.tubo.setVelocityX(-100);
     }
 
     isOut(){
@@ -28,7 +31,14 @@ export default class Pipe extends Phaser.GameObjects.Container{
     }
 
     deletePipe(){
+        
+
         this.destroy();
+    }
+
+    onCollision(){
+
+        console.log("BAILA BAILA CONMIGOOOOOOOOOOOOOOOOOOOOO");
     }
 
 

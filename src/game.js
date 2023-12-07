@@ -1,6 +1,7 @@
 import Demo from './scenes/demo.js';
 import movil from './scenes/movil.js';
 import melonFlip from './scenes/melonFlip.js';
+import MelonFlippeador from './scenes/melonFlippeador.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
@@ -25,13 +26,14 @@ let config = {
           height: 720
       }
   },
-  scene: [Demo, movil, melonFlip],
+  scene: [Demo, movil, melonFlip, MelonFlippeador],
   physics: {
     default: 'arcade', // elegir motor
     arcade: {
-      gravity: { y : 500 }
+      gravity: { y : 500 },
+      debug: true
 
-    }
+    },
     /*
     matter: {
       gravity: { y: 2 },
