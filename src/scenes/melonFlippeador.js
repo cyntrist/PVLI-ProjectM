@@ -68,19 +68,12 @@ export default class MelonFlippeador extends Phaser.Scene{
         //console.log(time);
 
         if(this.cursor.up.isDown){
-            console.log("holo soy eddochan");
             this.mel.setVelocityY(-200);
         }
 
         this.pipeManager();
 
-        this.paralax();
-
-
-        console.log(this.physics.collide(this.mel, this.pipeGroup));
-
         if(this.physics.collide(this.mel, this.PIPE)) {
-            console.log("Hay colisión");
         }
     }
 
@@ -99,9 +92,6 @@ export default class MelonFlippeador extends Phaser.Scene{
             // añade al contador
             this.cdCounter++;
         }
-
-
-
     }
 
     melonDie(){
@@ -124,8 +114,7 @@ export default class MelonFlippeador extends Phaser.Scene{
         this.pipes.push(this.TOPpipe);
 
 
-        // crea una tuberia
-
+        // crea una tuberia de abajo
         this.BOTpipe = this.PIPE.create(1200, height + 600).body.setAllowGravity(false);
         this.BOTpipe.setVelocity(-100, 0);
         this.BOTpipe.depth = 2;
