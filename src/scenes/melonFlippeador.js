@@ -5,10 +5,11 @@ export default class MelonFlippeador extends Phaser.Scene
 
     constructor() {
 
-		super({ key: 'melonFlippeador'});
+		super({ key: 'melonFlippeador'});   
 
-       // crea un emitidor de eventos
-       this.eventEmitter = new Phaser.Events.EventEmitter();
+        // crea un emitidor de eventos
+        this.emitter = new Phaser.Events.EventEmitter();
+       
 	}
 
 
@@ -30,6 +31,8 @@ export default class MelonFlippeador extends Phaser.Scene
     }
 
     create(){
+
+
 
         this.cursor = this.input.keyboard.createCursorKeys();
 
@@ -64,31 +67,20 @@ export default class MelonFlippeador extends Phaser.Scene
             collideWorldBounds: false
         });
 
-        this.physics.add.collider(this.mel, this.PIPE, this.melonDie);
+        this.physics.add.collider(this.mel, this.PIPE, this.melonDie(this));
 
-        // En el create de Scene 
-        //this.events.on('GAMEOVER', gameOver)
 
-        // crea un listener
-        this.eventEmitter.on('melondied', function (valor) {
-			console.log("¿?¿?¿¿¿?¿? cyntrist carrrea");
+        this.emitter.on('melondied', function () {
+			console.log("aaaa");
 		});
-
-
-        this.eventEmitter.on('decided', function (valor) {
-			console.log('OPCION DECIDIDA: ', valor);
-			camille.focusEveryone(characters);
-			scene.dialog?.setText("T/N:\n" + dayData[node].choices[valor].text.es, true);
-			node = dayData[node].choices[valor].next;
-			scene.dialog.setInteractable(true);
-			decision.destroy();
-		});
+        
+        
        
+        
 
     }
 
-    update(time){
-
+    update(){
 
         if(!this.END){
             if(this.cursor.up.isDown){
@@ -128,11 +120,9 @@ export default class MelonFlippeador extends Phaser.Scene
        
         console.log("MUEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 
+        //console.log(scene);
 
-        console.log("AAAAA decap " + this.eventEmitter.emit('melondied'));
-        //console.log(this.eventEmitter);
-        //this.eventEmitter.emit('melondied');
-       // this.events.emit('melondied');
+        //scene.emitter.emit('melondied');
 
     }
 
