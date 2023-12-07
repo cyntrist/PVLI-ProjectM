@@ -64,6 +64,11 @@ export default class MelonFlippeador extends Phaser.Scene{
         });
 
         this.physics.add.collider(this.mel, this.PIPE, this.melonDie);
+
+
+        // En el create de Scene 
+        this.events.on('GAMEOVER', gameOver);
+
     }
 
     update(time){
@@ -103,8 +108,8 @@ export default class MelonFlippeador extends Phaser.Scene{
 
     melonDie(){
         
-
-        this.END = true;
+        // En otro punto de nuestro juego (this es la escena)
+        this.events.emit('GAMEOVER');
         console.log("MUEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE");
 
     }
@@ -145,4 +150,13 @@ export default class MelonFlippeador extends Phaser.Scene{
 
     }
 
+    
+
+    
+
 }
+
+function gameOver() {
+        // Fin de la partida
+        console.log("wow... eventos....");
+    }

@@ -49,9 +49,8 @@ export default class MelonFlip extends Phaser.Scene{
 		//but1.depth = 2;
 
         // melon flippeador
-        //this.mel = new melon(this, 150, 270, 'melon');
-
-        this.mel = this.physics.add.sprite(150, 270, 'melon', 0);
+        this.mel = new melon(this, 150, 270, 'melon');
+        
         //this.mel.depth = 3;
 
        // array de pipes
