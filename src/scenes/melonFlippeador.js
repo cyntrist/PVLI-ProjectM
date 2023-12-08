@@ -147,7 +147,7 @@ export default class MelonFlippeador extends Phaser.Scene
 
                 console.log("score added");
             }
-            else if(this.pipes[i].x < 100){
+            else if(this.pipes[i].x < -200){
 
                 
                 if(this.pipes[i] != undefined){
