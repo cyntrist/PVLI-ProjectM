@@ -57,14 +57,6 @@ export default class MelonFlippeador extends Phaser.Scene
         // crea el pajaro ¿?¿¿?
         this.mel = this.physics.add.sprite(150, 270, 'melon', 0);
 
-        // grupo de colisiones para las tuberias
-        this.pipeGroup = this.physics.add.group({
-            classType: Pipe,
-            runChildUpdate: true,
-            allowGravity: false
-
-        })
-
         // array de pipes
         this.pipes = [];
 
@@ -143,19 +135,6 @@ export default class MelonFlippeador extends Phaser.Scene
         }
     }
 
-    pipeDeleter(){
-        for(let i = 0; i<this.pipes.length; i++){
-            if(this.pipes[i].x < -200){
-
-                console.log("DELETED");
-
-                this.pipes[i].pop();
-            }
-
-        }
-        
-    }
-
     pipeScoreAdder(){
         for(let i = 0; i<this.pipes.length; i++){
 
@@ -168,11 +147,28 @@ export default class MelonFlippeador extends Phaser.Scene
 
                 console.log("score added");
             }
-            else if(this.pipes[i].x < -200){
+            else if(this.pipes[i].x < 100){
 
-                //console.log("DELETED");
+                
+                if(this.pipes[i] != undefined){
+                    //console.log("DELETED");
 
-                // elimina el elemento del array
+                    // la guarrada del siglo pero oye, cuela (ES UN PLACEHOLDER PROFE
+                    // SI SIGUE AQUI ES QUE FUNCIONA TAN BIEN QUE SE NOS HA PASADO)
+                    //this.pipes[i].depth = -10;
+                    // no ha ido .................
+
+                    // elimina el elemento del array
+                    this.PIPE.remove(this.pipes[i], true);
+                    console.log("antes " + this.pipes[i]);
+
+                    
+
+                    this.pipes[i].destroy(false, true);
+
+                    console.log("despues " + this.pipes[i]);
+                    Phaser.Utils.Array.Remove(this.pipes, this.pipes[i]);
+                }
                 
             }
 
