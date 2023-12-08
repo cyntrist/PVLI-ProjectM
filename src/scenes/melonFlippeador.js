@@ -75,7 +75,8 @@ export default class MelonFlippeador extends Phaser.Scene
 
             console.log("i died");
 
-            scene.endGame = 1;
+            // acaba el juego
+            scene.endGame();
 
             // limpia el grupo de colisiones
             scene.PIPE.clear();
@@ -100,14 +101,14 @@ export default class MelonFlippeador extends Phaser.Scene
 
     update(){
 
-        console.log(this.gameEnded);
-
-        if(this.gameEnded == 0){
+        if(this.gameEnded === 0){
             if(this.cursor.up.isDown){
                 this.mel.setVelocityY(-200);
             }
     
             this.pipeManager(); 
+
+            console.log(this.gameEnded);
         }
         
 
@@ -160,6 +161,11 @@ export default class MelonFlippeador extends Phaser.Scene
         return height;
 
         // -20 - 80
+    }
+
+    endGame(){
+
+        this.gameEnded = 1;
     }
 }
 
