@@ -242,8 +242,8 @@ export default class MelonFlippeador extends Phaser.Scene
 
         console.log(this.scene);
 
-        this.ChangeScene(this, this);
-        //this.scene.restart();
+        //this.ChangeScene(this, this);
+        this.restart();
     }
 
     ChangeScene(newScene, escena){
