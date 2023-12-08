@@ -32,15 +32,8 @@ export default class MelonFlippeador extends Phaser.Scene
 
     create(){
 
-
-        // crea un evento y un listener para el evento (la funcion)
-        this.emitter.on('died', function(){
-
-            console.log("i died");
-
-            //this.mel.body.setEnable(false);
-        });
-
+        // si es 0 es que no ha acabado si es 1 es que ha acabado (NO SE HACER BOOLEANOS)
+        this.gameEnded = 0;
 
         this.scene = this;
         this.cursor = this.input.keyboard.createCursorKeys();
@@ -72,14 +65,31 @@ export default class MelonFlippeador extends Phaser.Scene
         // crea las colisiones
         this.colliderObj = this.physics.add.collider(this.mel, this.PIPE,() =>{
 
-            this.emitter.emit('died');
-
-            this.melonDie();
+            // cuando colisiona memite el evento
+            this.emitter.emit('died', this);
         });
 
-        console.log(this.colliderObj);
 
-        
+        // crea un evento y un listener para el evento (la funcion)
+        this.emitter.on('died', function(scene){
+
+            console.log("i died");
+
+            scene.endGame = 1;
+
+            // limpia el grupo de colisiones
+            scene.PIPE.clear();
+            
+            // elimina los objetos
+            for(let i = 0; i<scene.pipes.length; i++){
+
+                scene.pipes[i].destroy();
+            }
+            
+            // desactiva las fisicas
+            scene.mel.body.setEnable(false);
+        });
+
 
         // variables para los pipes
         this.pipeCooldown = 70;
@@ -90,11 +100,16 @@ export default class MelonFlippeador extends Phaser.Scene
 
     update(){
 
-        if(this.cursor.up.isDown){
-            this.mel.setVelocityY(-200);
-        }
+        console.log(this.gameEnded);
 
-        this.pipeManager();
+        if(this.gameEnded == 0){
+            if(this.cursor.up.isDown){
+                this.mel.setVelocityY(-200);
+            }
+    
+            this.pipeManager(); 
+        }
+        
 
         
     }
@@ -116,13 +131,6 @@ export default class MelonFlippeador extends Phaser.Scene
             this.cdCounter++;
         }
     }
-
-    // desabilita el melon y borra todos los pipes
-    melonDie(){
-        
-
-    }
-
 
     // --------------------------------- AUXILIARES -----------------------------
     createNewPipe(){
@@ -152,11 +160,6 @@ export default class MelonFlippeador extends Phaser.Scene
         return height;
 
         // -20 - 80
-    }
-
-
-    endGame(){
-        
     }
 }
 
