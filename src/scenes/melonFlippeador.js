@@ -35,6 +35,12 @@ export default class MelonFlippeador extends Phaser.Scene
         // si es 0 es que no ha acabado si es 1 es que ha acabado (NO SE HACER BOOLEANOS)
         this.gameEnded = 0;
 
+        // 
+        this.SCORE = 0;
+
+        // crea la zona donde puntua 
+
+
         this.scene = this;
         this.cursor = this.input.keyboard.createCursorKeys();
 
@@ -108,7 +114,11 @@ export default class MelonFlippeador extends Phaser.Scene
     
             this.pipeManager(); 
 
-            console.log(this.gameEnded);
+            // add score
+            this.pipeScoreAdder();
+
+            // elimina tuberias
+
         }
         
 
@@ -131,6 +141,43 @@ export default class MelonFlippeador extends Phaser.Scene
             // añade al contador
             this.cdCounter++;
         }
+    }
+
+    pipeDeleter(){
+        for(let i = 0; i<this.pipes.length; i++){
+            if(this.pipes[i].x < -200){
+
+                console.log("DELETED");
+
+                this.pipes[i].pop();
+            }
+
+        }
+        
+    }
+
+    pipeScoreAdder(){
+        for(let i = 0; i<this.pipes.length; i++){
+
+            // si no se ha pasado y esta en una posicion mas baja que el melon
+            if(!this.pipes[i].passed && this.pipes[i].x < 200){
+
+                this.addPoints();
+
+                this.pipes[i].passed = true;
+
+                console.log("score added");
+            }
+            else if(this.pipes[i].x < -200){
+
+                //console.log("DELETED");
+
+                // elimina el elemento del array
+                this.pipes[i].shift();
+            }
+
+        }
+
     }
 
     // --------------------------------- AUXILIARES -----------------------------
@@ -166,6 +213,10 @@ export default class MelonFlippeador extends Phaser.Scene
     endGame(){
 
         this.gameEnded = 1;
+    }
+
+    addPoints(){
+        this.SCORE += 10;
     }
 }
 
