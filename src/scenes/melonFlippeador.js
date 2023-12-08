@@ -38,7 +38,10 @@ export default class MelonFlippeador extends Phaser.Scene
         // 
         this.SCORE = 0;
 
-        // crea la zona donde puntua 
+        // texto para el score
+        this.scoreText = this.add.text(50, 50, this.SCORE);
+        this.scoreText.setScale(2,2);
+
 
 
         this.scene = this;
@@ -149,7 +152,7 @@ export default class MelonFlippeador extends Phaser.Scene
             }
             else if(this.pipes[i].x < -200){
 
-                
+                // si n o es undefined
                 if(this.pipes[i] != undefined){
                     //console.log("DELETED");
 
@@ -212,7 +215,13 @@ export default class MelonFlippeador extends Phaser.Scene
     }
 
     addPoints(){
-        this.SCORE += 10;
+        this.SCORE += 0.5;
+
+        this.updateScoreText();
+    }
+
+    updateScoreText(){
+        this.scoreText.setText(this.SCORE)
     }
 }
 
