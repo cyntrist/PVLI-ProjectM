@@ -1,4 +1,5 @@
 import Pipe from "../melonFlip/pipe.js";
+import Button from "../objects/button.js";
 
 export default class MelonFlippeador extends Phaser.Scene
 {
@@ -41,8 +42,6 @@ export default class MelonFlippeador extends Phaser.Scene
         // texto para el score
         this.scoreText = this.add.text(50, 50, this.SCORE);
         this.scoreText.setScale(2,2);
-
-
 
         this.scene = this;
         this.cursor = this.input.keyboard.createCursorKeys();
@@ -90,6 +89,9 @@ export default class MelonFlippeador extends Phaser.Scene
             
             // desactiva las fisicas
             scene.mel.body.setEnable(false);
+
+            scene.endScreen();
+
         });
 
 
@@ -115,6 +117,7 @@ export default class MelonFlippeador extends Phaser.Scene
             // elimina tuberias
 
         }
+        
         
 
         
@@ -223,6 +226,29 @@ export default class MelonFlippeador extends Phaser.Scene
     updateScoreText(){
         this.scoreText.setText(this.SCORE)
     }
+
+
+    endScreen(){
+
+        let restart = new Button(this, 590, 200, 'restart', 2, 'goBackBox', { 
+            "ClickCallback": () => this.restartGame () });
+
+    }
+
+    restartGame(){
+
+
+        console.log("AAAAAAAAAAAAAAAAAAAAA QUE VA");
+
+        console.log(this.scene);
+
+        this.ChangeScene(this, this);
+        //this.scene.restart();
+    }
+
+    ChangeScene(newScene, escena){
+		escena.scene.start(newScene);
+	}
 }
 
 
