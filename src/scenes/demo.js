@@ -33,7 +33,7 @@ export default class Demo extends Phaser.Scene
 		this.load.image('box', './assets/images/escenarios/opciones2.png')
 		this.load.image('movil', './assets/images/movil/movil.png');
 
-		this.load.json('dia1Data', './src/json/dia1_test.json')
+		this.load.json('dia1Data', './assets/dialogue editor/Dialog files/test_afinidad.json')
 		this.load.image('9slice', './assets/images/ui/botones_decision_nineslice_muy_peque.png')
     }
 
@@ -56,10 +56,10 @@ export default class Demo extends Phaser.Scene
 		]
 
 		// creación de personajes
-		const camille = new Character(scene, width*1/5, height - sprites[Elenco.Camille].displayHeight/2, sprites[Elenco.Camille], "Camille");
-		const delilah = new Character(scene, width*2/5, height - sprites[Elenco.Delilah].displayHeight/2, sprites[Elenco.Delilah], "Delilah");
-		const matthew = new Character(scene, width*3/5, height - sprites[Elenco.Matthew].displayHeight/2, sprites[Elenco.Matthew], "Matthew");
-		const richard = new Character(scene, width*4/5, height - sprites[Elenco.Richard].displayHeight/2, sprites[Elenco.Richard], "Richard");
+		const camille = new Character(scene, width*1/5, height - sprites[Elenco.Camille].displayHeight/2, sprites[Elenco.Camille], "Camille", 0);
+		const delilah = new Character(scene, width*2/5, height - sprites[Elenco.Delilah].displayHeight/2, sprites[Elenco.Delilah], "Delilah", 1);
+		const matthew = new Character(scene, width*3/5, height - sprites[Elenco.Matthew].displayHeight/2, sprites[Elenco.Matthew], "Matthew", 2);
+		const richard = new Character(scene, width*4/5, height - sprites[Elenco.Richard].displayHeight/2, sprites[Elenco.Richard], "Richard", 3);
 		// array de los personajes, pensado para las iteraciones dentro de Character
 		const characters = { camille, delilah, matthew, richard } // corchetes array, brackets diccionario (objeto)
 		// descolorea a todos los personajes antes de empezar
@@ -134,7 +134,7 @@ export default class Demo extends Phaser.Scene
 			let currentCharacter = characters[currentName]; 
 			currentCharacter?.onFocus(); //muy importante el interrogante 
 			currentCharacter?.unfocusEveryoneElse(characters);
-			if (currentNode.hasOwnProperty("next") || currentNode.hasOwnProperty("choices")) { // si es un nodo intermedio y/o tiene tiene elecciones
+			if (currentNode.hasOwnProperty("next") || currentNode.hasOwnProperty("choices") || currentNode.hasOwnProperty("conditions")) { // si es un nodo intermedio y/o tiene tiene elecciones
 				if ( i < 1) 
 					scene.dialog.setText(currentNode.name + ":\n" + currentNode.text.es, true);
 				if (currentNode.hasOwnProperty("choices")) { 
@@ -145,7 +145,17 @@ export default class Demo extends Phaser.Scene
 					} 
 					else i++;
 				}
-				else node = currentNode.next; // si no hay decisiones, continuación lineal, el nodo actual pasa a ser el siguiente
+				else if (currentNode.hasOwnProperty("conditions")){
+					var charAff = PM.affinities[currentCharacter.numero];
+					/*for (let j = 0; i < conditions.length; j++) {
+						if()
+						
+					}*/
+				}
+				else 
+				{
+					node = currentNode.next; // si no hay decisiones, continuación lineal, el nodo actual pasa a ser el siguiente
+				}
 			}
 			else {
 				scene.dialog.setText(currentNode.text.es); // se escribe el último msj
