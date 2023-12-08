@@ -173,7 +173,7 @@ export default class MelonFlippeador extends Phaser.Scene
                 //console.log("DELETED");
 
                 // elimina el elemento del array
-                this.pipes[i].shift();
+                
             }
 
         }
