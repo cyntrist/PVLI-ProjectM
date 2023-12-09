@@ -147,10 +147,10 @@ export default class Demo extends Phaser.Scene
 				}
 				else if (currentNode.hasOwnProperty("conditions")){
 					var charAff = PM.affinities[currentCharacter.numero]; //afinidad del personaje a mirar
+					console.log(charAff)
 					var _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
 					var conditionCheck = false; //flag para solo comprobar una condicion
 					var j = 0;
-					console.log(j < _conditions.length && !conditionCheck)
 					while(j < _conditions.length && !conditionCheck)	
 					{
 						/*if(this.CheckConditions(_conditions[j], charAff)){ //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
@@ -158,25 +158,24 @@ export default class Demo extends Phaser.Scene
 							conditionCheck = true;
 						}
 						j++; //si no se cuumple avanzamos a la siguiente condicion*/
-						console.log["????"]
 
 						if(_conditions[j].matAff.operator == "lower") //todo el codigo de una funcion que esta mas abajo pero que javascript llora por algun motivo, como odio javascript
 							if(charAff < _conditions[j].matAff.value)
 							{
-								currentNode = _conditions[j].next;
+								node = _conditions[j].next;
 								conditionCheck = true;
 							}
 							else j++;
 						else if (_conditions[j].matAff.operator == "equal")
-							if(charAff == condicion.matAff.value)
+							if(charAff == _conditions[j].matAff.value)
 							{
-								currentNode = _conditions[j].next;
+								node = _conditions[j].next;
 								conditionCheck = true;
 							}
 							else j++;
 						else
 							if(charAff > _conditions[j].matAff.value){
-								currentNode = _conditions[j].next;
+								node = _conditions[j].next;
 								conditionCheck = true;
 							}
 							else j++;
