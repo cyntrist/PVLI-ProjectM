@@ -93,12 +93,12 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			decision.destroy();
 		});
     }
-	CheckConditions(condicion, valor) {
-		if(condicion.matAff.operator == "lower")
-			return valor < condicion.matAff.value;
-		else if (condicion.matAff.operator == "equal")
-			return valor == condicion.matAff.value;
+	CheckConditions(condicion, affVal) {
+		if(condicion.affValue.operator == "lower")
+			return affVal < condicion.affValue.value;
+		else if (condicion.affValue.operator == "equal")
+			return affVal == condicion.affValue.value;
 		else
-			return valor > condicion.matAff.value;
+			return affVal > condicion.affValue.value;
 	}
 }
