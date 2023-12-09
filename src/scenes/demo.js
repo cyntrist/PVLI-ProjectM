@@ -147,6 +147,8 @@ export default class Demo extends Phaser.Scene
 				}
 				else if (currentNode.hasOwnProperty("conditions")){
 					var charAff = PM.affinities[currentCharacter.numero];
+					var condition = currentNode.conditions[0];
+					console.log(condition)
 					/*for (let j = 0; i < conditions.length; j++) {
 						if()
 						
