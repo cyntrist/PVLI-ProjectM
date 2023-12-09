@@ -60,6 +60,20 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					} 
 					else i++;
 				}
+				else if (currentNode.hasOwnProperty("conditions")){
+					let charAff = PM.affinities[currentCharacter.numero]; //afinidad del personaje a mirar
+					let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
+					let conditionCheck = false; //flag para solo comprobar una condicion
+					let j = 0;
+					while(j < _conditions.length && !conditionCheck)	
+					{
+						if(this.scene.CheckConditions(_conditions[j], charAff)){ //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
+							node = _conditions[j].next;
+							conditionCheck = true;
+						}
+						j++; //si no se cuumple avanzamos a la siguiente condicion
+					}
+				}
 				else node = currentNode.next; // si no hay decisiones, continuación lineal, el nodo actual pasa a ser el siguiente
 			}
 			else {
@@ -79,4 +93,12 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			decision.destroy();
 		});
     }
+	CheckConditions(condicion, valor) {
+		if(condicion.matAff.operator == "lower")
+			return valor < condicion.matAff.value;
+		else if (condicion.matAff.operator == "equal")
+			return valor == condicion.matAff.value;
+		else
+			return valor > condicion.matAff.value;
+	}
 }

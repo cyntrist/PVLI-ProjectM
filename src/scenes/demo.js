@@ -146,39 +146,17 @@ export default class Demo extends Phaser.Scene
 					else i++;
 				}
 				else if (currentNode.hasOwnProperty("conditions")){
-					var charAff = PM.affinities[currentCharacter.numero]; //afinidad del personaje a mirar
-					console.log(charAff)
-					var _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
-					var conditionCheck = false; //flag para solo comprobar una condicion
-					var j = 0;
+					let charAff = PM.affinities[currentCharacter.numero]; //afinidad del personaje a mirar
+					let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
+					let conditionCheck = false; //flag para solo comprobar una condicion
+					let j = 0;
 					while(j < _conditions.length && !conditionCheck)	
 					{
-						/*if(this.CheckConditions(_conditions[j], charAff)){ //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
-							currentNode = conditions[j].next();
+						if(this.scene.CheckConditions(_conditions[j], charAff)){ //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
+							node = _conditions[j].next;
 							conditionCheck = true;
 						}
-						j++; //si no se cuumple avanzamos a la siguiente condicion*/
-
-						if(_conditions[j].matAff.operator == "lower") //todo el codigo de una funcion que esta mas abajo pero que javascript llora por algun motivo, como odio javascript
-							if(charAff < _conditions[j].matAff.value)
-							{
-								node = _conditions[j].next;
-								conditionCheck = true;
-							}
-							else j++;
-						else if (_conditions[j].matAff.operator == "equal")
-							if(charAff == _conditions[j].matAff.value)
-							{
-								node = _conditions[j].next;
-								conditionCheck = true;
-							}
-							else j++;
-						else
-							if(charAff > _conditions[j].matAff.value){
-								node = _conditions[j].next;
-								conditionCheck = true;
-							}
-							else j++;
+						j++; //si no se cuumple avanzamos a la siguiente condicion
 					}
 				}
 				else 
@@ -247,7 +225,7 @@ export default class Demo extends Phaser.Scene
 		but.box.tint = "0xF6F6F6" ;
 	}
 
-	CheckConditions(condicion, valor){
+	CheckConditions(condicion, valor) {
 		if(condicion.matAff.operator == "lower")
 			return valor < condicion.matAff.value;
 		else if (condicion.matAff.operator == "equal")
