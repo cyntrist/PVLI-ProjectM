@@ -41,7 +41,11 @@ export default class MelonFlippeador extends Phaser.Scene
         this.SCORE = 0;
 
         // texto para el score
-        this.scoreText = this.add.text(50, 50, this.SCORE);
+        this.scoreText = this.add.text(50, 50, this.SCORE, {
+            fontFamily: 'Arial',
+            fontSize: 35,
+            color: '#3b6e22'
+        });
         this.scoreText.setScale(2,2);
 
         this.cursor = this.input.keyboard.createCursorKeys();
