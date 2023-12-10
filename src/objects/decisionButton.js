@@ -18,7 +18,7 @@ export default class DecisionButton extends Phaser.GameObjects.Container {
      * @param {int} corner - tamaño del frame del 3-slice
      * @param {int} id - numero en el array de la opcion
 	*/
-    constructor(scene, x, y, sprite, width, height, text, corner, value) {
+    constructor(scene, x, y, sprite, width, height, text, corner, value, {EnterCallback, ExitCallback}) {
 		// super a la escena
 		super(scene, x, y);
 
@@ -30,7 +30,7 @@ export default class DecisionButton extends Phaser.GameObjects.Container {
             width, 
             height, 
             corner,
-            corner
+            corner,
         )
         this.nineslice.setInteractive(); 
         this.text = scene.add.text(
@@ -47,6 +47,19 @@ export default class DecisionButton extends Phaser.GameObjects.Container {
         this.nineslice.on('pointerdown', function(){
             scene.eventEmitter.emit('decided', value);
         })
+
+        /* this.nineslice.on('pointerover', function(){
+            console.log("Encima");
+           this.nineslice.sprite.tint = "0xc24d6d"
+        }) */
+
+        //Reconoce que el ratón está encima de la función
+		if (EnterCallback)
+        this.nineslice.on('pointerover', EnterCallback);
+
+        //Reconoce que el raton sale del botón
+        if (ExitCallback)
+        this.nineslice.on('pointerout', ExitCallback);
 
         this.on('destroy', function onDestroy() {
 			console.log("ME MUEROOOO");
