@@ -90,7 +90,9 @@ export default class MelonFlippeador extends Phaser.Scene
             // desactiva las fisicas
             scene.mel.body.setEnable(false);
 
-            scene.endScreen();
+            console.log(scene);
+
+            scene.endScreen(scene);
 
         });
 
@@ -228,22 +230,29 @@ export default class MelonFlippeador extends Phaser.Scene
     }
 
 
-    endScreen(){
+    endScreen(escena){
+
+        console.log("...");
+        console.log(escena);
+
+        console.log(this);
 
         let restart = new Button(this, 590, 200, 'restart', 2, 'goBackBox', { 
-            "ClickCallback": () => this.restartGame () });
+            "ClickCallback": () => this.restartGame (this) });
 
     }
 
-    restartGame(){
+    restartGame(escena){
 
 
         console.log("AAAAAAAAAAAAAAAAAAAAA QUE VA");
 
-        console.log(this.scene);
+        console.log("lo otro " + escena.scene);
+
+        console.log("esto: " +  this);
 
         //this.ChangeScene(this, this);
-        this.restart();
+        escena.scene.restart();
     }
 
     ChangeScene(newScene, escena){
