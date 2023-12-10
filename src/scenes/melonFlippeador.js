@@ -118,7 +118,16 @@ export default class MelonFlippeador extends Phaser.Scene
             // add score
             this.pipeScoreAdder();
 
-            // elimina tuberias
+            // si sse ha pasado de alto o de bajo
+            if(this.mel.y > 750 || this.mel.y < 0){
+                    console.log("CAGASTE");
+
+                    // cuando colisiona memite el evento
+                    this.emitter.emit('died', this);
+
+                    //this.endGame();
+
+            }
 
         }
         
