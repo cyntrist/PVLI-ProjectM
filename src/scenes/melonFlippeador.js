@@ -78,8 +78,6 @@ export default class MelonFlippeador extends Phaser.Scene
         // crea un evento y un listener para el evento (la funcion)
         this.emitter.on('died', function(scene){
 
-            console.log("i died");
-
             // acaba el juego
             scene.endGame();
 
@@ -89,14 +87,14 @@ export default class MelonFlippeador extends Phaser.Scene
             // elimina los objetos
             for(let i = 0; i<scene.pipes.length; i++){
 
+                // destruye el objeto
                 scene.pipes[i].destroy();
             }
             
             // desactiva las fisicas
             scene.mel.body.setEnable(false);
 
-            console.log(scene);
-
+            // llama a la escena del final
             scene.endScreen(scene);
 
         });
@@ -111,11 +109,16 @@ export default class MelonFlippeador extends Phaser.Scene
 
     update(){
 
+        // si el juego no ha acabado
         if(this.gameEnded === 0){
+
+            // input
             if(this.cursor.up.isDown){
+                // salto
                 this.mel.setVelocityY(-200);
             }
     
+            // gestion de pipes
             this.pipeManager(); 
 
             // add score
@@ -123,20 +126,12 @@ export default class MelonFlippeador extends Phaser.Scene
 
             // si sse ha pasado de alto o de bajo
             if(this.mel.y > 750 || this.mel.y < 0){
-                    console.log("CAGASTE");
 
                     // cuando colisiona memite el evento
                     this.emitter.emit('died', this);
 
-                    //this.endGame();
-
             }
-
         }
-        
-        
-
-        
     }
 
 
@@ -163,39 +158,28 @@ export default class MelonFlippeador extends Phaser.Scene
             // si no se ha pasado y esta en una posicion mas baja que el melon
             if(!this.pipes[i].passed && this.pipes[i].x < 200){
 
+                // pone puntos
                 this.addPoints();
 
+                // marca que se haya pasado
                 this.pipes[i].passed = true;
 
-                console.log("score added");
             }
             else if(this.pipes[i].x < -200){
 
                 // si n o es undefined
                 if(this.pipes[i] != undefined){
-                    //console.log("DELETED");
-
-                    // la guarrada del siglo pero oye, cuela (ES UN PLACEHOLDER PROFE
-                    // SI SIGUE AQUI ES QUE FUNCIONA TAN BIEN QUE SE NOS HA PASADO)
-                    //this.pipes[i].depth = -10;
-                    // no ha ido .................
 
                     // elimina el elemento del array
                     this.PIPE.remove(this.pipes[i], true);
-                    console.log("antes " + this.pipes[i]);
-
-                    
 
                     this.pipes[i].destroy(false, true);
 
-                    console.log("despues " + this.pipes[i]);
                     Phaser.Utils.Array.Remove(this.pipes, this.pipes[i]);
                 }
                 
             }
-
         }
-
     }
 
     // --------------------------------- AUXILIARES -----------------------------
@@ -220,9 +204,10 @@ export default class MelonFlippeador extends Phaser.Scene
     }
 
     createNewHeight(){
+        // genera un numero aleatorio
         let height = Phaser.Math.Between(-20, 80)
 
-        //console.log(height);
+        // devuelve la altura generada
         return height;
 
         // -20 - 80
@@ -230,12 +215,15 @@ export default class MelonFlippeador extends Phaser.Scene
 
     endGame(){
 
+        // cambia el 'booleano'
         this.gameEnded = 1;
     }
 
     addPoints(){
+        // pone 0.5 puntos (triquinyuela porque pasa dos veces por lo mismo heh)
         this.SCORE += 0.5;
 
+        // actualiza el texto
         this.updateScoreText();
     }
 
@@ -245,27 +233,13 @@ export default class MelonFlippeador extends Phaser.Scene
 
 
     endScreen(escena){
-
-        console.log("...");
-        console.log(escena);
-
-        console.log(this);
-
+        // boton de restart
         let restart = new Button(this, 590, 200, 'restart', 2, 'goBackBox', {
                             "ClickCallback": () => this.restartGame (this) });
 
     }
 
     restartGame(escena){
-
-
-        console.log("AAAAAAAAAAAAAAAAAAAAA QUE VA");
-
-        console.log("lo otro " + escena.scene);
-
-        console.log("esto: " +  this);
-
-        //this.ChangeScene(this, this);
         escena.scene.restart();
     }
 
