@@ -33,6 +33,9 @@ export default class MelonFlippeador extends Phaser.Scene
 
     create(){
 
+
+        const scene = this // referencia a esta misma escena
+
         // si es 0 es que no ha acabado si es 1 es que ha acabado (NO SE HACER BOOLEANOS)
         this.gameEnded = 0;
 
@@ -43,7 +46,6 @@ export default class MelonFlippeador extends Phaser.Scene
         this.scoreText = this.add.text(50, 50, this.SCORE);
         this.scoreText.setScale(2,2);
 
-        this.scene = this;
         this.cursor = this.input.keyboard.createCursorKeys();
 
         // pone el fondo
@@ -237,8 +239,8 @@ export default class MelonFlippeador extends Phaser.Scene
 
         console.log(this);
 
-        let restart = new Button(this, 590, 200, 'restart', 2, 'goBackBox', { 
-            "ClickCallback": () => this.restartGame (this) });
+        let restart = new Button(this, 590, 200, 'restart', 2, 'goBackBox', {
+                            "ClickCallback": () => this.restartGame (this) });
 
     }
 
