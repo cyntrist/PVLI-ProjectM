@@ -1,6 +1,5 @@
 import Demo from './scenes/demo.js';
 import movil from './scenes/movil.js';
-import melonFlip from './scenes/melonFlip.js';
 import MelonFlippeador from './scenes/melonFlippeador.js';
 
 /**
@@ -26,7 +25,7 @@ let config = {
           height: 720
       }
   },
-  scene: [Demo, movil, melonFlip, MelonFlippeador],
+  scene: [Demo, movil, MelonFlippeador],
   physics: {
     default: 'arcade', // elegir motor
     arcade: {

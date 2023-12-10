@@ -1,4 +1,3 @@
-import Pipe from "../melonFlip/pipe.js";
 import Button from "../objects/button.js";
 
 export default class MelonFlippeador extends Phaser.Scene
@@ -12,8 +11,6 @@ export default class MelonFlippeador extends Phaser.Scene
         this.emitter = new Phaser.Events.EventEmitter();
        
 	}
-
-
 
 
     preload(){
@@ -33,6 +30,7 @@ export default class MelonFlippeador extends Phaser.Scene
 
     create(){
 
+        // -------------------- SETTEO INICIAL ---------------------
 
         const scene = this // referencia a esta misma escena
 
@@ -52,17 +50,21 @@ export default class MelonFlippeador extends Phaser.Scene
         let bg = this.add.image(0, 0, 'fondo').setScale(1, 1).setOrigin(0, 0);
         bg.depth = -2;
 
+        // grupo de fisicas de tuberias
         this.PIPE = this.physics.add.group({
             defaultKey: 'pipe',
             collideWorldBounds: false
         });
 
-
-        // crea el pajaro ¿?¿¿?
-        this.mel = this.physics.add.sprite(150, 270, 'melon', 0);
-
         // array de pipes
         this.pipes = [];
+
+        // crea el melon
+        this.mel = this.physics.add.sprite(150, 270, 'melon', 0);
+
+        
+
+        // ------------------- COLISIONES ----------------
 
         // crea las colisiones
         this.colliderObj = this.physics.add.collider(this.mel, this.PIPE,() =>{
@@ -71,6 +73,7 @@ export default class MelonFlippeador extends Phaser.Scene
             this.emitter.emit('died', this);
         });
 
+        // ----------------- END GAME EVENT ---------------------
 
         // crea un evento y un listener para el evento (la funcion)
         this.emitter.on('died', function(scene){
