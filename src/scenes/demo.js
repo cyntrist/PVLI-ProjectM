@@ -39,7 +39,7 @@ export default class Demo extends Phaser.Scene
 
 	create()
     {
-		var PM = new PlayerManager(0, 0, 0, 0);
+		let PM = new PlayerManager(0, 0, 0, 0);
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
 		const dayData = this.cache.json.get('dia1Data'); // XD la conversación del día
 		const { width, height } = this.canvas; // la anchura y altura del canvas
@@ -106,7 +106,7 @@ export default class Demo extends Phaser.Scene
 		})
 	
 		// creacion del manager de dialogo
-		let dialogManager = new DialogueManager(scene, PlayerManager, dayData, characters, '9slice');
+		let dialogManager = new DialogueManager(scene, PM, dayData, characters, '9slice');
     }
 
 	update(){
@@ -150,14 +150,5 @@ export default class Demo extends Phaser.Scene
 
 	ExitButton(but) {
 		but.box.tint = "0xF6F6F6" ;
-	}
-
-	CheckConditions(condicion, affVal) {
-		if(condicion.affValue.operator == "lower")
-			return affVal < condicion.affValue.value;
-		else if (condicion.affValue.operator == "equal")
-			return affVal == condicion.affValue.value;
-		else
-			return affVal > condicion.affValue.value;
 	}
 }
