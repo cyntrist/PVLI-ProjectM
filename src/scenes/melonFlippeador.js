@@ -64,9 +64,16 @@ export default class MelonFlippeador extends Phaser.Scene
         this.pipes = [];
 
         // crea el melon
-        this.mel = this.physics.add.sprite(150, 270, 'melon', 0);
+        this.mel = this.physics.add.sprite(150, 270, 'melon', 0).setOrigin(0.5,0.5);
 
-        
+        // tween del melon
+        this.melonTween = this.tweens.add ({
+            targets: this.mel,
+			duration: 200,
+		    angle: '+=360',
+			persist: true
+        })
+
 
         // ------------------- COLISIONES ----------------
 
@@ -120,15 +127,16 @@ export default class MelonFlippeador extends Phaser.Scene
             if(this.cursor.up.isDown){
                 // salto
                 this.mel.setVelocityY(-200);
+                this.melonTween.play();
             }
-    
+
             // gestion de pipes
             this.pipeManager(); 
 
             // add score
             this.pipeScoreAdder();
 
-            // si sse ha pasado de alto o de bajo
+            // si se ha pasado de alto o de bajo
             if(this.mel.y > 750 || this.mel.y < 0){
 
                     // cuando colisiona memite el evento
@@ -238,8 +246,10 @@ export default class MelonFlippeador extends Phaser.Scene
 
     endScreen(escena){
         // boton de restart
-        let restart = new Button(this, 590, 200, 'restart', 2, 'goBackBox', {
-                            "ClickCallback": () => this.restartGame (this) });
+        let restart = new Button(this, 590, 200, 'restart', 2, 'goBackBox', {"ClickCallback": () => this.restartGame (this) });
+
+        // boton para volver al movil
+        let movil = new Button(this, 100, 300, 'movil', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("movil", this) });
 
     }
 
