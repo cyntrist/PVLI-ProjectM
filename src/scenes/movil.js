@@ -26,7 +26,7 @@ export default class Movil extends Phaser.Scene {
 
 		// boton de vuelta
 		let but1 = new Button(this, 100, 320, 'Demo', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("Demo", scene) } );
-		but1.depth = 2;
+		//but1.depth = 2;
 
 		// boton de melon flip
 		let but2 = new Button(this, 200, 200, 'melonFlippeador', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("melonFlippeador", scene) });
