@@ -49,7 +49,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			let currentCharacter = characters[currentName];  // idem
 			currentCharacter?.onFocus(); // si existe current character, lo enfoca
 			currentCharacter?.unfocusEveryoneElse(characters); // y desenfoca al resto
-			if (currentNode.hasOwnProperty("next") || currentNode.hasOwnProperty("choices")) { // si es un nodo intermedio y/o tiene tiene elecciones
+			if (currentNode.hasOwnProperty("next") || currentNode.hasOwnProperty("choices") ||currentNode.hasOwnProperty("conditions")) { // si es un nodo intermedio y/o tiene tiene elecciones
 				if ( i < 1) 
 					scene.dialog.setText(currentNode.name + ":\n" + currentNode.text.es, true);
 				if (currentNode.hasOwnProperty("choices")) { 
@@ -61,13 +61,13 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					else i++;
 				}
 				else if (currentNode.hasOwnProperty("conditions")){
-					let charAff = PM.affinities[currentCharacter.numero]; //afinidad del personaje a mirar
 					let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
 					let conditionCheck = false; //flag para solo comprobar una condicion
 					let j = 0;
+					console.log(j < _conditions.length && !conditionCheck)
 					while(j < _conditions.length && !conditionCheck)	
 					{
-						if(this.scene.CheckConditions(_conditions[j], charAff)){ //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
+						if(CheckConditions(_conditions[j], playerManager)){ //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
 							node = _conditions[j].next;
 							conditionCheck = true;
 						}
@@ -78,7 +78,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			}
 			else {
 				scene.dialog.setText(currentNode.text.es); // se escribe el último msj
-				characters["camille"].unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar, camille como conejillo de indias porque sí
+				//characters["camille"].unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar, camille como conejillo de indias porque sí
 			}
 		})		
 
@@ -99,12 +99,26 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		});
     }
 
-	CheckConditions(condicion, affVal) {
+
+	
+	/*CheckConditions(condicion) {
+		let affVal = PM.affinities[condicion.charNum.value]; //afinidad del personaje a mirar
 		if(condicion.affValue.operator == "lower")
 			return affVal < condicion.affValue.value;
 		else if (condicion.affValue.operator == "equal")
 			return affVal == condicion.affValue.value;
 		else
 			return affVal > condicion.affValue.value;
-	}
+	}*/
+
+}
+
+function CheckConditions(condicion, PM) {
+	let affVal = PM.affinities[condicion.charNum.value]; //afinidad del personaje a mirar
+	if(condicion.affValue.operator == "lower")
+		return affVal < condicion.affValue.value;
+	else if (condicion.affValue.operator == "equal")
+		return affVal == condicion.affValue.value;
+	else
+		return affVal > condicion.affValue.value;
 }
