@@ -64,7 +64,15 @@ export default class MelonFlippeador extends Phaser.Scene
         this.pipes = [];
 
         // crea el melon
-        this.mel = this.physics.add.sprite(150, 270, 'melon', 0);
+        this.mel = this.physics.add.sprite(150, 270, 'melon', 0).setOrigin(0.5,0.5);
+
+        // tween del melon
+        this.melonTween = this.tweens.add ({
+            targets: this.mel,
+			duration: 200,
+		    angle: '+=360',
+			persist: true
+        })
 
         
 
@@ -120,8 +128,9 @@ export default class MelonFlippeador extends Phaser.Scene
             if(this.cursor.up.isDown){
                 // salto
                 this.mel.setVelocityY(-200);
+                this.melonTween.play();
             }
-    
+
             // gestion de pipes
             this.pipeManager(); 
 
