@@ -65,8 +65,6 @@ export default class Demo extends Phaser.Scene
 		camille.unfocusEveryone(characters); // camille siendo conejillo de indias
 
 		// pone el fondo
-		this.nextBG = 1;
-		this.currentBG = 1;
         let bg = scene.add.image(0, 0, "clase").setScale(0.35, 0.35).setOrigin(0, 0);
 		bg.depth = -2;
 
@@ -110,13 +108,6 @@ export default class Demo extends Phaser.Scene
     }
 
 	update(){
-		if(this.nextBG === 1 &&  Scenary != 'clase') Scenary = 'clase';
-		else if(this.nextBG === 2 && Scenary != 'pasillo') Scenary = 'pasillo';
-		if(this.nextBG != this.currentBG){
-			let bg = this.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
-			bg.depth = -2;
-			this.currentBG = this.nextBG;
-		}
 
 	}
 	
