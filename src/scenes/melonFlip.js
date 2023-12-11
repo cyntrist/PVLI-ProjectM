@@ -46,11 +46,9 @@ export default class MelonFlip extends Phaser.Scene{
 
         // boton de vuelta
 		let but1 = new Button(this, 100, 320, 'movil', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("movil", scene) });
-		//but1.depth = 2;
 
         // melon flippeador
         this.mel = new melon(this, 150, 270, 'melon');
-        //this.mel.depth = 3;
 
        // array de pipes
         this.pipes = [];
@@ -69,9 +67,9 @@ export default class MelonFlip extends Phaser.Scene{
             targets: this.mel,
             duration: 100,
             //No sabemos cambiar el origen para hacer que rote sobre si mismo
-            //angle: '+=360',
-            scaleY: 0.1,
-            yoyo: true,
+            angle: '+=360',
+            //scaleY: 0.1,
+            //yoyo: true,
             persist: true
             
         })
