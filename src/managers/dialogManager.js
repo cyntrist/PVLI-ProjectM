@@ -49,9 +49,14 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			let currentCharacter = characters[currentName];  // idem
 			currentCharacter?.onFocus(); // si existe current character, lo enfoca
 			currentCharacter?.unfocusEveryoneElse(characters); // y desenfoca al resto
-			if (currentNode.hasOwnProperty("next") || currentNode.hasOwnProperty("choices") ||currentNode.hasOwnProperty("conditions")) { // si es un nodo intermedio y/o tiene tiene elecciones
+			if (currentNode.hasOwnProperty("next") || currentNode.hasOwnProperty("choices") ||currentNode.hasOwnProperty("conditions") || currentNode.hasOwnProperty("signals")) { // si es un nodo intermedio y/o tiene tiene elecciones
 				if ( i < 1) 
 					scene.dialog.setText(currentNode.name + ":\n" + currentNode.text.es, true);
+
+				if(currentNode.hasOwnProperty("signals")){
+					scene.eventEmitter.emit(currentNode.signals.eventName.String, currentNode.signals[currentNode.signals.eventName.String].Number)
+				}
+
 				if (currentNode.hasOwnProperty("choices")) { 
 					if (i >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
 						decision = new Decision(scene, currentNode.choices, nineslice);
@@ -63,12 +68,12 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				else if (currentNode.hasOwnProperty("conditions")){
 					let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
 					let conditionCheck = false; //flag para solo comprobar una condicion
-					let j = 0;
-					console.log(j < _conditions.length && !conditionCheck)
-					while(j < _conditions.length && !conditionCheck)	
+					let k = 0;
+					console.log(k < _conditions.length && !conditionCheck)
+					while(k < _conditions.length && !conditionCheck)	
 					{
-						if(CheckConditions(_conditions[j], playerManager)){ //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
-							node = _conditions[j].next;
+						if(CheckConditions(_conditions[k], playerManager)){ //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
+							node = _conditions[k].next;
 							conditionCheck = true;
 						}
 						j++; //si no se cuumple avanzamos a la siguiente condicion
