@@ -8,6 +8,7 @@ export default class PlayerManager {
             2: { points: mAff, scalingStat: "humor" },
             3: { points: rAff, scalingStat: "intelligence" }
         }*/
+        
         this.affinities = [cAff, dAff, mAff, rAff]
 
         //this.playerStats = { charisma: 1, kindness: 1, humor: 1, intelligence: 1, luck: 1 }
@@ -24,6 +25,5 @@ export default class PlayerManager {
     increasePlayerStats(statNum) {
         this.playerStats[statNum]++;
     }
-
 
 }

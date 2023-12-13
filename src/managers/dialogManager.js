@@ -87,15 +87,19 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 * Cuando una opcion es escogida, actualiza el nodo en corcondancia
 		 */
 		scene.eventEmitter.on('decided', function (valor) {
-			//console.log('OPCION DECIDIDA: ', valor);
-			console.log(PM.increaseAffinity);
-			if(valor >= 0 && valor <= 3) //0 camille, 1 delilah, 2 matthew, 3 richard, cualquier valor que no sea de esos no suma (no entra en el caso, no porque haya proteccion contra eso en el player manager)
-				playerManager.increaseAffinity(valor);
+			console.log('OPCION DECIDIDA: ', valor);
 			characters["camille"].focusEveryone(characters); // se enfoca a todo el mundo al hablar, camille como conejillo de indias porque sí
 			scene.dialog?.setText("T/N:\n" + dayData[node].choices[valor].text.es, true); // escribe lo escogido
 			node = dayData[node].choices[valor].next; // pasa al siguiente nodo
 			scene.dialog.setInteractable(true); // devuelve la interaccion al cuadro de diálogo
 			decision.destroy(); // destruye la decison
+		});
+
+		
+		this.scene.eventEmitter.on('affinityUp', function (valor) {
+			console.log(PM);
+			if(valor >= 0 && valor <= 3) //0 camille, 1 delilah, 2 matthew, 3 richard, cualquier valor que no sea de esos no suma (no entra en el caso, no porque haya proteccion contra eso en el player manager)
+				playerManager.increaseAffinity(valor);
 		});
     }
 
