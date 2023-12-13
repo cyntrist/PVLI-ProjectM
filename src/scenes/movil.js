@@ -35,7 +35,7 @@ export default class Movil extends Phaser.Scene {
 	// update (que no hara falta)
 
 	ChangeScene(newScene, escena){
-		escena.scene.start(newScene);
+		escena.scene.switch(newScene);
 
 	}
 

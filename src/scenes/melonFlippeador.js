@@ -258,7 +258,7 @@ export default class MelonFlippeador extends Phaser.Scene
     }
 
     ChangeScene(newScene, escena){
-		escena.scene.start(newScene);
+		escena.scene.switch(newScene);
 	}
 }
 
