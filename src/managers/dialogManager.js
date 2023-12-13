@@ -101,7 +101,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		});
 
 		
-		this.scene.eventEmitter.on('affinityUp', function (valor) {
+		scene.eventEmitter.on('affinityUp', function (valor) {
 			console.log(PM);
 			if(valor >= 0 && valor <= 3) //0 camille, 1 delilah, 2 matthew, 3 richard, cualquier valor que no sea de esos no suma (no entra en el caso, no porque haya proteccion contra eso en el player manager)
 				playerManager.increaseAffinity(valor);
