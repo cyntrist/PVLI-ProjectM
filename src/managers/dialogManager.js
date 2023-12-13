@@ -68,12 +68,12 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				else if (currentNode.hasOwnProperty("conditions")){
 					let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
 					let conditionCheck = false; //flag para solo comprobar una condicion
-					let k = 0;
-					console.log(k < _conditions.length && !conditionCheck)
-					while(k < _conditions.length && !conditionCheck)	
+					let j = 0;
+					//console.log(j < _conditions.length && !conditionCheck)
+					while(j < _conditions.length && !conditionCheck)	
 					{
-						if(CheckConditions(_conditions[k], playerManager)){ //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
-							node = _conditions[k].next;
+						if(CheckConditions(_conditions[j], playerManager)){ //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
+							node = _conditions[j].next;
 							conditionCheck = true;
 						}
 						j++; //si no se cuumple avanzamos a la siguiente condicion
