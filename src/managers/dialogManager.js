@@ -107,19 +107,6 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				playerManager.increaseAffinity(valor);
 		});
     }
-
-
-	
-	/*CheckConditions(condicion) {
-		let affVal = PM.affinities[condicion.charNum.value]; //afinidad del personaje a mirar
-		if(condicion.affValue.operator == "lower")
-			return affVal < condicion.affValue.value;
-		else if (condicion.affValue.operator == "equal")
-			return affVal == condicion.affValue.value;
-		else
-			return affVal > condicion.affValue.value;
-	}*/
-
 }
 
 function CheckConditions(condicion, PM) {
