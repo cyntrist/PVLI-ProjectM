@@ -35,8 +35,8 @@ export default class Demo extends Phaser.Scene
 		
 		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/dia1_midday.json')
 		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/test_afinidad.json')
-		this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/dia2_morning.json')
-		this.load.image('9slice', './assets/images/ui/botones_decision_nineslice_muy_peque.png')
+		this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/dia2_morning.json');
+		this.load.image('9slice', './assets/images/ui/botones_decision_nineslice_muy_peque.png');
     }
 
 	create()
