@@ -8,3 +8,7 @@ https://blog.ourcade.co/posts/2020/fix-stretched-image-distortion-9-slice-scale-
 https://github.com/jdotrjs/phaser3-nineslice/
 https://gist.github.com/keisans/5491894
 
+Manejo de escenas
+https://desarrolloweb.com/articulos/escenas-juegos-phaser
+https://stackoverflow.com/questions/59439790/switching-between-scenes-in-phaser3
+
