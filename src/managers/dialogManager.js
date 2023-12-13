@@ -54,7 +54,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					scene.dialog.setText(currentNode.name + ":\n" + currentNode.text.es, true);
 
 				if(currentNode.hasOwnProperty("signals")){
-					scene.eventEmitter.emit(currentNode.signals.eventName.String, currentNode.signals[currentNode.signals.eventName.String].Number)
+					scene.eventEmitter.emit(currentNode.signals.eventName.String, currentNode.signals[currentNode.signals.eventName.String].Number) //primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
 				}
 
 				if (currentNode.hasOwnProperty("choices")) { 
