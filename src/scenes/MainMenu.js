@@ -10,7 +10,7 @@ export default class MainMenu extends Phaser.Scene {
 		this.canvas = this.sys.game.canvas;
 
 		// fondo
-		this.load.image('fondoMain', './assets/images/fondoweb/fondoraro.jpg');
+		this.load.image('fondoMain', './assets/images/fondoweb/fondoraro.png');
 
 		// boton de play
 		this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
