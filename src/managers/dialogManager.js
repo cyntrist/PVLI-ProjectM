@@ -82,7 +82,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				else node = currentNode.next; // si no hay decisiones, continuación lineal, el nodo actual pasa a ser el siguiente
 			}
 			else {
-				scene.dialog.setText(currentNode.text.es); // se escribe el último msj
+				scene.dialog.setText(currentNode?.name + ":\n" + currentNode?.text.es, true); // se escribe el último msj
 				//characters["camille"].unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar, camille como conejillo de indias porque sí
 			}
 		})		
