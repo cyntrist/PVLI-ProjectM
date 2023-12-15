@@ -15,6 +15,9 @@ export default class Movil extends Phaser.Scene {
 		// boton de vuelta
 		this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
 
+		// boton melon flip
+		this.load.image('melonflip', './assets/images/movil/melonFlip.png');
+
 	}
 
 	create (){
@@ -25,11 +28,10 @@ export default class Movil extends Phaser.Scene {
 		bg.depth = -2;
 
 		// boton de vuelta
-		let but1 = new Button(this, 100, 320, 'Demo', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("Demo", scene) } );
-		//but1.depth = 2;
+		let but1 = new Button(this, 100, 320, ' ', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("Demo", scene) } );
 
 		// boton de melon flip
-		let but2 = new Button(this, 200, 200, 'melonFlippeador', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("melonFlippeador", scene) });
+		let but2 = new Button(this, 300, 250, ' ', 2, 'melonflip', { "ClickCallback": () => this.ChangeScene("melonFlippeador", scene) }).setScale(0.75);
 	}
 
 	// update (que no hara falta)

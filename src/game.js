@@ -2,6 +2,7 @@ import Demo from './scenes/demo.js';
 import Pruebita from './scenes/pruebita.js';
 import PlayerManager from './managers/playerManger.js';
 import movil from './scenes/movil.js';
+import MainMenu from './scenes/MainMenu.js';
 import MelonFlippeador from './scenes/melonFlippeador.js';
 
 /**
@@ -28,7 +29,7 @@ let config = {
       }
   },
   
-  scene: [Demo, movil, MelonFlippeador],
+  scene: [MainMenu, Demo, movil, MelonFlippeador],
   physics: {
     default: 'arcade', // elegir motor
     arcade: {
