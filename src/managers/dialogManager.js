@@ -49,9 +49,14 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			let currentCharacter = characters[currentName];  // idem
 			currentCharacter?.onFocus(); // si existe current character, lo enfoca
 			currentCharacter?.unfocusEveryoneElse(characters); // y desenfoca al resto
-			if (currentNode.hasOwnProperty("next") || currentNode.hasOwnProperty("choices") ||currentNode.hasOwnProperty("conditions")) { // si es un nodo intermedio y/o tiene tiene elecciones
+			if (currentNode.hasOwnProperty("next") || currentNode.hasOwnProperty("choices") ||currentNode.hasOwnProperty("conditions") || currentNode.hasOwnProperty("signals")) { // si es un nodo intermedio y/o tiene tiene elecciones
 				if ( i < 1) 
 					scene.dialog.setText(currentNode.name + ":\n" + currentNode.text.es, true);
+
+				if(currentNode.hasOwnProperty("signals")){
+					scene.eventEmitter.emit(currentNode.signals.eventName.String, currentNode.signals[currentNode.signals.eventName.String].Number) //primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
+				}
+
 				if (currentNode.hasOwnProperty("choices")) { 
 					if (i >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
 						decision = new Decision(scene, currentNode.choices, nineslice);
@@ -64,7 +69,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
 					let conditionCheck = false; //flag para solo comprobar una condicion
 					let j = 0;
-					console.log(j < _conditions.length && !conditionCheck)
+					//console.log(j < _conditions.length && !conditionCheck)
 					while(j < _conditions.length && !conditionCheck)	
 					{
 						if(CheckConditions(_conditions[j], playerManager)){ //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
@@ -87,30 +92,21 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 * Cuando una opcion es escogida, actualiza el nodo en corcondancia
 		 */
 		scene.eventEmitter.on('decided', function (valor) {
-			//console.log('OPCION DECIDIDA: ', valor);
-			console.log(PM.increaseAffinity);
-			if(valor >= 0 && valor <= 3) //0 camille, 1 delilah, 2 matthew, 3 richard, cualquier valor que no sea de esos no suma (no entra en el caso, no porque haya proteccion contra eso en el player manager)
-				playerManager.increaseAffinity(valor);
+			console.log('OPCION DECIDIDA: ', valor);
 			characters["camille"].focusEveryone(characters); // se enfoca a todo el mundo al hablar, camille como conejillo de indias porque sí
 			scene.dialog?.setText("T/N:\n" + dayData[node].choices[valor].text.es, true); // escribe lo escogido
 			node = dayData[node].choices[valor].next; // pasa al siguiente nodo
 			scene.dialog.setInteractable(true); // devuelve la interaccion al cuadro de diálogo
 			decision.destroy(); // destruye la decison
 		});
+
+		
+		scene.eventEmitter.on('affinityUp', function (valor) {
+			console.log(PM);
+			if(valor >= 0 && valor <= 3) //0 camille, 1 delilah, 2 matthew, 3 richard, cualquier valor que no sea de esos no suma (no entra en el caso, no porque haya proteccion contra eso en el player manager)
+				playerManager.increaseAffinity(valor);
+		});
     }
-
-
-	
-	/*CheckConditions(condicion) {
-		let affVal = PM.affinities[condicion.charNum.value]; //afinidad del personaje a mirar
-		if(condicion.affValue.operator == "lower")
-			return affVal < condicion.affValue.value;
-		else if (condicion.affValue.operator == "equal")
-			return affVal == condicion.affValue.value;
-		else
-			return affVal > condicion.affValue.value;
-	}*/
-
 }
 
 function CheckConditions(condicion, PM) {
