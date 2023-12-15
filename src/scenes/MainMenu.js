@@ -27,13 +27,38 @@ export default class MainMenu extends Phaser.Scene {
 		bg.depth = -2;
 
 		// boton de play
-		let playButton = new Button(this, 300, 200, ' ', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("Demo", scene) } );
+		let playButton = new Button(this, 315, 200, ' ', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("Demo", scene),
+																			"EnterCallback": () =>this.OverButton(playButton),
+																			"ExitCallback": () => this.ExitButton(playButton) } );
+
+		this.playTween = this.tweens.add({
+			targets: playButton,
+			scaleX: 0.95,
+			scaleY: 0.95,
+			duration: 500,
+			yoyo: true,
+			repeat: -1,
+			persist: true
+		})
+
+
 
 	}
 
 	ChangeScene(newScene, escena){
 		escena.scene.switch(newScene);
 
+	}
+
+	OverButton(but) {
+		but.box.tint = "0xc24d6d" ;
+		this.playTween.pause();
+		
+	}
+
+	ExitButton(but) {
+		but.box.tint = "0xF6F6F6" ;
+		this.playTween.play();
 	}
 
   }
