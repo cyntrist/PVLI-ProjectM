@@ -32,21 +32,21 @@ export default class Demo extends Phaser.Scene
 
 		this.load.image('box', './assets/images/escenarios/opciones2.png')
 		this.load.image('movil', './assets/images/movil/movil.png');
-		
+		this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
+
 		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/dia1_midday.json')
 		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/test_afinidad.json')
-		this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/dia1_morning.json');
-		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/dia2_morning.json');
-		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/dia3_morning.json');
-		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/dia4_morning.json');
+		this.load.json('dia1mData', './assets/dialogue editor/Dialog Files/dia1_morning.json');
+		this.load.json('dia2mData', './assets/dialogue editor/Dialog Files/dia2_morning.json');
+		this.load.json('dia3mData', './assets/dialogue editor/Dialog Files/dia3_morning.json');
+		this.load.json('dia4mData', './assets/dialogue editor/Dialog Files/dia4_morning.json');
 		this.load.image('9slice', './assets/images/ui/botones_decision_nineslice_muy_peque.png');
     }
 
 	create()
     {
-		let PM = new PlayerManager(0, 0, 0, 0);
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
-		const dayData = this.cache.json.get('dia1Data'); // XD la conversación del día
+		const dayData = this.cache.json.get('dia1mData'); // XD la conversación del día
 		const { width, height } = this.canvas; // la anchura y altura del canvas
 		const scene = this // referencia a esta misma escena
 		this.width = width; this.height = height;
@@ -77,17 +77,6 @@ export default class Demo extends Phaser.Scene
 
 		
 		// ** CREACION DE INTERFAZ ** //
-
-
-		// crea un boton al pasillo
-		let but1 = new Button(this, 590, 200, 'pasillo', 2, 'box', { "ClickCallback": () => this.ChangeScenary ("pasillo", scene),
-																	"EnterCallback": () =>this.OverButton(but1),
-																	"ExitCallback": () => this.ExitButton(but1) });
-		but1.depth = 2;
-		// crea un boton a la clase
-		let but2 = new Button(this, 590, 250, 'clase', 2, 'box', { "ClickCallback": () => this.ChangeScenary ("clase", scene),
-																	"EnterCallback": () =>this.OverButton(but2),
-																	"ExitCallback": () => this.ExitButton(but2) });
 		// crea el botón del movil
 		let movil = new Button(this, 850, 700, ' ', 2, 'movil', { "ClickCallback": () => this.ChangeScene("movil", scene), 
 																  "EnterCallback": () => this.OverMovile(),
@@ -110,11 +99,12 @@ export default class Demo extends Phaser.Scene
 			persist: true
 		})
 	
-		// creacion del manager de dialogo
-		let dialogManager = new DialogueManager(scene, PM, dayData, characters, '9slice');
+		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
+		let playerManager = new PlayerManager(0, 0, 0, 0);
+		let dialogManager = new DialogueManager(scene, playerManager, dayData, characters, '9slice', 'blip');
     }
 
-	update(){
+	update() { 
 		if(this.nextBG === 1 &&  Scenary != 'clase') Scenary = 'clase';
 		else if(this.nextBG === 2 && Scenary != 'pasillo') Scenary = 'pasillo';
 		if(this.nextBG != this.currentBG){
@@ -122,18 +112,14 @@ export default class Demo extends Phaser.Scene
 			bg.depth = -2;
 			this.currentBG = this.nextBG;
 		}
-
 	}
 	
 	// cambia el escenario (la imagen de fondo)
 	ChangeScenary (newImage, escena){
-
 		// crea una imagen en la escena dada 
 		let bg = escena.add.image(0, 0, newImage).setScale(0.35, 0.35).setOrigin(0, 0);
-
 		// ajusta la capa
 		bg.depth = -2;
-
 	}
 
 	ChangeScene(newScene, escena){
@@ -150,7 +136,6 @@ export default class Demo extends Phaser.Scene
 
 	OverButton(but) {
 		but.box.tint = "0xc24d6d" ;
-		
 	}
 
 	ExitButton(but) {

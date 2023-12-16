@@ -116,6 +116,13 @@ export default class DialogText{
 		}
 	}
 
+	// otro método propio
+	getInteractable() {
+		if (this.graphics.input.enabled)
+			return true;
+		return false;
+	}
+
 	// Consigue el ancho del juego (en funcion del tamaño en la escena) 
 	_getGameWidth() {
 		return this.scene.sys.game.config.width;

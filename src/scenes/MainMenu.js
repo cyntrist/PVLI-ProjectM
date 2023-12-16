@@ -13,7 +13,7 @@ export default class MainMenu extends Phaser.Scene {
 		this.load.image('fondoMain', './assets/images/fondoweb/fondoraro.png');
 
 		// boton de play
-		this.load.image('goBackBox', './assets/images/logo/logoconsombrapeque.png');
+		this.load.image('logo', './assets/images/logo/logoconsombrapeque.png');
 	}
 
 	create (){
@@ -23,7 +23,7 @@ export default class MainMenu extends Phaser.Scene {
 		bg.depth = -2;
 
 		// boton de play
-		let playButton = new Button(this, 315, 200, ' ', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("Demo", scene),
+		let playButton = new Button(this, 315, 200, ' ', 2, 'logo', { "ClickCallback": () => this.ChangeScene("Demo", scene),
 																			"EnterCallback": () =>this.OverButton(playButton),
 																			"ExitCallback": () => this.ExitButton(playButton) } );
 		playButton.box.setScale(0.5, 0.5);
