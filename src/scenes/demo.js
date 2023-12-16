@@ -32,7 +32,10 @@ export default class Demo extends Phaser.Scene
 
 		this.load.image('box', './assets/images/escenarios/opciones2.png')
 		this.load.image('movil', './assets/images/movil/movil.png');
+
 		this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
+		this.load.audio('click', [ './assets/sounds/click.ogg', './assets/sounds/click.mp3' ]);
+		this.load.audio('bonk', [ './assets/sounds/bonk.ogg', './assets/sounds/bonk.mp3' ]);
 
 		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/dia1_midday.json')
 		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/test_afinidad.json')
@@ -101,7 +104,7 @@ export default class Demo extends Phaser.Scene
 	
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
 		let playerManager = new PlayerManager(0, 0, 0, 0);
-		let dialogManager = new DialogueManager(scene, playerManager, dayData, characters, '9slice', 'blip');
+		let dialogManager = new DialogueManager(scene, playerManager, dayData, characters, '9slice', 'bonk');
     }
 
 	update() { 
