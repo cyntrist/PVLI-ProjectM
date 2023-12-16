@@ -53,8 +53,8 @@ export default class Demo extends Phaser.Scene
 		const { width, height } = this.canvas; // la anchura y altura del canvas
 		const scene = this // referencia a esta misma escena
 		this.width = width; this.height = height;
-		const Elenco = { Camille: 0, Delilah: 1, Matthew: 2, Richard: 3} // enum para que queden más bonitas las asignaciones pero vamos es una tonteria
 		const padding = 40; // espacio respecto al origen
+		const Elenco = { Camille: 0, Delilah: 1, Matthew: 2, Richard: 3} // enum para que queden más bonitas las asignaciones pero vamos es una tonteria
 		const sprites = [ // array de sprites
 			scene.add.sprite(0, padding, 'camilleph').setScale(0.5,0.5),
 			scene.add.sprite(0, padding, 'delilahph').setScale(0.5,0.5),
@@ -67,7 +67,7 @@ export default class Demo extends Phaser.Scene
 		const delilah = new Character(scene, width*2/5, height - sprites[Elenco.Delilah].displayHeight/2, sprites[Elenco.Delilah], "Delilah", 1);
 		const matthew = new Character(scene, width*3/5, height - sprites[Elenco.Matthew].displayHeight/2, sprites[Elenco.Matthew], "Matthew", 2);
 		const richard = new Character(scene, width*4/5, height - sprites[Elenco.Richard].displayHeight/2, sprites[Elenco.Richard], "Richard", 3);
-		// array de los personajes, pensado para las iteraciones dentro de Character
+		// diccionario de los personajes, pensado para las iteraciones dentro de Character
 		const characters = { camille, delilah, matthew, richard } // corchetes array, brackets diccionario (objeto)
 		// descolorea a todos los personajes antes de empezar
 		camille.unfocusEveryone(characters); // camille siendo conejillo de indias

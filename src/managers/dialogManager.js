@@ -121,7 +121,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				// si lo anterior no se cumple, significa que es el nodo final
 				else {
 					speak(currentNode);
-					node = undefined;
+					//node = undefined;
 					//scene.dialog.setInteractable(false);
 					//characters["camille"].unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar, camille como conejillo de indias porque sí
 				}
@@ -130,17 +130,38 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 		/**
 		 * callback que retrocede en el diálogo hasta que se encuentre un nodo especial (con check, señal o decision)
-		 */
+		 * ESTÁ TAAAAN MAL HECHO PERO QUEDAN COMO 5 DÍAS Y HAY QUE TENER COMO 10 FUNCIONALIDADES MÁS POR FAVOR TEN PIEDAD 
+		 */ 
 		function backward() {
-			// tiene que retroceder dos veces porque con cada click el nodo se deja en el siguiente para escribirlo lo primero
-			node = dayData[node].parent;
-			console.log(node);
-			let currentNode = dayData[node];
-			console.log(currentNode);
-			let prevNode = dayData[currentNode.parent];
-			console.log(prevNode);
-
-			//speak(node);
+			if (scene.dialog?.getInteractable() // si el diálogo es interactuable
+			 && node != undefined // si nodo existe
+			 && !dayData[node]?.hasOwnProperty("signals") 	// si no estás justo en una señal
+			 && !dayData[node]?.hasOwnProperty("conditions")// si no estás justo en una comprobación
+			 && !dayData[node]?.hasOwnProperty("choices")) 	// si no estás justo antes de una decisión
+			{ 
+				// tiene que retroceder dos veces porque con cada click el nodo se deja en el siguiente para escribirlo lo primero... venga, va... no me mires asi...
+				// referencia al nodo real (solo el ID)
+				let real = dayData[node].parent;
+				// referencia al nodo padre (solo el ID)
+				let padre;
+				// nodo padre (el objeto entero)
+				let prevNode;
+				// si tiene padre siquiera
+				if (dayData[real]?.hasOwnProperty("parent")) { // me he fumao un petardacoooo con cada linea de codigo de este método del demonioooooooooooooOOOOooOoo
+					padre = dayData[real].parent;
+					prevNode = dayData[padre];
+				}
+				// solo si tiene un nodo padre y no es root (no es el primer nodo)
+				if (padre != undefined 
+				&& padre != "root"
+				&& prevNode != undefined
+				&& !prevNode.hasOwnProperty("choices")
+				&& !prevNode.hasOwnProperty("conditions")
+				&& !prevNode.hasOwnProperty("signals")) { 
+					node = dayData[node].parent; // vuelve atrás
+					speak(prevNode); // blablabla
+				}
+			}
 		}
 
 		/**
