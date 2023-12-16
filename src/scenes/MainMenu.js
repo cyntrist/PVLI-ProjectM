@@ -13,15 +13,11 @@ export default class MainMenu extends Phaser.Scene {
 		this.load.image('fondoMain', './assets/images/fondoweb/fondoraro.png');
 
 		// boton de play
-		this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
-
-
+		this.load.image('goBackBox', './assets/images/logo/logoconsombrapeque.png');
 	}
 
 	create (){
-
 		const scene = this // referencia a esta misma escena
-
 		// pone el fondo
 		let bg = this.add.image(0, 0, 'fondoMain').setScale(0.5).setOrigin(0, 0);
 		bg.depth = -2;
@@ -30,7 +26,7 @@ export default class MainMenu extends Phaser.Scene {
 		let playButton = new Button(this, 315, 200, ' ', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("Demo", scene),
 																			"EnterCallback": () =>this.OverButton(playButton),
 																			"ExitCallback": () => this.ExitButton(playButton) } );
-
+		playButton.box.setScale(0.5, 0.5);
 		this.playTween = this.tweens.add({
 			targets: playButton,
 			scaleX: 0.95,
