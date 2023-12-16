@@ -138,8 +138,6 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					speak(currentNode);
 					setDayData(++i);
 					node = dayData.root.next;
-					//node = undefined;
-					//scene.dialog.setInteractable(false);
 					//characters["camille"].unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar, camille como conejillo de indias porque sí
 				}
 			} 
