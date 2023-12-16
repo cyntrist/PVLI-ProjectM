@@ -49,7 +49,11 @@ export default class Demo extends Phaser.Scene
 	create()
     {
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
-		const dayData = this.cache.json.get('dia1mData'); // XD la conversación del día
+		const day1mData = this.cache.json.get('dia1mData'); 
+		const day2mData = this.cache.json.get('dia2mData'); 
+		const day3mData = this.cache.json.get('dia3mData'); 
+		const day4mData = this.cache.json.get('dia4mData'); 
+		const dayDatas = { day1mData, day2mData, day3mData, day4mData }; // !!!!!!!!!IMPORTANTE!! añadir aquí el resto de jsons que se generen 
 		const { width, height } = this.canvas; // la anchura y altura del canvas
 		const scene = this // referencia a esta misma escena
 		this.width = width; this.height = height;
@@ -104,7 +108,7 @@ export default class Demo extends Phaser.Scene
 	
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
 		let playerManager = new PlayerManager(0, 0, 0, 0);
-		let dialogManager = new DialogueManager(scene, playerManager, dayData, characters, '9slice', 'bonk');
+		let dialogManager = new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
     }
 
 	update() { 

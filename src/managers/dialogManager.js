@@ -14,7 +14,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 	 * @param {*} nineslice - key al sprite para el nineslice de los botones de las decisiones
 	 * @param {*} sound - key al sonido para cada avance en el diálogo
 	 */
-	constructor(scene, playerManager, dayData, characters, nineslice, sound) {
+	constructor(scene, playerManager, dayDatas, characters, nineslice, sound) {
 		super(scene, 0, 0);
 		// crea la ventana de diálogo
 		scene.dialog = new DialogText(scene, {
@@ -34,6 +34,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		});
 		scene.dialog.depth = 2;
 
+		// importante, todos los jsons parseados a un diccionario que contiene cada periodo de cada dia
+		let dayData = dayDatas["dia1mData"]; // predeterminado
+		let i = 0; // contador del periodo del día
+		setDayData(i); // dia inicial, sea cual sea, en el diccionario
+		
 		// parámetros
 		const blip = scene.sound.add(sound, { volume: 0.5 }); // sonido de diálogo
 		let title = "\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"; // primera línea de título (sí, es justo lo que estás pensando, tiene todos esos espacios para que esté centrada (lo siento mucho))
@@ -44,6 +49,15 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 		 // !!! LOGICA DE VERDAD POR FIN VAMOSSSSSSSSSSSSSSS !!!
 		 // FUNCIONES (mayormente callbacks) 
+		/**
+		 * funcion para asignar los datos del día según un índice
+		 */
+		function setDayData(index) {
+			let dayIndex = index; 
+			let key = Object.keys(dayDatas)[dayIndex];
+			dayData = dayDatas[key];
+		}
+
 		/** 
 		  * callback que avanza el diálogo si y solo si el diálogo es interactuable
 		  */
@@ -115,12 +129,15 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					}
 
 					// si no se cumple ninguna de las condiciones anteriores es simplemente continuacion lineal, tiene next
-					else node = currentNode?.next; 
+					else 
+						node = currentNode?.next;
 				}
 
 				// si lo anterior no se cumple, significa que es el nodo final
 				else {
 					speak(currentNode);
+					setDayData(++i);
+					node = dayData.root.next;
 					//node = undefined;
 					//scene.dialog.setInteractable(false);
 					//characters["camille"].unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar, camille como conejillo de indias porque sí
@@ -148,16 +165,16 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				let prevNode;
 				// si tiene padre siquiera
 				if (dayData[real]?.hasOwnProperty("parent")) { // me he fumao un petardacoooo con cada linea de codigo de este método del demonioooooooooooooOOOOooOoo
-					padre = dayData[real].parent;
+					padre = dayData[real].parent; // le asigna su referencia y su nodo
 					prevNode = dayData[padre];
 				}
-				// solo si tiene un nodo padre y no es root (no es el primer nodo)
-				if (padre != undefined 
-				&& padre != "root"
-				&& prevNode != undefined
-				&& !prevNode.hasOwnProperty("choices")
-				&& !prevNode.hasOwnProperty("conditions")
-				&& !prevNode.hasOwnProperty("signals")) { 
+				
+				if (padre != undefined // si la referencia al padre existe
+				&& padre != "root" // y no es la raiz (no estás el primer nodo)
+				&& prevNode != undefined // si el padre existe
+				&& !prevNode.hasOwnProperty("choices") // si no vas a volver a una decision
+				&& !prevNode.hasOwnProperty("conditions") // ni a una condicion
+				&& !prevNode.hasOwnProperty("signals")) {  // ni a una señal
 					node = dayData[node].parent; // vuelve atrás
 					speak(prevNode); // blablabla
 				}
