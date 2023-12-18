@@ -90,7 +90,10 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 					// si el nodo ha de emitir un evento, lo emite
 					if (currentNode.hasOwnProperty("signals")) 
-						scene.eventEmitter?.emit(currentNode.signals.eventName.String, currentNode.signals[currentNode.signals.eventName.String].Number) //primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
+					{
+						scene.eventEmitter?.emit(currentNode.signals.eventName.String, currentNode.signals[currentNode.signals.eventName.String].String.toLowerCase()) //primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
+
+					}
 						/* 
 						!!! FORMATO EN JSON !!!
 						"signals": {
@@ -227,7 +230,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 */
 		scene.eventEmitter.on('decided', function (valor) {
 			blip?.play(); // si el sonido existe lo reproduce
-			console.log('OPCION DECIDIDA: ', valor);
+			//console.log('OPCION DECIDIDA: ', valor);
 			characters["camille"]?.focusEveryone(characters); // se enfoca a todo el mundo al hablar, camille como conejillo de indias porque sí
 			speak(dayData[node].choices[valor]);
 			node = dayData[node].choices[valor].next; // pasa al siguiente nodo
@@ -240,8 +243,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 * Cuando se recoge una señal de este tipo, sube la afinidad del personaje indicado
 		 */
 		scene.eventEmitter.on('affinityUp', function (valor) {
-			if (valor >= 0 && valor <= 3) //0 camille, 1 delilah, 2 matthew, 3 richard, cualquier valor que no sea de esos no suma (no entra en el caso, no porque haya proteccion contra eso en el player manager, no es un caso que vaya a ocurrir pero nunca se sabe)
-				playerManager?.increaseAffinity(valor);
+			playerManager?.increaseAffinity(valor);
 		});
 	}
 }
