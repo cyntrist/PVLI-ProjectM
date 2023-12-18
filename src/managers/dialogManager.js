@@ -16,6 +16,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 	 */
 	constructor(scene, playerManager, dayDatas, characters, nineslice, sound) {
 		super(scene, 0, 0);
+		
 		// crea la ventana de diálogo
 		scene.dialog = new DialogText(scene, {
 			borderThickness: 6,

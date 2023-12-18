@@ -22,21 +22,26 @@ export default class Demo extends Phaser.Scene
 	// Carga de assets
 	preload() {
 		this.canvas = this.sys.game.canvas;
+		//Sprites de los personajes
 		this.load.image('camilleph', './assets/images/personajes/camille.png');
 		this.load.image('delilahph', './assets/images/personajes/delilah.png');
 		this.load.image('matthewph', './assets/images/personajes/matthew.png');
 		this.load.image('richardph', './assets/images/personajes/richard.png');
 
+		//Lugares
 		this.load.image('clase', './assets/images/escenarios/clase2.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo.png');
 
+		//Botones
 		this.load.image('box', './assets/images/escenarios/opciones2.png')
 		this.load.image('movil', './assets/images/movil/movil.png');
 
+		//Sonidos
 		this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
 		this.load.audio('click', [ './assets/sounds/click.ogg', './assets/sounds/click.mp3' ]);
 		this.load.audio('bonk', [ './assets/sounds/bonk.ogg', './assets/sounds/bonk.mp3' ]);
 
+		//Diálogos
 		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/dia1_midday.json')
 		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/test_afinidad.json')
 		this.load.json('dia1mData', './assets/dialogue editor/Dialog Files/dia1_morning.json');
@@ -49,6 +54,7 @@ export default class Demo extends Phaser.Scene
 	create()
     {
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
+		//Carga de diálogos
 		const day1mData = this.cache.json.get('dia1mData'); 
 		const day2mData = this.cache.json.get('dia2mData'); 
 		const day3mData = this.cache.json.get('dia3mData'); 
