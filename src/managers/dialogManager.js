@@ -249,7 +249,17 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 }
 
 function CheckConditions(condicion, playerManager) { 
-	let affVal = playerManager.affinities[condicion.charNum.value]; //afinidad del personaje a mirar, charNum es un parametro del nodo de condicion pero que no se evalua, solo es para guardar informacion
+	let charName
+	switch(condicion.charNum.value)
+	{
+		case 0: charName = "camille"; break;
+		case 1: charName = "delilah"; break;
+		case 2: charName = "matthew"; break;
+		case 3: charName = "richard"; break;
+	}
+	//console.log(charName);
+	let affVal = playerManager.affinities[charName].points; //afinidad del personaje a mirar
+	//console.log(affVal);
 	if (condicion.affValue.operator == "lower") //dependiendo del operador de la condicion se comprueba una cosa u otra
 		return affVal < condicion.affValue.value; //el value es el valor con el que se quiere comparar la afinidad actual
 	else if (condicion.affValue.operator == "equal")
