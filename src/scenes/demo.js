@@ -90,10 +90,10 @@ export default class Demo extends Phaser.Scene
 			scene.add.sprite(0, padding, 'richardph').setScale(0.5,0.5)
 		]
 		// Creación de personajes
-		const camille = new Character(scene, width*1/5, height - sprites[0].displayHeight/2, sprites[0], "Camille", 0);
-		const delilah = new Character(scene, width*2/5, height - sprites[1].displayHeight/2, sprites[1], "Delilah", 1);
-		const matthew = new Character(scene, width*3/5, height - sprites[2].displayHeight/2, sprites[2], "Matthew", 2);
-		const richard = new Character(scene, width*4/5, height - sprites[3].displayHeight/2, sprites[3], "Richard", 3);
+		const camille = new Character(scene, width*1/5, height - sprites[0].displayHeight/2, sprites[0], "Camille");
+		const delilah = new Character(scene, width*2/5, height - sprites[1].displayHeight/2, sprites[1], "Delilah");
+		const matthew = new Character(scene, width*3/5, height - sprites[2].displayHeight/2, sprites[2], "Matthew");
+		const richard = new Character(scene, width*4/5, height - sprites[3].displayHeight/2, sprites[3], "Richard");
 		// DICCIONARIO (!IMPORTANTE!) de los personajes
 		const characters = { camille, delilah, matthew, richard } // corchetes array, brackets diccionario (objeto)
 		// descolorea a todos los personajes antes de empezar

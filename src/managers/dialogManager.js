@@ -46,11 +46,22 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		let node = dayData.root.next; // primer nodo
 		let decision; // scope dentro del constructor, va a ser la decisión cuando la haya
 		scene.dialog.setText(title, true); // imprime la línea de título
+		disableBehaviours();
+
 
 		 // !!! LOGICA DE VERDAD POR FIN VAMOSSSSSSSSSSSSSSS !!!
-		 // FUNCIONES (mayormente callbacks) 
+		// Controles:
+		/** 
+		 *  Barra espaciadora y click izquierdo avanzan el diálogo
+		 *  Flecha hacia arriba y click derecho retroceden el diálogo hasta donde sea posible
+		 */
+		scene.input.keyboard.on('keydown-SPACE', forward); // barra espaciadora
+		scene.input.keyboard.on('keydown-UP', backward); // flecha arriba
+		scene.dialog.graphics.on('pointerdown', callback); // click en el cuadro de diálogo, independiente de cual sea
+
 		/**
-		 * funcion para asignar los datos del día según un índice
+		 * Método para cambiar de JSON del que se están leyendo los nodos dentro  de un diccionario de los datos diarios.
+		 * @param {*} index - índice del perido de día a cargar en el diccionario de días
 		 */
 		function setDayData(index) {
 			let dayIndex = index; 
@@ -91,8 +102,8 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					// si el nodo ha de emitir un evento, lo emite
 					if (currentNode.hasOwnProperty("signals")) 
 					{
-						scene.eventEmitter?.emit(currentNode.signals.eventName.String, currentNode.signals[currentNode.signals.eventName.String].String.toLowerCase()) //primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
-
+						scene.eventEmitter?.emit(currentNode.signals.eventName.String, currentNode.signals[currentNode.signals.eventName.String].String.toLowerCase()) 
+						//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
 					}
 						/* 
 						!!! FORMATO EN JSON !!!
@@ -102,7 +113,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 								"String": "\"affinityUp\""	//este parametro indica el nombre del evento para poder acceder a el y al valor que se le quiere pasar
 							},
 							"affinityUp": {
-								"Number": "1"		//este otro parametro es el valor que se quiere
+								"String": "camille"		//este otro parametro es el valor que se quiere
 							}
 						}
 						*/
@@ -202,26 +213,19 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			scene.dialog?.setText(name + ":\n" + currentNode.text.es, true); // se escribe el último msj
 		 }
 
-		// INPUT !!!
 		/** 
 		 * para interceptar comportamientos indeseados 
 		*/ 
-		scene.input.mouse.disableContextMenu(); // no queremos menú de contexto en nuestro canvas, lo sentimos pero no está invitado a esta fiesta
-		scene.spacebar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // su fiesta le espera arriba (mentira, tampoco queremos que el espacio o las flechas hagan scroll)
-		scene.up = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP); // lo mismo pero para las flechas
-		scene.down = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN); // lo mismo pero para las flechas
-		if (Phaser.Input.Keyboard.JustDown(scene.spacebar) 
-		 || Phaser.Input.Keyboard.JustDown(scene.up)
-		 || Phaser.Input.Keyboard.JustDown(scene.down)) {}		
+		function disableBehaviours() {
+			scene.input.mouse.disableContextMenu(); // no queremos menú de contexto en nuestro canvas, lo sentimos pero no está invitado a esta fiesta
+			scene.spacebar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // su fiesta le espera arriba (mentira, tampoco queremos que el espacio o las flechas hagan scroll)
+			scene.up = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP); // lo mismo pero para las flechas
+			scene.down = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN); // lo mismo pero para las flechas
+			if (Phaser.Input.Keyboard.JustDown(scene.spacebar) 
+				|| Phaser.Input.Keyboard.JustDown(scene.up)
+				|| Phaser.Input.Keyboard.JustDown(scene.down)) {}		
+		}
 
-		// Controles:
-		/** 
-		 *  Barra espaciadora y click izquierdo avanzan el diálogo
-		 *  Flecha hacia arriba y click derecho retroceden el diálogo hasta donde sea posible
-		 */
-		scene.input.keyboard.on('keydown-SPACE', forward); // barra espaciadora
-		scene.input.keyboard.on('keydown-UP', backward); // flecha arriba
-		scene.dialog.graphics.on('pointerdown', callback); // click en el cuadro de diálogo, independiente de cual sea
 
 		// el resto de LISTENERS !!!
 		/**
