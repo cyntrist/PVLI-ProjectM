@@ -26,11 +26,16 @@ export default class MelonFlippeador extends Phaser.Scene
         // tuberia flippeando
         this.load.image('pipe', './assets/images/personajes/pipe2.png');
 
+        // musiquita de fondo
+        this.load.audio('melonMusic', ["./assets/sounds/a-short-story-loop-1/A Short Story loop 1.ogg"]);
+
     }
 
     create(){
 
         // -------------------- SETTEO INICIAL ---------------------
+
+        this.music  = this.sound.add("melonMusic", { loop: true });
 
         const scene = this // referencia a esta misma escena
 
@@ -119,6 +124,11 @@ export default class MelonFlippeador extends Phaser.Scene
     }
 
     update(){
+
+        //Activamos la música si no está ya activa
+        if(!this.music.isPlaying) {
+			this.music.play()
+		}
 
         // si el juego no ha acabado
         if(this.gameEnded === 0){
@@ -255,10 +265,12 @@ export default class MelonFlippeador extends Phaser.Scene
 
     restartGame(escena){
         escena.scene.restart();
+        this.music.pause();
     }
 
     ChangeScene(newScene, escena){
 		escena.scene.switch(newScene);
+        this.music.pause();
 	}
 }
 

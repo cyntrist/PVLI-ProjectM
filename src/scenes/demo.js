@@ -70,7 +70,7 @@ export default class Demo extends Phaser.Scene
     {
 		this.music  = this.sound.add("baseMusic", { loop: true });
 		this.music.play();
-		
+
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
 		// Scripts segun periodo de día
 		const day1mData = this.cache.json.get('dia1mData'); 
@@ -151,15 +151,19 @@ export default class Demo extends Phaser.Scene
 		let dialogManager = new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
     }
 
-	/*update() { 
-		if(this.nextBG === 1 &&  Scenary != 'clase') Scenary = 'clase';
+	update() { 
+		/*if(this.nextBG === 1 &&  Scenary != 'clase') Scenary = 'clase';
 		else if(this.nextBG === 2 && Scenary != 'pasillo') Scenary = 'pasillo';
 		if(this.nextBG != this.currentBG){
 			let bg = this.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
 			bg.depth = -2;
 			this.currentBG = this.nextBG;
+		}*/
+
+		if(!this.music.isPlaying) {
+			this.music.play()
 		}
-	}*/
+	}
 	
 	// cambia el escenario (la imagen de fondo)
 	ChangeScenary (bgName){
@@ -171,6 +175,7 @@ export default class Demo extends Phaser.Scene
 
 	ChangeScene(newScene, escena){
 		escena.scene.switch(newScene);
+		this.music.pause();
 	}
 
 	OverMovile() {
