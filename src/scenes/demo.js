@@ -81,33 +81,33 @@ export default class Demo extends Phaser.Scene
 		this.load.json('cannon_ending', './assets/dialogue editor/Dialog Files/cannon_ending.json');
 		this.load.json('confCamille', './assets/dialogue editor/Dialog Files/camille_confession.json');
 		this.load.json('confDelilah', './assets/dialogue editor/Dialog Files/delilah_confession.json');
-		// this.load.json('confMatthew', './assets/dialogue editor/Dialog Files/matthew_confession.json');
-		// this.load.json('confRichard', './assets/dialogue editor/Dialog Files/richard_confession.json');
+		this.load.json('confMatthew', './assets/dialogue editor/Dialog Files/matthew_confession.json');
+		this.load.json('confRichard', './assets/dialogue editor/Dialog Files/richard_confession.json');
     }
 
 	create()
     {
-		this.music  = this.sound.add("base_music", { loop: true });
+		this.music  = this.sound.add("base_music", { loop: true, volume: 0.5 });
 		this.music.play();
 
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
 		// Scripts segun periodo de día
-		const day1_morning_data = this.cache.json.get('day1_morning_data'); 
-		const day1_midday_data = this.cache.json.get('day1_midday_data'); 
-		const day2_morning_data = this.cache.json.get('day2_morning_data'); 
-		const day2_midday_data = this.cache.json.get('day2_midday_data'); 
-		const day3_morning_data = this.cache.json.get('day3_morning_data'); 
-		const day3_midday_data = this.cache.json.get('day3_midday_data'); 
-		const day4_morning_data = this.cache.json.get('day4_morning_data'); 
-		const day4_midday_data = this.cache.json.get('day4_midday_data'); 
-		const day5_morning_data = this.cache.json.get('day5_morning_data'); 
-		const day5_midday_data = this.cache.json.get('day5_midday_data'); 
+		const day1_morning_data	 = this.cache.json.get('day1_morning_data'); 
+		const day1_midday_data	 = this.cache.json.get('day1_midday_data'); 
+		const day2_morning_data	 = this.cache.json.get('day2_morning_data'); 
+		const day2_midday_data	 = this.cache.json.get('day2_midday_data'); 
+		const day3_morning_data	 = this.cache.json.get('day3_morning_data'); 
+		const day3_midday_data	 = this.cache.json.get('day3_midday_data'); 
+		const day4_morning_data	 = this.cache.json.get('day4_morning_data'); 
+		const day4_midday_data	 = this.cache.json.get('day4_midday_data'); 
+		const day5_morning_data	 = this.cache.json.get('day5_morning_data'); 
+		const day5_midday_data	 = this.cache.json.get('day5_midday_data'); 
 		const confession_context = this.cache.json.get('confContext'); 
-		const cannon_ending = this.cache.json.get('cannon_ending'); 
 		const camille_confession = this.cache.json.get('confCamille'); 
 		const delilah_confession = this.cache.json.get('confDelilah'); 
-		// const matthew_confession = this.cache.json.get('confMatthew'); 
-		// const richard_confession = this.cache.json.get('confRichard'); 
+		const matthew_confession = this.cache.json.get('confMatthew'); 
+		const richard_confession = this.cache.json.get('confRichard');
+		const cannon_ending		 = this.cache.json.get('cannon_ending');  
 
 		const dayDatas = { 
 			day1_morning_data, 
@@ -121,11 +121,11 @@ export default class Demo extends Phaser.Scene
 			day5_morning_data,
 			day5_midday_data,
 			confession_context,
-			cannon_ending,
 			camille_confession,
 			delilah_confession,
-			//matthew_confession,
-			//richard_confession
+			matthew_confession,
+			richard_confession,
+			cannon_ending
 		}; // !!!!!!!!!IMPORTANTE!! añadir aquí el resto de jsons que se generen 
 		
 		// Parámetros de la escena
@@ -216,7 +216,7 @@ export default class Demo extends Phaser.Scene
 	
 	ChangeMusic(musicName){
 		this.music.pause();
-		this.music  = this.sound.add(musicName, { loop: true });
+		this.music  = this.sound.add(musicName, { loop: true, volume: 0.5});
 		this.music.play();
 	}
 

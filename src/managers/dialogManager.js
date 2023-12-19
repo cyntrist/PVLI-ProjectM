@@ -46,7 +46,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		setDayData(i); // dia inicial, sea cual sea, en el diccionario
 		
 		// parámetros
-		const blip = scene.sound.add(sound, { volume: 1 }); // sonido de diálogo
+		const blip = scene.sound.add(sound, { volume: 2 }); // sonido de diálogo
 		let title = "\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"; // primera línea de título (sí, es justo lo que estás pensando, tiene todos esos espacios para que esté centrada (lo siento mucho))
 		let clicks = 0; // para contar dos clicks antes de decidir, una guarra da pero son las 6 de la mañana bestie
 		let node = dayData.root.next; // primer nodo
