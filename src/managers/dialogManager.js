@@ -230,7 +230,9 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			if (name == undefined || !valid) // si el nombre del nodo es undefined, habla y/n
 			{
 				name = "Y/N";
-				if (caracter === '*' || caracter === '(') {
+				if (
+					//caracter === '*' || 
+					caracter === '(') {
 					characters["camille"]?.unfocusEveryone(characters); 
 				}
 				else {
@@ -244,13 +246,15 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 * para interceptar comportamientos indeseados 
 		*/ 
 		function disableBehaviours() {
-			scene.input.mouse.disableContextMenu(); // no queremos menú de contexto en nuestro canvas, lo sentimos pero no está invitado a esta fiesta
-			scene.spacebar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // su fiesta le espera arriba (mentira, tampoco queremos que el espacio o las flechas hagan scroll)
+			scene.input.mouse.disableContextMenu(); 
+			scene.cursor = scene.input.keyboard.createCursorKeys();
+			// no queremos menú de contexto en nuestro canvas, lo sentimos pero no está invitado a esta fiesta
+			/*scene.spacebar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // su fiesta le espera arriba (mentira, tampoco queremos que el espacio o las flechas hagan scroll)
 			scene.up = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP); // lo mismo pero para las flechas
 			scene.down = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN); // lo mismo pero para las flechas
 			if (Phaser.Input.Keyboard.JustDown(scene.spacebar) 
 				|| Phaser.Input.Keyboard.JustDown(scene.up)
-				|| Phaser.Input.Keyboard.JustDown(scene.down)) {}		
+				|| Phaser.Input.Keyboard.JustDown(scene.down)) {}		*/
 		}
 
 
