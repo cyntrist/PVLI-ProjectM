@@ -98,7 +98,7 @@ export default class Character extends Phaser.GameObjects.Container {
         for (let p of Object.values(personajes)) { 
             p.setVisible(true);
         }
-        p.move(personajes);
+        this.move(personajes);
     }
 
     static onExitEveryone(personajes) {
