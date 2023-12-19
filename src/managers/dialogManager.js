@@ -1,5 +1,6 @@
 import DialogText from "../plugins/dialog_plugin.js";
 import Decision from "../objects/decision.js";
+import Character from "../objects/character.js"
 /**
  * Clase que maneja la lógica de diálogo
  * @extends Container
@@ -16,6 +17,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 	 */
 	constructor(scene, playerManager, dayDatas, characters, nineslice, sound) {
 		super(scene, 0, 0);
+
+		////////////////////////////////////////////////////////
+		////////        PARÁMETROS IMPORTANTES         /////////
+		////////////////////////////////////////////////////////
+
 		// crea la ventana de diálogo
 		scene.dialog = new DialogText(scene, {
 			borderThickness: 6,
@@ -40,14 +46,19 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		setDayData(i); // dia inicial, sea cual sea, en el diccionario
 		
 		// parámetros
-		const blip = scene.sound.add(sound, { volume: 0.5 }); // sonido de diálogo
+		const blip = scene.sound.add(sound, { volume: 1 }); // sonido de diálogo
 		let title = "\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"; // primera línea de título (sí, es justo lo que estás pensando, tiene todos esos espacios para que esté centrada (lo siento mucho))
 		let clicks = 0; // para contar dos clicks antes de decidir, una guarra da pero son las 6 de la mañana bestie
 		let node = dayData.root.next; // primer nodo
 		let decision; // scope dentro del constructor, va a ser la decisión cuando la haya
-		scene.dialog.setText(title, true); // imprime la línea de título
+		scene.dialog.setText(title, false); // imprime la línea de título
 		disableBehaviours();
+		Character.onExitEveryone(characters);
 
+
+		////////////////////////////////////////////////////////
+		/////////////   FUNCIONES Y CALLBACKS   ////////////////
+		////////////////////////////////////////////////////////
 
 		 // !!! LOGICA DE VERDAD POR FIN VAMOSSSSSSSSSSSSSSS !!!
 		// Controles:
@@ -100,11 +111,13 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 						speak(currentNode);
 
 					// si el nodo ha de emitir un evento, lo emite
+					///////////     EVENTO      ////////////
 					if (currentNode.hasOwnProperty("signals")) 
 					{
-						scene.eventEmitter?.emit(currentNode.signals.eventName.String, currentNode.signals[currentNode.signals.eventName.String].String.toLowerCase()) 
+						let currentEvent = currentNode.signals.eventName.String;
+						let currentValue = currentNode.signals[currentEvent]?.String?.toLowerCase();
+						scene.eventEmitter?.emit(currentEvent, currentValue); 
 						//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
-					}
 						/* 
 						!!! FORMATO EN JSON !!!
 						"signals": {
@@ -117,8 +130,10 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 							}
 						}
 						*/
+					}
 
 					// si el nodo lleva a una decisión
+					//////////     DECISION     ///////////
 					if (currentNode.hasOwnProperty("choices")) {
 						if (clicks >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
 							decision = new Decision(scene, currentNode.choices, nineslice); // genera una nueva decisión
@@ -129,6 +144,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					}
 
 					// si el nodo contiene una condición
+					//////////     CONDICION     //////////
 					else if (currentNode.hasOwnProperty("conditions")) { // else porque por definicion no puede haber nodos con tanto decisiones como condiciones a la vez
 						let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
 						let conditionCheck = false; //flag para solo comprobar una condicion
@@ -143,6 +159,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					}
 
 					// si no se cumple ninguna de las condiciones anteriores es simplemente continuacion lineal, tiene next
+					//////////      NEXT     //////////
 					else 
 						node = currentNode?.next;
 				}
@@ -152,7 +169,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					speak(currentNode);
 					setDayData(++i);
 					node = dayData.root.next;
-					//characters["camille"].unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar, camille como conejillo de indias porque sí
+					//Character.unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar
 				}
 			} 
 		};
@@ -208,8 +225,21 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		// escribir el texto en el cuadro de dialogo :-)
 		function speak(currentNode) {
 			let name = currentNode.name;
-			if (name == undefined) // si el nombre del nodo es undefined, habla y/n
+			const names = Object.values(characters).map(character => character.nombre);
+			let valid = names.includes(name);
+			let caracter = currentNode.text.es[0];
+			if (name == undefined || !valid) // si el nombre del nodo es undefined, habla y/n
+			{
 				name = "Y/N";
+				if (
+					//caracter === '*' || 
+					caracter === '(') {
+					Character.unfocusEveryone(characters); 
+				}
+				else {
+					Character.focusEveryone(characters); 
+				}
+			}
 			scene.dialog?.setText(name + ":\n" + currentNode.text.es, true); // se escribe el último msj
 		 }
 
@@ -217,27 +247,62 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 * para interceptar comportamientos indeseados 
 		*/ 
 		function disableBehaviours() {
-			scene.input.mouse.disableContextMenu(); // no queremos menú de contexto en nuestro canvas, lo sentimos pero no está invitado a esta fiesta
-			scene.spacebar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // su fiesta le espera arriba (mentira, tampoco queremos que el espacio o las flechas hagan scroll)
+			scene.input.mouse.disableContextMenu(); 
+			scene.cursor = scene.input.keyboard.createCursorKeys();
+			// no queremos menú de contexto en nuestro canvas, lo sentimos pero no está invitado a esta fiesta
+			/*scene.spacebar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // su fiesta le espera arriba (mentira, tampoco queremos que el espacio o las flechas hagan scroll)
 			scene.up = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP); // lo mismo pero para las flechas
 			scene.down = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN); // lo mismo pero para las flechas
 			if (Phaser.Input.Keyboard.JustDown(scene.spacebar) 
 				|| Phaser.Input.Keyboard.JustDown(scene.up)
-				|| Phaser.Input.Keyboard.JustDown(scene.down)) {}		
+				|| Phaser.Input.Keyboard.JustDown(scene.down)) {}		*/
 		}
 
 
-		// el resto de LISTENERS !!!
+
+
+
+		///////////////////////////////////////////
+		/////////      LISTENERS !!!     //////////
+		///////////////////////////////////////////
+		// con sus callbacks
+		
+		/// BLOQUE DE ESCUCHA PARA ENTRADA Y SALIDA DE PERSONAJES
+		// OJO: El FORMATO para lanzar un evento desde el programa de los JSON sería tal que:
+		// EMIT eventName STRING characterEnter
+		// EMIT characterEnter STRING camille
+		// -------------
+		// Nombre del evento: 'characterEnter'
+		// Personaje: 'camille'
+		// Ambos strings, excepto con los de everyoneExit/Enter, que no necesitan personajes
+		scene.eventEmitter.on('characterEnter', function(character) {
+			let name = character.toLowerCase();
+			characters[name].onEnter(characters);
+		}) 
+
+		scene.eventEmitter.on('characterExit', function(character) {
+			let name = character.toLowerCase();
+			characters[name].onExit();
+		})
+		
+		scene.eventEmitter.on('everyoneEnter', function() {
+			Character.onEnterEveryone(characters);
+		}) 
+
+		scene.eventEmitter.on('everyoneExit', function() {
+			Character.onExitEveryone(characters);
+		})
+
 		/**
 		 * Receptor del evento decided, que viene de decisionButton.
 		 * Cuando una opcion es escogida, actualiza el nodo en corcondancia
 		 */
 		scene.eventEmitter.on('decided', function (valor) {
 			blip?.play(); // si el sonido existe lo reproduce
-			//console.log('OPCION DECIDIDA: ', valor);
-			characters["camille"]?.focusEveryone(characters); // se enfoca a todo el mundo al hablar, camille como conejillo de indias porque sí
-			speak(dayData[node].choices[valor]);
-			node = dayData[node].choices[valor].next; // pasa al siguiente nodo
+			let decidida = dayData[node].choices[valor]
+			Character.focusEveryone(characters); // se enfoca a todo el mundo al hablar
+			speak(decidida);
+			node = decidida.next; // pasa al siguiente nodo
 			scene.dialog?.setInteractable(true); // devuelve la interaccion al cuadro de diálogo
 			decision?.destroy(); // destruye la decison
 		});
@@ -255,6 +320,10 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		});
 	}
 }
+
+
+
+
 
 function CheckConditions(condicion, playerManager) { 
 	let charName

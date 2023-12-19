@@ -1,5 +1,4 @@
 import Button from "../objects/button.js";
-
 export default class MelonFlippeador extends Phaser.Scene
 {
 
@@ -9,7 +8,6 @@ export default class MelonFlippeador extends Phaser.Scene
 
         // crea un emitidor de eventos
         this.emitter = new Phaser.Events.EventEmitter();
-       
 	}
 
 
@@ -25,7 +23,6 @@ export default class MelonFlippeador extends Phaser.Scene
 
         // tuberia flippeando
         this.load.image('pipe', './assets/images/personajes/pipe2.png');
-
     }
 
     create(){
@@ -64,16 +61,15 @@ export default class MelonFlippeador extends Phaser.Scene
         this.pipes = [];
 
         // crea el melon
-        this.mel = this.physics.add.sprite(150, 270, 'melon', 0).setOrigin(0.5,0.5);
+        scene.mel = this.physics.add.sprite(150, 270, 'melon', 0).setOrigin(0.5,0.5);
 
         // tween del melon
-        this.melonTween = this.tweens.add ({
+        scene.melonTween = this.tweens.add ({
             targets: this.mel,
 			duration: 200,
 		    angle: '+=360',
 			persist: true
         })
-
 
         // ------------------- COLISIONES ----------------
 
@@ -115,7 +111,10 @@ export default class MelonFlippeador extends Phaser.Scene
         this.pipeCooldown = 70;
         this.cdCounter = 0;
 
-        
+        // input por barra espaciadora
+        scene.input.keyboard.on('keydown-SPACE', function() {
+            scene.melonJump();
+        })
     }
 
     update(){
@@ -126,8 +125,7 @@ export default class MelonFlippeador extends Phaser.Scene
             // input
             if(this.cursor.up.isDown){
                 // salto
-                this.mel.setVelocityY(-200);
-                this.melonTween.play();
+                this.melonJump();
             }
 
             // gestion de pipes
@@ -146,7 +144,10 @@ export default class MelonFlippeador extends Phaser.Scene
         }
     }
 
-
+    melonJump() {
+        this.mel.setVelocityY(-200);
+        this.melonTween.play();
+    }
 
     pipeManager(){
         // si llega hace cosas

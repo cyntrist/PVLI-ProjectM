@@ -9,15 +9,17 @@ export default class Character extends Phaser.GameObjects.Container {
      * @param {number} x - posición X
 	 * @param {number} y - posicion Y
 	 * @param {String} nombre - nombre del personaje
+	 * @param {int} num - indice del personaje en el diccionario
      * @param {Sprite} sprite - identificador del sprite que se usará
      * @param {bool} focus - si estan hablando en el instante actual
 	 */
-    constructor(scene, x, y, sprite, nombre) {
+    constructor(scene, x, y, sprite, nombre, num) {
         super (scene, x, y);
         this.add(sprite);
         this.scene = scene;
         this.sprite = sprite;
         this.nombre = nombre;
+        this.index = num;
         this.sprite.setBlendMode(Phaser.BlendModes.DARKEN);
         this.onUnfocus(); // por defecto siempre aparecen oscuros
         scene.add.existing(this);
@@ -51,7 +53,7 @@ export default class Character extends Phaser.GameObjects.Container {
 	 * ilumina a todo el mundo
 	 * @param {Character[]} personajes - array de personajes sobre el que cicla para acceder y oscurecerlos.
 	 */
-    focusEveryone(personajes) {
+    static focusEveryone(personajes) {
         for (let p of Object.values(personajes)) { 
             p.onFocus();
         }
@@ -73,9 +75,56 @@ export default class Character extends Phaser.GameObjects.Container {
 	 * oscurece a todo el mundo, hablante inclusive
 	 * @param {Character[]} personajes - array de personajes sobre el que cicla para acceder y oscurecerlos.
 	 */
-    unfocusEveryone(personajes){ 
+    static unfocusEveryone(personajes){ 
         for (let p of Object.values(personajes)) { 
             p.onUnfocus();
         }
+    }
+
+
+    /////////////////////////////////////
+    ////// ENTRADA/SALIDA DE PJS  ///////
+    /////////////////////////////////////
+    onEnter(personajes) {
+        this.setVisible(true);
+        this.move(personajes)
+    }
+
+    onExit() {
+        this.setVisible(false);
+    }
+
+    static onEnterEveryone(personajes) {
+        for (let p of Object.values(personajes)) { 
+            p.onEnter(personajes);
+        }
+        for (let p of Object.values(personajes)) { 
+            if (p.visible)
+                p.move(personajes);
+        }
+    }
+
+    static onExitEveryone(personajes) {
+        for (let p of Object.values(personajes)) { 
+            p.onExit();
+        }
+    }
+
+    move(personajes) {
+        this.setX(this.scene.width * this.index / (Character.getVisibles(personajes) + 1));
+    }
+
+    /**
+     *  método para saber que personajes hay visibles ahora mismo
+     * @param {*} personajes - diccionario de personajes
+     * @returns la cantidad de personajes que hay vibiles ahora mismo
+     */
+    static getVisibles(personajes) {
+        let i = 0;
+        for (let p of Object.values(personajes)) { 
+            if (p.visible) 
+                ++i;
+        }
+        return i;
     }
 }
