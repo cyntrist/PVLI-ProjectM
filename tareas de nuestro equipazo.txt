@@ -1,11 +1,12 @@
 tareas de nuestro equipazo:
 - feedback de afinidad (paula)
 - eventos en el json:
-	>cambiar de fondo
-	>cambiar de personajes
-	>actualizar y regular eventos
-- soniditos
-- que subir afinidades vara por key y no por indice int (cyn o david)
-- reemplazar placeholders por cositas bonitas
-- ver afinidad en el movil (!)
+	>cambiar de personajes (cyn)
+	>actualizar y regular eventos (david)
+- presentacion (david)
+- gdd (david)
+- soniditos (paula)
+- dialogos (ines)
+- que subir afinidades vara por key y no por indice int (david)
+- reemplazar placeholders por cositas bonitas (ines)
 - hacer menu principal (paula)

@@ -12,6 +12,11 @@ export default class DialogText{
 	constructor(scene, opts){
 		this.scene = scene;
 		this.init(opts);
+		// CUSTOM: sonidito en cada letrita
+		this.clack1 = this.scene.sound.add('clack1', { volume: 2}); // sonido de diálogo
+		this.clack2 = this.scene.sound.add('clack2', { volume: 2}); // sonido de diálogo
+		this.clack3 = this.scene.sound.add('clack3', { volume: 2}); // sonido de diálogo
+		this.clacks = [ this.clack2, this.clack3 ];
 	}
 
 	init(opts) {
@@ -239,6 +244,19 @@ export default class DialogText{
 		//se va actualizando el texto de nuestro game object llamando a setText
 		this.text.setText(this.text.text + this.dialog[this.eventCounter - 1]);
 		
+
+
+	
+		////////////////////////////////////////
+		if (!this.clack1.isPlaying && !this.clack2.isPlaying && !this.clack3.isPlaying) {
+			const index = Math.floor(Math.random() * this.clacks.length);
+			this.clacks[index].play();
+			//this.clack.play();
+		}
+		///////////////////////////////////////
+
+
+
 		//Cuando eventCounter sea igual a la longitud del texto, se detiene el evento
 		if (this.eventCounter === this.dialog.length) {
 			this.timedEvent.remove();

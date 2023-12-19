@@ -9,17 +9,15 @@ export default class Character extends Phaser.GameObjects.Container {
      * @param {number} x - posición X
 	 * @param {number} y - posicion Y
 	 * @param {String} nombre - nombre del personaje
-     * @param {number} numero - numero del personaje (relacionado con el player manager)
      * @param {Sprite} sprite - identificador del sprite que se usará
      * @param {bool} focus - si estan hablando en el instante actual
 	 */
-    constructor(scene, x, y, sprite, nombre, num) {
+    constructor(scene, x, y, sprite, nombre) {
         super (scene, x, y);
         this.add(sprite);
         this.scene = scene;
         this.sprite = sprite;
         this.nombre = nombre;
-        this.numero = num;
         this.sprite.setBlendMode(Phaser.BlendModes.DARKEN);
         this.onUnfocus(); // por defecto siempre aparecen oscuros
         scene.add.existing(this);
@@ -78,6 +76,28 @@ export default class Character extends Phaser.GameObjects.Container {
     unfocusEveryone(personajes){ 
         for (let p of Object.values(personajes)) { 
             p.onUnfocus();
+        }
+    }
+
+
+    /////////////////////////////////////
+    onEnter() {
+        this.setVisible(true);
+    }
+
+    onExit() {
+        this.setVisible(false);
+    }
+
+    onEnterEveryone(personajes) {
+        for (let p of Object.values(personajes)) { 
+            p.onEnter();
+        }
+    }
+
+    onExitEveryone(personajes) {
+        for (let p of Object.values(personajes)) { 
+            p.onExit();
         }
     }
 }

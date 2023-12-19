@@ -16,7 +16,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 	 */
 	constructor(scene, playerManager, dayDatas, characters, nineslice, sound) {
 		super(scene, 0, 0);
-		
+
+		////////////////////////////////////////////////////////
+		////////        PARÁMETROS IMPORTANTES         /////////
+		////////////////////////////////////////////////////////
+
 		// crea la ventana de diálogo
 		scene.dialog = new DialogText(scene, {
 			borderThickness: 6,
@@ -41,17 +45,33 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		setDayData(i); // dia inicial, sea cual sea, en el diccionario
 		
 		// parámetros
-		const blip = scene.sound.add(sound, { volume: 0.5 }); // sonido de diálogo
+		const blip = scene.sound.add(sound, { volume: 1 }); // sonido de diálogo
 		let title = "\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"; // primera línea de título (sí, es justo lo que estás pensando, tiene todos esos espacios para que esté centrada (lo siento mucho))
 		let clicks = 0; // para contar dos clicks antes de decidir, una guarra da pero son las 6 de la mañana bestie
 		let node = dayData.root.next; // primer nodo
 		let decision; // scope dentro del constructor, va a ser la decisión cuando la haya
-		scene.dialog.setText(title, true); // imprime la línea de título
+		scene.dialog.setText(title, false); // imprime la línea de título
+		disableBehaviours();
+		characters["camille"].onExitEveryone(characters);
+
+
+		////////////////////////////////////////////////////////
+		/////////////   FUNCIONES Y CALLBACKS   ////////////////
+		////////////////////////////////////////////////////////
 
 		 // !!! LOGICA DE VERDAD POR FIN VAMOSSSSSSSSSSSSSSS !!!
-		 // FUNCIONES (mayormente callbacks) 
+		// Controles:
+		/** 
+		 *  Barra espaciadora y click izquierdo avanzan el diálogo
+		 *  Flecha hacia arriba y click derecho retroceden el diálogo hasta donde sea posible
+		 */
+		scene.input.keyboard.on('keydown-SPACE', forward); // barra espaciadora
+		scene.input.keyboard.on('keydown-UP', backward); // flecha arriba
+		scene.dialog.graphics.on('pointerdown', callback); // click en el cuadro de diálogo, independiente de cual sea
+
 		/**
-		 * funcion para asignar los datos del día según un índice
+		 * Método para cambiar de JSON del que se están leyendo los nodos dentro  de un diccionario de los datos diarios.
+		 * @param {*} index - índice del perido de día a cargar en el diccionario de días
 		 */
 		function setDayData(index) {
 			let dayIndex = index; 
@@ -90,8 +110,16 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 						speak(currentNode);
 
 					// si el nodo ha de emitir un evento, lo emite
+					///////////     EVENTO      ////////////
 					if (currentNode.hasOwnProperty("signals")) 
-						scene.eventEmitter?.emit(currentNode.signals.eventName.String, currentNode.signals[currentNode.signals.eventName.String].Number) //primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
+					{
+						let currentEvent = currentNode.signals.eventName.String;
+						let currentValue = currentNode.signals[currentEvent]?.String?.toLowerCase();
+						console.log(currentEvent);
+						console.log(currentValue);
+						scene.eventEmitter?.emit(currentEvent, currentValue); 
+						//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
+					}
 						/* 
 						!!! FORMATO EN JSON !!!
 						"signals": {
@@ -100,12 +128,13 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 								"String": "\"affinityUp\""	//este parametro indica el nombre del evento para poder acceder a el y al valor que se le quiere pasar
 							},
 							"affinityUp": {
-								"Number": "1"		//este otro parametro es el valor que se quiere
+								"String": "camille"		//este otro parametro es el valor que se quiere
 							}
 						}
 						*/
 
 					// si el nodo lleva a una decisión
+					//////////     DECISION     ///////////
 					if (currentNode.hasOwnProperty("choices")) {
 						if (clicks >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
 							decision = new Decision(scene, currentNode.choices, nineslice); // genera una nueva decisión
@@ -116,6 +145,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					}
 
 					// si el nodo contiene una condición
+					//////////     CONDICION     //////////
 					else if (currentNode.hasOwnProperty("conditions")) { // else porque por definicion no puede haber nodos con tanto decisiones como condiciones a la vez
 						let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
 						let conditionCheck = false; //flag para solo comprobar una condicion
@@ -130,6 +160,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					}
 
 					// si no se cumple ninguna de las condiciones anteriores es simplemente continuacion lineal, tiene next
+					//////////      NEXT     //////////
 					else 
 						node = currentNode?.next;
 				}
@@ -195,43 +226,80 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		// escribir el texto en el cuadro de dialogo :-)
 		function speak(currentNode) {
 			let name = currentNode.name;
-			if (name == undefined) // si el nombre del nodo es undefined, habla y/n
+			const names = Object.values(characters).map(character => character.nombre);
+			let valid = names.includes(name);
+			let caracter = currentNode.text.es[0];
+			if (name == undefined || !valid) // si el nombre del nodo es undefined, habla y/n
+			{
 				name = "Y/N";
+				if (caracter === '*' || caracter === '(') {
+					characters["camille"]?.unfocusEveryone(characters); 
+				}
+				else {
+					characters["camille"]?.focusEveryone(characters); 
+				}
+			}
 			scene.dialog?.setText(name + ":\n" + currentNode.text.es, true); // se escribe el último msj
 		 }
 
-		// INPUT !!!
 		/** 
 		 * para interceptar comportamientos indeseados 
 		*/ 
-		scene.input.mouse.disableContextMenu(); // no queremos menú de contexto en nuestro canvas, lo sentimos pero no está invitado a esta fiesta
-		scene.spacebar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // su fiesta le espera arriba (mentira, tampoco queremos que el espacio o las flechas hagan scroll)
-		scene.up = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP); // lo mismo pero para las flechas
-		scene.down = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN); // lo mismo pero para las flechas
-		if (Phaser.Input.Keyboard.JustDown(scene.spacebar) 
-		 || Phaser.Input.Keyboard.JustDown(scene.up)
-		 || Phaser.Input.Keyboard.JustDown(scene.down)) {}		
+		function disableBehaviours() {
+			scene.input.mouse.disableContextMenu(); // no queremos menú de contexto en nuestro canvas, lo sentimos pero no está invitado a esta fiesta
+			scene.spacebar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // su fiesta le espera arriba (mentira, tampoco queremos que el espacio o las flechas hagan scroll)
+			scene.up = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP); // lo mismo pero para las flechas
+			scene.down = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN); // lo mismo pero para las flechas
+			if (Phaser.Input.Keyboard.JustDown(scene.spacebar) 
+				|| Phaser.Input.Keyboard.JustDown(scene.up)
+				|| Phaser.Input.Keyboard.JustDown(scene.down)) {}		
+		}
 
-		// Controles:
-		/** 
-		 *  Barra espaciadora y click izquierdo avanzan el diálogo
-		 *  Flecha hacia arriba y click derecho retroceden el diálogo hasta donde sea posible
-		 */
-		scene.input.keyboard.on('keydown-SPACE', forward); // barra espaciadora
-		scene.input.keyboard.on('keydown-UP', backward); // flecha arriba
-		scene.dialog.graphics.on('pointerdown', callback); // click en el cuadro de diálogo, independiente de cual sea
 
-		// el resto de LISTENERS !!!
+
+
+
+		///////////////////////////////////////////
+		/////////      LISTENERS !!!     //////////
+		///////////////////////////////////////////
+		// con sus callbacks
+		
+		/// BLOQUE DE ESCUCHA PARA ENTRADA Y SALIDA DE PERSONAJES
+		// OJO: El FORMATO para lanzar un evento desde el programa de los JSON sería tal que:
+		// EMIT eventName STRING characterEnter
+		// EMIT characterEnter STRING camille
+		// -------------
+		// Nombre del evento: 'characterEnter'
+		// Personaje: 'camille'
+		// Ambos strings, excepto con los de everyoneExit/Enter, que no necesitan personajes
+		scene.eventEmitter.on('characterEnter', function(character) {
+			let name = character.toLowerCase();
+			characters[name].onEnter();
+		}) 
+
+		scene.eventEmitter.on('characterExit', function(character) {
+			let name = character.toLowerCase();
+			characters[name].onExit();
+		})
+		
+		scene.eventEmitter.on('everyoneEnter', function() {
+			characters["camille"].onEnterEveryone(characters);
+		}) 
+
+		scene.eventEmitter.on('everyoneExit', function() {
+			characters["camille"].onExitEveryone(characters);
+		})
+
 		/**
 		 * Receptor del evento decided, que viene de decisionButton.
 		 * Cuando una opcion es escogida, actualiza el nodo en corcondancia
 		 */
 		scene.eventEmitter.on('decided', function (valor) {
 			blip?.play(); // si el sonido existe lo reproduce
-			console.log('OPCION DECIDIDA: ', valor);
+			let decidida = dayData[node].choices[valor]
 			characters["camille"]?.focusEveryone(characters); // se enfoca a todo el mundo al hablar, camille como conejillo de indias porque sí
-			speak(dayData[node].choices[valor]);
-			node = dayData[node].choices[valor].next; // pasa al siguiente nodo
+			speak(decidida);
+			node = decidida.next; // pasa al siguiente nodo
 			scene.dialog?.setInteractable(true); // devuelve la interaccion al cuadro de diálogo
 			decision?.destroy(); // destruye la decison
 		});
@@ -241,14 +309,31 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 * Cuando se recoge una señal de este tipo, sube la afinidad del personaje indicado
 		 */
 		scene.eventEmitter.on('affinityUp', function (valor) {
-			if (valor >= 0 && valor <= 3) //0 camille, 1 delilah, 2 matthew, 3 richard, cualquier valor que no sea de esos no suma (no entra en el caso, no porque haya proteccion contra eso en el player manager, no es un caso que vaya a ocurrir pero nunca se sabe)
-				playerManager?.increaseAffinity(valor);
+			playerManager?.increaseAffinity(valor);
+		});
+
+		scene.eventEmitter.on('changeBg', function (valor) {
+			scene.ChangeScenary(valor);
 		});
 	}
 }
 
+
+
+
+
 function CheckConditions(condicion, playerManager) { 
-	let affVal = playerManager.affinities[condicion.charNum.value]; //afinidad del personaje a mirar, charNum es un parametro del nodo de condicion pero que no se evalua, solo es para guardar informacion
+	let charName
+	switch(condicion.charNum.value) //por desgracia los nodos de condiciones no dejan tener como parametro una string asi que se utiliza la codificacion de los personajes usada anteriormente
+	{
+		case 0: charName = "camille"; break;
+		case 1: charName = "delilah"; break;
+		case 2: charName = "matthew"; break;
+		case 3: charName = "richard"; break;
+	}
+	//console.log(charName);
+	let affVal = playerManager.affinities[charName].points; //afinidad del personaje a mirar
+	//console.log(affVal);
 	if (condicion.affValue.operator == "lower") //dependiendo del operador de la condicion se comprueba una cosa u otra
 		return affVal < condicion.affValue.value; //el value es el valor con el que se quiere comparar la afinidad actual
 	else if (condicion.affValue.operator == "equal")
