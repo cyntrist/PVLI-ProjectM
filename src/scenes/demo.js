@@ -174,7 +174,7 @@ export default class Demo extends Phaser.Scene
 		})
 	
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
-		let playerManager = new PlayerManager(0, 0, 0, 0);
+		let playerManager = new PlayerManager(0, 0, 0, 0, 'corazon', 'affCamille', 'affDelilah', 'affMatthew', 'affRichard', 10 ,700, scene );
 		let dialogManager = new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
     }
 
