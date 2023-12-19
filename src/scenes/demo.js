@@ -173,20 +173,30 @@ export default class Demo extends Phaser.Scene
 			persist: true
 		})
 	
+		//Afinidades
+		const images = [
+			scene.add.image(1200, 100, "affCamille").setScale(0.25).setVisible(false),
+			scene.add.image(1200, 100, "affDelilah").setScale(0.1).setVisible(false),
+			scene.add.image(1200, 100, "affMatthew").setScale(0.1).setVisible(false),
+			scene.add.image(1200, 100, "affRichard").setScale(0.1).setVisible(false)
+		]
+
+		//Tween de la afinidad
+		this.affinityTween = this.tweens.add({
+			targets: images[3],
+			duration: 200,
+			y: '-=20',
+			yoyo: true,
+			repeat: 2,
+			persist: true
+		})
+
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
 		let playerManager = new PlayerManager(0, 0, 0, 0, 'corazon', 'affCamille', 'affDelilah', 'affMatthew', 'affRichard', 10 ,700, scene );
 		let dialogManager = new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
     }
 
 	update() { 
-		/*if(this.nextBG === 1 &&  Scenary != 'clase') Scenary = 'clase';
-		else if(this.nextBG === 2 && Scenary != 'pasillo') Scenary = 'pasillo';
-		if(this.nextBG != this.currentBG){
-			let bg = this.add.image(0, 0, Scenary).setScale(0.35, 0.35).setOrigin(0, 0);
-			bg.depth = -2;
-			this.currentBG = this.nextBG;
-		}*/
-
 		if(!this.music.isPlaying) {
 			this.music.play()
 		}
@@ -205,6 +215,18 @@ export default class Demo extends Phaser.Scene
 		this.music.pause();
 	}
 
+	Affinity(pj) {
+
+		//pj es el string con el nombre del personaje al que le afecta la sub de afinidad
+		//Lo que yo quiero hacer es acceder a las imagenes (declarado arriba estan las 4 flechas de colores) y hacer visible la que toca
+		this.images[0].setVisible(true);
+
+		//Se ejecuta el tween (Se aplica sobre todas las flechas pero solo se va a ver la que esté visible)
+		this.affinityTween.play();
+
+		//la idea ahora es desactivarlo de nuevo para que no se vea ninguna
+		this.images[0].setVisible(false);
+	}
 	OverMovile() {
 		this.movilEnterTween.play();
 	}
