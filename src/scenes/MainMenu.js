@@ -9,13 +9,13 @@ export default class MainMenu extends Phaser.Scene {
 	preload (){
 		this.canvas = this.sys.game.canvas;
 
-		// fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo)
+		// fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
 		this.load.image('fondo_main', './assets/images/fondoweb/fondoraro.png');
 
 		// boton de play
 		this.load.image('logo', './assets/images/logo/logoconsombrapeque.png');
 
-		//Musica de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo)
+		//Musica de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
 		this.load.audio('main_music', ["/assets/sounds/dogs-and-cats/Dogs and Cats.mp3"]);
 	}
 

@@ -14,7 +14,7 @@ export default class MelonFlippeador extends Phaser.Scene
 
 
     preload(){
-        // fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo)
+        // fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
         this.load.image('fondo', './assets/images/escenarios/melonFlip.png');
 
         // boton de vuelta
@@ -26,7 +26,7 @@ export default class MelonFlippeador extends Phaser.Scene
         // tuberia flippeando
         this.load.image('pipe', './assets/images/personajes/pipe2.png');
 
-        // musiquita de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo)
+        // musiquita de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
         this.load.audio('melon_music', ["./assets/sounds/a-short-story-loop-1/A Short Story loop 1.ogg"]);
 
     }

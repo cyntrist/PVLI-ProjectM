@@ -28,7 +28,7 @@ export default class Demo extends Phaser.Scene
 		this.load.image('delilahph', './assets/images/personajes/delilah.png');
 		this.load.image('matthewph', './assets/images/personajes/matthew.png');
 		this.load.image('richardph', './assets/images/personajes/richard.png');
-		// Imágenes de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo)
+		// Imágenes de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
 		this.load.image('clase', './assets/images/escenarios/clase_peque.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo_peque.png');
 		// Imágenes de UI
@@ -43,10 +43,11 @@ export default class Demo extends Phaser.Scene
 		this.load.audio('clack1', [ './assets/sounds/clack1.ogg', './assets/sounds/clack1.mp3' ]);
 		this.load.audio('clack2', [ './assets/sounds/clack2.ogg', './assets/sounds/clack2.mp3' ]);
 		this.load.audio('clack3', [ './assets/sounds/clack3.ogg', './assets/sounds/clack3.mp3' ]);
-		//musiquita de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo)
+		//musiquita de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
 		this.load.audio('base_music', ["/assets/sounds/right-place-loop-1/Right Place Loop 1.ogg"]);
 		this.load.audio('main_music', ["/assets/sounds/dogs-and-cats/Dogs and Cats.mp3"]);
 		this.load.audio('melon_music', ["./assets/sounds/a-short-story-loop-1/A Short Story loop 1.ogg"]);
+		this.load.audio('movil_music', ["/assets/sounds/dogs-and-cats/Dogs and Cats.mp3"]);
 
 		// DATA
 		// Tests 
