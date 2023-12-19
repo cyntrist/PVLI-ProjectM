@@ -40,6 +40,7 @@ export default class Demo extends Phaser.Scene
 		//this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
 		//this.load.audio('click', [ './assets/sounds/click.ogg', './assets/sounds/click.mp3' ]);
 		this.load.audio('bonk', [ './assets/sounds/bonk.ogg', './assets/sounds/bonk.mp3' ]);
+		this.load.audio('clack', [ './assets/sounds/clack.ogg', './assets/sounds/clack.mp3' ]);
 
 		// DATA
 		// Tests
