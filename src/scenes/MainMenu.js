@@ -16,7 +16,7 @@ export default class MainMenu extends Phaser.Scene {
 		this.load.image('logo', './assets/images/logo/logoconsombrapeque.png');
 
 		//Musica de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
-		this.load.audio('main_music', ["/assets/sounds/dogs-and-cats/Dogs and Cats.mp3"]);
+		this.load.audio('main_music', ["/assets/sounds/musicas de fondo/dogs-and-cats/Dogs and Cats.mp3"]);
 	}
 
 	create (){
