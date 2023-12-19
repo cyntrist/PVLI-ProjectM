@@ -96,7 +96,7 @@ export default class Character extends Phaser.GameObjects.Container {
 
     static onEnterEveryone(personajes) {
         for (let p of Object.values(personajes)) { 
-            p.onEnter(personajes);
+            p.setVisible(true);
         }
         for (let p of Object.values(personajes)) { 
             if (p.visible)
