@@ -316,7 +316,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 			//Colocamos el fedback de afinidad
 			scene.Affinity(valor);
-			console.log("Afinidad");
+			//console.log("Afinidad");
 		});
 
 		scene.eventEmitter.on('changeBg', function (valor) {

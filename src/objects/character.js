@@ -87,7 +87,7 @@ export default class Character extends Phaser.GameObjects.Container {
     /////////////////////////////////////
     onEnter(personajes) {
         this.setVisible(true);
-        this.move(personajes)
+        this.move(personajes);
     }
 
     onExit() {
@@ -111,7 +111,13 @@ export default class Character extends Phaser.GameObjects.Container {
     }
 
     move(personajes) {
-        this.setX(this.scene.width * this.index / (Character.getVisibles(personajes) + 1));
+        let i = 0;
+        console.log("memuero");
+        for (let p of Object.values(personajes)) { 
+            if (p.visible)
+                p.setX(this.scene.width * i / (Character.getVisibles(personajes) + 1));
+                i++;
+        }
     }
 
     /**
