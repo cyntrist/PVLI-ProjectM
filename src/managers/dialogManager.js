@@ -112,7 +112,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					// si el nodo ha de emitir un evento, lo emite
 					if (currentNode.hasOwnProperty("signals")) 
 					{
-						scene.eventEmitter?.emit(currentNode.signals.eventName.String, currentNode.signals[currentNode.signals.eventName.String].String.toLowerCase()) 
+						let currentEvent = currentNode.signals.eventName.String;
+						let currentValue = currentNode.signals[currentEvent]?.String?.toLowerCase();
+						console.log(currentEvent);
+						console.log(currentValue);
+						scene.eventEmitter?.emit(currentEvent, currentValue); 
 						//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
 					}
 						/* 
@@ -264,11 +268,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		})
 		
 		scene.eventEmitter.on('everyoneEnter', function() {
-			characters["camille"].onEnter();
+			characters["camille"].onEnterEveryone(characters);
 		}) 
 
 		scene.eventEmitter.on('everyoneExit', function() {
-			characters["camille"].onExit();
+			characters["camille"].onExitEveryone(characters);
 		})
 
 		/**
