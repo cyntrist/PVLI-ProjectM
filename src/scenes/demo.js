@@ -35,6 +35,12 @@ export default class Demo extends Phaser.Scene
 		this.load.image('box', './assets/images/escenarios/opciones2.png')
 		this.load.image('movil', './assets/images/movil/movil.png');
 		this.load.image('9slice', './assets/images/ui/botones_decision_nineslice_muy_peque.png');
+		// Imagenes de afinidad
+		this.load.image('corazon', './assets/images/ui/feedback versiones grandes/feedback_corazon.png');
+		this.load.image('affCamille', './assets/images/ui/feedback versiones grandes/feedback_flecha_camille.png');
+		this.load.image('affDelilah', './assets/images/ui/feedback versiones grandes/feedback_flecha_delilah.png');
+		this.load.image('affMatthew', './assets/images/ui/feedback versiones grandes/feedback_flecha_matthew.png');
+		this.load.image('affRichard', './assets/images/ui/feedback versiones grandes/feedback_flecha_richard.png');
 
 		// SOUNDS
 		//this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
@@ -43,8 +49,8 @@ export default class Demo extends Phaser.Scene
 		// this.load.audio('clack1', [ './assets/sounds/clack1.ogg', './assets/sounds/clack1.mp3' ]);
 		this.load.audio('clack2', [ './assets/sounds/clack2.ogg', './assets/sounds/clack2.mp3' ]);
 		this.load.audio('clack3', [ './assets/sounds/clack3.ogg', './assets/sounds/clack3.mp3' ]);
-		//musiquita de fondo
-		this.load.audio('baseMusic', ["/assets/sounds/right-place-loop-1/Right Place Loop 1.ogg"]);
+		//	musiquita de fondo
+		this.load.audio('baseMusic', ["/assets/sounds/musicas de fondo/right-place-loop-1/Right Place Loop 1.ogg"]);
 		
 
 		// DATA

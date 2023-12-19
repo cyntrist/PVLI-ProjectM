@@ -19,7 +19,7 @@ export default class Movil extends Phaser.Scene {
 		this.load.image('melonflip', './assets/images/movil/melonFlip.png');
 
 		// musiquita de fondo
-		this.load.audio('movileMusic', ["/assets/sounds/dogs-and-cats/Dogs and Cats.mp3"]);
+		this.load.audio('movileMusic', ["/assets/sounds/musicas de fondo/dogs-and-cats/Dogs and Cats.mp3"]);
 
 	}
 

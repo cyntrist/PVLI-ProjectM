@@ -25,7 +25,7 @@ export default class MelonFlippeador extends Phaser.Scene
         this.load.image('pipe', './assets/images/personajes/pipe2.png');
 
         // musiquita de fondo
-        this.load.audio('melonMusic', ["./assets/sounds/a-short-story-loop-1/A Short Story loop 1.ogg"]);
+        this.load.audio('melonMusic', ["./assets/sounds/musicas de fondo/a-short-story-loop-1/A Short Story loop 1.ogg"]);
         // sonido del flipeo
         this.load.audio('flipMelon', ["./assets/sounds/sfx-magic11/sfx-magic11.mp3"]);
         // sonido de derrota

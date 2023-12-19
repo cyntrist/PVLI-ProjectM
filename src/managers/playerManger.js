@@ -1,6 +1,13 @@
 //import {Background} from "../objects/background.js"
 export default class PlayerManager {
 
+    /**
+     * @param {*} cAFF - afinidad con camille
+     * @param {*} dAff - afinidad con Delilah
+     * @param {*} mAff - afinidad con Matthew
+     * @param {*} rAff - afinidad con Richard
+	 */
+    
     constructor(cAff, dAff, mAff, rAff) {
         this.affinities = {
             camille: { points: cAff, scalingStat: "charisma" },
