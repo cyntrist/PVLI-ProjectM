@@ -1,8 +1,7 @@
 tareas de nuestro equipazo:
 - feedback de afinidad (paula)
 - eventos en el json:
-	>cambiar de fondo
-	>cambiar de personajes
+	>cambiar de personajes (cyn)
 	>actualizar y regular eventos (david)
 - presentacion (david)
 - gdd (david)
@@ -10,5 +9,4 @@ tareas de nuestro equipazo:
 - dialogos (ines)
 - que subir afinidades vara por key y no por indice int (david)
 - reemplazar placeholders por cositas bonitas (ines)
-- ver afinidad en el movil (!)
 - hacer menu principal (paula)

@@ -51,12 +51,13 @@ export default class Demo extends Phaser.Scene
 		this.load.json('dia2mData', './assets/dialogue editor/Dialog Files/dia2_morning.json');
 		this.load.json('dia3mData', './assets/dialogue editor/Dialog Files/dia3_morning.json');
 		this.load.json('dia4mData', './assets/dialogue editor/Dialog Files/dia4_morning.json');
+		this.load.json('dia5mData', './assets/dialogue editor/Dialog Files/dia5_morning.json');
 
 		// Midday
 		this.load.json('dia1mdData', './assets/dialogue editor/Dialog Files/dia1_midday.json');
-		//this.load.json('dia2mdData', './assets/dialogue editor/Dialog Files/dia2_midday.json');
-		//this.load.json('dia3mdData', './assets/dialogue editor/Dialog Files/dia3_midday.json');
-		//this.load.json('dia4mdData', './assets/dialogue editor/Dialog Files/dia4_midday.json');
+		this.load.json('dia2mdData', './assets/dialogue editor/Dialog Files/dia2_midday.json');
+		this.load.json('dia3mdData', './assets/dialogue editor/Dialog Files/dia3_midday.json');
+		this.load.json('dia4mdData', './assets/dialogue editor/Dialog Files/dia4_midday.json');
     }
 
 	create()
@@ -66,14 +67,22 @@ export default class Demo extends Phaser.Scene
 		const day1mData = this.cache.json.get('dia1mData'); 
 		const day1mdData = this.cache.json.get('dia1mdData'); 
 		const day2mData = this.cache.json.get('dia2mData'); 
+		const day2mdData = this.cache.json.get('dia2mdData'); 
 		const day3mData = this.cache.json.get('dia3mData'); 
+		const day3mdData = this.cache.json.get('dia3mdData'); 
 		const day4mData = this.cache.json.get('dia4mData'); 
+		const day4mdData = this.cache.json.get('dia4mdData'); 
+		const day5mData = this.cache.json.get('dia5mData'); 
 		const dayDatas = { 
 			day1mData, 
 			day1mdData,
 			day2mData, 
-			day3mData, 
-			day4mData 
+			day2mdData,
+			day3mData,
+			day3mdData, 
+			day4mData,
+			day4mdData,
+			day5mData
 		}; // !!!!!!!!!IMPORTANTE!! añadir aquí el resto de jsons que se generen 
 		
 		// Parámetros de la escena
