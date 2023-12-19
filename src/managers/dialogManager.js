@@ -54,11 +54,6 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		scene.dialog.setText(title, false); // imprime la línea de título
 		disableBehaviours();
 		Character.onExitEveryone(characters);
-		//Character.onEnterEveryone(characters);
-		//characters["camille"].onEnter(characters);
-		//characters["delilah"].onEnter(characters);
-		//characters["matthew"].onEnter(characters);
-		//characters["richard"].onEnter(characters);
 
 
 		////////////////////////////////////////////////////////
@@ -121,6 +116,12 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					{
 						let currentEvent = currentNode?.signals?.eventName?.String;
 						let currentValue = currentNode?.signals[currentEvent]?.String?.toLowerCase();
+						console.log("EVENTOOOOO: " + currentEvent);
+						console.log("VALOOOOOOR DEL EVENTOOOOOOO: " + currentValue);
+						if (currentEvent == undefined) {
+							console.log(currentNode);
+							console.log(currentNode.signals);
+						}
 						scene.eventEmitter?.emit(currentEvent, currentValue); 
 						//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
 						/* 
