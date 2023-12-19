@@ -29,16 +29,16 @@ export default class Demo extends Phaser.Scene
 		this.load.image('matthewph', './assets/images/personajes/matthew.png');
 		this.load.image('richardph', './assets/images/personajes/richard.png');
 		// Imágenes de fondo
-		this.load.image('clase', './assets/images/escenarios/clase2.png');
-		this.load.image('pasillo', './assets/images/escenarios/pasillo.png');
+		this.load.image('clase', './assets/images/escenarios/clase_peque.png');
+		this.load.image('pasillo', './assets/images/escenarios/pasillo_peque.png');
 		// Imágenes de UI
 		this.load.image('box', './assets/images/escenarios/opciones2.png')
 		this.load.image('movil', './assets/images/movil/movil.png');
 		this.load.image('9slice', './assets/images/ui/botones_decision_nineslice_muy_peque.png');
 
 		// SOUNDS
-		this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
-		this.load.audio('click', [ './assets/sounds/click.ogg', './assets/sounds/click.mp3' ]);
+		//this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
+		//this.load.audio('click', [ './assets/sounds/click.ogg', './assets/sounds/click.mp3' ]);
 		this.load.audio('bonk', [ './assets/sounds/bonk.ogg', './assets/sounds/bonk.mp3' ]);
 
 		// DATA
@@ -112,7 +112,7 @@ export default class Demo extends Phaser.Scene
 		// pone el fondo
 		this.nextBG = 1;
 		this.currentBG = 1;
-		let bg = scene.add.image(0, 0, "clase").setScale(0.35, 0.35).setOrigin(0, 0);
+		let bg = scene.add.image(0, 0, "clase").setScale(0.8, 0.8).setOrigin(0, 0);
 		bg.depth = -2;
 
 		// crea el botón del movil
@@ -155,7 +155,7 @@ export default class Demo extends Phaser.Scene
 	// cambia el escenario (la imagen de fondo)
 	ChangeScenary (newImage, escena){
 		// crea una imagen en la escena dada 
-		let bg = escena.add.image(0, 0, newImage).setScale(0.35, 0.35).setOrigin(0, 0);
+		let bg = escena.add.image(0, 0, newImage).setScale(0.8,0.8).setOrigin(0, 0);
 		// ajusta la capa
 		bg.depth = -2;
 	}
