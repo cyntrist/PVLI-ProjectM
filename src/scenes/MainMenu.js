@@ -9,24 +9,24 @@ export default class MainMenu extends Phaser.Scene {
 	preload (){
 		this.canvas = this.sys.game.canvas;
 
-		// fondo
-		this.load.image('fondoMain', './assets/images/fondoweb/fondoraro.png');
+		// fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
+		this.load.image('fondo_main', './assets/images/fondoweb/fondoraro.png');
 
 		// boton de play
 		this.load.image('logo', './assets/images/logo/logoconsombrapeque.png');
 
-		//Musica de fondo
-		this.load.audio('mainMusic', ["/assets/sounds/musicas de fondo/dogs-and-cats/Dogs and Cats.mp3"]);
+		//Musica de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
+		this.load.audio('main_music', ["/assets/sounds/dogs-and-cats/Dogs and Cats.mp3"]);
 	}
 
 	create (){
 		//Añadimos la musiquita y le damos al play
-		this.music = this.sound.add("mainMusic", { loop: true });
+		this.music = this.sound.add("main_music", { loop: true });
 		this.music.play();
 
 		const scene = this // referencia a esta misma escena
 		// pone el fondo
-		let bg = this.add.image(0, 0, 'fondoMain').setScale(0.5).setOrigin(0, 0);
+		let bg = this.add.image(0, 0, 'fondo_main').setScale(0.5).setOrigin(0, 0);
 		bg.depth = -2;
 
 		// boton de play

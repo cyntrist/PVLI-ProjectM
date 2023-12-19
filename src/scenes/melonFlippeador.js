@@ -12,7 +12,7 @@ export default class MelonFlippeador extends Phaser.Scene
 
 
     preload(){
-        // fondo
+        // fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
         this.load.image('fondo', './assets/images/escenarios/melonFlip.png');
 
         // boton de vuelta
@@ -24,12 +24,12 @@ export default class MelonFlippeador extends Phaser.Scene
         // tuberia flippeando
         this.load.image('pipe', './assets/images/personajes/pipe2.png');
 
-        // musiquita de fondo
-        this.load.audio('melonMusic', ["./assets/sounds/musicas de fondo/a-short-story-loop-1/A Short Story loop 1.ogg"]);
+        // musiquita de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
+        this.load.audio('melon_music', ["./assets/sounds/a-short-story-loop-1/A Short Story loop 1.ogg"]);
         // sonido del flipeo
-        this.load.audio('flipMelon', ["./assets/sounds/sfx-magic11/sfx-magic11.mp3"]);
+        this.load.audio('flip_melon', ["./assets/sounds/sfx-magic11/sfx-magic11.mp3"]);
         // sonido de derrota
-        this.load.audio('gameOver', ["./assets/sounds/sfx-defeat4/sfx-defeat4.mp3"]);
+        this.load.audio('game_over', ["./assets/sounds/sfx-defeat4/sfx-defeat4.mp3"]);
 
     }
 
@@ -37,9 +37,9 @@ export default class MelonFlippeador extends Phaser.Scene
 
         // -------------------- SETTEO INICIAL ---------------------
 
-        this.music  = this.sound.add("melonMusic", { loop: true });
-        this.flip  = this.sound.add("flipMelon", { loop: false });
-        this.gameOverSound  = this.sound.add("gameOver", { loop: false });
+        this.music  = this.sound.add("melon_music", { loop: true });
+        this.flip  = this.sound.add("flip_melon", { loop: false });
+        this.gameOverSound  = this.sound.add("game_over", { loop: false });
 
         const scene = this // referencia a esta misma escena
 
