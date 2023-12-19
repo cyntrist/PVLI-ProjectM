@@ -1,11 +1,7 @@
 //import {Background} from "../objects/background.js"
 export default class PlayerManager {
-    /**
-	 * Contructor
-	 * @param {String} AffinitySprite // sprite de la afinidad
-	 */
 
-    constructor(cAff, dAff, mAff, rAff, AffinitySprite) {
+    constructor(cAff, dAff, mAff, rAff) {
         this.affinities = {
             camille: { points: cAff, scalingStat: "charisma" },
             delilah: { points: dAff, scalingStat: "kindness" },
@@ -17,10 +13,6 @@ export default class PlayerManager {
 
         this.affIncrease = 100;
 
-        // creamos el sprite
-		this.aff = new Phaser.GameObjects.Sprite(scene, x, y, boxSprite);
-		this.box.setScale(2, 2);
-		this.add(this.box);
     }
 
     increaseAffinity(charName) { //como parametro una string del nombre de personaje

@@ -26,6 +26,10 @@ export default class MelonFlippeador extends Phaser.Scene
 
         // musiquita de fondo
         this.load.audio('melonMusic', ["./assets/sounds/a-short-story-loop-1/A Short Story loop 1.ogg"]);
+        // sonido del flipeo
+        this.load.audio('flipMelon', ["./assets/sounds/sfx-magic11/sfx-magic11.mp3"]);
+        // sonido de derrota
+        this.load.audio('gameOver', ["./assets/sounds/sfx-defeat4/sfx-defeat4.mp3"]);
 
     }
 
@@ -34,6 +38,8 @@ export default class MelonFlippeador extends Phaser.Scene
         // -------------------- SETTEO INICIAL ---------------------
 
         this.music  = this.sound.add("melonMusic", { loop: true });
+        this.flip  = this.sound.add("flipMelon", { loop: false });
+        this.gameOverSound  = this.sound.add("gameOver", { loop: false });
 
         const scene = this // referencia a esta misma escena
 
@@ -84,6 +90,7 @@ export default class MelonFlippeador extends Phaser.Scene
 
             // cuando colisiona memite el evento
             this.emitter.emit('died', this);
+            this.gameOverSound.play();
         });
 
         // ----------------- END GAME EVENT ---------------------
@@ -158,6 +165,7 @@ export default class MelonFlippeador extends Phaser.Scene
     melonJump() {
         this.mel.setVelocityY(-200);
         this.melonTween.play();
+        this.flip.play();
     }
 
     pipeManager(){
