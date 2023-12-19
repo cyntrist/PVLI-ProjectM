@@ -40,7 +40,7 @@ export default class Demo extends Phaser.Scene
 		//this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
 		//this.load.audio('click', [ './assets/sounds/click.ogg', './assets/sounds/click.mp3' ]);
 		this.load.audio('bonk', [ './assets/sounds/bonk.ogg', './assets/sounds/bonk.mp3' ]);
-		this.load.audio('clack1', [ './assets/sounds/clack1.ogg', './assets/sounds/clack1.mp3' ]);
+		// this.load.audio('clack1', [ './assets/sounds/clack1.ogg', './assets/sounds/clack1.mp3' ]);
 		this.load.audio('clack2', [ './assets/sounds/clack2.ogg', './assets/sounds/clack2.mp3' ]);
 		this.load.audio('clack3', [ './assets/sounds/clack3.ogg', './assets/sounds/clack3.mp3' ]);
 		//musiquita de fondo
@@ -64,6 +64,14 @@ export default class Demo extends Phaser.Scene
 		this.load.json('dia2mdData', './assets/dialogue editor/Dialog Files/dia2_midday.json');
 		this.load.json('dia3mdData', './assets/dialogue editor/Dialog Files/dia3_midday.json');
 		this.load.json('dia4mdData', './assets/dialogue editor/Dialog Files/dia4_midday.json');
+		this.load.json('dia5mdData', './assets/dialogue editor/Dialog Files/dia4_midday.json');
+
+		// Confessions
+		// this.load.json('confContext', './assets/dialogue editor/Dialog Files/dia1_midday.json');
+		// this.load.json('confCamille', './assets/dialogue editor/Dialog Files/dia2_midday.json');
+		// this.load.json('confDelilah', './assets/dialogue editor/Dialog Files/dia3_midday.json');
+		// this.load.json('confMatthew', './assets/dialogue editor/Dialog Files/dia4_midday.json');
+		// this.load.json('confRichard', './assets/dialogue editor/Dialog Files/dia4_midday.json');
     }
 
 	create()
@@ -82,6 +90,13 @@ export default class Demo extends Phaser.Scene
 		const day4mData = this.cache.json.get('dia4mData'); 
 		const day4mdData = this.cache.json.get('dia4mdData'); 
 		const day5mData = this.cache.json.get('dia5mData'); 
+		const day5mdData = this.cache.json.get('dia5mdData'); 
+		// const confession_context = this.cache.json.get('confContext'); 
+		// const camille_confession = this.cache.json.get('confCamille'); 
+		// const delilah_confession = this.cache.json.get('confDelilah'); 
+		// const matthew_confession = this.cache.json.get('confMatthew'); 
+		// const richard_confession = this.cache.json.get('confRichard'); 
+
 		const dayDatas = { 
 			day1mData, 
 			day1mdData,
@@ -91,7 +106,13 @@ export default class Demo extends Phaser.Scene
 			day3mdData, 
 			day4mData,
 			day4mdData,
-			day5mData
+			day5mData,
+			day5mdData,
+			//confession_context,
+			//camille_confession,
+			//delilah_confession,
+			//matthew_confession,
+			//richard_confession
 		}; // !!!!!!!!!IMPORTANTE!! añadir aquí el resto de jsons que se generen 
 		
 		// Parámetros de la escena
