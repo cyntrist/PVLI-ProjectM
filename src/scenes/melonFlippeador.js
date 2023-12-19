@@ -13,16 +13,17 @@ export default class MelonFlippeador extends Phaser.Scene
 
     preload(){
         // fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
-        this.load.image('fondo', './assets/images/escenarios/melonFlip.png');
+        this.load.image('fondo', './assets/images/escenarios/melonFlip2.png');
 
         // boton de vuelta
         this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
 
         // melon flippeando
-        this.load.image('melon', './assets/images/personajes/melonQueFlippea2.png');
+        this.load.image('melon', './assets/images/personajes/melonQueFlippea3.png');
 
         // tuberia flippeando
-        this.load.image('pipe', './assets/images/personajes/pipe2.png');
+        this.load.image('pipe', './assets/images/personajes/pipe3_1_1.png');
+
 
         // musiquita de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
         this.load.audio('melon_music', ["./assets/sounds/musicas de fondo/a-short-story-loop-1/A Short Story loop 1.ogg"]);
@@ -74,6 +75,7 @@ export default class MelonFlippeador extends Phaser.Scene
 
         // crea el melon
         scene.mel = this.physics.add.sprite(150, 270, 'melon', 0).setOrigin(0.5,0.5);
+        scene.mel.setScale(1.5, 1.5);
 
         // tween del melon
         scene.melonTween = this.tweens.add ({
@@ -228,9 +230,12 @@ export default class MelonFlippeador extends Phaser.Scene
 
 
         // crea una tuberia de abajo
-        this.BOTpipe = this.PIPE.create(1200, height + 600).body.setAllowGravity(false);
+        this.BOTpipe = this.PIPE.create(1200, height + 700).body.setAllowGravity(false);
         this.BOTpipe.setVelocity(-100, 0);
         this.BOTpipe.depth = 2;
+        this.BOTpipe.rotate += 1;
+
+        console.log(this.BOTpipe.rotate);
         this.pipes.push(this.BOTpipe);
 
     }
