@@ -9,7 +9,7 @@ export default class Movil extends Phaser.Scene {
 	preload (){
 		this.canvas = this.sys.game.canvas;
 
-		// fondo
+		// fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo)
 		this.load.image('movilph', './assets/images/escenarios/movilPH.png');
 
 		// boton de vuelta
@@ -18,14 +18,14 @@ export default class Movil extends Phaser.Scene {
 		// boton melon flip
 		this.load.image('melonflip', './assets/images/movil/melonFlip.png');
 
-		// musiquita de fondo
-		this.load.audio('movileMusic', ["/assets/sounds/dogs-and-cats/Dogs and Cats.mp3"]);
+		// musiquita de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo)
+		this.load.audio('movil_music', ["/assets/sounds/dogs-and-cats/Dogs and Cats.mp3"]);
 
 	}
 
 	create (){
 
-		this.music  = this.sound.add("movileMusic", { loop: true });
+		this.music  = this.sound.add("movil_music", { loop: true });
 		this.music.play();
 
 		const scene = this // referencia a esta misma escena

@@ -315,6 +315,10 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		scene.eventEmitter.on('changeBg', function (valor) {
 			scene.ChangeScenary(valor);
 		});
+
+		scene.eventEmitter.on('changeMusic', function(valor){
+			scene.ChangeMusic(valor);
+		});
 	}
 }
 
