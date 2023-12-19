@@ -90,30 +90,34 @@ export default class Character extends Phaser.GameObjects.Container {
         this.move(personajes);
     }
 
-    onExit() {
+    onExit(personajes) {
         this.setVisible(false);
+        this.move(personajes);
     }
 
     static onEnterEveryone(personajes) {
         for (let p of Object.values(personajes)) { 
             p.setVisible(true);
         }
-        this.move(personajes);
+        for (let p of Object.values(personajes)) { 
+            if (p.visible)
+                p.move(personajes);
+        }
     }
 
     static onExitEveryone(personajes) {
         for (let p of Object.values(personajes)) { 
-            p.onExit();
+            p.onExit(personajes);
         }
     }
 
     move(personajes) {
-        let i = 0;
-        console.log("memuero");
+        let i = 1;
         for (let p of Object.values(personajes)) { 
-            if (p.visible)
-                p.setX(this.scene.width * i / (Character.getVisibles(personajes) + 1));
+            if (p.visible) {
+                p.setX(p.scene.width * i / (Character.getVisibles(personajes) + 1));
                 i++;
+            }
         }
     }
 
