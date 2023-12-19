@@ -29,17 +29,20 @@ export default class Demo extends Phaser.Scene
 		this.load.image('matthewph', './assets/images/personajes/matthew.png');
 		this.load.image('richardph', './assets/images/personajes/richard.png');
 		// Imágenes de fondo
-		this.load.image('clase', './assets/images/escenarios/clase2.png');
-		this.load.image('pasillo', './assets/images/escenarios/pasillo.png');
+		this.load.image('clase', './assets/images/escenarios/clase_peque.png');
+		this.load.image('pasillo', './assets/images/escenarios/pasillo_peque.png');
 		// Imágenes de UI
 		this.load.image('box', './assets/images/escenarios/opciones2.png')
 		this.load.image('movil', './assets/images/movil/movil.png');
 		this.load.image('9slice', './assets/images/ui/botones_decision_nineslice_muy_peque.png');
 
 		// SOUNDS
-		this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
-		this.load.audio('click', [ './assets/sounds/click.ogg', './assets/sounds/click.mp3' ]);
+		//this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
+		//this.load.audio('click', [ './assets/sounds/click.ogg', './assets/sounds/click.mp3' ]);
 		this.load.audio('bonk', [ './assets/sounds/bonk.ogg', './assets/sounds/bonk.mp3' ]);
+		this.load.audio('clack1', [ './assets/sounds/clack1.ogg', './assets/sounds/clack1.mp3' ]);
+		this.load.audio('clack2', [ './assets/sounds/clack2.ogg', './assets/sounds/clack2.mp3' ]);
+		this.load.audio('clack3', [ './assets/sounds/clack3.ogg', './assets/sounds/clack3.mp3' ]);
 
 		// DATA
 		// Tests
@@ -51,12 +54,13 @@ export default class Demo extends Phaser.Scene
 		this.load.json('dia2mData', './assets/dialogue editor/Dialog Files/dia2_morning.json');
 		this.load.json('dia3mData', './assets/dialogue editor/Dialog Files/dia3_morning.json');
 		this.load.json('dia4mData', './assets/dialogue editor/Dialog Files/dia4_morning.json');
+		this.load.json('dia5mData', './assets/dialogue editor/Dialog Files/dia5_morning.json');
 
 		// Midday
 		this.load.json('dia1mdData', './assets/dialogue editor/Dialog Files/dia1_midday.json');
-		//this.load.json('dia2mdData', './assets/dialogue editor/Dialog Files/dia2_midday.json');
-		//this.load.json('dia3mdData', './assets/dialogue editor/Dialog Files/dia3_midday.json');
-		//this.load.json('dia4mdData', './assets/dialogue editor/Dialog Files/dia4_midday.json');
+		this.load.json('dia2mdData', './assets/dialogue editor/Dialog Files/dia2_midday.json');
+		this.load.json('dia3mdData', './assets/dialogue editor/Dialog Files/dia3_midday.json');
+		this.load.json('dia4mdData', './assets/dialogue editor/Dialog Files/dia4_midday.json');
     }
 
 	create()
@@ -66,14 +70,22 @@ export default class Demo extends Phaser.Scene
 		const day1mData = this.cache.json.get('dia1mData'); 
 		const day1mdData = this.cache.json.get('dia1mdData'); 
 		const day2mData = this.cache.json.get('dia2mData'); 
+		const day2mdData = this.cache.json.get('dia2mdData'); 
 		const day3mData = this.cache.json.get('dia3mData'); 
+		const day3mdData = this.cache.json.get('dia3mdData'); 
 		const day4mData = this.cache.json.get('dia4mData'); 
+		const day4mdData = this.cache.json.get('dia4mdData'); 
+		const day5mData = this.cache.json.get('dia5mData'); 
 		const dayDatas = { 
 			day1mData, 
 			day1mdData,
 			day2mData, 
-			day3mData, 
-			day4mData 
+			day2mdData,
+			day3mData,
+			day3mdData, 
+			day4mData,
+			day4mdData,
+			day5mData
 		}; // !!!!!!!!!IMPORTANTE!! añadir aquí el resto de jsons que se generen 
 		
 		// Parámetros de la escena
@@ -103,7 +115,7 @@ export default class Demo extends Phaser.Scene
 		// pone el fondo
 		this.nextBG = 1;
 		this.currentBG = 1;
-		let bg = scene.add.image(0, 0, "clase").setScale(0.35, 0.35).setOrigin(0, 0);
+		let bg = scene.add.image(0, 0, "clase").setScale(0.8, 0.8).setOrigin(0, 0);
 		bg.depth = -2;
 
 		// crea el botón del movil

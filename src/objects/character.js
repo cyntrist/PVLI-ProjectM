@@ -78,4 +78,26 @@ export default class Character extends Phaser.GameObjects.Container {
             p.onUnfocus();
         }
     }
+
+
+    /////////////////////////////////////
+    onEnter() {
+        this.setVisible(true);
+    }
+
+    onExit() {
+        this.setVisible(false);
+    }
+
+    onEnterEveryone(personajes) {
+        for (let p of Object.values(personajes)) { 
+            p.onEnter();
+        }
+    }
+
+    onExitEveryone(personajes) {
+        for (let p of Object.values(personajes)) { 
+            p.onExit();
+        }
+    }
 }

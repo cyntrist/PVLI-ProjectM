@@ -16,6 +16,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 	 */
 	constructor(scene, playerManager, dayDatas, characters, nineslice, sound) {
 		super(scene, 0, 0);
+
+		////////////////////////////////////////////////////////
+		////////        PARÁMETROS IMPORTANTES         /////////
+		////////////////////////////////////////////////////////
+
 		// crea la ventana de diálogo
 		scene.dialog = new DialogText(scene, {
 			borderThickness: 6,
@@ -40,14 +45,19 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		setDayData(i); // dia inicial, sea cual sea, en el diccionario
 		
 		// parámetros
-		const blip = scene.sound.add(sound, { volume: 0.5 }); // sonido de diálogo
+		const blip = scene.sound.add(sound, { volume: 1 }); // sonido de diálogo
 		let title = "\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"; // primera línea de título (sí, es justo lo que estás pensando, tiene todos esos espacios para que esté centrada (lo siento mucho))
 		let clicks = 0; // para contar dos clicks antes de decidir, una guarra da pero son las 6 de la mañana bestie
 		let node = dayData.root.next; // primer nodo
 		let decision; // scope dentro del constructor, va a ser la decisión cuando la haya
-		scene.dialog.setText(title, true); // imprime la línea de título
+		scene.dialog.setText(title, false); // imprime la línea de título
 		disableBehaviours();
+		characters["camille"].onExitEveryone(characters);
 
+
+		////////////////////////////////////////////////////////
+		/////////////   FUNCIONES Y CALLBACKS   ////////////////
+		////////////////////////////////////////////////////////
 
 		 // !!! LOGICA DE VERDAD POR FIN VAMOSSSSSSSSSSSSSSS !!!
 		// Controles:
@@ -227,14 +237,46 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		}
 
 
-		// el resto de LISTENERS !!!
+
+
+
+		///////////////////////////////////////////
+		/////////      LISTENERS !!!     //////////
+		///////////////////////////////////////////
+		// con sus callbacks
+		
+		/// BLOQUE DE ESCUCHA PARA ENTRADA Y SALIDA DE PERSONAJES
+		// OJO: El FORMATO para lanzar un evento desde el programa de los JSON sería tal que:
+		// EMIT eventName STRING characterEnter
+		// EMIT characterEnter STRING camille
+		// -------------
+		// Nombre del evento: 'characterEnter'
+		// Personaje: 'camille'
+		// Ambos strings, excepto con los de everyoneExit/Enter, que no necesitan personajes
+		scene.eventEmitter.on('characterEnter', function(character) {
+			let name = character.toLowerCase();
+			characters[name].onEnter();
+		}) 
+
+		scene.eventEmitter.on('characterExit', function(character) {
+			let name = character.toLowerCase();
+			characters[name].onExit();
+		})
+		
+		scene.eventEmitter.on('everyoneEnter', function() {
+			characters["camille"].onEnter();
+		}) 
+
+		scene.eventEmitter.on('everyoneExit', function() {
+			characters["camille"].onExit();
+		})
+
 		/**
 		 * Receptor del evento decided, que viene de decisionButton.
 		 * Cuando una opcion es escogida, actualiza el nodo en corcondancia
 		 */
 		scene.eventEmitter.on('decided', function (valor) {
 			blip?.play(); // si el sonido existe lo reproduce
-			//console.log('OPCION DECIDIDA: ', valor);
 			characters["camille"]?.focusEveryone(characters); // se enfoca a todo el mundo al hablar, camille como conejillo de indias porque sí
 			speak(dayData[node].choices[valor]);
 			node = dayData[node].choices[valor].next; // pasa al siguiente nodo
@@ -255,6 +297,10 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		});
 	}
 }
+
+
+
+
 
 function CheckConditions(condicion, playerManager) { 
 	let charName
