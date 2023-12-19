@@ -1,0 +1,1 @@
+{"root":{"conditions":[{"parent":"root","affValue":{"value":80,"operator":"greater","type":"int"},"charNum":{"value":3,"operator":"equal","type":"int"}}]},"__editor":{"root":{"uuid":"root","offset":[40,100]},"dialogues":[],"conditions":[{"uuid":"9dc1ed3a-d074-455b-9ef2-b1a6a73f1ec1","offset":[280,-60],"parent":"root"}],"signals":[],"choices":[]}}
