@@ -43,6 +43,9 @@ export default class Demo extends Phaser.Scene
 		this.load.audio('clack1', [ './assets/sounds/clack1.ogg', './assets/sounds/clack1.mp3' ]);
 		this.load.audio('clack2', [ './assets/sounds/clack2.ogg', './assets/sounds/clack2.mp3' ]);
 		this.load.audio('clack3', [ './assets/sounds/clack3.ogg', './assets/sounds/clack3.mp3' ]);
+		//musiquita de fondo
+		this.load.audio('baseMusic', ["/assets/sounds/right-place-loop-1/Right Place Loop 1.ogg"]);
+		
 
 		// DATA
 		// Tests
@@ -65,6 +68,9 @@ export default class Demo extends Phaser.Scene
 
 	create()
     {
+		this.music  = this.sound.add("baseMusic", { loop: true });
+		this.music.play();
+		
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
 		// Scripts segun periodo de día
 		const day1mData = this.cache.json.get('dia1mData'); 
