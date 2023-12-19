@@ -110,6 +110,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 						speak(currentNode);
 
 					// si el nodo ha de emitir un evento, lo emite
+					///////////     EVENTO      ////////////
 					if (currentNode.hasOwnProperty("signals")) 
 					{
 						let currentEvent = currentNode.signals.eventName.String;
@@ -133,6 +134,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 						*/
 
 					// si el nodo lleva a una decisión
+					//////////     DECISION     ///////////
 					if (currentNode.hasOwnProperty("choices")) {
 						if (clicks >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
 							decision = new Decision(scene, currentNode.choices, nineslice); // genera una nueva decisión
@@ -143,6 +145,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					}
 
 					// si el nodo contiene una condición
+					//////////     CONDICION     //////////
 					else if (currentNode.hasOwnProperty("conditions")) { // else porque por definicion no puede haber nodos con tanto decisiones como condiciones a la vez
 						let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
 						let conditionCheck = false; //flag para solo comprobar una condicion
@@ -157,6 +160,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					}
 
 					// si no se cumple ninguna de las condiciones anteriores es simplemente continuacion lineal, tiene next
+					//////////      NEXT     //////////
 					else 
 						node = currentNode?.next;
 				}
@@ -222,8 +226,19 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		// escribir el texto en el cuadro de dialogo :-)
 		function speak(currentNode) {
 			let name = currentNode.name;
-			if (name == undefined) // si el nombre del nodo es undefined, habla y/n
+			const names = Object.values(characters).map(character => character.nombre);
+			let valid = names.includes(name);
+			let caracter = currentNode.text.es[0];
+			if (name == undefined || !valid) // si el nombre del nodo es undefined, habla y/n
+			{
 				name = "Y/N";
+				if (caracter === '*' || caracter === '(') {
+					characters["camille"]?.unfocusEveryone(characters); 
+				}
+				else {
+					characters["camille"]?.focusEveryone(characters); 
+				}
+			}
 			scene.dialog?.setText(name + ":\n" + currentNode.text.es, true); // se escribe el último msj
 		 }
 
@@ -281,9 +296,10 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 */
 		scene.eventEmitter.on('decided', function (valor) {
 			blip?.play(); // si el sonido existe lo reproduce
+			let decidida = dayData[node].choices[valor]
 			characters["camille"]?.focusEveryone(characters); // se enfoca a todo el mundo al hablar, camille como conejillo de indias porque sí
-			speak(dayData[node].choices[valor]);
-			node = dayData[node].choices[valor].next; // pasa al siguiente nodo
+			speak(decidida);
+			node = decidida.next; // pasa al siguiente nodo
 			scene.dialog?.setInteractable(true); // devuelve la interaccion al cuadro de diálogo
 			decision?.destroy(); // destruye la decison
 		});

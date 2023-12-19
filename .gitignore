@@ -12,3 +12,5 @@
 *.vsix
 cynthia.code-workspace
 assets/dialogue editor/MBTIDialogues.cfg
+*.cfg
+assets/dialogue editor/MBTIDialogues.cfg
