@@ -9,7 +9,7 @@ export default class Movil extends Phaser.Scene {
 	preload (){
 		this.canvas = this.sys.game.canvas;
 
-		// fondo
+		// fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
 		this.load.image('movilph', './assets/images/escenarios/movilPH.png');
 
 		// boton de vuelta
@@ -18,9 +18,15 @@ export default class Movil extends Phaser.Scene {
 		// boton melon flip
 		this.load.image('melonflip', './assets/images/movil/melonFlip.png');
 
+		// musiquita de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo(esto ultimo no importa, solo es para que quede mas bonito))
+		this.load.audio('movil_music', ["/assets/sounds/dogs-and-cats/Dogs and Cats.mp3"]);
+
 	}
 
 	create (){
+
+		this.music  = this.sound.add("movil_music", { loop: true });
+		this.music.play();
 
 		const scene = this // referencia a esta misma escena
 		// pone el fondo
@@ -34,10 +40,16 @@ export default class Movil extends Phaser.Scene {
 		let but2 = new Button(this, 300, 250, ' ', 2, 'melonflip', { "ClickCallback": () => this.ChangeScene("melonFlippeador", scene) }).setScale(0.75);
 	}
 
-	// update (que no hara falta)
+	//Solo se utiliza para la música
+	update() {
+		if(!this.music.isPlaying) {
+			this.music.play()
+		}
+	} 
 
 	ChangeScene(newScene, escena){
 		escena.scene.switch(newScene);
+		this.music.pause();
 
 	}
 
