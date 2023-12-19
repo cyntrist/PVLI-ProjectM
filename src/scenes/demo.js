@@ -133,7 +133,7 @@ export default class Demo extends Phaser.Scene
 		let dialogManager = new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
     }
 
-	update() { 
+	/*update() { 
 		if(this.nextBG === 1 &&  Scenary != 'clase') Scenary = 'clase';
 		else if(this.nextBG === 2 && Scenary != 'pasillo') Scenary = 'pasillo';
 		if(this.nextBG != this.currentBG){
@@ -141,12 +141,12 @@ export default class Demo extends Phaser.Scene
 			bg.depth = -2;
 			this.currentBG = this.nextBG;
 		}
-	}
+	}*/
 	
 	// cambia el escenario (la imagen de fondo)
-	ChangeScenary (newImage, escena){
+	ChangeScenary (bgName){
 		// crea una imagen en la escena dada 
-		let bg = escena.add.image(0, 0, newImage).setScale(0.35, 0.35).setOrigin(0, 0);
+		let bg = this.add.image(0, 0, bgName).setScale(0.35, 0.35).setOrigin(0, 0);
 		// ajusta la capa
 		bg.depth = -2;
 	}
