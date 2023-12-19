@@ -31,6 +31,7 @@ export default class Demo extends Phaser.Scene
 		// Imágenes de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
 		this.load.image('clase', './assets/images/escenarios/clase_peque.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo_peque.png');
+		this.load.image('fondo_negro', './assets/images/escenarios/fondo_negro.jpg');
 		// Imágenes de UI
 		this.load.image('box', './assets/images/escenarios/opciones2.png')
 		this.load.image('movil', './assets/images/movil/movil.png');
@@ -153,7 +154,7 @@ export default class Demo extends Phaser.Scene
 		// pone el fondo
 		this.nextBG = 1;
 		this.currentBG = 1;
-		let bg = scene.add.image(0, 0, "clase").setScale(0.8, 0.8).setOrigin(0, 0);
+		let bg = scene.add.image(0, 0, "fondo_negro");
 		bg.depth = -2;
 
 		// crea el botón del movil
@@ -239,6 +240,7 @@ export default class Demo extends Phaser.Scene
 		//la idea ahora es desactivarlo de nuevo para que no se vea ninguna
 		this.images[0].setVisible(false);
 	}
+
 	OverMovile() {
 		this.movilEnterTween.play();
 	}
