@@ -115,11 +115,8 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					{
 						let currentEvent = currentNode.signals.eventName.String;
 						let currentValue = currentNode.signals[currentEvent]?.String?.toLowerCase();
-						console.log(currentEvent);
-						console.log(currentValue);
 						scene.eventEmitter?.emit(currentEvent, currentValue); 
 						//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
-					}
 						/* 
 						!!! FORMATO EN JSON !!!
 						"signals": {
@@ -132,6 +129,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 							}
 						}
 						*/
+					}
 
 					// si el nodo lleva a una decisión
 					//////////     DECISION     ///////////
