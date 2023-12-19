@@ -50,44 +50,46 @@ export default class Demo extends Phaser.Scene
 		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/test_afinidad.json')
 
 		// Morning
-		this.load.json('dia1mData', './assets/dialogue editor/Dialog Files/dia1_morning.json');
-		this.load.json('dia2mData', './assets/dialogue editor/Dialog Files/dia2_morning.json');
-		this.load.json('dia3mData', './assets/dialogue editor/Dialog Files/dia3_morning.json');
-		this.load.json('dia4mData', './assets/dialogue editor/Dialog Files/dia4_morning.json');
-		this.load.json('dia5mData', './assets/dialogue editor/Dialog Files/dia5_morning.json');
+		this.load.json('day1_morning_data', './assets/dialogue editor/Dialog Files/dia1_morning.json');
+		this.load.json('day2_morning_data', './assets/dialogue editor/Dialog Files/dia2_morning.json');
+		this.load.json('day3_morning_data', './assets/dialogue editor/Dialog Files/dia3_morning.json');
+		this.load.json('day4_morning_data', './assets/dialogue editor/Dialog Files/dia4_morning.json');
+		this.load.json('day5_morning_data', './assets/dialogue editor/Dialog Files/dia5_morning.json');
 
 		// Midday
-		this.load.json('dia1mdData', './assets/dialogue editor/Dialog Files/dia1_midday.json');
-		this.load.json('dia2mdData', './assets/dialogue editor/Dialog Files/dia2_midday.json');
-		this.load.json('dia3mdData', './assets/dialogue editor/Dialog Files/dia3_midday.json');
-		this.load.json('dia4mdData', './assets/dialogue editor/Dialog Files/dia4_midday.json');
-		this.load.json('dia5mdData', './assets/dialogue editor/Dialog Files/dia4_midday.json');
+		this.load.json('day1_midday_data', './assets/dialogue editor/Dialog Files/dia1_midday.json');
+		this.load.json('day2_midday_data', './assets/dialogue editor/Dialog Files/dia2_midday.json');
+		this.load.json('day3_midday_data', './assets/dialogue editor/Dialog Files/dia3_midday.json');
+		this.load.json('day4_midday_data', './assets/dialogue editor/Dialog Files/dia4_midday.json');
+		this.load.json('day5_midday_data', './assets/dialogue editor/Dialog Files/dia4_midday.json');
 
 		// Confessions
-		// this.load.json('confContext', './assets/dialogue editor/Dialog Files/dia1_midday.json');
-		// this.load.json('confCamille', './assets/dialogue editor/Dialog Files/dia2_midday.json');
-		// this.load.json('confDelilah', './assets/dialogue editor/Dialog Files/dia3_midday.json');
-		// this.load.json('confMatthew', './assets/dialogue editor/Dialog Files/dia4_midday.json');
-		// this.load.json('confRichard', './assets/dialogue editor/Dialog Files/dia4_midday.json');
+		this.load.json('confContext', './assets/dialogue editor/Dialog Files/confession_context.json');
+		this.load.json('cannon_ending', './assets/dialogue editor/Dialog Files/cannon_ending.json');
+		this.load.json('confCamille', './assets/dialogue editor/Dialog Files/camille_confession.json');
+		this.load.json('confDelilah', './assets/dialogue editor/Dialog Files/delilah_confession.json');
+		// this.load.json('confMatthew', './assets/dialogue editor/Dialog Files/matthew_confession.json');
+		// this.load.json('confRichard', './assets/dialogue editor/Dialog Files/richard_confession.json');
     }
 
 	create()
     {
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
 		// Scripts segun periodo de día
-		const day1mData = this.cache.json.get('dia1mData'); 
-		const day1mdData = this.cache.json.get('dia1mdData'); 
-		const day2mData = this.cache.json.get('dia2mData'); 
-		const day2mdData = this.cache.json.get('dia2mdData'); 
-		const day3mData = this.cache.json.get('dia3mData'); 
-		const day3mdData = this.cache.json.get('dia3mdData'); 
-		const day4mData = this.cache.json.get('dia4mData'); 
-		const day4mdData = this.cache.json.get('dia4mdData'); 
-		const day5mData = this.cache.json.get('dia5mData'); 
-		const day5mdData = this.cache.json.get('dia5mdData'); 
-		// const confession_context = this.cache.json.get('confContext'); 
-		// const camille_confession = this.cache.json.get('confCamille'); 
-		// const delilah_confession = this.cache.json.get('confDelilah'); 
+		const day1mData = this.cache.json.get('day1_morning_data'); 
+		const day1mdData = this.cache.json.get('day1_midday_data'); 
+		const day2mData = this.cache.json.get('day2_morning_data'); 
+		const day2mdData = this.cache.json.get('day2_midday_data'); 
+		const day3mData = this.cache.json.get('day3_morning_data'); 
+		const day3mdData = this.cache.json.get('day3_midday_data'); 
+		const day4mData = this.cache.json.get('day4_morning_data'); 
+		const day4mdData = this.cache.json.get('day4_midday_data'); 
+		const day5mData = this.cache.json.get('day5_morning_data'); 
+		const day5mdData = this.cache.json.get('day5_midday_data'); 
+		const confession_context = this.cache.json.get('confContext'); 
+		const cannon_ending = this.cache.json.get('cannon_ending'); 
+		const camille_confession = this.cache.json.get('confCamille'); 
+		const delilah_confession = this.cache.json.get('confDelilah'); 
 		// const matthew_confession = this.cache.json.get('confMatthew'); 
 		// const richard_confession = this.cache.json.get('confRichard'); 
 
@@ -102,9 +104,10 @@ export default class Demo extends Phaser.Scene
 			day4mdData,
 			day5mData,
 			day5mdData,
-			//confession_context,
-			//camille_confession,
-			//delilah_confession,
+			confession_context,
+			cannon_ending,
+			camille_confession,
+			delilah_confession,
 			//matthew_confession,
 			//richard_confession
 		}; // !!!!!!!!!IMPORTANTE!! añadir aquí el resto de jsons que se generen 
