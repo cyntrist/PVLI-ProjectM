@@ -76,16 +76,16 @@ export default class Demo extends Phaser.Scene
     {
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
 		// Scripts segun periodo de día
-		const day1mData = this.cache.json.get('day1_morning_data'); 
-		const day1mdData = this.cache.json.get('day1_midday_data'); 
-		const day2mData = this.cache.json.get('day2_morning_data'); 
-		const day2mdData = this.cache.json.get('day2_midday_data'); 
-		const day3mData = this.cache.json.get('day3_morning_data'); 
-		const day3mdData = this.cache.json.get('day3_midday_data'); 
-		const day4mData = this.cache.json.get('day4_morning_data'); 
-		const day4mdData = this.cache.json.get('day4_midday_data'); 
-		const day5mData = this.cache.json.get('day5_morning_data'); 
-		const day5mdData = this.cache.json.get('day5_midday_data'); 
+		const day1_morning_data = this.cache.json.get('day1_morning_data'); 
+		const day1_midday_data = this.cache.json.get('day1_midday_data'); 
+		const day2_morning_data = this.cache.json.get('day2_morning_data'); 
+		const day2_midday_data = this.cache.json.get('day2_midday_data'); 
+		const day3_morning_data = this.cache.json.get('day3_morning_data'); 
+		const day3_midday_data = this.cache.json.get('day3_midday_data'); 
+		const day4_morning_data = this.cache.json.get('day4_morning_data'); 
+		const day4_midday_data = this.cache.json.get('day4_midday_data'); 
+		const day5_morning_data = this.cache.json.get('day5_morning_data'); 
+		const day5_midday_data = this.cache.json.get('day5_midday_data'); 
 		const confession_context = this.cache.json.get('confContext'); 
 		const cannon_ending = this.cache.json.get('cannon_ending'); 
 		const camille_confession = this.cache.json.get('confCamille'); 
@@ -94,16 +94,16 @@ export default class Demo extends Phaser.Scene
 		// const richard_confession = this.cache.json.get('confRichard'); 
 
 		const dayDatas = { 
-			day1mData, 
-			day1mdData,
-			day2mData, 
-			day2mdData,
-			day3mData,
-			day3mdData, 
-			day4mData,
-			day4mdData,
-			day5mData,
-			day5mdData,
+			day1_morning_data, 
+			day1_midday_data,
+			day2_morning_data, 
+			day2_midday_data,
+			day3_morning_data,
+			day3_midday_data, 
+			day4_morning_data,
+			day4_midday_data,
+			day5_morning_data,
+			day5_midday_data,
 			confession_context,
 			cannon_ending,
 			camille_confession,
@@ -126,15 +126,14 @@ export default class Demo extends Phaser.Scene
 			scene.add.sprite(0, padding, 'richardph').setScale(0.5,0.5)
 		]
 		// Creación de personajes
-		const camille = new Character(scene, width*1/5, height - sprites[0].displayHeight/2, sprites[0], "Camille");
-		const delilah = new Character(scene, width*2/5, height - sprites[1].displayHeight/2, sprites[1], "Delilah");
-		const matthew = new Character(scene, width*3/5, height - sprites[2].displayHeight/2, sprites[2], "Matthew");
-		const richard = new Character(scene, width*4/5, height - sprites[3].displayHeight/2, sprites[3], "Richard");
+		const camille = new Character(scene, width*1/5, height - sprites[0].displayHeight/2, sprites[0], "Camille", 1);
+		const delilah = new Character(scene, width*2/5, height - sprites[1].displayHeight/2, sprites[1], "Delilah", 2);
+		const matthew = new Character(scene, width*3/5, height - sprites[2].displayHeight/2, sprites[2], "Matthew", 3);
+		const richard = new Character(scene, width*4/5, height - sprites[3].displayHeight/2, sprites[3], "Richard", 4);
 		// DICCIONARIO (!IMPORTANTE!) de los personajes
 		const characters = { camille, delilah, matthew, richard } // corchetes array, brackets diccionario (objeto)
 		// descolorea a todos los personajes antes de empezar
-		camille.unfocusEveryone(characters); // camille siendo conejillo de indias
-		
+		Character.unfocusEveryone(characters); // camille siendo conejillo de indias
 		// ** CREACION DE INTERFAZ ** //
 		// pone el fondo
 		this.nextBG = 1;
@@ -163,11 +162,11 @@ export default class Demo extends Phaser.Scene
 			y: 700,
 			persist: true
 		})
-	
+
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
 		let playerManager = new PlayerManager(0, 0, 0, 0);
 		let dialogManager = new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
-    }
+	}
 
 	/*update() { 
 		if(this.nextBG === 1 &&  Scenary != 'clase') Scenary = 'clase';

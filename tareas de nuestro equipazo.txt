@@ -1,6 +1,5 @@
 tareas de nuestro equipazo:
 - eventos en el json:
-	>cambiar de personajes (medio hecho, cyn)
 	>regular, actualizar eventos existentes 
 	y meter nuevos de cambio de personajes, escenario y música
 - presentacion (david)

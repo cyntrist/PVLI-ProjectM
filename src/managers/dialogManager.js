@@ -1,5 +1,6 @@
 import DialogText from "../plugins/dialog_plugin.js";
 import Decision from "../objects/decision.js";
+import Character from "../objects/character.js"
 /**
  * Clase que maneja la lógica de diálogo
  * @extends Container
@@ -52,7 +53,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		let decision; // scope dentro del constructor, va a ser la decisión cuando la haya
 		scene.dialog.setText(title, false); // imprime la línea de título
 		disableBehaviours();
-		characters["camille"].onExitEveryone(characters);
+		Character.onExitEveryone(characters);
 
 
 		////////////////////////////////////////////////////////
@@ -168,7 +169,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					speak(currentNode);
 					setDayData(++i);
 					node = dayData.root.next;
-					//characters["camille"].unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar, camille como conejillo de indias porque sí
+					//Character.unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar
 				}
 			} 
 		};
@@ -233,10 +234,10 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				if (
 					//caracter === '*' || 
 					caracter === '(') {
-					characters["camille"]?.unfocusEveryone(characters); 
+					Character.unfocusEveryone(characters); 
 				}
 				else {
-					characters["camille"]?.focusEveryone(characters); 
+					Character.focusEveryone(characters); 
 				}
 			}
 			scene.dialog?.setText(name + ":\n" + currentNode.text.es, true); // se escribe el último msj
@@ -276,7 +277,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		// Ambos strings, excepto con los de everyoneExit/Enter, que no necesitan personajes
 		scene.eventEmitter.on('characterEnter', function(character) {
 			let name = character.toLowerCase();
-			characters[name].onEnter();
+			characters[name].onEnter(characters);
 		}) 
 
 		scene.eventEmitter.on('characterExit', function(character) {
@@ -285,11 +286,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		})
 		
 		scene.eventEmitter.on('everyoneEnter', function() {
-			characters["camille"].onEnterEveryone(characters);
+			Character.onEnterEveryone(characters);
 		}) 
 
 		scene.eventEmitter.on('everyoneExit', function() {
-			characters["camille"].onExitEveryone(characters);
+			Character.onExitEveryone(characters);
 		})
 
 		/**
@@ -299,7 +300,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		scene.eventEmitter.on('decided', function (valor) {
 			blip?.play(); // si el sonido existe lo reproduce
 			let decidida = dayData[node].choices[valor]
-			characters["camille"]?.focusEveryone(characters); // se enfoca a todo el mundo al hablar, camille como conejillo de indias porque sí
+			Character.focusEveryone(characters); // se enfoca a todo el mundo al hablar
 			speak(decidida);
 			node = decidida.next; // pasa al siguiente nodo
 			scene.dialog?.setInteractable(true); // devuelve la interaccion al cuadro de diálogo
