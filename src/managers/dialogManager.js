@@ -245,12 +245,16 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		scene.eventEmitter.on('affinityUp', function (valor) {
 			playerManager?.increaseAffinity(valor);
 		});
+
+		scene.eventEmitter.on('changeBg', function (valor) {
+			scene.ChangeScenary(valor);
+		});
 	}
 }
 
 function CheckConditions(condicion, playerManager) { 
 	let charName
-	switch(condicion.charNum.value)
+	switch(condicion.charNum.value) //por desgracia los nodos de condiciones no dejan tener como parametro una string asi que se utiliza la codificacion de los personajes usada anteriormente
 	{
 		case 0: charName = "camille"; break;
 		case 1: charName = "delilah"; break;
