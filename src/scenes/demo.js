@@ -232,13 +232,13 @@ export default class Demo extends Phaser.Scene
 
 		//pj es el string con el nombre del personaje al que le afecta la sub de afinidad
 		//Lo que yo quiero hacer es acceder a las imagenes (declarado arriba estan las 4 flechas de colores) y hacer visible la que toca
-		this.images[0].setVisible(true);
+		//this.images[0].setVisible(true);
 
 		//Se ejecuta el tween (Se aplica sobre todas las flechas pero solo se va a ver la que esté visible)
 		this.affinityTween.play();
 
 		//la idea ahora es desactivarlo de nuevo para que no se vea ninguna
-		this.images[0].setVisible(false);
+		//this.images[0].setVisible(false);
 	}
 
 	OverMovile() {
