@@ -24,10 +24,10 @@ export default class Demo extends Phaser.Scene
 
 		// IMAGENES
 		// Imágenes de los personajes
-		this.load.image('camilleph', './assets/images/personajes/camille.png');
-		this.load.image('delilahph', './assets/images/personajes/delilah.png');
-		this.load.image('matthewph', './assets/images/personajes/matthew.png');
-		this.load.image('richardph', './assets/images/personajes/richard.png');
+		this.load.image('camilleph', './assets/images/personajes/Camille_sprite.png');
+		this.load.image('delilahph', './assets/images/personajes/Delilah_sprite.png');
+		this.load.image('matthewph', './assets/images/personajes/Matthew_sprite.png');
+		this.load.image('richardph', './assets/images/personajes/Richard_sprite.png');
 		// Imágenes de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
 		this.load.image('clase', './assets/images/escenarios/clase_peque.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo_peque.png');
@@ -36,11 +36,11 @@ export default class Demo extends Phaser.Scene
 		this.load.image('movil', './assets/images/movil/movil.png');
 		this.load.image('9slice', './assets/images/ui/botones_decision_nineslice_muy_peque.png');
 		// Imagenes de afinidad
-		this.load.image('corazon', './assets/images/ui/feedback versiones grandes/feedback_corazon.png');
-		this.load.image('affCamille', './assets/images/ui/feedback versiones grandes/feedback_flecha_camille.png');
-		this.load.image('affDelilah', './assets/images/ui/feedback versiones grandes/feedback_flecha_delilah.png');
-		this.load.image('affMatthew', './assets/images/ui/feedback versiones grandes/feedback_flecha_matthew.png');
-		this.load.image('affRichard', './assets/images/ui/feedback versiones grandes/feedback_flecha_richard.png');
+		this.load.image('corazon', './assets/images/ui/feedback_corazon.png');
+		this.load.image('affCamille', './assets/images/ui/feedback_flecha_camille.png');
+		this.load.image('affDelilah', './assets/images/ui/feedback_flecha_delilah.png');
+		this.load.image('affMatthew', './assets/images/ui/feedback_flecha_matthew.png');
+		this.load.image('affRichard', './assets/images/ui/feedback_flecha_richard.png');
 
 		// SOUNDS
 		//this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
@@ -135,10 +135,10 @@ export default class Demo extends Phaser.Scene
 
 		// Parámetros de los personajes
 		const sprites = [ // array de sprites
-			scene.add.sprite(0, padding, 'camilleph').setScale(0.5,0.5),
-			scene.add.sprite(0, padding, 'delilahph').setScale(0.5,0.5),
-			scene.add.sprite(0, padding, 'matthewph').setScale(0.5,0.5),
-			scene.add.sprite(0, padding, 'richardph').setScale(0.5,0.5)
+			scene.add.sprite(0, padding, 'camilleph').setScale(1.1,1.1),
+			scene.add.sprite(0, padding, 'delilahph').setScale(1.1,1.1),
+			scene.add.sprite(0, padding + 60, 'matthewph').setScale(1.1,1.1),
+			scene.add.sprite(0, padding, 'richardph').setScale(1.1,1.1)
 		]
 		// Creación de personajes
 		const camille = new Character(scene, width*1/5, height - sprites[0].displayHeight/2, sprites[0], "Camille", 1);
@@ -181,23 +181,29 @@ export default class Demo extends Phaser.Scene
 		//Afinidades
 		const images = [
 			scene.add.image(1200, 100, "affCamille").setScale(0.25).setVisible(false),
-			scene.add.image(1200, 100, "affDelilah").setScale(0.1).setVisible(false),
-			scene.add.image(1200, 100, "affMatthew").setScale(0.1).setVisible(false),
-			scene.add.image(1200, 100, "affRichard").setScale(0.1).setVisible(false)
+			scene.add.image(1180, 100, "affDelilah").setScale(0.25).setVisible(false),
+			scene.add.image(1160, 100, "affMatthew").setScale(0.25).setVisible(false),
+			scene.add.image(1140, 100, "affRichard").setScale(0.25).setVisible(false)
 		]
+		this.images = images;
 
 		//Tween de la afinidad
 		this.affinityTween = this.tweens.add({
-			targets: images[3],
+			targets: images,
 			duration: 200,
 			y: '-=20',
 			yoyo: true,
 			repeat: 2,
-			persist: true
+			persist: true,
+			onComplete: function () {
+				for (let i = 0; i < images.length; i++) {
+					images[i].setVisible(false);
+				  }
+			  }
 		})
 
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
-		let playerManager = new PlayerManager(0, 0, 0, 0, 'corazon', 'affCamille', 'affDelilah', 'affMatthew', 'affRichard', 10 ,700, scene );
+		let playerManager = new PlayerManager(0, 0, 0, 0);
 		let dialogManager = new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
 	}
 
@@ -227,17 +233,25 @@ export default class Demo extends Phaser.Scene
 		this.music.pause();
 	}
 
-	Affinity(pj) {
-
+	/**
+	 * 
+	 * @param {String} character - nombre del personaje
+	 */
+	affinity(character) {
 		//pj es el string con el nombre del personaje al que le afecta la sub de afinidad
 		//Lo que yo quiero hacer es acceder a las imagenes (declarado arriba estan las 4 flechas de colores) y hacer visible la que toca
-		this.images[0].setVisible(true);
-
+		let index = -1;
+		switch(character)
+		{
+			case "camille": index = 0; break;
+			case "delilah": index = 1; break;
+			case "matthew": index = 2; break;
+			case "richard": index = 3; break;
+		}
+		this.images[index].setVisible(true);
 		//Se ejecuta el tween (Se aplica sobre todas las flechas pero solo se va a ver la que esté visible)
 		this.affinityTween.play();
-
-		//la idea ahora es desactivarlo de nuevo para que no se vea ninguna
-		this.images[0].setVisible(false);
+		//se desactivan al acabar el tween
 	}
 	OverMovile() {
 		this.movilEnterTween.play();
