@@ -34,7 +34,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			padding: 18,
 			hasCloseBtn: false,
 			closeBtnColor: 'white',
-			dialogSpeed: 4.4,
+			dialogSpeed: 4,
 			fontSize: 24,
 			fontFamily: "lato"
 		});
