@@ -3,6 +3,5 @@ tareas de nuestro equipazo:
 	>regular, actualizar eventos existentes 
 	y meter nuevos de cambio de personajes, escenario y música (paula reina)
 - demo-presentacion (david)
-- gdd (david)
-- pantallita de carga (cyn)
+- gdd (quien pueda)
 
