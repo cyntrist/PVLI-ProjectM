@@ -130,9 +130,15 @@ export default class MelonFlippeador extends Phaser.Scene
         scene.input.keyboard.on('keydown-SPACE', function() {
             scene.melonJump();
         })
+
     }
 
     update(){
+
+        if(this.pipes.length <= 0){
+            // crea un nuebo tubo
+            this.createNewPipe();
+        }
 
         //Activamos la música si no está ya activa
         if(!this.music.isPlaying) {
@@ -149,7 +155,7 @@ export default class MelonFlippeador extends Phaser.Scene
             }
 
             // gestion de pipes
-            this.pipeManager(); 
+           // this.pipeManager(); 
 
             // add score
             this.pipeScoreAdder();
@@ -174,8 +180,7 @@ export default class MelonFlippeador extends Phaser.Scene
         // si llega hace cosas
         if(this.cdCounter >= this.pipeCooldown){
 
-            // crea un nuebo tubo
-            this.createNewPipe();
+            
 
             // reinicia el contador
             this.cdCounter = 0;
@@ -189,8 +194,22 @@ export default class MelonFlippeador extends Phaser.Scene
     pipeScoreAdder(){
         for(let i = 0; i<this.pipes.length; i++){
 
+            if(!this.pipes[i].newPipeCreated && this.pipes[i].x < 750){
+                
+
+                // marca que se haya pasado
+                this.pipes[i].newPipeCreated = true;
+                this.pipes[i+1].newPipeCreated = true;
+
+                console.log(i +  " " + this.pipes[i].newPipeCreated);
+
+                // crea un nuebo tubo
+                this.createNewPipe();
+
+            }
+
             // si no se ha pasado y esta en una posicion mas baja que el melon
-            if(!this.pipes[i].passed && this.pipes[i].x < 200){
+            else if(!this.pipes[i].passed && this.pipes[i].x < 200){
 
                 // pone puntos
                 this.addPoints();
@@ -219,6 +238,8 @@ export default class MelonFlippeador extends Phaser.Scene
     // --------------------------------- AUXILIARES -----------------------------
     createNewPipe(){
 
+
+        console.log("uwu");
         // crea una altura
         let height = this.createNewHeight();
 
@@ -233,9 +254,6 @@ export default class MelonFlippeador extends Phaser.Scene
         this.BOTpipe = this.PIPE.create(1200, height + 700).body.setAllowGravity(false);
         this.BOTpipe.setVelocity(-100, 0);
         this.BOTpipe.depth = 2;
-        this.BOTpipe.rotate += 1;
-
-        console.log(this.BOTpipe.rotate);
         this.pipes.push(this.BOTpipe);
 
     }
