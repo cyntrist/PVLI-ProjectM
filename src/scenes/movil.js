@@ -13,7 +13,7 @@ export default class Movil extends Phaser.Scene {
 		this.load.image('movilph', './assets/images/escenarios/movilPH.png');
 
 		// boton de vuelta
-		this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
+		this.load.image('goBackBox', './assets/images/escenarios/goBack2.png');
 
 		// boton melon flip
 		this.load.image('melonflip', './assets/images/movil/melonFlip.png');
