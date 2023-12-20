@@ -271,10 +271,10 @@ export default class MelonFlippeador extends Phaser.Scene
 
     endScreen(escena){
         // boton de restart
-        let restart = new Button(this, 590, 200, 'restart', 2, 'retry', {"ClickCallback": () => this.restartGame (this) });
+        let restart = new Button(this, 590, 200, ' ', 2, 'retry', {"ClickCallback": () => this.restartGame (this) });
 
         // boton para volver al movil
-        let movil = new Button(this, 100, 300, 'movil', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("movil", this) });
+        let movil = new Button(this, 100, 300, ' ', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("movil", this) });
 
     }
 
