@@ -5,9 +5,10 @@ Este videojuego es un proyecto universitario de la asignatura de *Programación 
 **My Beloved True Interest** (**MBTI**) es un simulador de citas y novela visual realizado en JavaScript. En él, el protagonista  establecerá distintas relaciones y eventualmente un romance entre cuatro personajes universitarios en base a las decisiones del jugador, además de experimentar la vida escolar con diferentes actividades diarias.  
 
 ## Capturas
-![](https://placekitten.com/200/200)
-![](https://placekitten.com/200/200)
-![](https://placekitten.com/200/200)
+![](https://github.com/cyntrist/PVLI-ProjectM/blob/1c865bd06e2e100bd5ae07bdac3123577d1510af/assets/images/capturas/03.png)
+![](https://github.com/cyntrist/PVLI-ProjectM/blob/1c865bd06e2e100bd5ae07bdac3123577d1510af/assets/images/capturas/01.png)
+![](https://github.com/cyntrist/PVLI-ProjectM/blob/1c865bd06e2e100bd5ae07bdac3123577d1510af/assets/images/capturas/02.png)
+![](https://github.com/cyntrist/PVLI-ProjectM/blob/1c865bd06e2e100bd5ae07bdac3123577d1510af/assets/images/capturas/04.png)
 
 ## Enlaces
 - [Enlace](https://cyntrist.github.io/PVLI-ProjectM/) a la página del juego.
