@@ -107,7 +107,7 @@ export default class Demo extends Phaser.Scene
 		// Imágenes de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
 		this.load.image('clase', './assets/images/escenarios/clase_peque.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo_peque.png');
-		this.load.image('fondo_negro', './assets/images/escenarios/fondo_negro.jpg');
+		this.load.image('fondo_negro', './assets/images/escenarios/fondo_negro.png');
 		this.load.image('fuente', './assets/images/escenarios/endings/fuente2.png'); //camille
 		this.load.image('escalera', './assets/images/escenarios/endings/escalera.png'); //delilah
 		this.load.image('el_buen_gusto', './assets/images/escenarios/endings/elbuengusto.png'); //matthew
