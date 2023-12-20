@@ -135,10 +135,10 @@ export default class Demo extends Phaser.Scene
 		this.load.audio('clack3', [ './assets/sounds/clack3.ogg', './assets/sounds/clack3.mp3' ]);
 
 		//musiquita de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
-		this.load.audio('base_music', ["/assets/sounds/bgm/right-place-loop-1/Right_Place_Loop_1.ogg"]);
-		this.load.audio('main_music', ["/assets/sounds/bgm/dogs-and-cats/Dogs_and_Cats.mp3"]);
-		this.load.audio('melon_music', ["./assets/sounds/bgm/a-short-story-loop-1/A_Short_Story_loop_1.ogg"]);
-		this.load.audio('movil_music', ["/assets/sounds/bgm/dogs-and-cats/Dogs_and_Cats.mp3"]);
+		this.load.audio('base_music', "/assets/sounds/bgm/right-place-loop-1/Right_Place_Loop_1.ogg");
+		this.load.audio('main_music', "/assets/sounds/bgm/dogs-and-cats/Dogs_and_Cats.mp3");
+		this.load.audio('melon_music', "./assets/sounds/bgm/a-short-story-loop-1/A_Short_Story_loop_1.ogg");
+		this.load.audio('movil_music', "/assets/sounds/bgm/dogs-and-cats/Dogs_and_Cats.mp3");
 
 		////////////////////////////////
 		////////     DATA      /////////
