@@ -22,6 +22,18 @@ export default class Demo extends Phaser.Scene
 	preload() {
 		this.canvas = this.sys.game.canvas;
 
+		// PRELOADER
+		this.load.on('progress', function (value) {
+			console.log(value);
+		});
+					
+		this.load.on('fileprogress', function (file) {
+			console.log(file.src);
+		});
+		this.load.on('complete', function () {
+			console.log('complete');
+		});
+
 		// IMAGENES
 		// Imágenes de los personajes
 		this.load.image('camilleph', './assets/images/personajes/Camille_sprite.png');
@@ -110,8 +122,8 @@ export default class Demo extends Phaser.Scene
 		const cannon_ending		 = this.cache.json.get('cannon_ending');  
 
 		const dayDatas = { 
-			//day1_morning_data, 
-			//day1_midday_data,
+			day1_morning_data, 
+			day1_midday_data,
 			day2_morning_data, 
 			day2_midday_data,
 			day3_morning_data,
