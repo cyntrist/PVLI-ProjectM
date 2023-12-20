@@ -5,7 +5,6 @@
 > - sistema de texto independiente
 > - player manager
 > - móvil como objeto
-> - misiones en el player manager
 
 # **ARQUITECTURA DEL JUEGO**
 
