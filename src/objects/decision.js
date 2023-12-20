@@ -30,7 +30,7 @@ export default class Decision extends Phaser.GameObjects.Container {
 				scene.width/2, 
 				(scene.height - scene.dialog.windowHeight) * (i + 1)/(choices.length + 1), 
 				sprite, 
-				option_width * WIDTH_FACTOR, 
+				option_width * WIDTH_FACTOR + CORNER_SLICE * 2, 
 				OPTION_HEIGHT, 
 				currentOption,
 				CORNER_SLICE,

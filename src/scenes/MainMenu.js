@@ -30,7 +30,7 @@ export default class MainMenu extends Phaser.Scene {
 		bg.depth = -2;
 
 		// boton de play
-		let playButton = new Button(this, 315, 200, ' ', 2, 'logo', { "ClickCallback": () => this.ChangeScene("Demo", scene),
+		let playButton = new Button(this, 315, 175, ' ', 2, 'logo', { "ClickCallback": () => this.ChangeScene("Demo", scene),
 																			"EnterCallback": () =>this.OverButton(playButton),
 																			"ExitCallback": () => this.ExitButton(playButton) } );
 		playButton.box.setScale(0.75, 0.75);

@@ -22,12 +22,24 @@ export default class Demo extends Phaser.Scene
 	preload() {
 		this.canvas = this.sys.game.canvas;
 
+		// PRELOADER
+		this.load.on('progress', function (value) {
+			console.log(value);
+		});
+					
+		this.load.on('fileprogress', function (file) {
+			console.log(file.src);
+		});
+		this.load.on('complete', function () {
+			console.log('complete');
+		});
+
 		// IMAGENES
 		// Imágenes de los personajes
-		this.load.image('camilleph', './assets/images/personajes/camille.png');
-		this.load.image('delilahph', './assets/images/personajes/delilah.png');
-		this.load.image('matthewph', './assets/images/personajes/matthew.png');
-		this.load.image('richardph', './assets/images/personajes/richard.png');
+		this.load.image('camilleph', './assets/images/personajes/Camille_sprite.png');
+		this.load.image('delilahph', './assets/images/personajes/Delilah_sprite.png');
+		this.load.image('matthewph', './assets/images/personajes/Matthew_sprite.png');
+		this.load.image('richardph', './assets/images/personajes/Richard_sprite.png');
 		// Imágenes de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
 		this.load.image('clase', './assets/images/escenarios/clase_peque.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo_peque.png');
@@ -37,11 +49,11 @@ export default class Demo extends Phaser.Scene
 		this.load.image('movil', './assets/images/movil/movil.png');
 		this.load.image('9slice', './assets/images/ui/botones_decision_nineslice_muy_peque.png');
 		// Imagenes de afinidad
-		this.load.image('corazon', './assets/images/ui/feedback versiones grandes/feedback_corazon.png');
-		this.load.image('affCamille', './assets/images/ui/feedback versiones grandes/feedback_flecha_camille.png');
-		this.load.image('affDelilah', './assets/images/ui/feedback versiones grandes/feedback_flecha_delilah.png');
-		this.load.image('affMatthew', './assets/images/ui/feedback versiones grandes/feedback_flecha_matthew.png');
-		this.load.image('affRichard', './assets/images/ui/feedback versiones grandes/feedback_flecha_richard.png');
+		this.load.image('corazon', './assets/images/ui/feedback_corazon.png');
+		this.load.image('affCamille', './assets/images/ui/feedback_flecha_camille.png');
+		this.load.image('affDelilah', './assets/images/ui/feedback_flecha_delilah.png');
+		this.load.image('affMatthew', './assets/images/ui/feedback_flecha_matthew.png');
+		this.load.image('affRichard', './assets/images/ui/feedback_flecha_richard.png');
 
 		// SOUNDS
 		//this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
@@ -81,33 +93,33 @@ export default class Demo extends Phaser.Scene
 		this.load.json('cannon_ending', './assets/dialogue editor/Dialog Files/cannon_ending.json');
 		this.load.json('confCamille', './assets/dialogue editor/Dialog Files/camille_confession.json');
 		this.load.json('confDelilah', './assets/dialogue editor/Dialog Files/delilah_confession.json');
-		// this.load.json('confMatthew', './assets/dialogue editor/Dialog Files/matthew_confession.json');
-		// this.load.json('confRichard', './assets/dialogue editor/Dialog Files/richard_confession.json');
+		this.load.json('confMatthew', './assets/dialogue editor/Dialog Files/matthew_confession.json');
+		this.load.json('confRichard', './assets/dialogue editor/Dialog Files/richard_confession.json');
     }
 
 	create()
     {
-		this.music  = this.sound.add("base_music", { loop: true });
+		this.music  = this.sound.add("base_music", { loop: true, volume: 0.5 });
 		this.music.play();
 
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
 		// Scripts segun periodo de día
-		const day1_morning_data = this.cache.json.get('day1_morning_data'); 
-		const day1_midday_data = this.cache.json.get('day1_midday_data'); 
-		const day2_morning_data = this.cache.json.get('day2_morning_data'); 
-		const day2_midday_data = this.cache.json.get('day2_midday_data'); 
-		const day3_morning_data = this.cache.json.get('day3_morning_data'); 
-		const day3_midday_data = this.cache.json.get('day3_midday_data'); 
-		const day4_morning_data = this.cache.json.get('day4_morning_data'); 
-		const day4_midday_data = this.cache.json.get('day4_midday_data'); 
-		const day5_morning_data = this.cache.json.get('day5_morning_data'); 
-		const day5_midday_data = this.cache.json.get('day5_midday_data'); 
+		const day1_morning_data	 = this.cache.json.get('day1_morning_data'); 
+		const day1_midday_data	 = this.cache.json.get('day1_midday_data'); 
+		const day2_morning_data	 = this.cache.json.get('day2_morning_data'); 
+		const day2_midday_data	 = this.cache.json.get('day2_midday_data'); 
+		const day3_morning_data	 = this.cache.json.get('day3_morning_data'); 
+		const day3_midday_data	 = this.cache.json.get('day3_midday_data'); 
+		const day4_morning_data	 = this.cache.json.get('day4_morning_data'); 
+		const day4_midday_data	 = this.cache.json.get('day4_midday_data'); 
+		const day5_morning_data	 = this.cache.json.get('day5_morning_data'); 
+		const day5_midday_data	 = this.cache.json.get('day5_midday_data'); 
 		const confession_context = this.cache.json.get('confContext'); 
-		const cannon_ending = this.cache.json.get('cannon_ending'); 
 		const camille_confession = this.cache.json.get('confCamille'); 
 		const delilah_confession = this.cache.json.get('confDelilah'); 
-		// const matthew_confession = this.cache.json.get('confMatthew'); 
-		// const richard_confession = this.cache.json.get('confRichard'); 
+		const matthew_confession = this.cache.json.get('confMatthew'); 
+		const richard_confession = this.cache.json.get('confRichard');
+		const cannon_ending		 = this.cache.json.get('cannon_ending');  
 
 		const dayDatas = { 
 			day1_morning_data, 
@@ -121,11 +133,11 @@ export default class Demo extends Phaser.Scene
 			day5_morning_data,
 			day5_midday_data,
 			confession_context,
-			cannon_ending,
 			camille_confession,
 			delilah_confession,
-			//matthew_confession,
-			//richard_confession
+			matthew_confession,
+			richard_confession,
+			cannon_ending
 		}; // !!!!!!!!!IMPORTANTE!! añadir aquí el resto de jsons que se generen 
 		
 		// Parámetros de la escena
@@ -136,10 +148,10 @@ export default class Demo extends Phaser.Scene
 
 		// Parámetros de los personajes
 		const sprites = [ // array de sprites
-			scene.add.sprite(0, padding, 'camilleph').setScale(0.5,0.5),
-			scene.add.sprite(0, padding, 'delilahph').setScale(0.5,0.5),
-			scene.add.sprite(0, padding, 'matthewph').setScale(0.5,0.5),
-			scene.add.sprite(0, padding, 'richardph').setScale(0.5,0.5)
+			scene.add.sprite(0, padding, 'camilleph').setScale(1.1,1.1),
+			scene.add.sprite(0, padding, 'delilahph').setScale(1.1,1.1),
+			scene.add.sprite(0, padding + 60, 'matthewph').setScale(1.1,1.1),
+			scene.add.sprite(0, padding, 'richardph').setScale(1.1,1.1)
 		]
 		// Creación de personajes
 		const camille = new Character(scene, width*1/5, height - sprites[0].displayHeight/2, sprites[0], "Camille", 1);
@@ -182,23 +194,29 @@ export default class Demo extends Phaser.Scene
 		//Afinidades
 		const images = [
 			scene.add.image(1200, 100, "affCamille").setScale(0.25).setVisible(false),
-			scene.add.image(1200, 100, "affDelilah").setScale(0.1).setVisible(false),
-			scene.add.image(1200, 100, "affMatthew").setScale(0.1).setVisible(false),
-			scene.add.image(1200, 100, "affRichard").setScale(0.1).setVisible(false)
+			scene.add.image(1180, 100, "affDelilah").setScale(0.25).setVisible(false),
+			scene.add.image(1160, 100, "affMatthew").setScale(0.25).setVisible(false),
+			scene.add.image(1140, 100, "affRichard").setScale(0.25).setVisible(false)
 		]
+		this.images = images;
 
 		//Tween de la afinidad
 		this.affinityTween = this.tweens.add({
-			targets: images[3],
+			targets: images,
 			duration: 200,
 			y: '-=20',
 			yoyo: true,
 			repeat: 2,
-			persist: true
+			persist: true,
+			onComplete: function () {
+				for (let i = 0; i < images.length; i++) {
+					images[i].setVisible(false);
+				  }
+			  }
 		})
 
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
-		let playerManager = new PlayerManager(0, 0, 0, 0, 'corazon', 'affCamille', 'affDelilah', 'affMatthew', 'affRichard', 10 ,700, scene );
+		let playerManager = new PlayerManager(0, 0, 0, 0);
 		let dialogManager = new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
 	}
 
@@ -210,7 +228,7 @@ export default class Demo extends Phaser.Scene
 	
 	ChangeMusic(musicName){
 		this.music.pause();
-		this.music  = this.sound.add(musicName, { loop: true });
+		this.music  = this.sound.add(musicName, { loop: true, volume: 0.5});
 		this.music.play();
 	}
 
@@ -228,17 +246,25 @@ export default class Demo extends Phaser.Scene
 		this.music.pause();
 	}
 
-	Affinity(pj) {
-
+	/**
+	 * 
+	 * @param {String} character - nombre del personaje
+	 */
+	affinity(character) {
 		//pj es el string con el nombre del personaje al que le afecta la sub de afinidad
 		//Lo que yo quiero hacer es acceder a las imagenes (declarado arriba estan las 4 flechas de colores) y hacer visible la que toca
-		//this.images[0].setVisible(true);
-
+		let index = -1;
+		switch(character)
+		{
+			case "camille": index = 0; break;
+			case "delilah": index = 1; break;
+			case "matthew": index = 2; break;
+			case "richard": index = 3; break;
+		}
+		this.images[index].setVisible(true);
 		//Se ejecuta el tween (Se aplica sobre todas las flechas pero solo se va a ver la que esté visible)
 		this.affinityTween.play();
-
-		//la idea ahora es desactivarlo de nuevo para que no se vea ninguna
-		//this.images[0].setVisible(false);
+		//se desactivan al acabar el tween
 	}
 
 	OverMovile() {

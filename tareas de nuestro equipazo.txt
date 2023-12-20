@@ -1,10 +1,8 @@
 tareas de nuestro equipazo:
 - eventos en el json:
 	>regular, actualizar eventos existentes 
-	y meter nuevos de cambio de personajes, escenario y música
-- presentacion (david)
+	y meter nuevos de cambio de personajes, escenario y música (paula reina)
+- demo-presentacion (david)
 - gdd (david)
-- dialogos (ines)
-- reemplazar placeholders por cositas bonitas (ines)
-- feedback de afinidad (paula)
+- pantallita de carga (cyn)
 

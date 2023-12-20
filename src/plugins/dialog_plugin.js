@@ -14,8 +14,8 @@ export default class DialogText{
 		this.init(opts);
 		// CUSTOM: sonidito en cada letrita
 		//this.clack1 = this.scene.sound.add('clack1', { volume: 2}); // sonido de diálogo
-		this.clack2 = this.scene.sound.add('clack2', { volume: 2}); // sonido de diálogo
-		this.clack3 = this.scene.sound.add('clack3', { volume: 2}); // sonido de diálogo
+		this.clack2 = this.scene.sound.add('clack2', { volume: 10}); // sonido de diálogo
+		this.clack3 = this.scene.sound.add('clack3', { volume: 10}); // sonido de diálogo
 		this.clacks = [ this.clack2, this.clack3 ];
 	}
 
