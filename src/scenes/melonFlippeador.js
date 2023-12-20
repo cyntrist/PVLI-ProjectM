@@ -16,7 +16,10 @@ export default class MelonFlippeador extends Phaser.Scene
         this.load.image('fondo', './assets/images/escenarios/melonFlip2.png');
 
         // boton de vuelta
-        this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
+        this.load.image('goBackBox', './assets/images/escenarios/goBack2.png');
+
+        // boton de retry
+        this.load.image('retry', './assets/images/escenarios/retry.png');
 
         // melon flippeando
         this.load.image('melon', './assets/images/personajes/melonQueFlippea3.png');
@@ -130,9 +133,15 @@ export default class MelonFlippeador extends Phaser.Scene
         scene.input.keyboard.on('keydown-SPACE', function() {
             scene.melonJump();
         })
+
     }
 
     update(){
+
+        if(this.pipes.length <= 0){
+            // crea un nuebo tubo
+            this.createNewPipe();
+        }
 
         //Activamos la música si no está ya activa
         if(!this.music.isPlaying) {
@@ -148,11 +157,8 @@ export default class MelonFlippeador extends Phaser.Scene
                 this.melonJump();
             }
 
-            // gestion de pipes
-            this.pipeManager(); 
-
-            // add score
-            this.pipeScoreAdder();
+            // gestiona todo sobre las tuberias
+            this.pipesManager();
 
             // si se ha pasado de alto o de bajo
             if(this.mel.y > 750 || this.mel.y < 0){
@@ -170,27 +176,24 @@ export default class MelonFlippeador extends Phaser.Scene
         this.flip.play();
     }
 
-    pipeManager(){
-        // si llega hace cosas
-        if(this.cdCounter >= this.pipeCooldown){
 
-            // crea un nuebo tubo
-            this.createNewPipe();
-
-            // reinicia el contador
-            this.cdCounter = 0;
-        }
-        else {
-            // añade al contador
-            this.cdCounter++;
-        }
-    }
-
-    pipeScoreAdder(){
+    pipesManager(){
         for(let i = 0; i<this.pipes.length; i++){
 
+            if(!this.pipes[i].newPipeCreated && this.pipes[i].x < 750){
+                
+
+                // marca que se haya pasado
+                this.pipes[i].newPipeCreated = true;
+                this.pipes[i+1].newPipeCreated = true;
+
+                // crea un nuebo tubo
+                this.createNewPipe();
+
+            }
+
             // si no se ha pasado y esta en una posicion mas baja que el melon
-            if(!this.pipes[i].passed && this.pipes[i].x < 200){
+            else if(!this.pipes[i].passed && this.pipes[i].x < 200){
 
                 // pone puntos
                 this.addPoints();
@@ -223,19 +226,16 @@ export default class MelonFlippeador extends Phaser.Scene
         let height = this.createNewHeight();
 
         // crea la tuberia de arriba
-        this.TOPpipe = this.PIPE.create(1200, height).body.setAllowGravity(false);
+        this.TOPpipe = this.PIPE.create(1400, height).body.setAllowGravity(false);
         this.TOPpipe.setVelocity(-100, 0);
         this.TOPpipe.depth = 2;
         this.pipes.push(this.TOPpipe);
 
 
         // crea una tuberia de abajo
-        this.BOTpipe = this.PIPE.create(1200, height + 700).body.setAllowGravity(false);
+        this.BOTpipe = this.PIPE.create(1400, height + 700).body.setAllowGravity(false);
         this.BOTpipe.setVelocity(-100, 0);
         this.BOTpipe.depth = 2;
-        this.BOTpipe.rotate += 1;
-
-        console.log(this.BOTpipe.rotate);
         this.pipes.push(this.BOTpipe);
 
     }
@@ -271,7 +271,7 @@ export default class MelonFlippeador extends Phaser.Scene
 
     endScreen(escena){
         // boton de restart
-        let restart = new Button(this, 590, 200, 'restart', 2, 'goBackBox', {"ClickCallback": () => this.restartGame (this) });
+        let restart = new Button(this, 590, 200, 'restart', 2, 'retry', {"ClickCallback": () => this.restartGame (this) });
 
         // boton para volver al movil
         let movil = new Button(this, 100, 300, 'movil', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("movil", this) });
