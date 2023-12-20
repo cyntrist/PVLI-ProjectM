@@ -191,11 +191,7 @@ export default class Demo extends Phaser.Scene
 		const cannon_ending		 = this.cache.json.get('cannon_ending');  
 
 		const dayDatas = { 
-			camille_confession,
-			delilah_confession,
-			matthew_confession,
-			richard_confession,
-			cannon_ending,	
+			confession_context,
 			day1_morning_data, 
 			day1_midday_data,
 			day2_morning_data, 
