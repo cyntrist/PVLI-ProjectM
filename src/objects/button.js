@@ -55,9 +55,5 @@ export default class Button extends Phaser.GameObjects.Container {
 		//Reconoce que el raton sale del botón
 		if (ExitCallback)
 			this.box.on('pointerout', ExitCallback);
-
 	}
-
-
 }
-

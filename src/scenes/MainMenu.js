@@ -34,11 +34,12 @@ export default class MainMenu extends Phaser.Scene {
 																			"EnterCallback": () =>this.OverButton(playButton),
 																			"ExitCallback": () => this.ExitButton(playButton) } );
 		playButton.box.setScale(0.75, 0.75);
+		playButton.box.setOrigin(0.5,0.5);
 		
 		this.playTween = this.tweens.add({
 			targets: playButton,
-			scaleX: 0.95,
-			scaleY: 0.95,
+			ease: 'Sine.easeInOut',
+			scale: 0.95,
 			duration: 500,
 			yoyo: true,
 			repeat: -1,

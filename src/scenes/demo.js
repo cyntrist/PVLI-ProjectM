@@ -190,8 +190,8 @@ export default class Demo extends Phaser.Scene
 		const cannon_ending		 = this.cache.json.get('cannon_ending');  
 
 		const dayDatas = { 
-			day1_morning_data, 
-			day1_midday_data,
+			//day1_morning_data, 
+			//day1_midday_data,
 			day2_morning_data, 
 			day2_midday_data,
 			day3_morning_data,
@@ -246,6 +246,7 @@ export default class Demo extends Phaser.Scene
 		//Tween del movil cuando el ratón esté encima
 		this.movilEnterTween = this.tweens.add({
 			targets: movil,
+			ease: 'Sine.easeInOut',
 			duration: 100,
 			y: 650,
 			persist: true
@@ -254,6 +255,7 @@ export default class Demo extends Phaser.Scene
 		//Tween del movil cuando el ratón sale del botón
 		this.movilExitTween = this.tweens.add({
 			targets: movil,
+			ease: 'Sine.easeInOut',
 			duration: 100,
 			y: 700,
 			persist: true
@@ -273,6 +275,7 @@ export default class Demo extends Phaser.Scene
 			targets: images,
 			duration: 200,
 			y: '-=20',
+			ease: 'Sine.easeInOut',
 			yoyo: true,
 			repeat: 2,
 			persist: true,
