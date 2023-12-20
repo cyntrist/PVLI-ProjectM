@@ -16,7 +16,10 @@ export default class MelonFlippeador extends Phaser.Scene
         this.load.image('fondo', './assets/images/escenarios/melonFlip2.png');
 
         // boton de vuelta
-        this.load.image('goBackBox', './assets/images/escenarios/goBack.png');
+        this.load.image('goBackBox', './assets/images/escenarios/goBack2.png');
+
+        // boton de retry
+        this.load.image('retry', './assets/images/escenarios/retry.png');
 
         // melon flippeando
         this.load.image('melon', './assets/images/personajes/melonQueFlippea3.png');
@@ -184,8 +187,6 @@ export default class MelonFlippeador extends Phaser.Scene
                 this.pipes[i].newPipeCreated = true;
                 this.pipes[i+1].newPipeCreated = true;
 
-                console.log(i +  " " + this.pipes[i].newPipeCreated);
-
                 // crea un nuebo tubo
                 this.createNewPipe();
 
@@ -221,8 +222,6 @@ export default class MelonFlippeador extends Phaser.Scene
     // --------------------------------- AUXILIARES -----------------------------
     createNewPipe(){
 
-
-        console.log("uwu");
         // crea una altura
         let height = this.createNewHeight();
 
@@ -272,7 +271,7 @@ export default class MelonFlippeador extends Phaser.Scene
 
     endScreen(escena){
         // boton de restart
-        let restart = new Button(this, 590, 200, 'restart', 2, 'goBackBox', {"ClickCallback": () => this.restartGame (this) });
+        let restart = new Button(this, 590, 200, 'restart', 2, 'retry', {"ClickCallback": () => this.restartGame (this) });
 
         // boton para volver al movil
         let movil = new Button(this, 100, 300, 'movil', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("movil", this) });
