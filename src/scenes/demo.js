@@ -110,8 +110,8 @@ export default class Demo extends Phaser.Scene
 		const cannon_ending		 = this.cache.json.get('cannon_ending');  
 
 		const dayDatas = { 
-			day1_morning_data, 
-			day1_midday_data,
+			//day1_morning_data, 
+			//day1_midday_data,
 			day2_morning_data, 
 			day2_midday_data,
 			day3_morning_data,
