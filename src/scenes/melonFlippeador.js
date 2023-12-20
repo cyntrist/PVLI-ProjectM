@@ -154,11 +154,8 @@ export default class MelonFlippeador extends Phaser.Scene
                 this.melonJump();
             }
 
-            // gestion de pipes
-           // this.pipeManager(); 
-
-            // add score
-            this.pipeScoreAdder();
+            // gestiona todo sobre las tuberias
+            this.pipesManager();
 
             // si se ha pasado de alto o de bajo
             if(this.mel.y > 750 || this.mel.y < 0){
@@ -176,22 +173,8 @@ export default class MelonFlippeador extends Phaser.Scene
         this.flip.play();
     }
 
-    pipeManager(){
-        // si llega hace cosas
-        if(this.cdCounter >= this.pipeCooldown){
 
-            
-
-            // reinicia el contador
-            this.cdCounter = 0;
-        }
-        else {
-            // añade al contador
-            this.cdCounter++;
-        }
-    }
-
-    pipeScoreAdder(){
+    pipesManager(){
         for(let i = 0; i<this.pipes.length; i++){
 
             if(!this.pipes[i].newPipeCreated && this.pipes[i].x < 750){
@@ -244,14 +227,14 @@ export default class MelonFlippeador extends Phaser.Scene
         let height = this.createNewHeight();
 
         // crea la tuberia de arriba
-        this.TOPpipe = this.PIPE.create(1200, height).body.setAllowGravity(false);
+        this.TOPpipe = this.PIPE.create(1400, height).body.setAllowGravity(false);
         this.TOPpipe.setVelocity(-100, 0);
         this.TOPpipe.depth = 2;
         this.pipes.push(this.TOPpipe);
 
 
         // crea una tuberia de abajo
-        this.BOTpipe = this.PIPE.create(1200, height + 700).body.setAllowGravity(false);
+        this.BOTpipe = this.PIPE.create(1400, height + 700).body.setAllowGravity(false);
         this.BOTpipe.setVelocity(-100, 0);
         this.BOTpipe.depth = 2;
         this.pipes.push(this.BOTpipe);
