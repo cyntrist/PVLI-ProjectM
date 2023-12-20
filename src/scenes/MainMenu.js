@@ -37,9 +37,9 @@ export default class MainMenu extends Phaser.Scene {
 		playButton.box.setOrigin(0.5,0.5);
 		
 		this.playTween = this.tweens.add({
-			targets: playButton,
+			targets: playButton.box,
 			ease: 'Sine.easeInOut',
-			scale: 0.95,
+			scale: 0.85,
 			duration: 500,
 			yoyo: true,
 			repeat: -1,
