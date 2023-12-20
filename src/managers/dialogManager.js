@@ -103,6 +103,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				 || currentNode?.hasOwnProperty("conditions")
 				 || currentNode?.hasOwnProperty("signals")) 
 				 { 
+					//console.log(currentNode)
 					// reproduce sonido con cada avance de diálogo
 					blip?.play();
 
@@ -143,6 +144,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					if (currentNode.hasOwnProperty("choices")) {
 						if (clicks >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
 							decision = new Decision(scene, currentNode.choices, nineslice); // genera una nueva decisión
+							console.log(decision)
 							clicks = 0; // resetea el contador de clicks
 							scene.dialog.setInteractable(false); // desactiva la interaccion del cuadro de diálog hasta que se escoga una opción en el evento decided de decisonButtono
 						}
