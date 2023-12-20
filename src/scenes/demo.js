@@ -108,6 +108,11 @@ export default class Demo extends Phaser.Scene
 		this.load.image('clase', './assets/images/escenarios/clase_peque.png');
 		this.load.image('pasillo', './assets/images/escenarios/pasillo_peque.png');
 		this.load.image('fondo_negro', './assets/images/escenarios/fondo_negro.jpg');
+		this.load.image('fuente', './assets/images/escenarios/endings/fuente2.png'); //camille
+		this.load.image('escalera', './assets/images/escenarios/endings/escalera.png'); //delilah
+		this.load.image('el_buen_gusto', './assets/images/escenarios/endings/elbuengusto.png'); //matthew
+		this.load.image('farolillo', './assets/images/escenarios/endings/farolillo.png'); //richard
+		this.load.image('bosque', './assets/images/escenarios/endings/bosque.png'); //canon
 		// Imágenes de UI
 		this.load.image('box', './assets/images/escenarios/opciones2.png')
 		this.load.image('movil', './assets/images/movil/movil.png');
@@ -138,10 +143,6 @@ export default class Demo extends Phaser.Scene
 		////////////////////////////////
 		////////     DATA      /////////
 		////////////////////////////////
-		// Tests 
-		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/dia1_midday.json')
-		//this.load.json('dia1Data', './assets/dialogue editor/Dialog Files/test_afinidad.json')
-
 		// Morning
 		this.load.json('day1_morning_data', './assets/dialogue editor/Dialog Files/dia1_morning.json');
 		this.load.json('day2_morning_data', './assets/dialogue editor/Dialog Files/dia2_morning.json');
@@ -190,6 +191,11 @@ export default class Demo extends Phaser.Scene
 		const cannon_ending		 = this.cache.json.get('cannon_ending');  
 
 		const dayDatas = { 
+			camille_confession,
+			delilah_confession,
+			matthew_confession,
+			richard_confession,
+			cannon_ending,	
 			day1_morning_data, 
 			day1_midday_data,
 			day2_morning_data, 
@@ -287,7 +293,10 @@ export default class Demo extends Phaser.Scene
 		})
 
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
-		let playerManager = new PlayerManager(0, 0, 0, 0);
+		let dummy = 100;
+		// dummy,dummy,dummy,dummy
+		// 0,0,0,0
+		let playerManager = new PlayerManager(dummy,dummy,dummy,dummy);
 		let dialogManager = new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
 	}
 
@@ -307,7 +316,7 @@ export default class Demo extends Phaser.Scene
 	// cambia el escenario (la imagen de fondo)
 	ChangeScenary (bgName){
 		// crea una imagen en la escena dada 
-		let bg = this.add.image(0, 0, bgName).setScale(0.8, 0.8).setOrigin(0, 0);
+		let bg = this.add.image(0, 0, bgName).setScale(0.7, 0.7).setOrigin(0, 0);
 		// ajusta la capa
 		bg.depth = -2;
 	}
