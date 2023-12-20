@@ -1,6 +1,13 @@
 # **RECURSOS DEL JUEGO**:
-Inés y Paula se encargan de abocetar y finalizar respectivamente los sprites de los personajes, con ciclos de revisión del boceto, lineart, render, etc.
+Los sprites de los personajes y la UI (incluido feedback) son todos de cosecha propia. Gracias Inés y Paula. Y un poco yo.
 
-Por otro lado, la UI está por ver aunque es muy probable que sea exclusívamente por código.
+Los escenarios son fotos que hemos sacado nosotros mismos también, no hay copyright (no, ni siquiera el bar "El Buen Gusto" lo tiene, ...espero).
 
-Los fondos se realizarán a través de fotografías (ya sea de stock o propias) con un filtro encima para que sea congruente con la estética.
+Los assets que NO lo son son:
+> fuente general: Lato
+> fuente logotipo juego: Kinkie (licencia libre)
+> fuente logotipo grupo: Noto Sans y Thin Design 
+> fondo menú principal: https://www.freepik.com/free-vector/flat-design-geometric-shapes-background_6143429.htm (licencia libre)
+> sonidos: diferentes fuentes (freesound.com, etc) de licencia libre todos (lo juro)
+> música: lo mismo... :P
+Las licencias estan en sus respectivos directorios en assets/..., por si no te fias (yo tampoco lo haría)
