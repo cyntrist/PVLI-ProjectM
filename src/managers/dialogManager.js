@@ -275,14 +275,12 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			if (scene.skipInterval) {
 				clearInterval(scene.skipInterval);
 				scene.skipInterval = undefined;	
-				console.log("DEBERIA DEJAR DE FUNCIONAR: " + scene.skipInterval);
 			}
 		}
 		
 		function setSkip() {
 			if (scene.decision === undefined && scene.skipInterval === undefined) {
 				scene.skipInterval = setInterval(forward, 50);
-				console.log("ME EJECUTO: " + scene.skipInterval);
 			}
 		}
 
