@@ -85,9 +85,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		  */
 		function forward() 
 		{ 
+
 			// si el diálogo es interactuable y node existe
 			if (scene.dialog?.getInteractable() && node != undefined) 	
 			{ 
+				
 				// nodo actual, el personaje que habla y su nombre
 				let currentNode = dayData[node]; // para hacerlo más legible (sigue siendo infumable pero bueno)
 				let currentName = currentNode.name.toLowerCase(); // idem
@@ -99,16 +101,16 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 				// si es un nodo intermedio y/o tiene tiene elecciones
 				if (currentNode?.hasOwnProperty("next")
-				 || currentNode?.hasOwnProperty("choices")
-				 || currentNode?.hasOwnProperty("conditions")
-				 || currentNode?.hasOwnProperty("signals")) 
-				 { 
+				|| currentNode?.hasOwnProperty("choices")
+				|| currentNode?.hasOwnProperty("conditions")
+				|| currentNode?.hasOwnProperty("signals")) 
+				{ 
 					// reproduce sonido con cada avance de diálogo
 					blip?.play();
 
 					// si solo ha habido un click, escribe el mensaje
 					if (clicks < 1) 
-						speak(currentNode);
+						speak(currentNode, true);
 
 					// si el nodo ha de emitir un evento, lo emite
 					///////////     EVENTO      ////////////
@@ -172,7 +174,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 				// si lo anterior no se cumple, significa que es el nodo final
 				else {
-					speak(currentNode);
+					speak(currentNode, true);
 					setDayData(++i);
 					node = dayData.root.next;
 					//Character.unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar
@@ -211,7 +213,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				&& !prevNode.hasOwnProperty("conditions") // ni a una condicion
 				&& !prevNode.hasOwnProperty("signals")) {  // ni a una señal
 					node = dayData[node].parent; // vuelve atrás
-					speak(prevNode); // blablabla
+					speak(prevNode, false); // blablabla
 				}
 			}
 		}
@@ -229,7 +231,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		}
 
 		// escribir el texto en el cuadro de dialogo :-)
-		function speak(currentNode) {
+		function speak(currentNode, animate) {
 			let name = currentNode.name;
 			const names = Object.values(characters).map(character => character.nombre);
 			let valid = names.includes(name);
@@ -246,7 +248,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					Character.focusEveryone(characters); 
 				}
 			}
-			scene.dialog?.setText(name + ":\n" + currentNode.text.es, true); // se escribe el último msj
+			scene.dialog?.setText(name + ":\n" + currentNode.text.es, animate); // se escribe el último msj
 		 }
 
 		/** 
@@ -307,7 +309,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			blip?.play(); // si el sonido existe lo reproduce
 			let decidida = dayData[node].choices[valor]
 			Character.focusEveryone(characters); // se enfoca a todo el mundo al hablar
-			speak(decidida);
+			speak(decidida, true);
 			node = decidida.next; // pasa al siguiente nodo
 			scene.dialog?.setInteractable(true); // devuelve la interaccion al cuadro de diálogo
 			decision?.destroy(); // destruye la decison

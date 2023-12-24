@@ -37,7 +37,7 @@ export default class DialogText{
 		this.dialogSpeed = opts.dialogSpeed || 3;
 		this.fontSize = opts.fontSize || 24
 		this.fontFamily = opts.fontFamily || undefined
-		
+		this.animating = false;
 		// se usa para animar el texto
 		this.eventCounter = 0;
 		
@@ -65,6 +65,14 @@ export default class DialogText{
 			this.graphics.visible = this.visible;
 		if (this.closeBtn) 
 			this.closeBtn.visible = this.visible;
+	}
+
+	/**
+	 * 
+	 * @returns - si el texto ha acabado de animarse o no
+	 */
+	getAnimating() {
+		return this.animating; 
 	}
 
 	// con esta función se nos permite añadir texto a la ventana
