@@ -59,7 +59,7 @@ export default class Demo extends Phaser.Scene
 			text: '0%',
 			style: {
 				font: 'bold 24px monospace',
-				fill: '#FF799A'
+				fill: '#73c29b'
 			}
 		});
 		percentText.setOrigin(0.5, 0.5);
