@@ -288,7 +288,7 @@ export default class Demo extends Phaser.Scene
 		})
 
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
-		let dummy = 100;
+		let dummy = 0;
 		// dummy,dummy,dummy,dummy
 		// 0,0,0,0
 		let playerManager = new PlayerManager(dummy,dummy,dummy,dummy);
