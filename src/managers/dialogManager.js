@@ -50,7 +50,6 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		let title = "\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"; // primera línea de título (sí, es justo lo que estás pensando, tiene todos esos espacios para que esté centrada (lo siento mucho))
 		let clicks = 0; // para contar dos clicks antes de decidir, una guarra da pero son las 6 de la mañana bestie
 		let node = dayData.root.next; // primer nodo
-		let decision; // scope dentro del constructor, va a ser la decisión cuando la haya
 		scene.dialog.setText(title, false); // imprime la línea de título
 		disableBehaviours();
 		Character.onExitEveryone(characters);
@@ -69,6 +68,8 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		scene.input.keyboard.on('keydown-SPACE', forward); // barra espaciadora
 		scene.input.keyboard.on('keydown-UP', backward); // flecha arriba
 		scene.dialog.graphics.on('pointerdown', callback); // click en el cuadro de diálogo, independiente de cual sea
+		scene.input.keyboard.on('keydown-CTRL', setSkip, this);
+		scene.input.keyboard.on('keyup-CTRL', clearSkip, this);
 
 		/**
 		 * Método para cambiar de JSON del que se están leyendo los nodos dentro  de un diccionario de los datos diarios.
@@ -120,11 +121,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 						{
 							let currentEvent = currentNode?.signals?.eventName?.String;
 							let currentValue = currentNode?.signals[currentEvent]?.String?.toLowerCase();
-							console.log("EVENTOOOOO: " + currentEvent);
-							console.log("VALOOOOOOR DEL EVENTOOOOOOO: " + currentValue);
+							//console.log("EVENTOOOOO: " + currentEvent);
+							//console.log("VALOOOOOOR DEL EVENTOOOOOOO: " + currentValue);
 							if (currentEvent == undefined) {
-								console.log(currentNode);
-								console.log(currentNode.signals);
+								//console.log(currentNode);
+								//console.log(currentNode.signals);
 							}
 							scene.eventEmitter?.emit(currentEvent, currentValue); 
 							//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
@@ -146,9 +147,10 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 						//////////     DECISION     ///////////
 						if (currentNode.hasOwnProperty("choices")) {
 							if (clicks >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
-								decision = new Decision(scene, currentNode.choices, nineslice); // genera una nueva decisión
+								scene.decision = new Decision(scene, currentNode.choices, nineslice); // genera una nueva decisión
 								clicks = 0; // resetea el contador de clicks
 								scene.dialog.setInteractable(false); // desactiva la interaccion del cuadro de diálog hasta que se escoga una opción en el evento decided de decisonButtono
+								clearSkip();
 							}
 							else clicks++;
 						}
@@ -269,9 +271,22 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				|| Phaser.Input.Keyboard.JustDown(scene.down)) {}		*/
 		}
 
+		function clearSkip() {
+			if (scene.skipInterval) {
+				clearInterval(scene.skipInterval);
+				scene.skipInterval = undefined;	
+				console.log("DEBERIA DEJAR DE FUNCIONAR: " + scene.skipInterval);
+			}
+		}
+		
+		function setSkip() {
+			if (scene.decision === undefined && scene.skipInterval === undefined) {
+				scene.skipInterval = setInterval(forward, 50);
+				console.log("ME EJECUTO: " + scene.skipInterval);
+			}
+		}
 
-
-
+		
 
 		///////////////////////////////////////////
 		/////////      LISTENERS !!!     //////////
@@ -315,7 +330,9 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			speak(decidida, true);
 			node = decidida.next; // pasa al siguiente nodo
 			scene.dialog?.setInteractable(true); // devuelve la interaccion al cuadro de diálogo
-			decision?.destroy(); // destruye la decison
+			scene.decision?.destroy(); // destruye la decison
+			scene.decision = undefined;
+			clearSkip();
 		});
 
 		/**

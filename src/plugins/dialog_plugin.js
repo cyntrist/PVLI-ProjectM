@@ -77,7 +77,6 @@ export default class DialogText{
 	 * @returns - si el texto ha acabado de animarse o no
 	 */
 	getAnimating() {
-		console.log(this.animating);
 		return this.animating; 
 	}
 
@@ -137,6 +136,8 @@ export default class DialogText{
 			this.graphics.setInteractive(new Phaser.Geom.Rectangle(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight), Phaser.Geom.Rectangle.Contains, { useHandCursor: true });
 		}
 		else {
+			console.log(this.scene.skipInterval);
+			clearInterval(this.scene.skipInterval);
 			this.graphics.disableInteractive();
 		}
 	}
