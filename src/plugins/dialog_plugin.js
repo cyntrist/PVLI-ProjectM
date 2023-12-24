@@ -37,7 +37,12 @@ export default class DialogText{
 		this.dialogSpeed = opts.dialogSpeed || 3;
 		this.fontSize = opts.fontSize || 24
 		this.fontFamily = opts.fontFamily || undefined
+
+		//////////////////////////////
 		this.animating = false;
+		this.fullText;
+		//////////////////////////////
+
 		// se usa para animar el texto
 		this.eventCounter = 0;
 		
@@ -72,7 +77,12 @@ export default class DialogText{
 	 * @returns - si el texto ha acabado de animarse o no
 	 */
 	getAnimating() {
+		console.log(this.animating);
 		return this.animating; 
+	}
+
+	setAnimating(animate) {
+		this.animating = animate;
 	}
 
 	// con esta función se nos permite añadir texto a la ventana
@@ -80,7 +90,7 @@ export default class DialogText{
 	setText(text, animate) {
 		//el parametro animate nos permite saber si el texto sera animado o no
 		this.eventCounter = 0;
-		
+		this.fullText = text;
 		//se crea un array con cada caracter en la cadena de texto y se 
 		// guarda en la propiedad diálogo
 		this.dialog = text.split('');
@@ -109,7 +119,9 @@ export default class DialogText{
 				loop: true
 			});
 		}
-		
+		else {
+			this.animating = false;
+		}
 	}
 
 	// IMPORTANTE: para que sea clickable y tenga onpointerdown en caso de true y para esperar a una decision en caso de false
@@ -252,9 +264,9 @@ export default class DialogText{
 		//se va actualizando el texto de nuestro game object llamando a setText
 		this.text.setText(this.text.text + this.dialog[this.eventCounter - 1]);
 		
+		if (this.animating === false) 
+			this.animating = true;
 
-
-	
 		////////////////////////////////////////
 		if (
 			//!this.clack1.isPlaying && 
@@ -267,10 +279,10 @@ export default class DialogText{
 		///////////////////////////////////////
 
 
-
 		//Cuando eventCounter sea igual a la longitud del texto, se detiene el evento
 		if (this.eventCounter === this.dialog.length) {
 			this.timedEvent.remove();
+			this.animating = false;
 		}
 	}
 

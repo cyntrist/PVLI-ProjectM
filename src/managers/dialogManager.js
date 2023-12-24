@@ -85,101 +85,104 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		  */
 		function forward() 
 		{ 
-
 			// si el diálogo es interactuable y node existe
 			if (scene.dialog?.getInteractable() && node != undefined) 	
 			{ 
-				
-				// nodo actual, el personaje que habla y su nombre
-				let currentNode = dayData[node]; // para hacerlo más legible (sigue siendo infumable pero bueno)
-				let currentName = currentNode.name.toLowerCase(); // idem
-				let currentCharacter = characters[currentName];  // idem
+				if (scene.dialog?.getAnimating()) {
+					scene.dialog?.setText(scene.dialog?.fullText, false);
+					//scene.dialog?.setAnimating(false);
+				} else {
+					// nodo actual, el personaje que habla y su nombre
+					let currentNode = dayData[node]; // para hacerlo más legible (sigue siendo infumable pero bueno)
+					let currentName = currentNode.name.toLowerCase(); // idem
+					let currentCharacter = characters[currentName];  // idem
 
-				// enfoque de personajes
-				currentCharacter?.onFocus(); // si existe current character, lo enfoca
-				currentCharacter?.unfocusEveryoneElse(characters); // y desenfoca al resto
+					// enfoque de personajes
+					currentCharacter?.onFocus(); // si existe current character, lo enfoca
+					currentCharacter?.unfocusEveryoneElse(characters); // y desenfoca al resto
 
-				// si es un nodo intermedio y/o tiene tiene elecciones
-				if (currentNode?.hasOwnProperty("next")
-				|| currentNode?.hasOwnProperty("choices")
-				|| currentNode?.hasOwnProperty("conditions")
-				|| currentNode?.hasOwnProperty("signals")) 
-				{ 
-					// reproduce sonido con cada avance de diálogo
-					blip?.play();
+					// si es un nodo intermedio y/o tiene tiene elecciones
+					if (currentNode?.hasOwnProperty("next")
+					|| currentNode?.hasOwnProperty("choices")
+					|| currentNode?.hasOwnProperty("conditions")
+					|| currentNode?.hasOwnProperty("signals")) 
+					{ 
+						// reproduce sonido con cada avance de diálogo
+						blip?.play();
 
-					// si solo ha habido un click, escribe el mensaje
-					if (clicks < 1) 
+						// si solo ha habido un click, escribe el mensaje
+						if (clicks < 1) 
+							speak(currentNode, true);
+
+						// si el nodo ha de emitir un evento, lo emite
+						///////////     EVENTO      ////////////
+						if (currentNode.hasOwnProperty("signals")) 
+						{
+							let currentEvent = currentNode?.signals?.eventName?.String;
+							let currentValue = currentNode?.signals[currentEvent]?.String?.toLowerCase();
+							console.log("EVENTOOOOO: " + currentEvent);
+							console.log("VALOOOOOOR DEL EVENTOOOOOOO: " + currentValue);
+							if (currentEvent == undefined) {
+								console.log(currentNode);
+								console.log(currentNode.signals);
+							}
+							scene.eventEmitter?.emit(currentEvent, currentValue); 
+							//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
+							/* 
+							!!! FORMATO EN JSON !!!
+							"signals": {
+								"parent": "1c73a86e-0677-495c-a560-63f69179dbfa",
+								"eventName": {
+									"String": "\"affinityUp\""	//este parametro indica el nombre del evento para poder acceder a el y al valor que se le quiere pasar
+								},
+								"affinityUp": {
+									"String": "camille"		//este otro parametro es el valor que se quiere
+								}
+							}
+							*/
+						}
+
+						// si el nodo lleva a una decisión
+						//////////     DECISION     ///////////
+						if (currentNode.hasOwnProperty("choices")) {
+							if (clicks >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
+								decision = new Decision(scene, currentNode.choices, nineslice); // genera una nueva decisión
+								clicks = 0; // resetea el contador de clicks
+								scene.dialog.setInteractable(false); // desactiva la interaccion del cuadro de diálog hasta que se escoga una opción en el evento decided de decisonButtono
+							}
+							else clicks++;
+						}
+
+						// si el nodo contiene una condición
+						//////////     CONDICION     //////////
+						else if (currentNode.hasOwnProperty("conditions")) { // else porque por definicion no puede haber nodos con tanto decisiones como condiciones a la vez
+							let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
+							let conditionCheck = false; //flag para solo comprobar una condicion
+							let i = 0; // contador de condición
+							while (i < _conditions.length && !conditionCheck) {
+								if (CheckConditions(_conditions[i], playerManager)) { //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
+									node = _conditions[i].next;
+									conditionCheck = true;
+								}
+								i++; //si no se cuumple avanzamos a la siguiente condicion
+							}
+						}
+
+						// si no se cumple ninguna de las condiciones anteriores es simplemente continuacion lineal, tiene next
+						//////////      NEXT     //////////
+						else 
+							node = currentNode?.next;
+					}
+
+					// si lo anterior no se cumple, significa que es el nodo final
+					else {
 						speak(currentNode, true);
-
-					// si el nodo ha de emitir un evento, lo emite
-					///////////     EVENTO      ////////////
-					if (currentNode.hasOwnProperty("signals")) 
-					{
-						let currentEvent = currentNode?.signals?.eventName?.String;
-						let currentValue = currentNode?.signals[currentEvent]?.String?.toLowerCase();
-						console.log("EVENTOOOOO: " + currentEvent);
-						console.log("VALOOOOOOR DEL EVENTOOOOOOO: " + currentValue);
-						if (currentEvent == undefined) {
-							console.log(currentNode);
-							console.log(currentNode.signals);
-						}
-						scene.eventEmitter?.emit(currentEvent, currentValue); 
-						//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
-						/* 
-						!!! FORMATO EN JSON !!!
-						"signals": {
-							"parent": "1c73a86e-0677-495c-a560-63f69179dbfa",
-							"eventName": {
-								"String": "\"affinityUp\""	//este parametro indica el nombre del evento para poder acceder a el y al valor que se le quiere pasar
-							},
-							"affinityUp": {
-								"String": "camille"		//este otro parametro es el valor que se quiere
-							}
-						}
-						*/
+						setDayData(++i);
+						node = dayData.root.next;
+						//Character.unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar
 					}
-
-					// si el nodo lleva a una decisión
-					//////////     DECISION     ///////////
-					if (currentNode.hasOwnProperty("choices")) {
-						if (clicks >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
-							decision = new Decision(scene, currentNode.choices, nineslice); // genera una nueva decisión
-							clicks = 0; // resetea el contador de clicks
-							scene.dialog.setInteractable(false); // desactiva la interaccion del cuadro de diálog hasta que se escoga una opción en el evento decided de decisonButtono
-						}
-						else clicks++;
-					}
-
-					// si el nodo contiene una condición
-					//////////     CONDICION     //////////
-					else if (currentNode.hasOwnProperty("conditions")) { // else porque por definicion no puede haber nodos con tanto decisiones como condiciones a la vez
-						let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
-						let conditionCheck = false; //flag para solo comprobar una condicion
-						let i = 0; // contador de condición
-						while (i < _conditions.length && !conditionCheck) {
-							if (CheckConditions(_conditions[i], playerManager)) { //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
-								node = _conditions[i].next;
-								conditionCheck = true;
-							}
-							i++; //si no se cuumple avanzamos a la siguiente condicion
-						}
-					}
-
-					// si no se cumple ninguna de las condiciones anteriores es simplemente continuacion lineal, tiene next
-					//////////      NEXT     //////////
-					else 
-						node = currentNode?.next;
-				}
-
-				// si lo anterior no se cumple, significa que es el nodo final
-				else {
-					speak(currentNode, true);
-					setDayData(++i);
-					node = dayData.root.next;
-					//Character.unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar
-				}
-			} 
+				} 
+			}
 		};
 
 		/**
