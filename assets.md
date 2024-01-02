@@ -1,7 +1,7 @@
 # **RECURSOS DEL JUEGO**:
-Los sprites de los personajes y la UI (incluido feedback) son todos de cosecha propia. Gracias Inés y Paula. Y un poco yo.
+Los sprites de los personajes y la UI (incluido feedback) son todos de cosecha propia de Inés, Paula y Cynthia.
 
-Los escenarios son fotos que hemos sacado nosotros mismos también, no hay copyright (no, ni siquiera el bar "El Buen Gusto" lo tiene, ...espero).
+Los escenarios son fotos que el equipo ha sacado, no hay copyright (no, ni siquiera el bar "El Buen Gusto" lo tiene).
 
 Los assets que NO lo son son:
 > fuente general: Lato

@@ -291,8 +291,8 @@ export default class Demo extends Phaser.Scene
 		let dummy = 100;
 		// dummy,dummy,dummy,dummy
 		// 0,0,0,0
-		let playerManager = new PlayerManager(dummy,dummy,dummy,dummy);
-		let dialogManager = new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
+		const playerManager = new PlayerManager(dummy,dummy,dummy,dummy);
+		new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
 	}
 
 	update() { 
