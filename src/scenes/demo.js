@@ -269,17 +269,17 @@ export default class Demo extends Phaser.Scene
 		})
 
 		//Afinidades
-		const images = [
+		const affinitySprites = [
 			scene.add.image(1200, 100, "affCamille").setScale(0.25).setVisible(false),
 			scene.add.image(1180, 100, "affDelilah").setScale(0.25).setVisible(false),
 			scene.add.image(1160, 100, "affMatthew").setScale(0.25).setVisible(false),
 			scene.add.image(1140, 100, "affRichard").setScale(0.25).setVisible(false)
 		]
-		this.images = images;
+		this.affinitySprites = affinitySprites;
 
 		//Tween de la afinidad
 		this.affinityTween = this.tweens.add({
-			targets: images,
+			targets: affinitySprites,
 			duration: 200,
 			y: '-=20',
 			ease: 'Sine.easeInOut',
@@ -287,8 +287,8 @@ export default class Demo extends Phaser.Scene
 			repeat: 2,
 			persist: true,
 			onComplete: function () {
-				for (let i = 0; i < images.length; i++) {
-					images[i].setVisible(false);
+				for (let i = 0; i < affinitySprites.length; i++) {
+					affinitySprites[i].setVisible(false);
 				  }
 			  }
 		})
@@ -328,10 +328,10 @@ export default class Demo extends Phaser.Scene
 	}
 
 	/**
-	 * 
-	 * @param {String} character - nombre del personaje
+	 * Método que anima el feedback de afinidad al subirla con algun personaje
+	 * @param {String} character - nombre del personaje con el que se ha subido la afinidad
 	 */
-	affinity(character) {
+	animateAffinity(character) {
 		//pj es el string con el nombre del personaje al que le afecta la sub de afinidad
 		//Lo que yo quiero hacer es acceder a las imagenes (declarado arriba estan las 4 flechas de colores) y hacer visible la que toca
 		let index = -1;
@@ -342,7 +342,7 @@ export default class Demo extends Phaser.Scene
 			case "matthew": index = 2; break;
 			case "richard": index = 3; break;
 		}
-		this.images[index].setVisible(true);
+		this.affinitySprites[index].setVisible(true);
 		//Se ejecuta el tween (Se aplica sobre todas las flechas pero solo se va a ver la que esté visible)
 		this.affinityTween.play();
 		//se desactivan al acabar el tween

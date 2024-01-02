@@ -227,14 +227,14 @@ export default class MelonFlippeador extends Phaser.Scene
 
         // crea la tuberia de arriba
         this.TOPpipe = this.PIPE.create(1400, height).body.setAllowGravity(false);
-        this.TOPpipe.setVelocity(-100, 0);
+        this.TOPpipe.setVelocity(-200 - 10 * this.SCORE, 0);
         this.TOPpipe.depth = 2;
         this.pipes.push(this.TOPpipe);
 
 
         // crea una tuberia de abajo
         this.BOTpipe = this.PIPE.create(1400, height + 700).body.setAllowGravity(false);
-        this.BOTpipe.setVelocity(-100, 0);
+        this.BOTpipe.setVelocity(-200 - 10 * this.SCORE, 0);
         this.BOTpipe.depth = 2;
         this.pipes.push(this.BOTpipe);
 
