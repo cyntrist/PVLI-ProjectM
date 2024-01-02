@@ -117,13 +117,12 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 						if (currentNode.hasOwnProperty("signals")) {
 							let currentEvent = currentNode?.signals?.eventName?.String;
 							let currentValue = currentNode?.signals[currentEvent]?.String?.toLowerCase();
-							//console.log("EVENTOOOOO: " + currentEvent);
-							//console.log("VALOOOOOOR DEL EVENTOOOOOOO: " + currentValue);
 							if (currentEvent == undefined) {
-								//console.log(currentNode);
-								//console.log(currentNode.signals);
+								console.log("!!!AVISO: EVENTO NULO!!!\n En el nodo: " + currentNode);
+								console.log("En la señal: " + currentNode.signals);
 							}
-							scene.eventEmitter?.emit(currentEvent, currentValue);
+							else 
+								scene.eventEmitter?.emit(currentEvent, currentValue);
 							//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
 							/* 
 							!!! FORMATO EN JSON !!!
@@ -158,7 +157,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 							let conditionCheck = false; //flag para solo comprobar una condicion
 							let i = 0; // contador de condición
 							while (i < _conditions.length && !conditionCheck) {
-								if (CheckConditions(_conditions[i], playerManager)) { //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
+								if (checkConditions(_conditions[i], playerManager)) { //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
 									node = _conditions[i].next;
 									conditionCheck = true;
 								}
@@ -223,12 +222,10 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 * callback para gestionar si el click es izquierdo o derecho
 		 */
 		function callback() {
-			if (scene.input.activePointer.rightButtonDown()) { // click derecho
+			if (scene.input.activePointer.rightButtonDown()) // click derecho
 				backward(); // hacia atras
-			}
-			else { // si no es el click derecho sera el izquierdo XD o si no el medio pero nos da un poco igual tbh 
+			else // si no es el click derecho sera el izquierdo XD o si no el medio pero nos da un poco igual tbh 
 				forward();
-			}
 		}
 
 		// escribir el texto en el cuadro de dialogo :-)
@@ -241,13 +238,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			{
 				name = "Y/N";
 				if (
-					//caracter === '*' || 
 					caracter === '(') {
 					Character.unfocusEveryone(characters);
 				}
-				else {
+				else
 					Character.focusEveryone(characters);
-				}
 			}
 			scene.dialog?.setText(name + ":\n" + currentNode.text.es, animate); // se escribe el último msj
 		}
@@ -258,15 +253,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		function disableBehaviours() {
 			scene.input.mouse.disableContextMenu();
 			scene.cursor = scene.input.keyboard.createCursorKeys();
-			// no queremos menú de contexto en nuestro canvas, lo sentimos pero no está invitado a esta fiesta
-			/*scene.spacebar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // su fiesta le espera arriba (mentira, tampoco queremos que el espacio o las flechas hagan scroll)
-			scene.up = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP); // lo mismo pero para las flechas
-			scene.down = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN); // lo mismo pero para las flechas
-			if (Phaser.Input.Keyboard.JustDown(scene.spacebar) 
-				|| Phaser.Input.Keyboard.JustDown(scene.up)
-				|| Phaser.Input.Keyboard.JustDown(scene.down)) {}		*/
 		}
 
+		/**
+		 * Método para parar de saltar texto
+		 */
 		function clearSkip() {
 			if (scene.skipInterval) {
 				clearInterval(scene.skipInterval);
@@ -274,6 +265,9 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			}
 		}
 
+		/**
+		 *  Método para inicializar el salto de texto
+		 */
 		function setSkip() {
 			if (scene.decision === undefined && scene.skipInterval === undefined) {
 				scene.skipInterval = setInterval(forward, 50);
@@ -295,20 +289,25 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		// Nombre del evento: 'characterEnter'
 		// Personaje: 'camille'
 		// Ambos strings, excepto con los de everyoneExit/Enter, que no necesitan personajes
+
+		// Un personaje en concreto entra en escena
 		scene.eventEmitter.on('characterEnter', function (character) {
 			let name = character.toLowerCase();
 			characters[name].onEnter(characters);
 		})
 
+		// Un personaje en concreto sale de escena
 		scene.eventEmitter.on('characterExit', function (character) {
 			let name = character.toLowerCase();
 			characters[name].onExit(characters);
 		})
 
+		// Todos los personajes entran en escena
 		scene.eventEmitter.on('everyoneEnter', function () {
 			Character.onEnterEveryone(characters);
 		})
 
+		// Todos los personajes salen de escena
 		scene.eventEmitter.on('everyoneExit', function () {
 			Character.onExitEveryone(characters);
 		})
@@ -351,11 +350,15 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 }
 
 
-
-
-
+/**
+ * Este método comprueba que la condición dada (recibida por un evento en el json) es mayor 
+ * o igual a la afinidad que el jugador tiene con el personaje de la condicion
+ * @param {*} condicion - la condicion a comprobar
+ * @param {*} playerManager - referencia al jugador
+ * @returns 
+ */
 function checkConditions(condicion, playerManager) {
-	let charName
+	let charName;
 	switch (condicion.charNum.value) //por desgracia los nodos de condiciones no dejan tener como parametro una string asi que se utiliza la codificacion de los personajes usada anteriormente
 	{
 		case 0: charName = "camille"; break;
