@@ -1,7 +1,7 @@
-import Demo from './scenes/demo.js';
-import movil from './scenes/movil.js';
+import Demo from './scenes/Demo.js';
+import movil from './scenes/Movil.js';
 import MainMenu from './scenes/MainMenu.js';
-import MelonFlippeador from './scenes/melonFlippeador.js';
+import MelonFlippeador from './scenes/MelonFlippeador.js';
 
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos

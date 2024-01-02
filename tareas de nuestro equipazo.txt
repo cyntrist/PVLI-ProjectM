@@ -1,7 +1,0 @@
-tareas de nuestro equipazo:
-- eventos en el json:
-	>regular, actualizar eventos existentes 
-	y meter nuevos de cambio de personajes, escenario y música (paula reina)
-- demo-presentacion (david)
-- gdd (quien pueda)
-
