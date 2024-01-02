@@ -60,7 +60,7 @@ export default class Demo extends Phaser.Scene
 			text: '0%',
 			style: {
 				font: 'bold 24px monospace',
-				fill: '#FF799A'
+				fill: '#73c29b'
 			}
 		});
 		percentText.setOrigin(0.5, 0.5);
@@ -294,7 +294,7 @@ export default class Demo extends Phaser.Scene
 		})
 
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
-		let dummy = 100;
+		let dummy = 0;
 		// dummy,dummy,dummy,dummy
 		// 0,0,0,0
 		const playerManager = new PlayerManager(dummy,dummy,dummy,dummy);
