@@ -46,7 +46,6 @@ export default class Decision extends Phaser.GameObjects.Container {
 
 		// Escucha su propia destruccion para limpiar / Método destructor
 		this.on('destroy', function onDestroy() {
-			console.log("ME EJECUTOOO");
 			for(let i = 0; i < this.buttons.length; i++) {
 				this.buttons[i].destroy();
 			}

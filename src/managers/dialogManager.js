@@ -81,106 +81,146 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			dayData = dayDatas[key];
 		}
 
+		/**
+		 * callback para gestionar si el click es izquierdo o derecho
+		 */
+		function callback() {
+			if (scene.input.activePointer.rightButtonDown()) // click derecho
+				backward(); // hacia atras
+			else // si no es el click derecho sera el izquierdo XD o si no el medio pero nos da un poco igual tbh 
+				forward();
+		}
+
 		/** 
 		  * callback que avanza el diálogo si y solo si el diálogo es interactuable
 		  */
 		function forward() {
 			// si el diálogo es interactuable y node existe
-			if (scene.dialog?.getInteractable() && node != undefined) {
-				if (scene.dialog?.getAnimating()) {
-					scene.dialog?.setText(scene.dialog?.fullText, false);
-					//scene.dialog?.setAnimating(false);
-				} else {
-					// nodo actual, el personaje que habla y su nombre
-					let currentNode = dayData[node]; // para hacerlo más legible (sigue siendo infumable pero bueno)
-					let currentName = currentNode.name.toLowerCase(); // idem
-					let currentCharacter = characters[currentName];  // idem
+			if (scene.dialog?.getInteractable() && node != undefined)
+				// si es un click mientras el texto anterior todavía se está animando
+				if (scene.dialog.getAnimating())
+					scene.dialog.setText(scene.dialog?.fullText, false); // lo acaba de animar al instante
+				else
+					next();
+		};
 
-					// enfoque de personajes
-					currentCharacter?.onFocus(); // si existe current character, lo enfoca
-					currentCharacter?.unfocusEveryoneElse(characters); // y desenfoca al resto
+		/**
+		 * función para pasar al siguiente nodo y gestionar según qué tipo sea
+		 * realmente está hecho para que sea más legible el código y no haya tantos indents
+		 */
+		function next() {
+			// nodo actual, el personaje que habla y su nombre
+			let currentNode = dayData[node]; // para hacerlo más legible (sigue siendo infumable pero bueno)
+			let currentName = currentNode?.name.toLowerCase(); // idem
+			let currentCharacter = characters[currentName];  // idem
 
-					// si es un nodo intermedio y/o tiene tiene elecciones
-					if (currentNode?.hasOwnProperty("next")
-						|| currentNode?.hasOwnProperty("choices")
-						|| currentNode?.hasOwnProperty("conditions")
-						|| currentNode?.hasOwnProperty("signals")) {
-						// reproduce sonido con cada avance de diálogo
-						blip?.play();
+			// enfoque de personajes
+			currentCharacter?.onFocus(); // si existe current character, lo enfoca
+			currentCharacter?.unfocusEveryoneElse(characters); // y desenfoca al resto
 
-						// si solo ha habido un click, escribe el mensaje
-						if (clicks < 1)
-							speak(currentNode, true);
+			// si es un nodo intermedio y/o tiene tiene elecciones
+			if (currentNode?.hasOwnProperty("next")
+			|| currentNode?.hasOwnProperty("choices")
+			|| currentNode?.hasOwnProperty("conditions")
+			|| currentNode?.hasOwnProperty("signals")) {
+				manageNode(currentNode);
+			}
+			// si lo anterior no se cumple, significa que es el nodo final
+			else {
+				speak(currentNode, true);
+				setDayData(++i);
+				node = dayData.root.next;
+				//Character.unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar
+			}
+		}
 
-						// si el nodo ha de emitir un evento, lo emite
-						///////////     EVENTO      ////////////
-						if (currentNode.hasOwnProperty("signals")) {
-							let currentEvent = currentNode?.signals?.eventName?.String;
-							let currentValue = currentNode?.signals[currentEvent]?.String?.toLowerCase();
-							if (currentEvent == undefined) {
-								console.log("!!!AVISO: EVENTO NULO!!!\n En el nodo: " + currentNode);
-								console.log("En la señal: " + currentNode.signals);
-							}
-							else 
-								scene.eventEmitter?.emit(currentEvent, currentValue);
-							//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
-							/* 
-							!!! FORMATO EN JSON !!!
-							"signals": {
-								"parent": "1c73a86e-0677-495c-a560-63f69179dbfa",
-								"eventName": {
-									"String": "\"affinityUp\""	//este parametro indica el nombre del evento para poder acceder a el y al valor que se le quiere pasar
-								},
-								"affinityUp": {
-									"String": "camille"		//este otro parametro es el valor que se quiere
-								}
-							}
-							*/
-						}
+		/**
+		 * Gestiona el nodo y sus distintas características
+		 * @param {*} currentNode - nodo a manejar 
+		 */
+		function manageNode(currentNode) {
+			// reproduce sonido con cada avance de diálogo
+			blip?.play();
 
-						// si el nodo lleva a una decisión
-						//////////     DECISION     ///////////
-						if (currentNode.hasOwnProperty("choices")) {
-							if (clicks >= 1) { // manera muy guarra de necesitar dos clics antes de que aparezca la decision
-								scene.decision = new Decision(scene, currentNode.choices, nineslice); // genera una nueva decisión
-								clicks = 0; // resetea el contador de clicks
-								scene.dialog.setInteractable(false); // desactiva la interaccion del cuadro de diálog hasta que se escoga una opción en el evento decided de decisonButtono
-								clearSkip();
-							}
-							else clicks++;
-						}
+			// si solo ha habido un click, escribe el mensaje
+			if (clicks < 1)
+				speak(currentNode, true);
 
-						// si el nodo contiene una condición
-						//////////     CONDICION     //////////
-						else if (currentNode.hasOwnProperty("conditions")) { // else porque por definicion no puede haber nodos con tanto decisiones como condiciones a la vez
-							let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
-							let conditionCheck = false; //flag para solo comprobar una condicion
-							let i = 0; // contador de condición
-							while (i < _conditions.length && !conditionCheck) {
-								if (checkConditions(_conditions[i], playerManager)) { //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
-									node = _conditions[i].next;
-									conditionCheck = true;
-								}
-								i++; //si no se cuumple avanzamos a la siguiente condicion
-							}
-						}
+			// si el nodo ha de emitir un evento, lo emite
+			///////////     EVENTO      ////////////
+			if (currentNode.hasOwnProperty("signals")) 
+				signal(currentNode);	
 
-						// si no se cumple ninguna de las condiciones anteriores es simplemente continuacion lineal, tiene next
-						//////////      NEXT     //////////
-						else
-							node = currentNode?.next;
-					}
+			// si el nodo lleva a una decisión
+			//////////     DECISION     ///////////
+			if (currentNode.hasOwnProperty("choices")) {
+				if (clicks >= 1) // manera muy guarra de necesitar dos clics antes de que aparezca la decision
+					choice(currentNode, clicks);
+				else clicks++;
+			}
 
-					// si lo anterior no se cumple, significa que es el nodo final
-					else {
-						speak(currentNode, true);
-						setDayData(++i);
-						node = dayData.root.next;
-						//Character.unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar
-					}
+			// si el nodo contiene una condición
+			//////////     CONDICION     //////////
+			else if (currentNode.hasOwnProperty("conditions")) // else porque por definicion no puede haber nodos con tanto decisiones como condiciones a la vez
+				condition(currentNode);
+
+			// si no se cumple ninguna de las condiciones anteriores es simplemente continuacion lineal, tiene next
+			//////////      NEXT     //////////
+			else node = currentNode?.next;
+		}
+
+		/**
+		 * GESTIÓN DE EVENTO
+		 */
+		function signal(currentNode){
+			let currentEvent = currentNode?.signals?.eventName?.String;
+			let currentValue = currentNode?.signals[currentEvent]?.String?.toLowerCase();
+			if (currentEvent == undefined) {
+				console.log("!!!AVISO: EVENTO NULO!!!\n En el nodo: " + currentNode);
+				console.log("En la señal: " + currentNode.signals);
+			}
+			else scene.eventEmitter?.emit(currentEvent, currentValue);
+			//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
+			/* 
+			!!! FORMATO EN JSON !!!
+			"signals": {
+				"parent": "1c73a86e-0677-495c-a560-63f69179dbfa",
+				"eventName": {
+					"String": "\"affinityUp\""	//este parametro indica el nombre del evento para poder acceder a el y al valor que se le quiere pasar
+				},
+				"affinityUp": {
+					"String": "camille"		//este otro parametro es el valor que se quiere
 				}
 			}
-		};
+			*/
+		}
+
+		/**
+		 * GESTIÓN DE DECISISÓN
+		 */
+		function choice(currentNode) {
+			console.log(currentNode);
+			scene.decision = new Decision(scene, currentNode.choices, nineslice); // genera una nueva decisión
+			clicks = 0; // resetea el contador de clicks
+			scene.dialog.setInteractable(false); // desactiva la interaccion del cuadro de diálog hasta que se escoga una opción en el evento decided de decisonButtono
+			clearSkip();
+		}
+
+		/**
+		 * GESTIÓN DE CONDICIÓN
+		 */
+		function condition(currentNode) {
+			let _conditions = currentNode.conditions //hacemos un array con todas las condiciones 
+			let conditionCheck = false; //flag para solo comprobar una condicion
+			let i = 0; // contador de condición
+			while (i < _conditions.length && !conditionCheck) {
+				if (checkConditions(_conditions[i], playerManager)) { //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
+					node = _conditions[i].next;
+					conditionCheck = true;
+				}
+				i++; //si no se cuumple avanzamos a la siguiente condicion
+			}
+		}
 
 		/**
 		 * callback que retrocede en el diálogo hasta que se encuentre un nodo especial (con check, señal o decision)
@@ -216,16 +256,6 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					speak(prevNode, false); // blablabla
 				}
 			}
-		}
-
-		/**
-		 * callback para gestionar si el click es izquierdo o derecho
-		 */
-		function callback() {
-			if (scene.input.activePointer.rightButtonDown()) // click derecho
-				backward(); // hacia atras
-			else // si no es el click derecho sera el izquierdo XD o si no el medio pero nos da un poco igual tbh 
-				forward();
 		}
 
 		// escribir el texto en el cuadro de dialogo :-)
