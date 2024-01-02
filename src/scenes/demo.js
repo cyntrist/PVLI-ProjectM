@@ -174,12 +174,63 @@ export default class Demo extends Phaser.Scene
     {
 		this.music  = this.sound.add("base_music", { loop: true, volume: 0.5 });
 		this.music.play();
+		const scene = this;
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
-		const dayDatas = this.cache.json.entries.entries;
+		const dias = 5;
+		const periodos = ['morning', 'midday'];
+		const datos = [];
+		for (let i = 0; i < dias; i++) 
+		{ // DIAS
+			let name = `dia${i+1}_${periodos[0]}`; 
+			datos[i] = scene.cache.json.get(name);
+		}
+		for (let i = 0; i < dias; i++) 
+		{ // DIAS
+			let name = `dia${i+1}_${periodos[1]}`; 
+			datos[dias + i] = scene.cache.json.get(name);
+		}
+		const day1_morning_data	 = this.cache.json.get('dia1_morning'); 
+		const day1_midday_data	 = this.cache.json.get('dia1_midday'); 
+		const day2_morning_data	 = this.cache.json.get('dia2_morning'); 
+		const day2_midday_data	 = this.cache.json.get('dia2_midday'); 
+		const day3_morning_data	 = this.cache.json.get('dia3_morning'); 
+		const day3_midday_data	 = this.cache.json.get('dia3_midday'); 
+		const day4_morning_data	 = this.cache.json.get('dia4_morning'); 
+		const day4_midday_data	 = this.cache.json.get('dia4_midday'); 
+		const day5_morning_data	 = this.cache.json.get('dia5_morning'); 
+		const day5_midday_data	 = this.cache.json.get('dia5_midday'); 
+		const context_confession = this.cache.json.get('context_confession'); 
+		const camille_confession = this.cache.json.get('camille_confession'); 
+		const delilah_confession = this.cache.json.get('delilah_confession'); 
+		const matthew_confession = this.cache.json.get('matthew_confession'); 
+		const richard_confession = this.cache.json.get('richard_confession');
+		const cannon_ending		 = this.cache.json.get('cannon_ending');  
+		console.log(datos);
+		const dayDatas = { 
+			day1_morning_data, 
+			day1_midday_data,
+			day2_morning_data, 
+			day2_midday_data,
+			day3_morning_data,
+			day3_midday_data, 
+			day4_morning_data,
+			day4_midday_data,
+			day5_morning_data,
+			day5_midday_data,
+			context_confession,
+			camille_confession,
+			delilah_confession,
+			matthew_confession,
+			richard_confession,
+			cannon_ending
+		}; // !!!!!!!!!IMPORTANTE!! añadir aquí el resto de jsons que se generen 
+		console.log(dayDatas);
+
+		
 
 		// Parámetros de la escena
 		const { width, height } = this.canvas; // la anchura y altura del canvas
-		const scene = this // referencia a esta misma escena
+		//const scene = this // referencia a esta misma escena
 		this.width = width; this.height = height;
 		const padding = 40; // espacio respecto al origen
 
