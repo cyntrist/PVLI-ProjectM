@@ -15,7 +15,7 @@ let config = {
   type: Phaser.AUTO,      
   parent: 'juego',
   scale: {
-    mode: Phaser.Scale.NONE, // cyn: que alguien le pregunte a alguien por que si pongo fit pasan cosas malas
+    mode: Phaser.Scale.FIT, // cyn: que alguien le pregunte a alguien por que si pongo fit pasan cosas malas
     autoCenter: Phaser.Scale.CENTER_HORIZONTALLY, 
     min: { // cyn: como le deje escalar se pone a hacer unas cosas rarísimas 
           width: 720,

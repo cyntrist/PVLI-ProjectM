@@ -199,7 +199,6 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 * GESTIÓN DE DECISISÓN
 		 */
 		function choice(currentNode) {
-			console.log(currentNode);
 			scene.decision = new Decision(scene, currentNode.choices, nineslice); // genera una nueva decisión
 			clicks = 0; // resetea el contador de clicks
 			scene.dialog.setInteractable(false); // desactiva la interaccion del cuadro de diálog hasta que se escoga una opción en el evento decided de decisonButtono
