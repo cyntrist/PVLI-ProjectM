@@ -1,5 +1,5 @@
 import Demo from './scenes/Demo.js';
-import movil from './scenes/Movil.js';
+import Movil from './scenes/Movil.js';
 import MainMenu from './scenes/MainMenu.js';
 import MelonFlippeador from './scenes/MelonFlippeador.js';
 
@@ -27,7 +27,7 @@ let config = {
       }
   },
   
-  scene: [MainMenu, Demo, movil, MelonFlippeador],
+  scene: [MainMenu, Demo, Movil, MelonFlippeador],
   physics: {
     default: 'arcade', // elegir motor
     arcade: {
@@ -43,8 +43,6 @@ let config = {
         bottom: true,
       }
       */
-    
-    
   },
 
   title: "MBTI",

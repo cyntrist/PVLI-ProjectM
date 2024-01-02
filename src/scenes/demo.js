@@ -16,6 +16,7 @@ export default class Demo extends Phaser.Scene
 	{
 		super({ key: 'Demo'})
 		this.eventEmitter = new Phaser.Events.EventEmitter();
+		this.dayDatas2 = {};
 	}
 
 	// Carga de assets
@@ -143,72 +144,39 @@ export default class Demo extends Phaser.Scene
 		////////////////////////////////
 		////////     DATA      /////////
 		////////////////////////////////
-		// Morning
-		this.load.json('day1_morning_data', './assets/dialogue editor/Dialog Files/dia1_morning.json');
-		this.load.json('day2_morning_data', './assets/dialogue editor/Dialog Files/dia2_morning.json');
-		this.load.json('day3_morning_data', './assets/dialogue editor/Dialog Files/dia3_morning.json');
-		this.load.json('day4_morning_data', './assets/dialogue editor/Dialog Files/dia4_morning.json');
-		this.load.json('day5_morning_data', './assets/dialogue editor/Dialog Files/dia5_morning.json');
-
-		// Midday
-		this.load.json('day1_midday_data', './assets/dialogue editor/Dialog Files/dia1_midday.json');
-		this.load.json('day2_midday_data', './assets/dialogue editor/Dialog Files/dia2_midday.json');
-		this.load.json('day3_midday_data', './assets/dialogue editor/Dialog Files/dia3_midday.json');
-		this.load.json('day4_midday_data', './assets/dialogue editor/Dialog Files/dia4_midday.json');
-		this.load.json('day5_midday_data', './assets/dialogue editor/Dialog Files/dia4_midday.json');
+		const dias = 5;
+		const periodos = ['morning', 'midday'];
+		for (let i = 1; i <= dias; i++) 
+		{ // DIAS
+			for (let j = 0; j < periodos.length; j++) 
+			{ // PERIODOS
+				const name = `dia${i}_${periodos[j]}`; 
+				const source = `./src/json/${name}.json`;
+				this.load.json(name, source);
+			}
+		}
 
 		// Confessions
-		this.load.json('confContext', './assets/dialogue editor/Dialog Files/confession_context.json');
+		const charNum = 4;
+		const charNames = ['context', 'camille', 'delilah', 'matthew', 'richard'];
+		for (let i = 0; i < charNum + 1; i++) 
+		{
+			const name = `${charNames[i]}_confession`; 
+			const source = `./src/json/${name}.json`;
+			this.load.json(name, source);
+		}
+
+		// Canon ending
 		this.load.json('cannon_ending', './assets/dialogue editor/Dialog Files/cannon_ending.json');
-		this.load.json('confCamille', './assets/dialogue editor/Dialog Files/camille_confession.json');
-		this.load.json('confDelilah', './assets/dialogue editor/Dialog Files/delilah_confession.json');
-		this.load.json('confMatthew', './assets/dialogue editor/Dialog Files/matthew_confession.json');
-		this.load.json('confRichard', './assets/dialogue editor/Dialog Files/richard_confession.json');
     }
 
 	create()
     {
 		this.music  = this.sound.add("base_music", { loop: true, volume: 0.5 });
 		this.music.play();
-
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
-		// Scripts segun periodo de día
-		const day1_morning_data	 = this.cache.json.get('day1_morning_data'); 
-		const day1_midday_data	 = this.cache.json.get('day1_midday_data'); 
-		const day2_morning_data	 = this.cache.json.get('day2_morning_data'); 
-		const day2_midday_data	 = this.cache.json.get('day2_midday_data'); 
-		const day3_morning_data	 = this.cache.json.get('day3_morning_data'); 
-		const day3_midday_data	 = this.cache.json.get('day3_midday_data'); 
-		const day4_morning_data	 = this.cache.json.get('day4_morning_data'); 
-		const day4_midday_data	 = this.cache.json.get('day4_midday_data'); 
-		const day5_morning_data	 = this.cache.json.get('day5_morning_data'); 
-		const day5_midday_data	 = this.cache.json.get('day5_midday_data'); 
-		const confession_context = this.cache.json.get('confContext'); 
-		const camille_confession = this.cache.json.get('confCamille'); 
-		const delilah_confession = this.cache.json.get('confDelilah'); 
-		const matthew_confession = this.cache.json.get('confMatthew'); 
-		const richard_confession = this.cache.json.get('confRichard');
-		const cannon_ending		 = this.cache.json.get('cannon_ending');  
+		const dayDatas = this.cache.json.entries.entries;
 
-		const dayDatas = { 
-			day1_morning_data, 
-			day1_midday_data,
-			day2_morning_data, 
-			day2_midday_data,
-			day3_morning_data,
-			day3_midday_data, 
-			day4_morning_data,
-			day4_midday_data,
-			day5_morning_data,
-			day5_midday_data,
-			confession_context,
-			camille_confession,
-			delilah_confession,
-			matthew_confession,
-			richard_confession,
-			cannon_ending
-		}; // !!!!!!!!!IMPORTANTE!! añadir aquí el resto de jsons que se generen 
-		
 		// Parámetros de la escena
 		const { width, height } = this.canvas; // la anchura y altura del canvas
 		const scene = this // referencia a esta misma escena
