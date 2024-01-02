@@ -176,19 +176,6 @@ export default class Demo extends Phaser.Scene
 		this.music.play();
 		const scene = this;
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
-		const dias = 5;
-		const periodos = ['morning', 'midday'];
-		const datos = [];
-		for (let i = 0; i < dias; i++) 
-		{ // DIAS
-			let name = `dia${i+1}_${periodos[0]}`; 
-			datos[i] = scene.cache.json.get(name);
-		}
-		for (let i = 0; i < dias; i++) 
-		{ // DIAS
-			let name = `dia${i+1}_${periodos[1]}`; 
-			datos[dias + i] = scene.cache.json.get(name);
-		}
 		const day1_morning_data	 = this.cache.json.get('dia1_morning'); 
 		const day1_midday_data	 = this.cache.json.get('dia1_midday'); 
 		const day2_morning_data	 = this.cache.json.get('dia2_morning'); 
@@ -205,7 +192,7 @@ export default class Demo extends Phaser.Scene
 		const matthew_confession = this.cache.json.get('matthew_confession'); 
 		const richard_confession = this.cache.json.get('richard_confession');
 		const cannon_ending		 = this.cache.json.get('cannon_ending');  
-		console.log(datos);
+
 		const dayDatas = { 
 			day1_morning_data, 
 			day1_midday_data,
@@ -224,7 +211,7 @@ export default class Demo extends Phaser.Scene
 			richard_confession,
 			cannon_ending
 		}; // !!!!!!!!!IMPORTANTE!! añadir aquí el resto de jsons que se generen 
-		console.log(dayDatas);
+
 
 		
 
@@ -258,9 +245,9 @@ export default class Demo extends Phaser.Scene
 		bg.depth = -2;
 
 		// crea el botón del movil
-		let movil = new Button(this, 850, 700, ' ', 2, 'movil', { "ClickCallback": () => this.ChangeScene("movil", scene), 
-																  "EnterCallback": () => this.OverMovile(),
-																  "ExitCallback": () => this.ExitMovile() });
+		let movil = new Button(this, 850, 700, ' ', 2, 'movil', { "ClickCallback": () => this.changeScene("movil", scene), 
+																  "EnterCallback": () => this.overMovile(),
+																  "ExitCallback": () => this.exitMovile() });
 		movil.setScale(0.25, 0.25);
 
 		//Tween del movil cuando el ratón esté encima
@@ -320,7 +307,7 @@ export default class Demo extends Phaser.Scene
 		}
 	}
 	
-	ChangeMusic(musicName){
+	changeMusic(musicName){
 		this.music.pause();
 		this.music  = this.sound.add(musicName, { loop: true, volume: 0.5});
 		this.music.play();
@@ -328,14 +315,14 @@ export default class Demo extends Phaser.Scene
 
 
 	// cambia el escenario (la imagen de fondo)
-	ChangeScenary (bgName){
+	changeScenary (bgName){
 		// crea una imagen en la escena dada 
 		let bg = this.add.image(0, 0, bgName).setScale(0.7, 0.7).setOrigin(0, 0);
 		// ajusta la capa
 		bg.depth = -2;
 	}
 
-	ChangeScene(newScene, escena){
+	changeScene(newScene, escena){
 		escena.scene.switch(newScene);
 		this.music.pause();
 	}
@@ -361,19 +348,19 @@ export default class Demo extends Phaser.Scene
 		//se desactivan al acabar el tween
 	}
 
-	OverMovile() {
+	overMovile() {
 		this.movilEnterTween.play();
 	}
 
-	ExitMovile() {
+	exitMovile() {
 		this.movilExitTween.play();
 	}
 
-	OverButton(but) {
+	overButton(but) {
 		but.box.tint = "0xc24d6d" ;
 	}
 
-	ExitButton(but) {
+	exitButton(but) {
 		but.box.tint = "0xF6F6F6" ;
 	}
 }

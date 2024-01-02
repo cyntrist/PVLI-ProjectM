@@ -30,9 +30,9 @@ export default class MainMenu extends Phaser.Scene {
 		bg.depth = -2;
 
 		// boton de play
-		let playButton = new Button(this, 315, 175, ' ', 2, 'logo', { "ClickCallback": () => this.ChangeScene("Demo", scene),
-																			"EnterCallback": () =>this.OverButton(playButton),
-																			"ExitCallback": () => this.ExitButton(playButton) } );
+		let playButton = new Button(this, 315, 175, ' ', 2, 'logo', { "ClickCallback": () => this.changeScene("Demo", scene),
+																			"EnterCallback": () =>this.overButton(playButton),
+																			"ExitCallback": () => this.exitButton(playButton) } );
 		playButton.box.setScale(0.75, 0.75);
 		playButton.box.setOrigin(0.5,0.5);
 		
@@ -48,20 +48,20 @@ export default class MainMenu extends Phaser.Scene {
 
 	}
 
-	ChangeScene(newScene, escena){
+	changeScene(newScene, escena){
 		escena.scene.switch(newScene);
 		
 		//pausamos la música para poder cambiarla
 		this.music.pause();
 	}
 
-	OverButton(but) {
+	overButton(but) {
 		but.box.tint = "0xc24d6d" ;
 		this.playTween.pause();
 		
 	}
 
-	ExitButton(but) {
+	exitButton(but) {
 		but.box.tint = "0xF6F6F6" ;
 		this.playTween.play();
 	}

@@ -156,7 +156,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 						let conditionCheck = false; //flag para solo comprobar una condicion
 						let i = 0; // contador de condición
 						while (i < _conditions.length && !conditionCheck) {
-							if (CheckConditions(_conditions[i], playerManager)) { //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
+							if (checkConditions(_conditions[i], playerManager)) { //si se cumple la condicion entonces hacemos que el siguiente nodo sea el que esta indica
 								node = _conditions[i].next;
 								conditionCheck = true;
 							}
@@ -325,11 +325,11 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		});
 
 		scene.eventEmitter.on('changeBg', function (valor) {
-			scene.ChangeScenary(valor);
+			scene.changeScenary(valor);
 		});
 
 		scene.eventEmitter.on('changeMusic', function(valor){
-			scene.ChangeMusic(valor);
+			scene.changeMusic(valor);
 		});
 	}
 }
@@ -338,7 +338,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 
 
-function CheckConditions(condicion, playerManager) { 
+function checkConditions(condicion, playerManager) { 
 	let charName
 	switch(condicion.charNum.value) //por desgracia los nodos de condiciones no dejan tener como parametro una string asi que se utiliza la codificacion de los personajes usada anteriormente
 	{
