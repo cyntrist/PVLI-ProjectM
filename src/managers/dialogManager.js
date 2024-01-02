@@ -44,7 +44,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		let dayData = dayDatas["dia1mData"]; // predeterminado
 		let i = 0; // contador del periodo del día
 		setDayData(i); // dia inicial, sea cual sea, en el diccionario
-		
+
 		// parámetros
 		const blip = scene.sound.add(sound, { volume: 1 }); // sonido de diálogo
 		let title = "\n\n\                                                                                            <3 MY BELOVED TRUE INTEREST <3"; // primera línea de título (sí, es justo lo que estás pensando, tiene todos esos espacios para que esté centrada (lo siento mucho))
@@ -59,7 +59,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		/////////////   FUNCIONES Y CALLBACKS   ////////////////
 		////////////////////////////////////////////////////////
 
-		 // !!! LOGICA DE VERDAD POR FIN VAMOSSSSSSSSSSSSSSS !!!
+		// !!! LOGICA DE VERDAD POR FIN VAMOSSSSSSSSSSSSSSS !!!
 		// Controles:
 		/** 
 		 *  Barra espaciadora y click izquierdo avanzan el diálogo
@@ -76,7 +76,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 * @param {*} index - índice del perido de día a cargar en el diccionario de días
 		 */
 		function setDayData(index) {
-			let dayIndex = index; 
+			let dayIndex = index;
 			let key = Object.keys(dayDatas)[dayIndex];
 			dayData = dayDatas[key];
 		}
@@ -84,11 +84,9 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		/** 
 		  * callback que avanza el diálogo si y solo si el diálogo es interactuable
 		  */
-		function forward() 
-		{ 
+		function forward() {
 			// si el diálogo es interactuable y node existe
-			if (scene.dialog?.getInteractable() && node != undefined) 	
-			{ 
+			if (scene.dialog?.getInteractable() && node != undefined) {
 				if (scene.dialog?.getAnimating()) {
 					scene.dialog?.setText(scene.dialog?.fullText, false);
 					//scene.dialog?.setAnimating(false);
@@ -104,21 +102,19 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 					// si es un nodo intermedio y/o tiene tiene elecciones
 					if (currentNode?.hasOwnProperty("next")
-					|| currentNode?.hasOwnProperty("choices")
-					|| currentNode?.hasOwnProperty("conditions")
-					|| currentNode?.hasOwnProperty("signals")) 
-					{ 
+						|| currentNode?.hasOwnProperty("choices")
+						|| currentNode?.hasOwnProperty("conditions")
+						|| currentNode?.hasOwnProperty("signals")) {
 						// reproduce sonido con cada avance de diálogo
 						blip?.play();
 
 						// si solo ha habido un click, escribe el mensaje
-						if (clicks < 1) 
+						if (clicks < 1)
 							speak(currentNode, true);
 
 						// si el nodo ha de emitir un evento, lo emite
 						///////////     EVENTO      ////////////
-						if (currentNode.hasOwnProperty("signals")) 
-						{
+						if (currentNode.hasOwnProperty("signals")) {
 							let currentEvent = currentNode?.signals?.eventName?.String;
 							let currentValue = currentNode?.signals[currentEvent]?.String?.toLowerCase();
 							//console.log("EVENTOOOOO: " + currentEvent);
@@ -127,7 +123,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 								//console.log(currentNode);
 								//console.log(currentNode.signals);
 							}
-							scene.eventEmitter?.emit(currentEvent, currentValue); 
+							scene.eventEmitter?.emit(currentEvent, currentValue);
 							//primer parametro es el nombre del evento y el segundo es el valor que se quiere (por como funciona el editor de nodos es lo que hay)
 							/* 
 							!!! FORMATO EN JSON !!!
@@ -172,7 +168,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 						// si no se cumple ninguna de las condiciones anteriores es simplemente continuacion lineal, tiene next
 						//////////      NEXT     //////////
-						else 
+						else
 							node = currentNode?.next;
 					}
 
@@ -183,21 +179,21 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 						node = dayData.root.next;
 						//Character.unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar
 					}
-				} 
+				}
 			}
 		};
 
 		/**
 		 * callback que retrocede en el diálogo hasta que se encuentre un nodo especial (con check, señal o decision)
 		 * ESTÁ TAAAAN MAL HECHO PERO QUEDAN COMO 5 DÍAS Y HAY QUE TENER COMO 10 FUNCIONALIDADES MÁS POR FAVOR TEN PIEDAD 
-		 */ 
+		 */
 		function backward() {
 			if (scene.dialog?.getInteractable() // si el diálogo es interactuable
-			 && node != undefined // si nodo existe
-			 && !dayData[node]?.hasOwnProperty("signals") 	// si no estás justo en una señal
-			 && !dayData[node]?.hasOwnProperty("conditions")// si no estás justo en una comprobación
-			 && !dayData[node]?.hasOwnProperty("choices")) 	// si no estás justo antes de una decisión
-			{ 
+				&& node != undefined // si nodo existe
+				&& !dayData[node]?.hasOwnProperty("signals") 	// si no estás justo en una señal
+				&& !dayData[node]?.hasOwnProperty("conditions")// si no estás justo en una comprobación
+				&& !dayData[node]?.hasOwnProperty("choices")) 	// si no estás justo antes de una decisión
+			{
 				// tiene que retroceder dos veces porque con cada click el nodo se deja en el siguiente para escribirlo lo primero... venga, va... no me mires asi...
 				// referencia al nodo real (solo el ID)
 				let real = dayData[node].parent;
@@ -210,13 +206,13 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 					padre = dayData[real].parent; // le asigna su referencia y su nodo
 					prevNode = dayData[padre];
 				}
-				
+
 				if (padre != undefined // si la referencia al padre existe
-				&& padre != "root" // y no es la raiz (no estás el primer nodo)
-				&& prevNode != undefined // si el padre existe
-				&& !prevNode.hasOwnProperty("choices") // si no vas a volver a una decision
-				&& !prevNode.hasOwnProperty("conditions") // ni a una condicion
-				&& !prevNode.hasOwnProperty("signals")) {  // ni a una señal
+					&& padre != "root" // y no es la raiz (no estás el primer nodo)
+					&& prevNode != undefined // si el padre existe
+					&& !prevNode.hasOwnProperty("choices") // si no vas a volver a una decision
+					&& !prevNode.hasOwnProperty("conditions") // ni a una condicion
+					&& !prevNode.hasOwnProperty("signals")) {  // ni a una señal
 					node = dayData[node].parent; // vuelve atrás
 					speak(prevNode, false); // blablabla
 				}
@@ -247,20 +243,20 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				if (
 					//caracter === '*' || 
 					caracter === '(') {
-					Character.unfocusEveryone(characters); 
+					Character.unfocusEveryone(characters);
 				}
 				else {
-					Character.focusEveryone(characters); 
+					Character.focusEveryone(characters);
 				}
 			}
 			scene.dialog?.setText(name + ":\n" + currentNode.text.es, animate); // se escribe el último msj
-		 }
+		}
 
 		/** 
 		 * para interceptar comportamientos indeseados 
-		*/ 
+		*/
 		function disableBehaviours() {
-			scene.input.mouse.disableContextMenu(); 
+			scene.input.mouse.disableContextMenu();
 			scene.cursor = scene.input.keyboard.createCursorKeys();
 			// no queremos menú de contexto en nuestro canvas, lo sentimos pero no está invitado a esta fiesta
 			/*scene.spacebar = scene.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE); // su fiesta le espera arriba (mentira, tampoco queremos que el espacio o las flechas hagan scroll)
@@ -274,23 +270,23 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		function clearSkip() {
 			if (scene.skipInterval) {
 				clearInterval(scene.skipInterval);
-				scene.skipInterval = undefined;	
+				scene.skipInterval = undefined;
 			}
 		}
-		
+
 		function setSkip() {
 			if (scene.decision === undefined && scene.skipInterval === undefined) {
 				scene.skipInterval = setInterval(forward, 50);
 			}
 		}
 
-		
+
 
 		///////////////////////////////////////////
 		/////////      LISTENERS !!!     //////////
 		///////////////////////////////////////////
 		// con sus callbacks
-		
+
 		/// BLOQUE DE ESCUCHA PARA ENTRADA Y SALIDA DE PERSONAJES
 		// OJO: El FORMATO para lanzar un evento desde el programa de los JSON sería tal que:
 		// EMIT eventName STRING characterEnter
@@ -299,21 +295,21 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		// Nombre del evento: 'characterEnter'
 		// Personaje: 'camille'
 		// Ambos strings, excepto con los de everyoneExit/Enter, que no necesitan personajes
-		scene.eventEmitter.on('characterEnter', function(character) {
+		scene.eventEmitter.on('characterEnter', function (character) {
 			let name = character.toLowerCase();
 			characters[name].onEnter(characters);
-		}) 
+		})
 
-		scene.eventEmitter.on('characterExit', function(character) {
+		scene.eventEmitter.on('characterExit', function (character) {
 			let name = character.toLowerCase();
 			characters[name].onExit(characters);
 		})
-		
-		scene.eventEmitter.on('everyoneEnter', function() {
-			Character.onEnterEveryone(characters);
-		}) 
 
-		scene.eventEmitter.on('everyoneExit', function() {
+		scene.eventEmitter.on('everyoneEnter', function () {
+			Character.onEnterEveryone(characters);
+		})
+
+		scene.eventEmitter.on('everyoneExit', function () {
 			Character.onExitEveryone(characters);
 		})
 
@@ -348,7 +344,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			scene.changeScenary(valor);
 		});
 
-		scene.eventEmitter.on('changeMusic', function(valor){
+		scene.eventEmitter.on('changeMusic', function (valor) {
 			scene.changeMusic(valor);
 		});
 	}
@@ -358,9 +354,9 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 
 
-function checkConditions(condicion, playerManager) { 
+function checkConditions(condicion, playerManager) {
 	let charName
-	switch(condicion.charNum.value) //por desgracia los nodos de condiciones no dejan tener como parametro una string asi que se utiliza la codificacion de los personajes usada anteriormente
+	switch (condicion.charNum.value) //por desgracia los nodos de condiciones no dejan tener como parametro una string asi que se utiliza la codificacion de los personajes usada anteriormente
 	{
 		case 0: charName = "camille"; break;
 		case 1: charName = "delilah"; break;
