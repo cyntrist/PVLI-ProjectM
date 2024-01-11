@@ -243,7 +243,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			if (scene.dialog?.getInteractable() // si el diálogo es interactuable
 				&& node != undefined // si nodo existe
 				&& !dayData[node]?.hasOwnProperty("signals") 	// si no estás justo en una señal
-				&& !dayData[node]?.hasOwnProperty("conditions")// si no estás justo en una comprobación
+				&& !dayData[node]?.hasOwnProperty("conditions") // si no estás justo en una comprobación
 				&& !dayData[node]?.hasOwnProperty("choices")) 	// si no estás justo antes de una decisión
 			{
 				// tiene que retroceder dos veces porque con cada click el nodo se deja en el siguiente para escribirlo lo primero... venga, va... no me mires asi...
@@ -316,11 +316,9 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		}
 
 		function endGame(scene) {
-			// if (scene.endGameTimeout === undefined) { // si no se ha creado ya
-			// 	scene.endGameTimeout = setTimeout(() => {
-			// 		scene.scene.start('Demo', { restart: true });
-			// 	}, 4000);
-			// }
+			setTimeout(() => {
+				setDayData(0);
+			}, 3000);
 		}
 
 

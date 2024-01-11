@@ -25,7 +25,7 @@ export default class Demo extends Phaser.Scene
 		const { width, height } = this.canvas; // la anchura y altura del canvas
 
 		////////////////////////////////
-		////////    PRELOADER     //////
+		// #region   PRELOADER    //////
 		////////////////////////////////
 		// segmento sacado de:
 		// https://gamedevacademy.org/creating-a-preloading-screen-in-phaser-3/
@@ -96,6 +96,7 @@ export default class Demo extends Phaser.Scene
 			percentText.destroy();
 			assetText.destroy();
 		});
+		//#endregion
 
 		////////////////////////////////
 		/////////   IMAGENES   /////////
@@ -297,8 +298,8 @@ export default class Demo extends Phaser.Scene
 		let dummy = 0;
 		// dummy,dummy,dummy,dummy
 		// 0,0,0,0
-		const playerManager = new PlayerManager(dummy,dummy,dummy,dummy);
-		new DialogueManager(scene, playerManager, dayDatas, characters, '9slice', 'bonk');
+		this.playerManager = new PlayerManager(dummy,dummy,dummy,dummy);
+		this.dialogManager = new DialogueManager(scene, this.playerManager, dayDatas, characters, '9slice', 'bonk');
 	}
 
 	update() { 
