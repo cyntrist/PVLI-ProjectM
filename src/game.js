@@ -39,7 +39,9 @@ let config = {
       }
   },
   
-  scene: [MainMenu, Demo, Movil, MelonFlippeador, CircusBoot, CircusMenu, CircusLevel, TwinbeeBoot, TwinbeeMenu, TwinbeeLevel],
+  scene: [MainMenu, Demo, Movil, MelonFlippeador, CircusBoot, CircusMenu, CircusLevel, 
+    //TwinbeeBoot, TwinbeeMenu, TwinbeeLevel
+  ],
   physics: {
     default: 'arcade', // elegir motor
     arcade: {
