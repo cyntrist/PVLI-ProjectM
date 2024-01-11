@@ -118,7 +118,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			// dayData solo puede ser undefined si en setDayData se ha acabado de iterar por el array de datos diarios
 			// o lo que es lo mismo: el juego ha acabado
 			if (dayData === undefined) {
-				endGame(scene);
+				resetGame();
 				return;
 			}
 
@@ -144,7 +144,6 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 				setDayData(++i);
 				if (dayData?.root?.next !== undefined)
 					node = dayData.root.next;
-				//Character.unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar
 			}
 		}
 
@@ -315,10 +314,13 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			}
 		}
 
-		function endGame(scene) {
-			setTimeout(() => {
-				setDayData(0);
-			}, 3000);
+		function resetGame() {
+			setDayData(0); // manera muy basica de reiniciar el juego (si hago scene.restart o vuelvo al menú principal, todos los personajes pierden 
+						   // la referencia a su escena y no entiendo por qué)
+			if (dayData?.root?.next !== undefined) {
+				node = dayData.root.next;
+				speak(dayData[node], true);
+			}
 		}
 
 
