@@ -41,7 +41,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		scene.dialog.depth = 2;
 
 		// importante, todos los jsons parseados a un diccionario que contiene cada periodo de cada dia
-		let dayData = dayDatas["dia1mData"]; // predeterminado
+		let dayData = dayDatas["day1_morning_data"];
 		let i = 0; // contador del periodo del día
 		setDayData(i); // dia inicial, sea cual sea, en el diccionario
 
@@ -73,12 +73,18 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 		/**
 		 * Método para cambiar de JSON del que se están leyendo los nodos dentro  de un diccionario de los datos diarios.
+		 * Convierte el objeto a un array y trabaja con su índice
 		 * @param {*} index - índice del perido de día a cargar en el diccionario de días
 		 */
 		function setDayData(index) {
-			let dayIndex = index;
-			let key = Object.keys(dayDatas)[dayIndex];
-			dayData = dayDatas[key];
+			let days = Object.keys(dayDatas);
+			if (index < days.length) {
+				let key = days[index];
+				dayData = dayDatas[key];
+			}
+			else { // se acaba
+				dayData = undefined;
+			}
 		}
 
 		/**
@@ -109,6 +115,13 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		 * realmente está hecho para que sea más legible el código y no haya tantos indents
 		 */
 		function next() {
+			// dayData solo puede ser undefined si en setDayData se ha acabado de iterar por el array de datos diarios
+			// o lo que es lo mismo: el juego ha acabado
+			if (dayData === undefined) {
+				resetGame();
+				return;
+			}
+
 			// nodo actual, el personaje que habla y su nombre
 			let currentNode = dayData[node]; // para hacerlo más legible (sigue siendo infumable pero bueno)
 			let currentName = currentNode?.name.toLowerCase(); // idem
@@ -129,8 +142,8 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			else {
 				speak(currentNode, true);
 				setDayData(++i);
-				node = dayData.root.next;
-				//Character.unfocusEveryone(characters); // se desenfoca a todo el mundo para acabar
+				if (dayData?.root?.next !== undefined)
+					node = dayData.root.next;
 			}
 		}
 
@@ -229,7 +242,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			if (scene.dialog?.getInteractable() // si el diálogo es interactuable
 				&& node != undefined // si nodo existe
 				&& !dayData[node]?.hasOwnProperty("signals") 	// si no estás justo en una señal
-				&& !dayData[node]?.hasOwnProperty("conditions")// si no estás justo en una comprobación
+				&& !dayData[node]?.hasOwnProperty("conditions") // si no estás justo en una comprobación
 				&& !dayData[node]?.hasOwnProperty("choices")) 	// si no estás justo antes de una decisión
 			{
 				// tiene que retroceder dos veces porque con cada click el nodo se deja en el siguiente para escribirlo lo primero... venga, va... no me mires asi...
@@ -266,10 +279,8 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			if (name == undefined || !valid) // si el nombre del nodo es undefined, habla y/n
 			{
 				name = "Y/N";
-				if (
-					caracter === '(') {
+				if (caracter === '(') 
 					Character.unfocusEveryone(characters);
-				}
 				else
 					Character.focusEveryone(characters);
 			}
@@ -303,6 +314,14 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			}
 		}
 
+		function resetGame() {
+			setDayData(0); // manera muy basica de reiniciar el juego (si hago scene.restart o vuelvo al menú principal, todos los personajes pierden 
+						   // la referencia a su escena y no entiendo por qué)
+			if (dayData?.root?.next !== undefined) {
+				node = dayData.root.next;
+				speak(dayData[node], true);
+			}
+		}
 
 
 		///////////////////////////////////////////

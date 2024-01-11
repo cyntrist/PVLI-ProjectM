@@ -1,4 +1,3 @@
-> ESCALAR EL CANVAS!!
 > apuntar bien las licencias de los assets
 > carga de jsons en el create está medio optimizada solo creo
 > UML? XD 

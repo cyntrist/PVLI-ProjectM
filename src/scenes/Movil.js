@@ -15,8 +15,10 @@ export default class Movil extends Phaser.Scene {
 		// boton de vuelta
 		this.load.image('goBackBox', './assets/images/escenarios/goBack2.png');
 
-		// boton melon flip
+		// botones minijuegos
 		this.load.image('melonflip', './assets/images/movil/melonFlip.png');
+		this.load.image('circusIcon', './assets/images/movil/circusicon.png');
+		this.load.image('twinbeeIcon', './assets/images/movil/twinbeeicon.png');
 
 		// musiquita de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo(esto ultimo no importa, solo es para que quede mas bonito))
 		this.load.audio('movil_music', "./assets/sounds/bgm/dogs-and-cats/Dogs_and_Cats.mp3");
@@ -34,10 +36,21 @@ export default class Movil extends Phaser.Scene {
 		bg.depth = -2;
 
 		// boton de vuelta
-		let but1 = new Button(this, 100, 320, ' ', 2, 'goBackBox', { "ClickCallback": () => this.ChangeScene("Demo", scene) } );
+		let but1 = new Button(this, 100, 320, ' ', 2, 'goBackBox', { "ClickCallback": () => this.changeScene("Demo", scene) } );
 
 		// boton de melon flip
-		let but2 = new Button(this, 300, 250, ' ', 2, 'melonflip', { "ClickCallback": () => this.ChangeScene("melonFlippeador", scene) }).setScale(0.75);
+		let but2 = new Button(this, 300, 250, ' ', 2, 'melonflip', { "ClickCallback": () => this.changeScene("melonFlippeador", scene) }).setScale(0.75);
+		let but3 = new Button(this, 440, 230, ' ', 2, 'circusIcon', { "ClickCallback": () => {
+			this.scene.start('CircusBoot');
+		}}).setScale(0.20);
+		// hay que hacer mil movidas para ajustsar el twinbee y me da pereza XD
+		// let but4 = new Button(this, 600, 230, ' ', 2, 'twinbeeIcon', { "ClickCallback": () => {
+		// 	this.scene.start('TwinbeeBoot');
+		// }}).setScale(0.20);
+		let dummy = this.add.text(-400,0, "", {
+            fontFamily: 'arcade_classic',
+            fontSize: 24,
+        });
 	}
 
 	//Solo se utiliza para la música
@@ -47,10 +60,8 @@ export default class Movil extends Phaser.Scene {
 		}
 	} 
 
-	ChangeScene(newScene, escena){
+	changeScene(newScene, escena){
 		escena.scene.switch(newScene);
 		this.music.pause();
-
 	}
-
   }
