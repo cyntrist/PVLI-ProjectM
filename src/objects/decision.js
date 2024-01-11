@@ -36,16 +36,15 @@ export default class Decision extends Phaser.GameObjects.Container {
 				CORNER_SLICE,
 				i,
 				{
-					"EnterCallback" : () => this.OverButton(db),
-					"ExitCallback": () => this.ExitButton(db)
+					"EnterCallback" : () => this.overButton(db),
+					"ExitCallback": () => this.exitButton(db)
 				}
 				 
 			);
 			this.buttons.push(db);
 		}
 
-		// Escucha su propia destruccion para limpiar / Método destructor
-		this.on('destroy', function onDestroy() {
+		this.on('destroy', () => {
 			for(let i = 0; i < this.buttons.length; i++) {
 				this.buttons[i].destroy();
 			}
@@ -72,7 +71,7 @@ export default class Decision extends Phaser.GameObjects.Container {
 		return longest; // Return the longest string found
 	}
 
-	OverButton(db) { db.nineslice.tint = "0xc24d6d"; }
+	overButton(db) { db.nineslice.tint = "0xc24d6d"; }
 
-	ExitButton(db) { db.nineslice.tint = "0xF6F6F6" ; }
+	exitButton(db) { db.nineslice.tint = "0xF6F6F6" ; }
 }

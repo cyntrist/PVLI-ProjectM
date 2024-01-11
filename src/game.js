@@ -3,6 +3,18 @@ import Movil from './scenes/Movil.js';
 import MainMenu from './scenes/MainMenu.js';
 import MelonFlippeador from './scenes/MelonFlippeador.js';
 
+// circuos  
+import CircusBoot from './minigames/Circus/CircusBoot.js';
+import CircusMenu from './minigames/Circus/CircusMenu.js';
+import CircusLevel from './minigames/Circus/CircusLevel.js';
+
+// twinbee
+
+// import TwinbeeBoot from './minigames/TwinBee/TwinbeeBoot.js';
+// import TwinbeeMenu from './minigames/TwinBee/TwinbeeMenu.js';
+// import TwinbeeLevel from './minigames/TwinBee/TwinbeeLevel.js';
+
+
 /**
  * Inicio del juego en Phaser. Creamos el archivo de configuración del juego y creamos
  * la clase Game de Phaser, encargada de crear e iniciar el juego.
@@ -27,11 +39,12 @@ let config = {
       }
   },
   
-  scene: [MainMenu, Demo, Movil, MelonFlippeador],
+  scene: [MainMenu, Demo, Movil, MelonFlippeador, CircusBoot, CircusMenu, CircusLevel, TwinbeeBoot, TwinbeeMenu, TwinbeeLevel],
   physics: {
     default: 'arcade', // elegir motor
     arcade: {
-      gravity: { y : 500 },
+      gravity: { y : 500 }, 
+      debug: true,
     },
     /*
     matter: {
@@ -44,7 +57,6 @@ let config = {
       }
       */
   },
-
   title: "MBTI",
   version: "1.0.0"
 }

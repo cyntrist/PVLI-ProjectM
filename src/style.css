@@ -6,13 +6,23 @@
 
 @font-face { /* fuente de texto */
     font-family: "corazones";
-    src: url("../assets/fonts/LOGO-JUEGO-kinkie.regular.ttf");
+    src: url("../assets/fonts/LOGO-JUEGO-kinkie.regular.ttf") format('truetype');
 
 }
 
 @font-face {
   font-family: "lato";
-  src: url('../assets/fonts/Lato-Regular.ttf');
+  src: url('../assets/fonts/Lato-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'gummy';
+  src: url('../assets/fonts/Gummy.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'arcade_classic';
+  src: url('../assets/fonts/arcade.ttf') format('truetype');
 }
 
 html { /* imagen de fondo */
