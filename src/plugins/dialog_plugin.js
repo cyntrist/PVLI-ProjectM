@@ -150,11 +150,15 @@ export default class DialogText{
 
 	// Consigue el ancho del juego (en funcion del tamaño en la escena) 
 	_getGameWidth() {
+		const { width, height } = this.scene.sys.game.canvas; // la anchura y altura del canvas
+		return width;
 		return this.scene.sys.game.config.width;
 	}
 
 	// Consigue el alto del juego (en funcion del tamaño de la escena) 
 	_getGameHeight() {
+		const { width, height } = this.scene.sys.game.canvas; // la anchura y altura del canvas
+		return height;
 		return this.scene.sys.game.config.height;
 	}
 
@@ -199,6 +203,7 @@ export default class DialogText{
 
 		//Se calcula la dimension de la ventana de diálogo
 		var dimensions = this._calculateWindowDimensions(gameWidth, gameHeight);
+		
 		this.graphics = this.scene.add.graphics();
 		this.graphics.setInteractive(new Phaser.Geom.Rectangle(dimensions.x, dimensions.y, dimensions.rectWidth, dimensions.rectHeight), Phaser.Geom.Rectangle.Contains, { useHandCursor: true });
 
