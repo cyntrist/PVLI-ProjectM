@@ -80,6 +80,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			let days = Object.keys(dayDatas);
 			if (index < days.length) {
 				let key = days[index];
+				console.log(key);
 				dayData = dayDatas[key];
 			}
 			else { // se acaba
