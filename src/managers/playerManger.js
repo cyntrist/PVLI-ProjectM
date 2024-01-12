@@ -20,7 +20,7 @@ export default class PlayerManager {
 
         this.playerStats = { charisma: 1, kindness: 1, humor: 1, intelligence: 1, luck: 1 }
 
-        this.affIncrease = 15;
+        this.affIncrease = 21;
     }
 
     increaseAffinity(charName) { //como parametro una string del nombre de personaje
