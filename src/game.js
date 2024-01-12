@@ -46,7 +46,7 @@ let config = {
     default: 'arcade', // elegir motor
     arcade: {
       gravity: { y : 500 }, 
-      debug: true,
+      debug: false,
     },
     /*
     matter: {
