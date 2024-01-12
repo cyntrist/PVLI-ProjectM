@@ -60,24 +60,24 @@ export default class CircusBoot extends Phaser.Scene {
         // #endregion
 
         // Loading images
-        this.load.image('bg1', '../../../assets/minigames/circus/sprites/background.png');
-        this.load.image('bg2', '../../../assets/minigames/circus/sprites/background2.png');
-        this.load.image('stars', '../../../assets/minigames/circus/sprites/stars.png');
-        this.load.image('icon', '../../../assets/minigames/circus/sprites/icon.png');
-        this.load.image('platform', '../../../assets/minigames/circus/sprites/platform.png');
-        this.load.spritesheet('clown', '../../../assets/minigames/circus/sprites/clown.png', { frameWidth: 16, frameHeight: 24 });
-        this.load.spritesheet('fire', '../../../assets/minigames/circus/sprites/fire.png', { frameWidth: 25, frameHeight: 31 });
-        this.load.spritesheet('lion', '../../../assets/minigames/circus/sprites/lion.png', { frameWidth: 36, frameHeight: 16 });
-        this.load.spritesheet('ring', '../../../assets/minigames/circus/sprites/ring.png', { frameWidth: 26, frameHeight: 80 });
-        this.load.spritesheet('halfring', '../../../assets/minigames/circus/sprites/ring.png', { frameWidth: 13, frameHeight: 80 });
+        this.load.image('bg1', './assets/minigames/circus/sprites/background.png');
+        this.load.image('bg2', './assets/minigames/circus/sprites/background2.png');
+        this.load.image('stars', './assets/minigames/circus/sprites/stars.png');
+        this.load.image('icon', './assets/minigames/circus/sprites/icon.png');
+        this.load.image('platform', './assets/minigames/circus/sprites/platform.png');
+        this.load.spritesheet('clown', './assets/minigames/circus/sprites/clown.png', { frameWidth: 16, frameHeight: 24 });
+        this.load.spritesheet('fire', './assets/minigames/circus/sprites/fire.png', { frameWidth: 25, frameHeight: 31 });
+        this.load.spritesheet('lion', './assets/minigames/circus/sprites/lion.png', { frameWidth: 36, frameHeight: 16 });
+        this.load.spritesheet('ring', './assets/minigames/circus/sprites/ring.png', { frameWidth: 26, frameHeight: 80 });
+        this.load.spritesheet('halfring', './assets/minigames/circus/sprites/ring.png', { frameWidth: 13, frameHeight: 80 });
 
         // Loading audio
-        this.load.audio('failureEffect', '../../../assets/minigames/circus/sounds/failure.mp3');
-        this.load.audio('stageMusic', '../../../assets/minigames/circus/sounds/stage.mp3');
-        this.load.audio('menuMusic', '../../../assets/minigames/circus/sounds/menu.mp3');
-        this.load.audio('finalEffect', '../../../assets/minigames/circus/sounds/final.wav');
-        this.load.audio('jumpEffect', '../../../assets/minigames/circus/sounds/jump.wav');
-        this.load.audio('scoreEffect', '../../../assets/minigames/circus/sounds/score.wav');
+        this.load.audio('failureEffect', './assets/minigames/circus/sounds/failure.mp3');
+        this.load.audio('stageMusic', './assets/minigames/circus/sounds/stage.mp3');
+        this.load.audio('menuMusic', './assets/minigames/circus/sounds/menu.mp3');
+        this.load.audio('finalEffect', './assets/minigames/circus/sounds/final.wav');
+        this.load.audio('jumpEffect', './assets/minigames/circus/sounds/jump.wav');
+        this.load.audio('scoreEffect', './assets/minigames/circus/sounds/score.wav');
     }
 
     createAnimations() {
