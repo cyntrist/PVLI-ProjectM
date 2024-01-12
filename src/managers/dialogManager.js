@@ -81,6 +81,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			if (index < days.length) {
 				let key = days[index];
 				console.log(key);
+				console.log(playerManager.affinities);
 				dayData = dayDatas[key];
 			}
 			else { // se acaba
