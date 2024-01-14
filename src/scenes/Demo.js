@@ -176,7 +176,11 @@ export default class Demo extends Phaser.Scene
 		this.music  = this.sound.add("base_music", { loop: true, volume: 0.5 });
 		this.music.play();
 		const scene = this;
+
 		// ** PARÁMETROS Y CONFIG INICIAL ** //
+		// No he encontrado una manera de hacer esto de manera automatizada como en el preload de jsons,
+		// no entiendo cómo hacer un diccionario que no sea con o variables ya hechas o las keys directamente, 
+		// así que lo dejo así de momento
 		const day1_morning_data	 = this.cache.json.get('dia1_morning'); 
 		const day1_midday_data	 = this.cache.json.get('dia1_midday'); 
 		const day2_morning_data	 = this.cache.json.get('dia2_morning'); 

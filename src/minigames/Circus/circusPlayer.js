@@ -1,4 +1,4 @@
-const speedX = 170;
+const speedX = 200;
 const speedY = -375;
 
 export default class CircusPlayer extends Phaser.Physics.Arcade.Sprite {
