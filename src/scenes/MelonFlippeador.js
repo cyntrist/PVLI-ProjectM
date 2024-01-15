@@ -47,8 +47,8 @@ export default class MelonFlippeador extends Phaser.Scene
 
         const scene = this // referencia a esta misma escena
 
-        // si es 0 es que no ha acabado si es 1 es que ha acabado (NO SE HACER BOOLEANOS)
-        this.gameEnded = 0;
+        // si ha acabado
+        this.gameEnded = false;
 
         // 
         this.SCORE = 0;
@@ -149,7 +149,7 @@ export default class MelonFlippeador extends Phaser.Scene
 		}
 
         // si el juego no ha acabado
-        if(this.gameEnded === 0){
+        if(!this.gameEnded){
 
             // input
             if(this.cursor.up.isDown){
@@ -253,7 +253,7 @@ export default class MelonFlippeador extends Phaser.Scene
     endGame(){
 
         // cambia el 'booleano'
-        this.gameEnded = 1;
+        this.gameEnded = true;
     }
 
     addPoints(){
