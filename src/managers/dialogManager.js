@@ -42,7 +42,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 		// importante, todos los jsons parseados a un diccionario que contiene cada periodo de cada dia
 		let dayData = dayDatas["day1_morning_data"];
-		let i = 2; // contador del periodo del día
+		let i = 0; // contador del periodo del día
 		setDayData(i); // dia inicial, sea cual sea, en el diccionario
 
 		// parámetros
