@@ -80,7 +80,9 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			let days = Object.keys(dayDatas);
 			if (index < days.length) {
 				let key = days[index];
+				console.log("CAMBIO DE DIA: ")
 				console.log(key);
+				console.log("STATS: ")
 				console.log(playerManager.affinities);
 				dayData = dayDatas[key];
 			}
@@ -135,9 +137,9 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 			// si es un nodo intermedio y/o tiene tiene elecciones
 			if (currentNode?.hasOwnProperty("next")
-			|| currentNode?.hasOwnProperty("choices")
-			|| currentNode?.hasOwnProperty("conditions")
-			|| currentNode?.hasOwnProperty("signals")) {
+				|| currentNode?.hasOwnProperty("choices")
+				|| currentNode?.hasOwnProperty("conditions")
+				|| currentNode?.hasOwnProperty("signals")) {
 				manageNode(currentNode);
 			}
 			// si lo anterior no se cumple, significa que es el nodo final
@@ -158,13 +160,13 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			blip?.play();
 
 			// si solo ha habido un click, escribe el mensaje
-			if (clicks < 1)
+			if (clicks < 1) {
 				speak(currentNode, true);
-
-			// si el nodo ha de emitir un evento, lo emite
-			///////////     EVENTO      ////////////
-			if (currentNode.hasOwnProperty("signals")) 
-				signal(currentNode);	
+				// si el nodo ha de emitir un evento, lo emite
+				///////////     EVENTO      ////////////
+				if (currentNode.hasOwnProperty("signals"))
+					signal(currentNode);
+			}
 
 			// si el nodo lleva a una decisión
 			//////////     DECISION     ///////////
@@ -187,7 +189,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		/**
 		 * GESTIÓN DE EVENTO
 		 */
-		function signal(currentNode){
+		function signal(currentNode) {
 			let currentEvent = currentNode?.signals?.eventName?.String;
 			let currentValue = currentNode?.signals[currentEvent]?.String?.toLowerCase();
 			if (currentEvent == undefined) {
@@ -281,7 +283,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 			if (name == undefined || !valid) // si el nombre del nodo es undefined, habla y/n
 			{
 				name = "Y/N";
-				if (caracter === '(') 
+				if (caracter === '(')
 					Character.unfocusEveryone(characters);
 				else
 					Character.focusEveryone(characters);
@@ -318,7 +320,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 
 		function resetGame() {
 			setDayData(0); // manera muy basica de reiniciar el juego (si hago scene.restart o vuelvo al menú principal, todos los personajes pierden 
-						   // la referencia a su escena y no entiendo por qué)
+			// la referencia a su escena y no entiendo por qué)
 			if (dayData?.root?.next !== undefined) {
 				node = dayData.root.next;
 				speak(dayData[node], true);

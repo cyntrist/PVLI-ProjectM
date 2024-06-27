@@ -23,6 +23,31 @@ export default class Character extends Phaser.GameObjects.Container {
         this.sprite.setBlendMode(Phaser.BlendModes.DARKEN);
         this.onUnfocus(); // por defecto siempre aparecen oscuros
         scene.add.existing(this);
+        
+        let char = this;
+        this.fadeOut = scene.tweens.add({
+			targets: char,
+			ease: 'Sine.easeInOut',
+			duration: 500,
+			alpha: { from: char.alpha, to: 0},
+			persist: true,
+            onComplete: function () {
+                char.setVisible(true);
+            },
+            onCompleteScope: this // El scope en el que se ejecutará el callback
+		});
+
+        this.fadeIn = scene.tweens.add({
+			targets: char,
+			ease: 'Sine.easeInOut',
+			duration: 500,
+			alpha: { from: 0, to: 1 },
+			persist: true,
+            onComplete: function () {
+                char.setVisible(true);
+            },
+            onCompleteScope: this // El scope en el que se ejecutará el callback
+		});
     }
 
     /**
@@ -86,27 +111,29 @@ export default class Character extends Phaser.GameObjects.Container {
     ////// ENTRADA/SALIDA DE PJS  ///////
     /////////////////////////////////////
     onEnter(personajes) {
-        this.setVisible(true);
+        // this.setVisible(true);
         this.move(personajes);
+        this.fadeIn.play();
     }
 
     onExit(personajes) {
-        this.setVisible(false);
+        // this.setVisible(false);
         this.move(personajes);
+        this.fadeOut.play();
     }
 
     static onEnterEveryone(personajes) {
         for (let p of Object.values(personajes)) { 
-            p.setVisible(true);
-        }
-        for (let p of Object.values(personajes)) { 
-            if (p.visible)
+            if (p.visible) {
+                p.fadeIn.play();
                 p.move(personajes);
+            }
         }
     }
 
     static onExitEveryone(personajes) {
         for (let p of Object.values(personajes)) { 
+            p.fadeOut.play();
             p.onExit(personajes);
         }
     }
