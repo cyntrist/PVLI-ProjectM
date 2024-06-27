@@ -52,7 +52,7 @@ export default class DialogueManager extends Phaser.GameObjects.Container {
 		let node = dayData.root.next; // primer nodo
 		scene.dialog.setText(title, false); // imprime la línea de título
 		disableBehaviours();
-		Character.onExitEveryone(characters);
+		//Character.onExitEveryone(characters);
 
 
 		////////////////////////////////////////////////////////

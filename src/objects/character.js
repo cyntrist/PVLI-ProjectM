@@ -25,29 +25,34 @@ export default class Character extends Phaser.GameObjects.Container {
         scene.add.existing(this);
         
         let char = this;
-        this.fadeOut = scene.tweens.add({
-			targets: char,
-			ease: 'Sine.easeInOut',
-			duration: 500,
-			alpha: { from: char.alpha, to: 0},
-			persist: true,
-            onComplete: function () {
-                char.setVisible(true);
-            },
-            onCompleteScope: this // El scope en el que se ejecutará el callback
-		});
-
         this.fadeIn = scene.tweens.add({
 			targets: char,
 			ease: 'Sine.easeInOut',
 			duration: 500,
+            paused: true,
 			alpha: { from: 0, to: 1 },
 			persist: true,
             onComplete: function () {
-                char.setVisible(true);
+                // char.setVisible(true);
             },
             onCompleteScope: this // El scope en el que se ejecutará el callback
 		});
+
+        this.fadeOut = scene.tweens.add({
+			targets: char,
+			ease: 'Sine.easeInOut',
+			duration: 500,
+			alpha: { from: 1, to: 0},
+            paused: true,
+			persist: true,  
+            onComplete: function () {
+                // char.setVisible(false);
+            },
+            onCompleteScope: this // El scope en el que se ejecutará el callback
+		});
+
+        this.alpha = 0;
+        this.seen = false;
     }
 
     /**
@@ -112,19 +117,25 @@ export default class Character extends Phaser.GameObjects.Container {
     /////////////////////////////////////
     onEnter(personajes) {
         // this.setVisible(true);
+        this.seen = true;
         this.move(personajes);
         this.fadeIn.play();
     }
 
     onExit(personajes) {
         // this.setVisible(false);
+        this.seen = false;
         this.move(personajes);
         this.fadeOut.play();
     }
 
     static onEnterEveryone(personajes) {
         for (let p of Object.values(personajes)) { 
-            if (p.visible) {
+            p.seen = true;
+        }
+        for (let p of Object.values(personajes)) { 
+            if (p.seen) {
+                
                 p.fadeIn.play();
                 p.move(personajes);
             }
@@ -141,7 +152,7 @@ export default class Character extends Phaser.GameObjects.Container {
     move(personajes) {
         let i = 1;
         for (let p of Object.values(personajes)) { 
-            if (p.visible) {
+            if (p.seen) {
                 p.setX(p.scene.width * i / (Character.getVisibles(personajes) + 1));
                 i++;
             }
@@ -156,7 +167,7 @@ export default class Character extends Phaser.GameObjects.Container {
     static getVisibles(personajes) {
         let i = 0;
         for (let p of Object.values(personajes)) { 
-            if (p.visible) 
+            if (p.seen) 
                 ++i;
         }
         return i;

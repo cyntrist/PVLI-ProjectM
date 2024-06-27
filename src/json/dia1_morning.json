@@ -7,12 +7,6 @@
             "fr": "",
             "es": "(...)"
         },
-        "signals": {
-            "parent": "cbb2fa70-155c-4b88-a9a0-200d38b6331c",
-            "eventName": {
-                "String": "everyoneExit"
-            }
-        },
         "parent": "root",
         "next": "89128e1e-263f-477f-bdb1-2f15da7e0ddf"
     },
