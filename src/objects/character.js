@@ -28,7 +28,7 @@ export default class Character extends Phaser.GameObjects.Container {
         this.fadeIn = scene.tweens.add({
             targets: char,
             ease: 'Sine.easeInOut',
-            duration: 500,
+            duration: 250,
             paused: true,
             alpha: { from: 0, to: 1 },
             persist: true,
@@ -41,7 +41,7 @@ export default class Character extends Phaser.GameObjects.Container {
         this.fadeOut = scene.tweens.add({
             targets: char,
             ease: 'Sine.easeInOut',
-            duration: 500,
+            duration: 250,
             alpha: { from: 1, to: 0 },
             paused: true,
             persist: true,
