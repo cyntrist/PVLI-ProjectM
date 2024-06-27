@@ -322,9 +322,9 @@ export default class Demo extends Phaser.Scene {
 	// cambia el escenario (la imagen de fondo)
 	changeScenary(bgName) {
 		// crea una imagen en la escena dada 
-		let bg = this.add.image(0, 0, bgName).setScale(0.7, 0.7).setOrigin(0, 0);
+		this.bg = this.add.image(0, 0, bgName).setScale(0.7, 0.7).setOrigin(0, 0);
 		// ajusta la capa
-		bg.depth = -2;
+		this.bg.depth = -2;
 	}
 
 	changeScene(newScene, escena) {
