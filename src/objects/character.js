@@ -135,7 +135,6 @@ export default class Character extends Phaser.GameObjects.Container {
         }
         for (let p of Object.values(personajes)) { 
             if (p.seen) {
-                
                 p.fadeIn.play();
                 p.move(personajes);
             }
@@ -144,8 +143,13 @@ export default class Character extends Phaser.GameObjects.Container {
 
     static onExitEveryone(personajes) {
         for (let p of Object.values(personajes)) { 
-            p.fadeOut.play();
-            p.onExit(personajes);
+            p.seen = false;
+        }
+        for (let p of Object.values(personajes)) { 
+            if (!p.seen) {
+                p.fadeOut.play();
+                p.move(personajes);
+            }
         }
     }
 
@@ -158,6 +162,7 @@ export default class Character extends Phaser.GameObjects.Container {
             }
         }
     }
+
 
     /**
      *  método para saber que personajes hay visibles ahora mismo
