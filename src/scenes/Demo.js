@@ -10,11 +10,9 @@ let Scenary = 'clase';
  * @namespace Phaser.Actions
  */
 
-export default class Demo extends Phaser.Scene
-{ 
-    constructor()
-	{
-		super({ key: 'Demo'})
+export default class Demo extends Phaser.Scene {
+	constructor() {
+		super({ key: 'Demo' })
 		this.eventEmitter = new Phaser.Events.EventEmitter();
 		this.dayDatas2 = {};
 	}
@@ -33,10 +31,10 @@ export default class Demo extends Phaser.Scene
 		//progressbar
 		let progressBar = this.add.graphics();
 		let progressBox = this.add.graphics();
-		let bar_width = width/2;
+		let bar_width = width / 2;
 		let bar_height = 70;
-		let bar_x = (width - bar_width)/2;
-		let bar_y = (height - bar_height)/2;
+		let bar_x = (width - bar_width) / 2;
+		let bar_y = (height - bar_height) / 2;
 		let size_diff = 10;
 		progressBox.fillStyle(0x73c29b, 0.8);
 		progressBox.fillRect(bar_x, bar_y, bar_width, bar_height);
@@ -76,15 +74,15 @@ export default class Demo extends Phaser.Scene
 			}
 		});
 		assetText.setOrigin(0.5, 0.5);
-		 
+
 		// listeners
 		this.load.on('progress', function (value) {
 			percentText.setText(parseInt(value * 100) + '%');
 			progressBar.clear();
 			progressBar.fillStyle(0xffffff, 1);
-			progressBar.fillRect(bar_x + size_diff, bar_y + size_diff, (bar_width - size_diff * 2) * value, bar_height - size_diff* 2);
+			progressBar.fillRect(bar_x + size_diff, bar_y + size_diff, (bar_width - size_diff * 2) * value, bar_height - size_diff * 2);
 		});
-					
+
 		this.load.on('fileprogress', function (file) {
 			assetText.setText('Loading asset: ' + file.key);
 		});
@@ -131,10 +129,10 @@ export default class Demo extends Phaser.Scene
 		////////////////////////////////
 		//this.load.audio('blip', [ './assets/sounds/blip.ogg', './assets/sounds/blip.mp3' ]);
 		//this.load.audio('click', [ './assets/sounds/click.ogg', './assets/sounds/click.mp3' ]);
-		this.load.audio('bonk', [ './assets/sounds/bonk.ogg', './assets/sounds/bonk.mp3' ]);
+		this.load.audio('bonk', ['./assets/sounds/bonk.ogg', './assets/sounds/bonk.mp3']);
 		// this.load.audio('clack1', [ './assets/sounds/clack1.ogg', './assets/sounds/clack1.mp3' ]);
-		this.load.audio('clack2', [ './assets/sounds/clack2.ogg', './assets/sounds/clack2.mp3' ]);
-		this.load.audio('clack3', [ './assets/sounds/clack3.ogg', './assets/sounds/clack3.mp3' ]);
+		this.load.audio('clack2', ['./assets/sounds/clack2.ogg', './assets/sounds/clack2.mp3']);
+		this.load.audio('clack3', ['./assets/sounds/clack3.ogg', './assets/sounds/clack3.mp3']);
 
 		//musiquita de fondo (IMPORTANTE! todo en minusculas y si hay varias palabras separar con guion bajo (esto ultimo no importa, solo es para que quede mas bonito))
 		this.load.audio('base_music', "./assets/sounds/bgm/right-place-loop-1/Right_Place_Loop_1.ogg");
@@ -147,11 +145,9 @@ export default class Demo extends Phaser.Scene
 		////////////////////////////////
 		const dias = 5;
 		const periodos = ['morning', 'midday'];
-		for (let i = 1; i <= dias; i++) 
-		{ // DIAS
-			for (let j = 0; j < periodos.length; j++) 
-			{ // PERIODOS
-				const name = `dia${i}_${periodos[j]}`; 
+		for (let i = 1; i <= dias; i++) { // DIAS
+			for (let j = 0; j < periodos.length; j++) { // PERIODOS
+				const name = `dia${i}_${periodos[j]}`;
 				const source = `./src/json/${name}.json`;
 				this.load.json(name, source);
 			}
@@ -160,20 +156,18 @@ export default class Demo extends Phaser.Scene
 		// Confessions
 		const charNum = 4;
 		const charNames = ['context', 'camille', 'delilah', 'matthew', 'richard'];
-		for (let i = 0; i < charNum + 1; i++) 
-		{
-			const name = `${charNames[i]}_confession`; 
+		for (let i = 0; i < charNum + 1; i++) {
+			const name = `${charNames[i]}_confession`;
 			const source = `./src/json/${name}.json`;
 			this.load.json(name, source);
 		}
 
 		// Canon ending
 		this.load.json('cannon_ending', './assets/dialogue editor/Dialog Files/cannon_ending.json');
-    }
+	}
 
-	create()
-    {
-		this.music  = this.sound.add("base_music", { loop: true, volume: 0.5 });
+	create() {
+		this.music = this.sound.add("base_music", { loop: true, volume: 0.5 });
 		this.music.play();
 		const scene = this;
 
@@ -181,30 +175,30 @@ export default class Demo extends Phaser.Scene
 		// No he encontrado una manera de hacer esto de manera automatizada como en el preload de jsons,
 		// no entiendo cómo hacer un diccionario que no sea con o variables ya hechas o las keys directamente, 
 		// así que lo dejo así de momento
-		const day1_morning_data	 = this.cache.json.get('dia1_morning'); 
-		const day1_midday_data	 = this.cache.json.get('dia1_midday'); 
-		const day2_morning_data	 = this.cache.json.get('dia2_morning'); 
-		const day2_midday_data	 = this.cache.json.get('dia2_midday'); 
-		const day3_morning_data	 = this.cache.json.get('dia3_morning'); 
-		const day3_midday_data	 = this.cache.json.get('dia3_midday'); 
-		const day4_morning_data	 = this.cache.json.get('dia4_morning'); 
-		const day4_midday_data	 = this.cache.json.get('dia4_midday'); 
-		const day5_morning_data	 = this.cache.json.get('dia5_morning'); 
-		const day5_midday_data	 = this.cache.json.get('dia5_midday'); 
-		const context_confession = this.cache.json.get('context_confession'); 
-		const camille_confession = this.cache.json.get('camille_confession'); 
-		const delilah_confession = this.cache.json.get('delilah_confession'); 
-		const matthew_confession = this.cache.json.get('matthew_confession'); 
+		const day1_morning_data = this.cache.json.get('dia1_morning');
+		const day1_midday_data = this.cache.json.get('dia1_midday');
+		const day2_morning_data = this.cache.json.get('dia2_morning');
+		const day2_midday_data = this.cache.json.get('dia2_midday');
+		const day3_morning_data = this.cache.json.get('dia3_morning');
+		const day3_midday_data = this.cache.json.get('dia3_midday');
+		const day4_morning_data = this.cache.json.get('dia4_morning');
+		const day4_midday_data = this.cache.json.get('dia4_midday');
+		const day5_morning_data = this.cache.json.get('dia5_morning');
+		const day5_midday_data = this.cache.json.get('dia5_midday');
+		const context_confession = this.cache.json.get('context_confession');
+		const camille_confession = this.cache.json.get('camille_confession');
+		const delilah_confession = this.cache.json.get('delilah_confession');
+		const matthew_confession = this.cache.json.get('matthew_confession');
 		const richard_confession = this.cache.json.get('richard_confession');
-		const cannon_ending		 = this.cache.json.get('cannon_ending');  
+		const cannon_ending = this.cache.json.get('cannon_ending');
 
-		const dayDatas = { 
-			day1_morning_data, 
+		const dayDatas = {
+			day1_morning_data,
 			day1_midday_data,
-			day2_morning_data, 
+			day2_morning_data,
 			day2_midday_data,
 			day3_morning_data,
-			day3_midday_data, 
+			day3_midday_data,
 			day4_morning_data,
 			day4_midday_data,
 			day5_morning_data,
@@ -218,7 +212,7 @@ export default class Demo extends Phaser.Scene
 		}; // !!!!!!!!!IMPORTANTE!! añadir aquí el resto de jsons que se generen 
 
 
-		
+
 
 		// Parámetros de la escena
 		const { width, height } = this.canvas; // la anchura y altura del canvas
@@ -228,16 +222,16 @@ export default class Demo extends Phaser.Scene
 
 		// Parámetros de los personajes
 		const sprites = [ // array de sprites
-			scene.add.sprite(0, padding, 'camilleph').setScale(1.1,1.1),
-			scene.add.sprite(0, padding, 'delilahph').setScale(1.1,1.1),
-			scene.add.sprite(0, padding + 60, 'matthewph').setScale(1.1,1.1),
-			scene.add.sprite(0, padding, 'richardph').setScale(1.1,1.1)
+			scene.add.sprite(0, padding, 'camilleph').setScale(1.1, 1.1),
+			scene.add.sprite(0, padding, 'delilahph').setScale(1.1, 1.1),
+			scene.add.sprite(0, padding + 60, 'matthewph').setScale(1.1, 1.1),
+			scene.add.sprite(0, padding, 'richardph').setScale(1.1, 1.1)
 		]
 		// Creación de personajes
-		const camille = new Character(scene, width*1/5, height - sprites[0].displayHeight/2, sprites[0], "Camille", 1);
-		const delilah = new Character(scene, width*2/5, height - sprites[1].displayHeight/2, sprites[1], "Delilah", 2);
-		const matthew = new Character(scene, width*3/5, height - sprites[2].displayHeight/2, sprites[2], "Matthew", 3);
-		const richard = new Character(scene, width*4/5, height - sprites[3].displayHeight/2, sprites[3], "Richard", 4);
+		const camille = new Character(scene, width * 1 / 5, height - sprites[0].displayHeight / 2, sprites[0], "Camille", 1);
+		const delilah = new Character(scene, width * 2 / 5, height - sprites[1].displayHeight / 2, sprites[1], "Delilah", 2);
+		const matthew = new Character(scene, width * 3 / 5, height - sprites[2].displayHeight / 2, sprites[2], "Matthew", 3);
+		const richard = new Character(scene, width * 4 / 5, height - sprites[3].displayHeight / 2, sprites[3], "Richard", 4);
 		// DICCIONARIO (!IMPORTANTE!) de los personajes
 		const characters = { camille, delilah, matthew, richard } // corchetes array, brackets diccionario (objeto)
 		// descolorea a todos los personajes antes de empezar
@@ -250,9 +244,11 @@ export default class Demo extends Phaser.Scene
 		bg.depth = -2;
 
 		// crea el botón del movil
-		let movil = new Button(this, 850, 700, ' ', 2, 'movil', { "ClickCallback": () => this.changeScene("movil", scene), 
-																  "EnterCallback": () => this.overMovile(),
-																  "ExitCallback": () => this.exitMovile() });
+		let movil = new Button(this, 850, 700, ' ', 2, 'movil', {
+			"ClickCallback": () => this.changeScene("movil", scene),
+			"EnterCallback": () => this.overMovile(),
+			"ExitCallback": () => this.exitMovile()
+		});
 		movil.setScale(0.25, 0.25);
 
 		//Tween del movil cuando el ratón esté encima
@@ -290,44 +286,48 @@ export default class Demo extends Phaser.Scene
 			ease: 'Sine.easeInOut',
 			yoyo: true,
 			repeat: 2,
+            alpha: { from: 0, to: 1 },
 			persist: true,
+			onStart: function () {
+			},
 			onComplete: function () {
 				for (let i = 0; i < affinitySprites.length; i++) {
 					affinitySprites[i].setVisible(false);
-				  }
-			  }
+				}
+			}
 		})
+
 
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
 		let dummy = 0;
 		// dummy,dummy,dummy,dummy
 		// 0,0,0,0
-		this.playerManager = new PlayerManager(dummy,dummy,dummy,dummy);
+		this.playerManager = new PlayerManager(dummy, dummy, dummy, dummy);
 		this.dialogManager = new DialogueManager(scene, this.playerManager, dayDatas, characters, '9slice', 'bonk');
 	}
 
-	update() { 
-		if(!this.music.isPlaying) {
+	update() {
+		if (!this.music.isPlaying) {
 			this.music.play()
 		}
 	}
-	
-	changeMusic(musicName){
+
+	changeMusic(musicName) {
 		this.music.pause();
-		this.music  = this.sound.add(musicName, { loop: true, volume: 0.5});
+		this.music = this.sound.add(musicName, { loop: true, volume: 0.5 });
 		this.music.play();
 	}
 
 
 	// cambia el escenario (la imagen de fondo)
-	changeScenary (bgName){
+	changeScenary(bgName) {
 		// crea una imagen en la escena dada 
 		let bg = this.add.image(0, 0, bgName).setScale(0.7, 0.7).setOrigin(0, 0);
 		// ajusta la capa
 		bg.depth = -2;
 	}
 
-	changeScene(newScene, escena){
+	changeScene(newScene, escena) {
 		escena.scene.switch(newScene);
 		this.music.pause();
 	}
@@ -340,8 +340,7 @@ export default class Demo extends Phaser.Scene
 		//pj es el string con el nombre del personaje al que le afecta la sub de afinidad
 		//Lo que yo quiero hacer es acceder a las imagenes (declarado arriba estan las 4 flechas de colores) y hacer visible la que toca
 		let index = -1;
-		switch(character)
-		{
+		switch (character) {
 			case "camille": index = 0; break;
 			case "delilah": index = 1; break;
 			case "matthew": index = 2; break;
@@ -362,10 +361,10 @@ export default class Demo extends Phaser.Scene
 	}
 
 	overButton(but) {
-		but.box.tint = "0xc24d6d" ;
+		but.box.tint = "0xc24d6d";
 	}
 
 	exitButton(but) {
-		but.box.tint = "0xF6F6F6" ;
+		but.box.tint = "0xF6F6F6";
 	}
 }
