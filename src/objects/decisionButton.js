@@ -5,11 +5,11 @@ const FONT_FAMILY = "lato";
  * Clase que representa a una de las opciones dentro de una decisión en el diálogo
  * @extends Container
  */
-export default class DecisionButton extends Phaser.GameObjects.Container { 
+export default class DecisionButton extends Phaser.GameObjects.Container {
     /**
-	 * Constructor del botón
+     * Constructor del botón
      * @param {Scene} scene - escena en la que se añade
-	 * @param {int} x - posicion horizontal
+     * @param {int} x - posicion horizontal
      * @param {int} y - posicion vertical
      * @param {Sprite} imagen - key entre comillas simples a la imagen ya carcada en la escena para la apariencia de los botones
      * @param {int} width - anchura
@@ -17,40 +17,40 @@ export default class DecisionButton extends Phaser.GameObjects.Container {
      * @param {string} text - texto a representar
      * @param {int} corner - tamaño del frame del 3-slice
      * @param {int} id - numero en el array de la opcion
-	*/
-    constructor(scene, x, y, sprite, width, height, text, corner, value, {EnterCallback, ExitCallback}) {
-		// super a la escena
-		super(scene, x, y);
+    */
+    constructor(scene, x, y, sprite, width, height, text, corner, value, { EnterCallback, ExitCallback }) {
+        // super a la escena
+        super(scene, x, y);
 
         this.nineslice = scene.add.nineslice(
-            x, 
-            y, 
-            sprite, 
-            0, 
-            width, 
-            height, 
+            x,
+            y,
+            sprite,
+            0,
+            width,
+            height,
             corner,
             corner,
         )
-        this.nineslice.setInteractive(); 
+        this.nineslice.setInteractive();
         this.text = scene.add.text(
-            x, 
-            y, 
-            text, 
-            { 
+            x,
+            y,
+            text,
+            {
                 fontFamily: FONT_FAMILY,
                 fontSize: FONT_SIZE
             }
         );
         this.text.setOrigin(0.5, 0.5);
-        
-        this.nineslice.on('pointerdown', function(){
+
+        this.nineslice.on('pointerdown', function () {
             //console.log(scene.eventEmitter);
             scene.eventEmitter.emit('decided', value);
         })
 
-		this.fadeEnter = scene.tweens.add({
-            targets: this.nineslice,
+        this.fadeEnter = scene.tweens.add({
+            targets: [this.nineslice, this.text],
             ease: 'Sine.easeInOut',
             duration: 100,
             alpha: { from: 0, to: 1 },
@@ -65,18 +65,28 @@ export default class DecisionButton extends Phaser.GameObjects.Container {
            this.nineslice.sprite.tint = "0xc24d6d"
         }) */
 
+        let odioJs = this;
+
         //Reconoce que el ratón está encima de la función
-		if (EnterCallback)
-        this.nineslice.on('pointerover', EnterCallback);
+        if (EnterCallback)
+            this.nineslice.on('pointerover', EnterCallback);
 
         //Reconoce que el raton sale del botón
         if (ExitCallback)
-        this.nineslice.on('pointerout', ExitCallback);
+            this.nineslice.on('pointerout', ExitCallback);
 
         this.on('destroy', function onDestroy() {
-			//console.log("ME MUEROOOO");
-			this.nineslice.destroy();
-            this.text.destroy();
-		}); // esto funciona
-	}
+            odioJs.fadeExit = scene.tweens.add({
+                targets: [odioJs.nineslice, odioJs.text],
+                ease: 'Sine.easeInOut',
+                duration: 100,
+                alpha: { from: 1, to: 0 },
+                persist: true,
+                onComplete: function () {
+                    odioJs.nineslice.destroy();
+                    odioJs.text.destroy();
+                },
+            });
+        }); // esto funciona
+    }
 }
