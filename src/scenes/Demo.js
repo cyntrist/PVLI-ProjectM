@@ -298,10 +298,23 @@ export default class Demo extends Phaser.Scene {
 		})
 
 
+		/// Transiciones de fondo
+		this.bgFront = undefined;
+		this.bgBack = undefined;
+		this.fadeOut = scene.tweens.add({
+            targets: this.bgFront,
+            ease: 'Sine.easeInOut',
+            duration: 250,
+            alpha: { from: 1, to: 0 },
+            paused: true,
+            persist: true,
+            onComplete: function () {
+                // char.setVisible(false);
+            },
+        });
+
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
 		let dummy = 0;
-		// dummy,dummy,dummy,dummy
-		// 0,0,0,0
 		this.playerManager = new PlayerManager(dummy, dummy, dummy, dummy);
 		this.dialogManager = new DialogueManager(scene, this.playerManager, dayDatas, characters, '9slice', 'bonk');
 	}

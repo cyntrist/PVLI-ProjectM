@@ -35,7 +35,6 @@ export default class Character extends Phaser.GameObjects.Container {
             onComplete: function () {
                 // char.setVisible(true);
             },
-            onCompleteScope: this // El scope en el que se ejecutará el callback
         });
 
         this.fadeOut = scene.tweens.add({
@@ -48,7 +47,6 @@ export default class Character extends Phaser.GameObjects.Container {
             onComplete: function () {
                 // char.setVisible(false);
             },
-            onCompleteScope: this // El scope en el que se ejecutará el callback
         });
 
         this.alpha = 0;
