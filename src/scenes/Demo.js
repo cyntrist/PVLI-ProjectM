@@ -294,7 +294,7 @@ export default class Demo extends Phaser.Scene {
 
 
 		/// Transiciones de fondo
-		this.bgBack = scene.add.image(0, 0, "fondo_negro");
+		this.bgBack = scene.add.image(0, 0, "fondo_negro").setScale(0.7, 0.7).setOrigin(0, 0);
 		this.bgFront = this.bgBack;
 		this.bgBack.depth = -3;
 
@@ -320,8 +320,6 @@ export default class Demo extends Phaser.Scene {
 
 	// cambia el escenario (la imagen de fondo)
 	changeScenary(bgName) {
-		console.log("front antes: " + this.bgFront.texture.key);
-		console.log("back antes: " + this.bgBack.texture.key);
 		//this.bgFront.destroy();
 		this.bgFront = this.bgBack;
 
@@ -341,9 +339,6 @@ export default class Demo extends Phaser.Scene {
                 // char.setVisible(false);
             },
         });
-
-		console.log("front despues: " + this.bgFront.texture.key);
-		console.log("back despues: " + this.bgBack.texture.key);
 	}
 
 	changeScene(newScene, escena) {

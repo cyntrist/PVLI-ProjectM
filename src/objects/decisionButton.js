@@ -49,6 +49,17 @@ export default class DecisionButton extends Phaser.GameObjects.Container {
             scene.eventEmitter.emit('decided', value);
         })
 
+		this.fadeEnter = scene.tweens.add({
+            targets: this.nineslice,
+            ease: 'Sine.easeInOut',
+            duration: 100,
+            alpha: { from: 0, to: 1 },
+            persist: true,
+            onComplete: function () {
+                // char.setVisible(false);
+            },
+        });
+
         /* this.nineslice.on('pointerover', function(){
             console.log("Encima");
            this.nineslice.sprite.tint = "0xc24d6d"
