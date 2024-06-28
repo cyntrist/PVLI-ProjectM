@@ -237,11 +237,6 @@ export default class Demo extends Phaser.Scene {
 		// descolorea a todos los personajes antes de empezar
 		Character.unfocusEveryone(characters); // camille siendo conejillo de indias
 		// ** CREACION DE INTERFAZ ** //
-		// pone el fondo
-		this.nextBG = 1;
-		this.currentBG = 1;
-		let bg = scene.add.image(0, 0, "fondo_negro");
-		bg.depth = -2;
 
 		// crea el botón del movil
 		let movil = new Button(this, 850, 700, ' ', 2, 'movil', {
@@ -299,19 +294,10 @@ export default class Demo extends Phaser.Scene {
 
 
 		/// Transiciones de fondo
-		this.bgFront = undefined;
-		this.bgBack = undefined;
-		this.fadeOut = scene.tweens.add({
-            targets: this.bgFront,
-            ease: 'Sine.easeInOut',
-            duration: 250,
-            alpha: { from: 1, to: 0 },
-            paused: true,
-            persist: true,
-            onComplete: function () {
-                // char.setVisible(false);
-            },
-        });
+		this.bgBack = scene.add.image(0, 0, "fondo_negro");
+		this.bgFront = this.bgBack;
+		this.bgBack.depth = -3;
+
 
 		// ** MANAGERS WOOOOOOOOOOOOOOOOOOOOOOO (!)  ** //
 		let dummy = 0;
@@ -334,10 +320,30 @@ export default class Demo extends Phaser.Scene {
 
 	// cambia el escenario (la imagen de fondo)
 	changeScenary(bgName) {
-		// crea una imagen en la escena dada 
-		this.bg = this.add.image(0, 0, bgName).setScale(0.7, 0.7).setOrigin(0, 0);
-		// ajusta la capa
-		this.bg.depth = -2;
+		console.log("front antes: " + this.bgFront.texture.key);
+		console.log("back antes: " + this.bgBack.texture.key);
+		//this.bgFront.destroy();
+		this.bgFront = this.bgBack;
+
+		//this.bgBack.destroy();
+		this.bgBack = this.add.image(0, 0, bgName).setScale(0.7, 0.7).setOrigin(0, 0);
+		
+		this.bgFront.depth = 0;
+		this.bgBack.depth = -3;
+		
+		this.bgFade = this.tweens.add({
+            targets: this.bgFront,
+            ease: 'Sine.easeInOut',
+            duration: 250,
+            alpha: { from: 1, to: 0 },
+            persist: true,
+            onComplete: function () {
+                // char.setVisible(false);
+            },
+        });
+
+		console.log("front despues: " + this.bgFront.texture.key);
+		console.log("back despues: " + this.bgBack.texture.key);
 	}
 
 	changeScene(newScene, escena) {
