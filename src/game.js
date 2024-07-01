@@ -22,30 +22,22 @@ import CircusLevel from './minigames/Circus/CircusLevel.js';
  */
 
 let config = {
-  width: 1280,              
-  height: 720,            
-  type: Phaser.AUTO,      
+  width: 1280,
+  height: 720,
+  type: Phaser.AUTO,
   parent: 'juego',
   scale: {
-    mode: Phaser.Scale.FIT, // cyn: que alguien le pregunte a alguien por que si pongo fit pasan cosas malas
-    autoCenter: Phaser.Scale.CENTER_HORIZONTALLY, 
-    // min: { // cyn: como le deje escalar se pone a hacer unas cosas rarísimas 
-    //       width: 720,
-    //       height: 480
-    //   },
-    max: {
-          width: 1280,
-          height: 720
-      }
+    mode: Phaser.Scale.FIT,
+    autoCenter: Phaser.Scale.CENTER
   },
-  
-  scene: [MainMenu, Demo, Movil, MelonFlippeador, CircusBoot, CircusMenu, CircusLevel, 
+
+  scene: [MainMenu, Demo, Movil, MelonFlippeador, CircusBoot, CircusMenu, CircusLevel,
     //TwinbeeBoot, TwinbeeMenu, TwinbeeLevel
   ],
   physics: {
     default: 'arcade', // elegir motor
     arcade: {
-      gravity: { y : 500 }, 
+      gravity: { y: 500 },
       debug: false,
     },
     /*
