@@ -155,7 +155,17 @@ export default class Character extends Phaser.GameObjects.Container {
         let i = 1;
         for (let p of Object.values(personajes)) {
             if (p.seen) {
-                p.setX(p.scene.width * i / (Character.getVisibles(personajes) + 1));
+                //p.setX(p.scene.width * i / (Character.getVisibles(personajes) + 1));
+                p.scene.tweens.add({
+                    targets: p,
+                    duration: 500,
+                    x: p.scene.width * i / (Character.getVisibles(personajes) + 1),
+                    ease: 'Sine.easeInOut',
+                    //yoyo: true,
+                    //repeat: 2,
+                    persist: true,
+                })
+                
                 i++;
             }
         }
